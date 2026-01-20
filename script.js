@@ -384,6 +384,8 @@ document.addEventListener('keydown', (e) => {
         closeActivityDetails();
         closeSkillDetails();
         closeCertificateViewer();
+        closeEventDetails();
+        closeMultiCertificateViewer();
     }
 });
 
@@ -485,6 +487,278 @@ function closeSkillDetails() {
 }
 
 renderSkillsCompact();
+
+// ==================== International Events Section ====================
+const internationalEvents = [
+    {
+        id: "comtech-2023",
+        institute: "Institut Teknologi Sepuluh Nopember (ITS), Indonesia",
+        title: "CommTECH Nusantara 2023 — Virtual Exploration of Indonesia",
+        locationType: "International • Virtual",
+        certificates: ["assets/int/comtech.png"],
+        short: "International virtual exchange exploring Indonesian culture, technology, and community-driven innovation through workshops and peer collaboration with global participants.",
+        details: "I participated in the CommTECH Nusantara 2023: Virtual Exploration of Indonesia, an international program hosted by Institut Teknologi Sepuluh Nopember (ITS), Indonesia. The program brought together global participants to explore Indonesian culture, technology and community through a virtual academic exchange model. During the program, I learned about Indonesian social innovation, local industry practices, cultural heritage and the country's approach to community-driven development. The sessions included interactive workshops, cultural immersion activities, group discussions and problem-based learning with international peers. This experience developed cross-cultural communication, global awareness and international connections that continue to motivate my academic and professional growth."
+    },
+    {
+        id: "climate-summit-2023",
+        institute: "Global Youth Leadership Center • University of Dar es Salaam • Tanzania Forest Service Agency",
+        title: "Global Youth Climate Summit 2023 — Virtual Delegate",
+        locationType: "International • Virtual",
+        certificates: ["assets/int/gsummit.pdf"],
+        short: "Selected as a global virtual delegate to engage in climate action discussions on sustainability, resilience, policy, and youth-led solutions with changemakers worldwide.",
+        details: "I was selected as a virtual delegate for the Global Youth Climate Summit 2023, a global platform organized by the Global Youth Leadership Center in partnership with the University of Dar es Salaam and the Tanzania Forest Service Agency. More than a thousand youth applicants from different countries compete for a chance to join this summit each year, and being selected was a significant milestone. Throughout the summit, I engaged in discussions on climate resilience, global environmental policy, innovation for sustainability and youth-driven climate solutions. This experience strengthened my global perspective, enhanced my leadership mindset, and connected me with changemakers and youth leaders worldwide."
+    },
+    {
+        id: "rmi-week-2023",
+        institute: "Universitas Islam Sultan Agung (UNISSULA), Semarang, Indonesia",
+        title: "RMI Week 2023 — International Short Course",
+        locationType: "International • Short Course",
+        certificates: ["assets/int/rmi.pdf", "assets/int/rmibd.jpg"],
+        short: "International short course on city resilience and disaster mitigation, including cross-country teamwork and a case-study proposing solutions for real urban challenges.",
+        details: "I was selected for the International Short Course on City Resilience, Disaster Mitigation and Infrastructure (RMI Week 2023) at UNISSULA. I worked with students from multiple countries to study climate risks, resilient infrastructure, and disaster-ready communities. A key part was a collaborative international case study where our mixed-country team analyzed real urban challenges and proposed solutions combining engineering, policy insight, and community readiness. This experience strengthened cross-cultural teamwork, problem-solving, and understanding of global disaster management strategies, aligning with my goals in innovation, entrepreneurship, and impact-driven leadership."
+    },
+    {
+        id: "ubaya-2023",
+        institute: "Universitas Surabaya (UBAYA), Indonesia",
+        title: "UBAYA Online Summer Program 2023 — Global Short Courses",
+        locationType: "International • Online",
+        certificates: ["assets/int/ubaya1.pdf", "assets/int/ubaya2.pdf"],
+        short: "Two global short courses on digital transformation, personal branding, and future tech—AI, ChatGPT, and metaverse concepts—through interactive learning with international peers.",
+        details: "I participated in the UBAYA Online Summer Program 2023 organized by Universitas Surabaya (UBAYA). Across two global short courses, I explored how technology shapes modern life and collaborated with international participants. The first module, Digitalize Your Life, covered digital transformation trends, personal branding, online communication, and productivity tools. The second module focused on ChatGPT, AI applications, human–AI interaction, metaverse concepts, and future digital ecosystems. These programs strengthened my global exposure, cross-cultural communication, and understanding of emerging technologies, supporting my mindset as a future entrepreneur and digital product builder."
+    },
+    {
+        id: "reuters-journalism",
+        institute: "Reuters • Sponsored by Meta Journalism Project",
+        title: "Introduction to Digital Journalism",
+        locationType: "International • Online",
+        certificates: ["assets/int/reu.png"],
+        short: "Completed Reuters training covering media ethics, fact-checking, sourcing, misinformation handling, and producing digital content aligned with global journalism standards.",
+        details: "I completed the Introduction to Digital Journalism online training offered by Reuters and sponsored by the Meta Journalism Project. The course covered media ethics, fact-checking, sourcing reliable information, producing digital content, and how journalism operates in today's fast-changing online environment. Through structured modules, I learned how journalists verify information, combat misinformation, and communicate effectively across digital platforms. This training improved my critical thinking, writing clarity, and understanding of global media standards—supporting my growth as an entrepreneur, communicator, and future global professional."
+    },
+    {
+        id: "locust-2022",
+        institute: "Industrial Technology Faculty, UNISSULA, Indonesia",
+        title: "LOCUST 2022 — Local Culture, Science & Technology Short Program",
+        locationType: "International • Short Program",
+        certificates: ["assets/int/uni.pdf"],
+        short: "International short program exploring how culture influences innovation and technology adoption, with cross-cultural interaction focused on community development and local industry practices.",
+        details: "I participated in LOCUST 2022: Local Culture, Science & Technology Short Program, organized by the Industrial Technology Faculty of UNISSULA, Indonesia. The program brought together students to explore the connection between culture, innovation and technology in Southeast Asia. I learned about Indonesian local culture, scientific approaches to community development and technology-driven solutions used in local industries. Through lectures, discussions and cross-cultural interaction, I developed a broader perspective on how context shapes innovation. This experience strengthened my global mindset and interest in international learning and entrepreneurship."
+    }
+];
+
+function renderEventsGrid() {
+    const grid = document.getElementById('eventsGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = internationalEvents.map(event => `
+        <div class="event-card">
+            <span class="event-location-badge">${event.locationType}</span>
+            <p class="event-institute">${event.institute}</p>
+            <h3 class="event-title">${event.title}</h3>
+            <p class="event-short">${event.short}</p>
+            <div class="event-actions">
+                <button class="btn-event-certificate" onclick="event.stopPropagation(); openEventCertificates('${event.id}')">
+                    <i class="fas fa-certificate"></i> View Certificate
+                </button>
+                <button class="btn-event-details" onclick="event.stopPropagation(); openEventDetails('${event.id}')">
+                    <i class="fas fa-info-circle"></i> View Details
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function extractHighlights(text) {
+    const sentences = text.split(/\.\s+/).filter(s => s.length > 40).slice(0, 5);
+    return sentences.map(s => s.trim() + '.').slice(0, 5);
+}
+
+function openEventDetails(eventId) {
+    const event = internationalEvents.find(e => e.id === eventId);
+    if (!event) return;
+    
+    const modal = document.getElementById('event-details-modal');
+    document.getElementById('event-modal-institute').textContent = event.institute;
+    document.getElementById('event-modal-location').textContent = event.locationType;
+    document.getElementById('event-modal-title').textContent = event.title;
+    document.getElementById('event-modal-description').textContent = event.details;
+    
+    const highlights = extractHighlights(event.details);
+    const highlightsContainer = document.getElementById('event-modal-highlights');
+    highlightsContainer.innerHTML = `
+        <h4>Key Highlights</h4>
+        <ul>
+            ${highlights.map(h => `<li>${h}</li>`).join('')}
+        </ul>
+    `;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeEventDetails() {
+    const modal = document.getElementById('event-details-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+let currentEventCertificates = [];
+let currentCertIndex = 0;
+
+async function openEventCertificates(eventId) {
+    const event = internationalEvents.find(e => e.id === eventId);
+    if (!event || !event.certificates.length) return;
+    
+    currentEventCertificates = event.certificates;
+    currentCertIndex = 0;
+    
+    const modal = document.getElementById('multi-certificate-viewer-modal');
+    document.getElementById('multi-certificate-viewer-title').textContent = event.title;
+    
+    if (currentEventCertificates.length > 1) {
+        document.getElementById('certificate-carousel-controls').style.display = 'flex';
+    } else {
+        document.getElementById('certificate-carousel-controls').style.display = 'none';
+    }
+    
+    await displayCurrentCertificate();
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+async function displayCurrentCertificate() {
+    const url = currentEventCertificates[currentCertIndex];
+    const img = document.getElementById('multi-certificate-viewer-image');
+    const canvas = document.getElementById('multi-certificate-viewer-canvas');
+    const newTabBtn = document.getElementById('btn-multi-open-new-tab');
+    const counter = document.getElementById('certificate-counter');
+    
+    img.style.display = 'none';
+    canvas.style.display = 'none';
+    newTabBtn.style.display = 'none';
+    
+    counter.textContent = `${currentCertIndex + 1} / ${currentEventCertificates.length}`;
+    
+    const isPdf = url.toLowerCase().endsWith('.pdf');
+    
+    if (isPdf) {
+        try {
+            const success = await renderPDFToCanvasEvent(url, canvas, 1200);
+            if (success) {
+                canvas.style.display = 'block';
+            } else {
+                throw new Error('PDF rendering failed');
+            }
+        } catch (error) {
+            console.error('PDF rendering error:', error);
+            // Fallback: try iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.style.width = '100%';
+            iframe.style.height = '80vh';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '12px';
+            
+            const wrapper = document.querySelector('#multi-certificate-viewer-modal .certificate-viewer-image-wrapper');
+            wrapper.innerHTML = '';
+            wrapper.appendChild(iframe);
+            
+            // Show fallback button
+            newTabBtn.style.display = 'inline-flex';
+            newTabBtn.onclick = () => window.open(url, '_blank');
+        }
+    } else {
+        img.src = url;
+        img.alt = 'Certificate';
+        img.style.display = 'block';
+        img.onerror = () => {
+            console.error('Image load failed:', url);
+            newTabBtn.style.display = 'inline-flex';
+            newTabBtn.textContent = 'Open Certificate';
+            newTabBtn.onclick = () => window.open(url, '_blank');
+        };
+    }
+}
+
+const pdfCacheEvent = new Map();
+
+async function renderPDFToCanvasEvent(url, canvas, maxWidth = 1200) {
+    try {
+        if (typeof pdfjsLib === 'undefined') {
+            console.error('pdf.js not loaded');
+            return false;
+        }
+        
+        let pdf;
+        if (pdfCacheEvent.has(url)) {
+            pdf = pdfCacheEvent.get(url);
+        } else {
+            const loadingTask = pdfjsLib.getDocument(url);
+            pdf = await loadingTask.promise;
+            pdfCacheEvent.set(url, pdf);
+        }
+        
+        const page = await pdf.getPage(1);
+        const viewport = page.getViewport({ scale: 1 });
+        const scale = maxWidth / viewport.width;
+        const scaledViewport = page.getViewport({ scale });
+        
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+        
+        const context = canvas.getContext('2d');
+        await page.render({
+            canvasContext: context,
+            viewport: scaledViewport
+        }).promise;
+        
+        return true;
+    } catch (error) {
+        console.error('PDF rendering failed:', error);
+        return false;
+    }
+}
+
+function prevCertificate() {
+    if (currentCertIndex > 0) {
+        currentCertIndex--;
+        displayCurrentCertificate();
+    }
+}
+
+function nextCertificate() {
+    if (currentCertIndex < currentEventCertificates.length - 1) {
+        currentCertIndex++;
+        displayCurrentCertificate();
+    }
+}
+
+function closeMultiCertificateViewer() {
+    const modal = document.getElementById('multi-certificate-viewer-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    currentEventCertificates = [];
+    currentCertIndex = 0;
+    
+    // Clean up wrapper content
+    const wrapper = document.querySelector('#multi-certificate-viewer-modal .certificate-viewer-image-wrapper');
+    const img = document.getElementById('multi-certificate-viewer-image');
+    const canvas = document.getElementById('multi-certificate-viewer-canvas');
+    
+    if (wrapper && !wrapper.contains(img)) {
+        wrapper.innerHTML = '';
+        wrapper.appendChild(img);
+        wrapper.appendChild(canvas);
+    }
+}
+
+renderEventsGrid();
+
+// Configure PDF.js worker
+if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
 
 // ==================== About Details Modal ====================
 function openAboutDetails(id) {
@@ -634,124 +908,57 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', revealElements);
 window.addEventListener('load', revealElements);
 
-// ==================== Contact Form Validation & Submission ====================
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    // Basic validation
-    if (!name || !email || !subject || !message) {
-        showNotification('Please fill in all fields!', 'error');
-        return;
-    }
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        showNotification('Please enter a valid email address!', 'error');
-        return;
-    }
-    
-    // Simulate form submission (replace with actual backend API call)
-    showNotification('Thank you! Your message has been sent successfully!', 'success');
-    
-    // Reset form
-    contactForm.reset();
-    
-    // In a real application, you would send this data to a backend server
-    // Example:
-    // fetch('/api/contact', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name, email, subject, message })
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     showNotification('Message sent successfully!', 'success');
-    //     contactForm.reset();
-    // })
-    // .catch(error => {
-    //     showNotification('Failed to send message. Please try again.', 'error');
-    // });
-});
-
-// ==================== Notification System ====================
-function showNotification(message, type) {
-    // Remove existing notification if any
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.innerHTML = `
-        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-        <span>${message}</span>
-    `;
-    
-    // Style the notification
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#10b981' : '#ef4444'};
-        color: white;
-        padding: 15px 25px;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        z-index: 9999;
-        animation: slideInRight 0.5s ease;
-        font-weight: 500;
-    `;
-    
-    // Add CSS animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Add to body
-    document.body.appendChild(notification);
-    
-    // Remove after 4 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.5s ease';
+// ==================== Contact Section ====================
+function copyEmail() {
+    const email = 'uxdev.arafat@gmail.com';
+    navigator.clipboard.writeText(email).then(() => {
+        const copyBtn = document.querySelector('.btn-copy-email');
+        const originalHTML = copyBtn.innerHTML;
+        
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+        copyBtn.classList.add('copied');
+        
+        showToast('Email copied to clipboard!');
+        
         setTimeout(() => {
-            notification.remove();
-        }, 500);
-    }, 4000);
+            copyBtn.innerHTML = originalHTML;
+            copyBtn.classList.remove('copied');
+        }, 1500);
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        showToast('Failed to copy email');
+    });
+}
+
+function handleContactSubmit(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('contact-name').value;
+    const email = document.getElementById('contact-email').value;
+    const message = document.getElementById('contact-message').value;
+    
+    const subject = `Portfolio Contact — ${name}`;
+    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+    
+    showToast('Message prepared. Email opened.');
+    
+    setTimeout(() => {
+        window.location.href = `mailto:uxdev.arafat@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    }, 500);
+    
+    document.getElementById('contactForm').reset();
+}
+
+function showToast(message) {
+    const toast = document.getElementById('contactToast');
+    const toastMessage = document.getElementById('toastMessage');
+    
+    toastMessage.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
 }
 
 // ==================== Typing Effect for Tagline ====================
