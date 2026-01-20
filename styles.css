@@ -287,7 +287,42 @@ section {
         padding: 1rem 2rem;
     }
 }
-
+<div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div><div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div><div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div><div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div><div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div><div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div><div class="hero-image-wrapper">
+    <div class="hero-image-card">
+        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
+        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
+    </div>
+</div>
 .logo {
     display: flex;
     align-items: center;
@@ -1021,6 +1056,24 @@ section {
     aspect-ratio: 3/4;
 }
 
+.hero-image-mobile {
+    display: block;
+}
+
+.hero-image-desktop {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .hero-image-mobile {
+        display: none;
+    }
+    
+    .hero-image-desktop {
+        display: block;
+    }
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -1072,6 +1125,12 @@ section {
     .hero-image-wrapper {
         grid-column: 1 / -1;
         order: -1;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    
+    .hero-image-card {
+        max-width: 100%;
     }
     
     .hero-name-accent {
