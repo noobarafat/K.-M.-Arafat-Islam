@@ -287,46 +287,16 @@ section {
         padding: 1rem 2rem;
     }
 }
-<div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div><div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div><div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div><div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div><div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div><div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div><div class="hero-image-wrapper">
-    <div class="hero-image-card">
-        <img src="assets/profilem.png" alt="K M Arafat Islam" class="hero-image hero-image-mobile">
-        <img src="assets/profile.png" alt="K M Arafat Islam" class="hero-image hero-image-desktop">
-    </div>
-</div>
+
+.nav-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .logo {
     display: flex;
     align-items: center;
-    gap: 0;
 }
 
 .logo h2 {
@@ -336,6 +306,7 @@ section {
     background-clip: text;
     font-size: 1.5rem;
     font-weight: 700;
+    margin: 0;
 }
 
 .nav-menu {
@@ -449,6 +420,16 @@ section {
     .navbar .container {
         padding: 0.875rem 1rem;
     }
+    
+    .nav-brand-group {
+        gap: 10px;
+    }
+    
+    .search-toggle-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
 }
 
 /* ==================== Search Icon Toggle ==================== */
@@ -464,9 +445,9 @@ section {
     color: rgba(124, 58, 237, 0.9);
     font-size: 16px;
     cursor: pointer;
-    margin-left: 16px;
     transition: all 0.3s ease;
     outline: none;
+    flex-shrink: 0;
 }
 
 .search-toggle-btn:hover {
@@ -6946,9 +6927,9 @@ section {
 /* ==================== Extracurricular Activities Section ==================== */
 .activities-section {
     background: var(--bg-main);
-    padding: 100px 0;
+    padding: clamp(3rem, 8vw, 6.25rem) 0;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .activities-background-blob {
@@ -7027,11 +7008,61 @@ section {
 }
 
 .activities-grid {
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
     position: relative;
     z-index: 1;
+    min-height: auto;
+    height: auto;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.activities-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: clamp(3rem, 8vw, 5rem) 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.activities-empty-state i {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--purple);
+    opacity: 0.5;
+}
+
+.activities-empty-state p {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.btn-reset-filter {
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: var(--gradient-purple-blue);
+    border: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-reset-filter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5);
+}
+
+.btn-reset-filter:active {
+    transform: translateY(0);
 }
 
 .activity-card {
@@ -7043,6 +7074,22 @@ section {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-height: 200px;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+@media (hover: hover) {
+    .activity-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--purple);
+        box-shadow: 0 16px 48px rgba(124, 58, 237, 0.3);
+    }
+    
+    .activity-card:hover .activity-card-gradient {
+        opacity: 1;
+    }
 }
 
 .activity-card-gradient {
@@ -7057,14 +7104,10 @@ section {
     pointer-events: none;
 }
 
-.activity-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--purple);
-    box-shadow: 0 16px 48px rgba(124, 58, 237, 0.3);
-}
-
-.activity-card:hover .activity-card-gradient {
-    opacity: 1;
+@media (hover: none) {
+    .activity-card:active {
+        transform: scale(0.98);
+    }
 }
 
 .activity-role {
@@ -7274,6 +7317,11 @@ section {
 }
 
 @media (max-width: 768px) {
+    .activities-section {
+        padding: clamp(2.5rem, 6vw, 4rem) 0;
+        overflow: visible !important;
+    }
+    
     .activities-background-blob {
         width: 600px;
         height: 600px;
@@ -7290,12 +7338,19 @@ section {
     }
     
     .activities-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 20px;
+        display: grid !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .activity-card {
         padding: 24px;
+        min-height: auto;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .activity-role {
@@ -7304,6 +7359,10 @@ section {
     
     .activity-modal-metrics {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .activities-empty-state {
+        padding: 3rem 1.5rem;
     }
 }
 

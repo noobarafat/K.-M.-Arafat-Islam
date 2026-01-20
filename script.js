@@ -497,9 +497,34 @@ function renderActivitiesGrid() {
     const grid = document.getElementById('activitiesGrid');
     if (!grid) return;
     
+    console.log('Current Filter:', currentFilter);
+    
     const filteredActivities = currentFilter === 'All' 
         ? activities 
-        : activities.filter(activity => activity.category.includes(currentFilter));
+        : activities.filter(activity => {
+            const normalizedFilter = currentFilter.trim().toLowerCase();
+            const hasMatch = activity.category.some(cat => {
+                const normalizedCat = cat.trim().toLowerCase();
+                console.log(`Comparing: "${normalizedCat}" === "${normalizedFilter}"`, normalizedCat === normalizedFilter);
+                return normalizedCat === normalizedFilter;
+            });
+            return hasMatch;
+        });
+    
+    console.log('Filtered Activities Count:', filteredActivities.length);
+    
+    if (filteredActivities.length === 0) {
+        grid.innerHTML = `
+            <div class="activities-empty-state">
+                <i class="fas fa-filter"></i>
+                <p>No activities found for "${currentFilter}"</p>
+                <button class="btn-reset-filter" onclick="resetFilter()">
+                    <i class="fas fa-redo"></i> Show All Activities
+                </button>
+            </div>
+        `;
+        return;
+    }
     
     grid.innerHTML = filteredActivities.map(activity => {
         let clickAction = '';
@@ -520,7 +545,7 @@ function renderActivitiesGrid() {
         }
         
         return `
-            <div class="activity-card reveal-stagger" onclick="${clickAction}">
+            <div class="activity-card" onclick="${clickAction}">
                 <div class="activity-card-gradient"></div>
                 <h3 class="activity-role">${activity.role}</h3>
                 <p class="activity-org">${activity.org}</p>
@@ -541,6 +566,26 @@ function renderActivitiesGrid() {
             </div>
         `;
     }).join('');
+}
+
+function resetFilter() {
+    const filterChips = document.querySelectorAll('.filter-chip');
+    filterChips.forEach(chip => {
+        if (chip.getAttribute('data-filter') === 'All') {
+            chip.classList.add('active');
+        } else {
+            chip.classList.remove('active');
+        }
+    });
+    currentFilter = 'All';
+    renderActivitiesGrid();
+    
+    const section = document.getElementById('eca');
+    if (section) {
+        const navbarHeight = 80;
+        const sectionTop = section.offsetTop - navbarHeight;
+        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+    }
 }
 
 function navigateToCSClub() {
@@ -577,6 +622,13 @@ filterChips.forEach(chip => {
         chip.classList.add('active');
         currentFilter = chip.getAttribute('data-filter');
         renderActivitiesGrid();
+        
+        const section = document.getElementById('eca');
+        if (section && window.innerWidth < 768) {
+            const navbarHeight = 80;
+            const sectionTop = section.offsetTop - navbarHeight;
+            window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+        }
     });
 });
 
