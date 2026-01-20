@@ -1,0 +1,35 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="500" fill="#f8fafc"/>
+  
+  <!-- Code Editor Mock -->
+  <rect x="50" y="50" width="700" height="400" rx="10" fill="white" stroke="#e0e7ff" stroke-width="2"/>
+  
+  <!-- Header Bar -->
+  <rect x="50" y="50" width="700" height="40" rx="10" fill="url(#grad)"/>
+  <circle cx="70" cy="70" r="6" fill="white" opacity="0.8"/>
+  <circle cx="90" cy="70" r="6" fill="white" opacity="0.8"/>
+  <circle cx="110" cy="70" r="6" fill="white" opacity="0.8"/>
+  
+  <!-- Code Lines -->
+  <rect x="80" y="120" width="150" height="12" rx="6" fill="#e0e7ff"/>
+  <rect x="250" y="120" width="200" height="12" rx="6" fill="#ddd6fe"/>
+  <rect x="80" y="150" width="100" height="12" rx="6" fill="#e0e7ff"/>
+  <rect x="200" y="150" width="250" height="12" rx="6" fill="#ddd6fe"/>
+  <rect x="80" y="180" width="180" height="12" rx="6" fill="#e0e7ff"/>
+  
+  <!-- Shopping Cart Icon -->
+  <circle cx="650" cy="250" r="60" fill="url(#grad)" opacity="0.2"/>
+  <rect x="620" y="230" width="50" height="40" rx="4" fill="none" stroke="#6366f1" stroke-width="3"/>
+  <path d="M 615 230 L 625 210 L 665 210 L 675 230" fill="none" stroke="#6366f1" stroke-width="3"/>
+  <circle cx="630" cy="280" r="5" fill="#6366f1"/>
+  <circle cx="660" cy="280" r="5" fill="#6366f1"/>
+  
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="18" fill="#6366f1" text-anchor="middle" font-weight="bold">E-Commerce Platform</text>
+</svg>
