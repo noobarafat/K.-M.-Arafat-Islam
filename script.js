@@ -412,7 +412,7 @@ const aboutHighlights = [
     },
     {
         id: "nebulae-soft",
-        title: "Former UI Designer & UX Researccher at Nebulae-Soft",
+        title: "Former UI Designer & UX Researcher at Nebulae-Soft",
         short: "My first structured product-team experience—learning real workflows, collaboration, and system-based execution that shaped how I manage projects and teams today.",
         details: "I joined Nebulae Soft in June 2024 as a UI Designer and UX Researcher, gaining my first exposure to structured, team-based work in a real product environment. I learned how responsibilities are distributed, how teams collaborate, and how design workflows connect with development, timelines, and delivery. I independently handled a project for an army-related client—running meetings, gathering requirements, and coordinating with the team—strengthening leadership, communication, and trust. A key challenge was aligning stakeholders, which I solved through clarity and regular clarification. This role shaped my system-oriented mindset, which I later applied directly in freelancing from January 2025 and in BuildSign."
     },
