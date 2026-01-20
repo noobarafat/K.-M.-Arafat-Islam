@@ -7891,10 +7891,13 @@ section {
     background: var(--gradient-purple-blue);
     transition: width 0.3s ease;
     z-index: -1;
+    border-radius: 14px;
 }
 
-.btn-view-other-certificates:hover {
-    transform: translateY(-3px);
+.btn-view-other-certificates:hover,
+.btn-view-other-certificates:focus,
+.btn-view-other-certificates:active {
+    border-radius: 14px;
     box-shadow: 0 8px 32px rgba(124, 58, 237, 0.4);
     border-color: transparent;
 }
@@ -7903,8 +7906,12 @@ section {
     width: 100%;
 }
 
-#certificates-chevron {
+.btn-view-other-certificates .fa-arrow-right {
     transition: transform 0.3s ease;
+}
+
+.btn-view-other-certificates:hover .fa-arrow-right {
+    transform: translateX(4px);
 }
 
 /* Certificates Page */
@@ -8127,6 +8134,7 @@ section {
         justify-content: center;
         padding: 16px 32px;
         font-size: 1rem;
+        border-radius: 14px;
     }
     
     .certificates-page-title {
