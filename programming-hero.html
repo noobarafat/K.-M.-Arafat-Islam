@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Campus Hero - Programming Hero - K M Arafat Islam">
+    <title>Programming Hero Campus Leadership | K M Arafat Islam</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2>K. M. Arafat Islam</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/#home" class="nav-link">Home</a></li>
+                <li><a href="/#about" class="nav-link">About</a></li>
+                <li><a href="/#education" class="nav-link">Education</a></li>
+                <li><a href="/#publications" class="nav-link">Publications</a></li>
+                <li><a href="/#eca" class="nav-link">ECA</a></li>
+                <li><a href="/#skills" class="nav-link">Skills & Certifications</a></li>
+                <li><a href="/#events" class="nav-link">Events</a></li>
+                <li><a href="/#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button & Breadcrumb -->
+    <div class="ph-back-container">
+        <div class="container">
+            <button class="ph-back-btn" onclick="handlePHBackNavigation()">
+                <i class="fas fa-arrow-left"></i>
+                Back
+            </button>
+            <div class="ph-breadcrumb">
+                <span>ECA</span>
+                <i class="fas fa-chevron-right"></i>
+                <span>Programming Hero</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="ph-hero">
+        <div class="ph-hero-glow"></div>
+        <div class="container">
+            <div class="ph-hero-grid">
+                <div class="ph-hero-left">
+                    <div class="ph-badge">
+                        Community Leadership • Student Network
+                    </div>
+                    <h1 class="ph-hero-title">Campus Hero</h1>
+                    <p class="ph-hero-org">Programming Hero</p>
+                    <p class="ph-hero-subtitle">
+                        Coordinated student engagement and online outreach, supporting multi-campus communication and participation in learning initiatives.
+                    </p>
+                    
+                    <div class="ph-social-links">
+                        <a href="https://www.programming-hero.com/" target="_blank" rel="noopener noreferrer" class="ph-social-link">
+                            <i class="fas fa-globe"></i>
+                            <span>Website</span>
+                        </a>
+                        <a href="https://www.facebook.com/programmingHero" target="_blank" rel="noopener noreferrer" class="ph-social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ph-hero-right">
+                    <div class="ph-impact-cards">
+                        <div class="ph-impact-card">
+                            <div class="ph-impact-value">20+</div>
+                            <div class="ph-impact-label">Institutions Coordinated</div>
+                        </div>
+                        <div class="ph-impact-card">
+                            <div class="ph-impact-value">~1,000</div>
+                            <div class="ph-impact-label">Students Reached</div>
+                        </div>
+                        <div class="ph-impact-card">
+                            <div class="ph-impact-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="ph-impact-label">Online-First Outreach</div>
+                        </div>
+                        <div class="ph-impact-card">
+                            <div class="ph-impact-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="ph-impact-label">Student Support & Guidance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role Scope Section -->
+    <section class="ph-scope">
+        <div class="container">
+            <h2 class="ph-section-title">Role Scope</h2>
+            <div class="ph-scope-grid">
+                <div class="ph-scope-item">
+                    <div class="ph-scope-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <p>Coordinated communication among Campus Heroes across institutions</p>
+                </div>
+                <div class="ph-scope-item">
+                    <div class="ph-scope-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <p>Shared updates and announcements to maintain consistent engagement</p>
+                </div>
+                <div class="ph-scope-item">
+                    <div class="ph-scope-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <p>Promoted workshops/bootcamps and learning events through online channels</p>
+                </div>
+                <div class="ph-scope-item">
+                    <div class="ph-scope-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <p>Supported junior students by answering queries and guiding learning resources</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Execution Section -->
+    <section class="ph-network">
+        <div class="container">
+            <h2 class="ph-section-title">How the Network Worked</h2>
+            <div class="ph-network-grid">
+                <div class="ph-network-step">
+                    <div class="ph-network-number">1</div>
+                    <h3>Weekly Updates & Announcements</h3>
+                    <p>Coordinated consistent communication across the nationwide Campus Hero network</p>
+                </div>
+                <div class="ph-network-step">
+                    <div class="ph-network-number">2</div>
+                    <h3>Institution-Level Outreach</h3>
+                    <p>Managed engagement and coordination at individual campus levels</p>
+                </div>
+                <div class="ph-network-step">
+                    <div class="ph-network-number">3</div>
+                    <h3>Participation Support & Follow-Up</h3>
+                    <p>Provided guidance, answered student queries, and ensured smooth participation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section class="ph-outcomes">
+        <div class="container">
+            <h2 class="ph-section-title">Outcomes</h2>
+            <div class="ph-outcomes-grid">
+                <div class="ph-outcome-item">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Coordinated communication for 20+ institutions</p>
+                </div>
+                <div class="ph-outcome-item">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Reached around 1,000 students through online outreach</p>
+                </div>
+                <div class="ph-outcome-item">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Enabled participation beyond a single campus via online mode</p>
+                </div>
+                <div class="ph-outcome-item">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Built leadership experience managing large student groups</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Built Section -->
+    <section class="ph-skills">
+        <div class="container">
+            <h2 class="ph-section-title">Skills Built</h2>
+            <div class="ph-skills-grid">
+                <div class="ph-skill-card">
+                    <div class="ph-skill-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Leadership & Coordination</h3>
+                </div>
+                <div class="ph-skill-card">
+                    <div class="ph-skill-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Communication at Scale</h3>
+                </div>
+                <div class="ph-skill-card">
+                    <div class="ph-skill-icon">
+                        <i class="fas fa-people-arrows"></i>
+                    </div>
+                    <h3>Community Engagement</h3>
+                </div>
+                <div class="ph-skill-card">
+                    <div class="ph-skill-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Support Mindset & Mentoring</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Matters Section -->
+    <section class="ph-matters">
+        <div class="container">
+            <h2 class="ph-section-title">Why This Experience Matters</h2>
+            <div class="ph-matters-content">
+                <p>This role taught me how to manage communication at scale—coordinating 20+ institutions and reaching around 1,000 students required structured workflows, consistent follow-ups, and clear messaging. Those skills directly translate to how I manage BuildSign's client communication and team coordination today. Leading a nationwide student network also reinforced the importance of support systems and community-building, which shapes how I approach agency operations and long-term client relationships. The experience proved that leadership isn't about authority—it's about enabling others to participate and succeed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA Section -->
+    <section class="ph-cta">
+        <div class="container">
+            <div class="ph-cta-card">
+                <h2>Need someone who can lead communication and engagement at scale?</h2>
+                <div class="ph-cta-buttons">
+                    <a href="/#contact" class="ph-cta-btn ph-cta-primary">
+                        <i class="fas fa-envelope"></i>
+                        Contact Me
+                    </a>
+                    <a href="/#eca" class="ph-cta-btn ph-cta-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to ECA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="ph-year"></span> K. M. Arafat Islam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="programming-hero.js"></script>
+    <script>
+        document.getElementById('ph-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

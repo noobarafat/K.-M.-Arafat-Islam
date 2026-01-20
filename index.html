@@ -17,13 +17,16 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <h2>K M Arafat Islam</h2>
+                <h2>K. M. Arafat Islam</h2>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills-new" class="nav-link">Skills</a></li>
-                <li><a href="#international-events" class="nav-link">Events</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#eca" class="nav-link">ECA</a></li>
+                <li><a href="#skills" class="nav-link">Skills & Certifications</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -40,14 +43,14 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <p class="greeting">Hello, I'm</p>
-                    <h1 class="hero-name">K M Arafat Islam</h1>
+                    <h1 class="hero-name">K. M. Arafat Islam</h1>
                     <p class="hero-subtitle">Founder & CEO @BuildSign | Digital Product Agency</p>
                     <p class="hero-description">
                         Curious young mind eager to learn and explore the world. Always seeking new knowledge and experiences. Lover of science, technology, and adventure.
                     </p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn-primary-gradient">Get In Touch</a>
-                        <a href="#skills-new" class="btn-outline">View My Skills</a>
+                        <a href="#skills" class="btn-outline">View My Skills</a>
                     </div>
                     <div class="hero-social">
                         <a href="https://www.linkedin.com/in/kmarafatislam/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -76,7 +79,7 @@
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title section-title-purple">About Arafat</h2>
+            <h2 class="section-title section-title-purple reveal">About Arafat</h2>
             <div id="about-grid" class="about-grid"></div>
         </div>
     </section>
@@ -105,8 +108,8 @@
     <!-- Education Section -->
     <section id="education" class="education-section">
         <div class="container">
-            <h2 class="section-title section-title-purple">My Education</h2>
-            <div class="education-header">
+            <h2 class="section-title section-title-purple reveal">My Education</h2>
+            <div class="education-header reveal">
                 <div class="education-intro">
                     <div class="education-degree-wrapper">
                         <h3 class="education-degree">BSc in Computer Science & Engineering</h3>
@@ -157,16 +160,16 @@
     <!-- Publications Section -->
     <section id="publications" class="publications-section">
         <div class="container">
-            <h2 class="section-title section-title-purple">Publications</h2>
+            <h2 class="section-title section-title-purple reveal">Publications</h2>
             <div class="publications-grid" id="publicationsGrid"></div>
         </div>
     </section>
 
     <!-- Extracurricular Activities Section -->
-    <section id="activities" class="activities-section">
+    <section id="eca" class="activities-section">
         <div class="activities-background-blob"></div>
         <div class="container">
-            <h2 class="section-title section-title-purple">Extracurricular Activities</h2>
+            <h2 class="section-title section-title-purple reveal">Extracurricular Activities</h2>
             
             <div class="filter-chips" id="filterChips">
                 <button class="filter-chip active" data-filter="All">All</button>
@@ -214,14 +217,14 @@
     </div>
 
     <!-- Skills & Certifications Section -->
-    <section id="skills-new" class="skills-section">
+    <section id="skills" class="skills-section">
         <div class="container">
-            <h2 class="section-title section-title-purple">Skills & Certifications</h2>
+            <h2 class="section-title section-title-purple reveal">Skills & Certifications</h2>
             
             <div class="skills-compact-container" id="skillsCompactContainer"></div>
             
             <div class="other-certificates-cta">
-                <a href="certificates.html" class="btn-view-other-certificates">
+                <a href="certificates.html#skills" class="btn-view-other-certificates">
                     <i class="fas fa-certificate"></i>
                     View my other certificates (80+)
                     <i class="fas fa-arrow-right"></i>
@@ -274,7 +277,7 @@
     </div>
 
     <!-- International Event Participation Section -->
-    <section id="international-events" class="international-events-section">
+    <section id="events" class="international-events-section">
         <div class="global-bg-effect"></div>
         <div class="container">
             <h2 class="section-title section-title-purple">International Event Participation</h2>
@@ -335,7 +338,7 @@
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="contact-grid">
-                <div class="contact-left">
+                <div class="contact-left reveal">
                     <h2 class="contact-title">Get in touch</h2>
                     <p class="contact-subtitle">Let's build something meaningful—product, research, or collaboration.</p>
                     
@@ -369,7 +372,7 @@
                     </div>
                 </div>
                 
-                <div class="contact-right">
+                <div class="contact-right reveal">
                     <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
                         <div class="form-group">
                             <input type="text" id="contact-name" class="form-input" placeholder=" " required>

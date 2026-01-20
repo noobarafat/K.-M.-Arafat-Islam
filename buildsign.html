@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildSign — Digital Product Agency</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="buildsign-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2>K. M. Arafat Islam</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#education" class="nav-link">Education</a></li>
+                <li><a href="index.html#publications" class="nav-link">Publications</a></li>
+                <li><a href="index.html#eca" class="nav-link">ECA</a></li>
+                <li><a href="index.html#skills" class="nav-link">Skills & Certifications</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <div class="buildsign-back-container">
+        <div class="container">
+            <button class="buildsign-back-btn" onclick="handleBackNavigation()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="bs-hero" class="buildsign-hero">
+        <div class="buildsign-hero-bg"></div>
+        <div class="container">
+            <div class="buildsign-hero-grid">
+                <div class="buildsign-hero-left reveal">
+                    <div class="buildsign-badge">
+                        <i class="fas fa-globe"></i>
+                        <span>Remote-first Digital Product Agency</span>
+                    </div>
+                    <h1 class="buildsign-hero-title">Build products that look premium and work flawlessly.</h1>
+                    <p class="buildsign-hero-subtitle">We create digital experiences driven by quality and clarity. Every project is an opportunity to learn, deliver, and build trust through design and development that works.</p>
+                    <div class="buildsign-hero-ctas">
+                        <a href="#bs-contact" class="btn-primary-gradient btn-buildsign-primary">
+                            <i class="fas fa-rocket"></i> Start a Project
+                        </a>
+                        <a href="#bs-services" class="btn-outline btn-buildsign-secondary">
+                            <i class="fas fa-layer-group"></i> View Services
+                        </a>
+                    </div>
+                    <div class="buildsign-hero-links">
+                        <a href="https://buildsigndigital.com" target="_blank" rel="noopener" class="buildsign-link">
+                            <i class="fas fa-link"></i> buildsigndigital.com
+                        </a>
+                        <a href="https://www.linkedin.com/company/buildsign/" target="_blank" rel="noopener" class="buildsign-link">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="mailto:buildsign.contact@gmail.com" class="buildsign-link">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+                <div class="buildsign-hero-right reveal">
+                    <div class="buildsign-stat-cluster">
+                        <div class="buildsign-stat-card reveal-stagger">
+                            <div class="stat-card-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="stat-card-content">
+                                <h3>Remote & Flexible</h3>
+                                <p>Work from anywhere, collaborate seamlessly</p>
+                            </div>
+                        </div>
+                        <div class="buildsign-stat-card reveal-stagger">
+                            <div class="stat-card-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="stat-card-content">
+                                <h3>System-driven Delivery</h3>
+                                <p>Organized, predictable, quality-first</p>
+                            </div>
+                        </div>
+                        <div class="buildsign-stat-card reveal-stagger">
+                            <div class="stat-card-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="stat-card-content">
+                                <h3>Built to create opportunity</h3>
+                                <p>Supporting talented students through real projects</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buildsign-trust-pills reveal">
+                        <span class="trust-pill"><i class="fas fa-check-circle"></i> Remote-ready</span>
+                        <span class="trust-pill"><i class="fas fa-star"></i> Quality-first</span>
+                        <span class="trust-pill"><i class="fas fa-clipboard-list"></i> Transparent process</span>
+                        <span class="trust-pill"><i class="fas fa-users"></i> Student talent ecosystem</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="bs-services" class="buildsign-services">
+        <div class="container">
+            <div class="buildsign-section-header reveal">
+                <h2>Services</h2>
+            </div>
+            <div class="buildsign-services-grid" id="servicesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="bs-process" class="buildsign-process">
+        <div class="container">
+            <div class="buildsign-section-header reveal">
+                <h2>How we work</h2>
+            </div>
+            <div class="buildsign-process-grid" id="processGrid"></div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section id="bs-why" class="buildsign-why">
+        <div class="container">
+            <div class="buildsign-section-header reveal">
+                <h2>Why clients choose BuildSign</h2>
+            </div>
+            <div class="buildsign-why-grid" id="whyGrid"></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="bs-faq" class="buildsign-faq">
+        <div class="container">
+            <div class="buildsign-section-header reveal">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="buildsign-faq-grid" id="faqGrid"></div>
+        </div>
+    </section>
+
+    <!-- Contact/CTA -->
+    <section id="bs-contact" class="buildsign-contact">
+        <div class="container">
+            <div class="buildsign-cta-card reveal">
+                <h2>Ready to build something premium?</h2>
+                <p>Tell us what you need—design, development, or a full product team.</p>
+                <div class="buildsign-cta-buttons">
+                    <a href="mailto:buildsign.contact@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20BuildSign" class="btn-primary-gradient">
+                        <i class="fas fa-envelope"></i> Email BuildSign
+                    </a>
+                    <a href="https://www.linkedin.com/company/buildsign/" target="_blank" rel="noopener" class="btn-outline">
+                        <i class="fab fa-linkedin"></i> Message on LinkedIn
+                    </a>
+                </div>
+                <p class="buildsign-website-link">
+                    <i class="fas fa-link"></i> 
+                    <a href="https://buildsigndigital.com" target="_blank" rel="noopener">buildsigndigital.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details Modal -->
+    <div class="buildsign-modal" id="serviceModal">
+        <div class="buildsign-modal-overlay"></div>
+        <div class="buildsign-modal-content">
+            <button class="buildsign-modal-close" onclick="closeServiceModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="serviceModalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="buildsign.js"></script>
+</body>
+</html>

@@ -198,5 +198,14 @@ document.addEventListener('keydown', (e) => {
 
 // ==================== Initialize ====================
 document.addEventListener('DOMContentLoaded', () => {
+    // Remove all navbar active states on certificates page
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+    
     renderCertificatesGrid();
+    
+    // Initialize reveal animations
+    if (typeof initRevealAnimations === 'function') {
+        initRevealAnimations();
+    }
 });

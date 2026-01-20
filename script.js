@@ -231,19 +231,184 @@ const aboutHighlights = [
         id: "fiverr-level1",
         title: "Level 1 Seller on Fiverr",
         short: "Freelancing became my real-market training ground—learning with earning through Grameenphone Academy and building global client experience that later shaped BuildSign.",
-        details: "I started freelancing to apply my skills in a real market while learning continuously. Through the Grameenphone Academy Freelancing Factory program (learning with earning), I improved my UI/UX skills and launched on Fiverr. My first order came from an international client, showing how digital skills create value beyond local borders. Over time, each project strengthened my communication, client handling, and problem-solving. In a cohort of 100+ students, I became one of the top ten earners. Freelancing wasn't the final goal—it became the foundation for BuildSign, expanding from individual work to creating opportunities for others through a sustainable model."
+        details: `<div class="fiverr-details-layout">
+            <div class="fiverr-quote-block">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p class="quote-text">Freelancing became my real-market training ground—learning with earning through Grameenphone Academy and building global client experience that later shaped BuildSign.</p>
+            </div>
+
+            <div class="fiverr-section">
+                <h3 class="fiverr-section-title">Services I Deliver on Fiverr</h3>
+                <div class="fiverr-services-grid">
+                    <div class="fiverr-service-item">
+                        <div class="service-item-icon">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </div>
+                        <div class="service-item-content">
+                            <h4>UI/UX Design</h4>
+                            <p>Web & app UI, UX flows, wireframes, high-fidelity designs, clickable prototypes</p>
+                        </div>
+                    </div>
+                    <div class="fiverr-service-item">
+                        <div class="service-item-icon">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+                        <div class="service-item-content">
+                            <h4>WordPress Development</h4>
+                            <p>Custom themes, responsive websites, performance-focused builds, easy-to-manage CMS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fiverr-section">
+                <h3 class="fiverr-section-title">Seller Credibility</h3>
+                <div class="fiverr-stats-grid">
+                    <div class="fiverr-stat-card">
+                        <i class="fas fa-award stat-icon"></i>
+                        <p>Fiverr Level 1 Seller</p>
+                    </div>
+                    <div class="fiverr-stat-card">
+                        <i class="fas fa-star stat-icon"></i>
+                        <p>100% 5-star ratings across all completed orders</p>
+                    </div>
+                    <div class="fiverr-stat-card">
+                        <i class="fas fa-clock stat-icon"></i>
+                        <p>Consistent on-time delivery</p>
+                    </div>
+                    <div class="fiverr-stat-card">
+                        <i class="fas fa-globe stat-icon"></i>
+                        <p>Experience working with international clients</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fiverr-section">
+                <h3 class="fiverr-section-title">How I Work with Clients</h3>
+                <p class="fiverr-text">I focus on understanding requirements clearly before starting, maintaining transparent communication throughout the project, and delivering work that balances usability, performance, and visual clarity. Each Fiverr project is handled with the same quality-first mindset I follow in my agency work.</p>
+            </div>
+
+            <div class="fiverr-section">
+                <h3 class="fiverr-section-title">From Freelancing to Agency</h3>
+                <p class="fiverr-text">The discipline, communication practices, and real client exposure gained on Fiverr became the foundation for building BuildSign as a structured, system-driven digital product agency. What started as individual freelance projects evolved into a platform for creating opportunities for talented students while delivering consistent quality to clients worldwide.</p>
+            </div>
+        </div>`
     },
     {
         id: "spirit-on-jersey",
         title: "Owner of Spirit On Jersey",
         short: "A sports-driven brand idea built from a simple gap: too few trusted online jersey sellers. I focused on quality, customization, and customer trust from day one.",
-        details: "Spirit On Jersey started from two things: my love for sports and the lack of trusted online jersey sellers. I wanted to create a place where people could buy quality, customized jerseys without worry. I still remember getting the first order on day one—it proved someone could trust the brand early. The beginning was tough: finding the right audience and understanding growth. Step by step, I learned business basics, digital marketing, jersey design, and customer psychology. People value quality and personalization, and repeat orders confirmed that. My goal is to build a trusted footprint and grow Spirit On Jersey into a remembered brand."
+        details: `<div class="spirit-details-layout">
+            <div class="spirit-header">
+                <p class="spirit-subtext">Sportswear brand journey focused on quality, trust, and customization.</p>
+            </div>
+
+            <div class="spirit-story">
+                <p>Spirit On Jersey started from a very simple place. I saw that trusted jersey sellers were very few in the online space, and at the same time, I have always loved sports. From these two feelings, the idea came. What if I create something where people can get good-quality, customised jerseys without any worry. That is how the journey began.</p>
+                
+                <p>I still remember the first order. It came on the very first day. It gave me a small push inside, because someone trusted me without even knowing me. Finding the right audience in the beginning was difficult, and I was not sure how the business would grow, but I kept trying step by step.</p>
+                
+                <p>Through Spirit On Jersey, I learned many things. Business basics, digital marketing, jersey design, customer psychology and understanding market demand. I realized people care a lot about quality and personalization. When customers said they loved their jersey, or when they ordered again, it felt very motivating. These small happy moments told me that I was building something people valued.</p>
+                
+                <p>My aim with Spirit On Jersey is simple. I want to create a trusted footprint in online selling and make sure customers get what they expect. In the future, I want to grow this into a proper brand, one that people remember for honesty, quality and care.</p>
+            </div>
+
+            <div class="spirit-order-section">
+                <h3 class="spirit-order-title">Order & Explore</h3>
+                <p class="spirit-order-subtitle">Choose a platform to explore designs or place an order.</p>
+                
+                <div class="spirit-cta-grid">
+                    <div class="spirit-cta-card">
+                        <div class="spirit-cta-icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <h4>Order via Facebook</h4>
+                        <p>Message your jersey requirements and get quick confirmation.</p>
+                        <a href="https://www.facebook.com/profile.php?id=61562469124798" target="_blank" rel="noopener noreferrer" class="spirit-cta-btn">
+                            Facebook
+                        </a>
+                    </div>
+                    
+                    <div class="spirit-cta-card">
+                        <div class="spirit-cta-icon">
+                            <i class="fab fa-pinterest"></i>
+                        </div>
+                        <h4>Browse Designs (Pinterest)</h4>
+                        <p>Explore jersey inspirations, designs, and custom concepts.</p>
+                        <a href="https://www.pinterest.com/spiritonjersey/" target="_blank" rel="noopener noreferrer" class="spirit-cta-btn">
+                            Open Pinterest
+                        </a>
+                    </div>
+                    
+                    <div class="spirit-cta-card">
+                        <div class="spirit-cta-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Official Page (Google Site)</h4>
+                        <p>See full details, brand info, and updates in one place.</p>
+                        <a href="https://sites.google.com/view/spiritonjersey" target="_blank" rel="noopener noreferrer" class="spirit-cta-btn">
+                            Visit Website
+                        </a>
+                    </div>
+                </div>
+                
+                <p class="spirit-order-note">
+                    <i class="fas fa-info-circle"></i>
+                    Tip: Send your size, team name, player name, and preferred color to get a fast quote.
+                </p>
+            </div>
+        </div>`
     },
     {
         id: "gp-certified",
         title: "Certified & Recognized by Grameenphone Ltd",
         short: "Official recognition for turning skill development into verified earnings and entrepreneurship—freelancing success plus founding a digital agency inside an impact-focused program.",
-        details: "This recognition acknowledges my transition from skill development to sustainable income and entrepreneurship—verified freelancing earnings and founding a digital agency during a structured, impact-focused program. Grameenphone Academy, a Grameenphone Ltd. ESG initiative, provides free industry-relevant skills to create social and economic impact. In November 2024, it launched the 'Freelancing Factory' with the motto 'Learn with Earn.' I joined the UI/UX Design batch, started freelancing on Fiverr, achieved Level 1 Seller within six months, and founded BuildSign. Only two agencies emerged from the cohort; BuildSign was one, officially certified as a sustainable program outcome."
+        details: `<div class="gp-details-layout">
+            <div class="gp-content-grid">
+                <div class="gp-media-column">
+                    <div class="gp-media-card" onclick="openGPLightbox(0)">
+                        <img src="/assets/gp.jpg" alt="Grameenphone Certification" loading="lazy">
+                        <p class="gp-media-label">Certification</p>
+                    </div>
+                    <div class="gp-media-card" onclick="openGPLightbox(1)">
+                        <img src="/assets/gp1.jpg" alt="Grameenphone Recognition" loading="lazy">
+                        <p class="gp-media-label">Recognition</p>
+                    </div>
+                </div>
+
+                <div class="gp-text-column">
+                    <div class="gp-story">
+                        <p>This recognition was awarded to acknowledge my successful transition from skill development to sustainable income generation and entrepreneurship, including verified freelancing earnings and the founding of a digital agency during a structured impact-focused program.</p>
+                        
+                        <p>Grameenphone Academy is a venture of Grameenphone Ltd., operating under the company's ESG (Environmental, Social, and Governance) initiatives. The academy focuses on equipping students with industry-relevant skills free of cost, with the objective of creating sustainable social and economic impact through education and employability.</p>
+                        
+                        <p>In line with this mission, Grameenphone Academy launched the "Freelancing Factory" program in November 2024, designed to help participants develop professional skills and generate real income opportunities. I was selected as a participant in the UI/UX Design batch of this program.</p>
+                        
+                        <p>The core motto of the program was "Learn with Earn", where participants were encouraged not only to acquire skills but also to apply them in real market environments. As part of this initiative, I started freelancing on Fiverr, achieved Level 1 Seller status within six months, and concurrently founded BuildSign, a digital service agency.</p>
+                        
+                        <p>Additionally, only two digital agencies emerged from the cohort, one of which was BuildSign, founded by me. Grameenphone Academy officially certified this achievement as a key sustainable outcome of the program, recognizing it as part of their long-term impact creation efforts.</p>
+                    </div>
+
+                    <div class="gp-official-links">
+                        <h4>Official Links</h4>
+                        <div class="gp-links-row">
+                            <a href="https://www.facebook.com/Grameenphone" target="_blank" rel="noopener noreferrer" class="gp-link-item">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://www.grameenphone.academy/" target="_blank" rel="noopener noreferrer" class="gp-link-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>GP Academy</span>
+                            </a>
+                            <a href="https://www.linkedin.com/company/grameenphone-ltd/" target="_blank" rel="noopener noreferrer" class="gp-link-item">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`
     },
     {
         id: "nebulae-soft",
@@ -264,15 +429,40 @@ function renderAboutGrid() {
     const grid = document.getElementById('about-grid');
     if (!grid) return;
     
-    grid.innerHTML = aboutHighlights.map(item => `
-        <div class="about-card">
-            <h3 class="about-card-title">${item.title}</h3>
-            <p class="about-card-short">${item.short}</p>
-            <button class="btn-view-details" onclick="openAboutDetails('${item.id}')">
-                View Details <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-    `).join('');
+    grid.innerHTML = aboutHighlights.map(item => {
+        let action = '';
+        if (item.id === 'buildsign-founder') {
+            action = 'navigateToBuildsign()';
+        } else if (item.id === 'nebulae-soft') {
+            action = 'navigateToNebulae()';
+        } else if (item.id === 'diu-internship') {
+            action = 'navigateToInternationalAffairs()';
+        } else {
+            action = `openAboutDetails('${item.id}')`;
+        }
+        
+        return `
+            <div class="about-card reveal-stagger">
+                <h3 class="about-card-title">${item.title}</h3>
+                <p class="about-card-short">${item.short}</p>
+                <button class="btn-view-details" onclick="${action}">
+                    View Details <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+function navigateToBuildsign() {
+    window.location.href = 'buildsign.html';
+}
+
+function navigateToNebulae() {
+    window.location.href = 'nebulae.html';
+}
+
+function navigateToInternationalAffairs() {
+    window.location.href = 'international-affairs.html';
 }
 
 renderAboutGrid();
@@ -311,27 +501,58 @@ function renderActivitiesGrid() {
         ? activities 
         : activities.filter(activity => activity.category.includes(currentFilter));
     
-    grid.innerHTML = filteredActivities.map(activity => `
-        <div class="activity-card" onclick="openActivityDetails('${activity.id}')">
-            <div class="activity-card-gradient"></div>
-            <h3 class="activity-role">${activity.role}</h3>
-            <p class="activity-org">${activity.org}</p>
-            <div class="activity-metrics">
-                ${activity.metrics.slice(0, 2).map(metric => `
-                    <div class="activity-metric">
-                        <span class="metric-value">${metric.value}</span>
-                        <span class="metric-label">${metric.label}</span>
-                    </div>
-                `).join('')}
+    grid.innerHTML = filteredActivities.map(activity => {
+        let clickAction = '';
+        if (activity.id === 'diu-cyber-club') {
+            clickAction = 'navigateToCSClub()';
+        } else if (activity.id === 'ieee-pr') {
+            clickAction = 'navigateToIEEEPR()';
+        } else if (activity.id === 'creative-it-ambassador') {
+            clickAction = 'navigateToCreativeIT()';
+        } else if (activity.id === 'programming-hero') {
+            clickAction = 'navigateToProgrammingHero()';
+        } else {
+            clickAction = `openActivityDetails('${activity.id}')`;
+        }
+        
+        return `
+            <div class="activity-card reveal-stagger" onclick="${clickAction}">
+                <div class="activity-card-gradient"></div>
+                <h3 class="activity-role">${activity.role}</h3>
+                <p class="activity-org">${activity.org}</p>
+                <div class="activity-metrics">
+                    ${activity.metrics.slice(0, 2).map(metric => `
+                        <div class="activity-metric">
+                            <span class="metric-value">${metric.value}</span>
+                            <span class="metric-label">${metric.label}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <ul class="activity-highlights-preview">
+                    ${activity.highlights.slice(0, 2).map(highlight => `
+                        <li>${highlight}</li>
+                    `).join('')}
+                </ul>
+                <p class="activity-click-hint"><i class="fas fa-arrow-right"></i> Click to view more</p>
             </div>
-            <ul class="activity-highlights-preview">
-                ${activity.highlights.slice(0, 2).map(highlight => `
-                    <li>${highlight}</li>
-                `).join('')}
-            </ul>
-            <p class="activity-click-hint"><i class="fas fa-arrow-right"></i> Click to view more</p>
-        </div>
-    `).join('');
+        `;
+    }).join('');
+}
+
+function navigateToCSClub() {
+    window.location.href = 'csclub.html';
+}
+
+function navigateToIEEEPR() {
+    window.location.href = 'ieee-pr.html';
+}
+
+function navigateToCreativeIT() {
+    window.location.href = 'creative-it.html';
+}
+
+function navigateToProgrammingHero() {
+    window.location.href = 'programming-hero.html';
 }
 
 renderActivitiesGrid();
@@ -762,14 +983,31 @@ if (typeof pdfjsLib !== 'undefined') {
 
 // ==================== About Details Modal ====================
 function openAboutDetails(id) {
+    console.log("=== OPENING ABOUT DETAILS ===");
+    console.log("Item ID:", id);
+    
     const item = aboutHighlights.find(h => h.id === id);
-    if (!item) return;
+    if (!item) {
+        console.error("Item not found:", id);
+        return;
+    }
+    
+    console.log("Item found:", item.title);
+    
+    // Use HTML content for Fiverr item
+    let detailsContent = item.details;
+    if (id === 'fiverr-level1') {
+        console.log("FIVERR DETAILS VIEW RENDERED");
+        detailsContent = item.details;
+    }
     
     document.getElementById('modal-breadcrumb-title').textContent = item.title;
     document.getElementById('modal-title').textContent = item.title;
-    document.getElementById('modal-details').textContent = item.details;
+    document.getElementById('modal-details').innerHTML = detailsContent;
     document.getElementById('about-details-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    console.log("Modal opened successfully");
 }
 
 function closeAboutDetails() {
@@ -788,12 +1026,172 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeAboutDetails();
+        closeGPLightbox();
     }
 });
+
+// ==================== GP Lightbox ====================
+function openGPLightbox(index) {
+    const images = ['/assets/gp.jpg', '/assets/gp1.jpg'];
+    const labels = ['Certification', 'Recognition'];
+    
+    let lightbox = document.querySelector('.gp-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.className = 'gp-lightbox';
+        lightbox.innerHTML = `
+            <div class="gp-lightbox-overlay" onclick="closeGPLightbox()"></div>
+            <div class="gp-lightbox-content">
+                <button class="gp-lightbox-close" onclick="closeGPLightbox()">&times;</button>
+                <img class="gp-lightbox-img" src="" alt="">
+                <p class="gp-lightbox-label"></p>
+                <div class="gp-lightbox-nav">
+                    <button class="gp-lightbox-prev" onclick="changeGPImage(-1)">&#10094;</button>
+                    <button class="gp-lightbox-next" onclick="changeGPImage(1)">&#10095;</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+    }
+    
+    window.currentGPIndex = index;
+    window.gpImages = images;
+    window.gpLabels = labels;
+    
+    lightbox.querySelector('.gp-lightbox-img').src = images[index];
+    lightbox.querySelector('.gp-lightbox-label').textContent = labels[index];
+    lightbox.classList.add('active');
+    document.body.classList.add('modal-open');
+}
+
+function closeGPLightbox() {
+    const lightbox = document.querySelector('.gp-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+}
+
+function changeGPImage(direction) {
+    window.currentGPIndex += direction;
+    if (window.currentGPIndex < 0) window.currentGPIndex = window.gpImages.length - 1;
+    if (window.currentGPIndex >= window.gpImages.length) window.currentGPIndex = 0;
+    
+    const lightbox = document.querySelector('.gp-lightbox');
+    lightbox.querySelector('.gp-lightbox-img').src = window.gpImages[window.currentGPIndex];
+    lightbox.querySelector('.gp-lightbox-label').textContent = window.gpLabels[window.currentGPIndex];
+}
 
 // Initialize about grid on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderAboutGrid();
+});
+
+// ==================== Reveal Animation System ====================
+function initRevealAnimations() {
+    const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        revealElements.forEach(el => el.classList.add('revealed'));
+        return;
+    }
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.1
+    };
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('reveal-stagger')) {
+                    const siblings = entry.target.parentElement.querySelectorAll('.reveal-stagger');
+                    const elementIndex = Array.from(siblings).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, elementIndex * 80);
+                } else {
+                    entry.target.classList.add('revealed');
+                }
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+}
+
+// ==================== Scroll Progress Indicator ====================
+function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    document.documentElement.style.setProperty('--scroll-progress', `${scrollPercent}%`);
+}
+
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+// ==================== Page Transition ====================
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('page-transition');
+    initRevealAnimations();
+});
+
+// Re-initialize on page show (handles back/forward)
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        initRevealAnimations();
+    }
+});
+
+// ==================== Navbar Active State Management ====================
+function updateNavbarActiveState() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // If not on homepage, remove all active states
+    if (currentPath !== '/' && currentPath !== '/index.html' && !currentPath.endsWith('/K M Arafat Islam/')) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        return;
+    }
+    
+    // On homepage, use intersection observer for section detection
+    const sections = document.querySelectorAll('section[id]');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+    
+    sections.forEach(section => observer.observe(section));
+}
+
+// Initialize navbar state on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateNavbarActiveState();
+});
+
+// Re-initialize on page show (handles back/forward navigation)
+window.addEventListener('pageshow', () => {
+    updateNavbarActiveState();
 });
 
 // ==================== Mobile Menu Toggle ====================
