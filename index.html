@@ -21,7 +21,7 @@
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#skills-new" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -161,139 +161,116 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
+    <!-- Extracurricular Activities Section -->
+    <section id="activities" class="activities-section">
+        <div class="activities-background-blob"></div>
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Front-End</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>HTML/CSS</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>JavaScript</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>React</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Responsive Design</span>
-                                <span>88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="section-title section-title-purple">Extracurricular Activities</h2>
+            
+            <div class="filter-chips" id="filterChips">
+                <button class="filter-chip active" data-filter="All">All</button>
+                <button class="filter-chip" data-filter="Leadership">Leadership</button>
+                <button class="filter-chip" data-filter="Events">Events</button>
+                <button class="filter-chip" data-filter="Communication">Communication</button>
+                <button class="filter-chip" data-filter="Community">Community</button>
+                <button class="filter-chip" data-filter="PR / Media">PR / Media</button>
+            </div>
+            
+            <div class="activities-grid" id="activitiesGrid"></div>
+        </div>
+    </section>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i> Back-End</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Node.js</span>
-                                <span>82%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 82%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Python</span>
-                                <span>78%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 78%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>MongoDB</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>MySQL</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Activity Details Modal -->
+    <div class="modal-overlay" id="activity-details-modal">
+        <div class="modal-container">
+            <div class="modal-content activity-modal-content">
+                <button class="modal-close" onclick="closeActivityDetails()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-breadcrumb">
+                    <span>Extracurricular Activities</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <span id="activity-modal-breadcrumb-title"></span>
                 </div>
+                <h2 class="modal-title" id="activity-modal-title"></h2>
+                <div class="activity-modal-meta">
+                    <p class="activity-modal-org" id="activity-modal-org"></p>
+                </div>
+                <div class="activity-modal-metrics" id="activity-modal-metrics"></div>
+                <div class="activity-modal-highlights">
+                    <h3>Key Highlights</h3>
+                    <ul id="activity-modal-highlights-list"></ul>
+                </div>
+                <div class="activity-modal-description">
+                    <h3>Full Description</h3>
+                    <p id="activity-modal-description"></p>
+                </div>
+                <button class="btn-back" onclick="closeActivityDetails()">
+                    <i class="fas fa-arrow-left"></i> Back to Activities
+                </button>
+            </div>
+        </div>
+    </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Tools & Others</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Git/GitHub</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>VS Code</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>API Development</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Problem Solving</span>
-                                <span>88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Skills & Certifications Section -->
+    <section id="skills-new" class="skills-section">
+        <div class="container">
+            <h2 class="section-title section-title-purple">Skills & Certifications</h2>
+            
+            <div class="skills-compact-container" id="skillsCompactContainer"></div>
+            
+            <div class="other-certificates-cta">
+                <a href="certificates.html" class="btn-view-other-certificates">
+                    <i class="fas fa-certificate"></i>
+                    View my other certificates (80+)
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
+
+    <!-- Skill Details Modal -->
+    <div class="modal-overlay" id="skill-details-modal">
+        <div class="modal-container">
+            <div class="modal-content skill-modal-content">
+                <button class="modal-close" onclick="closeSkillDetails()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-breadcrumb">
+                    <span>Skills & Certifications</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <span id="skill-modal-breadcrumb-title"></span>
+                </div>
+                <h2 class="modal-title" id="skill-modal-title"></h2>
+                <p class="skill-modal-issuer" id="skill-modal-issuer"></p>
+                <div class="skill-modal-meta" id="skill-modal-meta"></div>
+                <div class="skill-modal-tags" id="skill-modal-tags"></div>
+                <div class="skill-modal-description">
+                    <h3>Full Details</h3>
+                    <p id="skill-modal-details"></p>
+                </div>
+                <div class="skill-modal-actions">
+                    <button class="btn-certificate" id="skill-modal-certificate-btn">
+                        <i class="fas fa-certificate"></i>
+                        <span id="skill-certificate-label">View Certificate</span>
+                    </button>
+                    <button class="btn-back" onclick="closeSkillDetails()">
+                        <i class="fas fa-arrow-left"></i> Back to Skills
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Viewer Modal -->
+    <div class="modal-overlay certificate-viewer-modal" id="certificate-viewer-modal">
+        <div class="certificate-viewer-container">
+            <button class="modal-close" onclick="closeCertificateViewer()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="certificate-viewer-image" src="" alt="Certificate" class="certificate-viewer-image">
+        </div>
+    </div>
 
     <!-- Projects Section -->
     <section id="projects" class="projects-section">

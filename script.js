@@ -58,6 +58,168 @@ const publications = [
     }
 ];
 
+const activities = [
+    {
+        id: "diu-cyber-club",
+        role: "Communication & Organizing Secretary",
+        org: "DIU Cyber Security Club",
+        category: ["Leadership", "Events", "Communication", "Community"],
+        metrics: [
+            { label: "Events Led", value: "25+" },
+            { label: "Students Reached", value: "6,000+" }
+        ],
+        highlights: [
+            "Handled content writing, email communication, documentation, and social media.",
+            "Led planning and execution of 25+ seminars, workshops, and competitions.",
+            "Improved outreach and internal coordination to solve participation and communication issues."
+        ],
+        desc: "I was actively involved in the Cyber Security Club at Daffodil International University, where I initially served as Communication Secretary and later took on the role of Organizing Secretary. My responsibilities began with content writing, email communication, documentation, and social media management, which strengthened the club's internal and external communication. As Organizing Secretary, I led the planning and execution of more than 25 seminars, workshops, and competitions—coordinating teams, schedules, and smooth delivery. Through these activities, the club reached and benefited over 6,000 students. This experience developed my communication, leadership, and planning skills and directly supports my current work in agency management and client communication."
+    },
+    {
+        id: "ieee-pr",
+        role: "Public Relations Coordinator",
+        org: "IEEE DIU Student Branch",
+        category: ["PR / Media", "Communication", "Events", "Leadership"],
+        metrics: [
+            { label: "Events Supported", value: "38" },
+            { label: "Avg Participants", value: "70–100" }
+        ],
+        highlights: [
+            "Coordinated with IEEE branches across Bangladesh for announcements and outreach.",
+            "Helped organize and promote 38 events with consistent documentation.",
+            "Led a 3-day programming program with Programming Hero + competition + bootcamp access."
+        ],
+        desc: "I served as a Public Relations Coordinator at the IEEE DIU Student Branch, managing internal communication and strengthening collaboration with other IEEE student branches across Bangladesh. I coordinated with different university branches to promote events, share announcements in official groups, and increase participation through structured outreach. During my tenure, I supported 38 events with 70–100 participants on average. A key initiative was a three-day programming event with Programming Hero: three technical sessions, followed by a competition; top three winners received prizes and all participants got a 21-day free bootcamp. This role strengthened my communication, branding, and stakeholder management skills—directly supporting my agency branding and client communication today."
+    },
+    {
+        id: "creative-it-ambassador",
+        role: "Campus Ambassador",
+        org: "Creative IT Institute",
+        category: ["Community", "Communication"],
+        metrics: [
+            { label: "Outreach Posts", value: "40+" },
+            { label: "Student Leads", value: "150+" }
+        ],
+        highlights: [
+            "Promoted practical IT skill development opportunities to students.",
+            "Acted as a bridge between the institute and the student community.",
+            "Encouraged peers to explore skill-based learning pathways for employability."
+        ],
+        desc: "I served as a Campus Ambassador for Creative IT Institute, promoting access to practical IT skill development and increasing student engagement with technology-focused learning initiatives. I acted as a bridge between the institute and the university student community—sharing program information through student networks and encouraging participation in training initiatives related to digital skills. Through consistent outreach, I supported peers in exploring skill-based learning pathways that strengthened confidence and long-term career readiness. This experience improved my communication and outreach abilities and reinforced my community impact mindset, which continues to influence my entrepreneurial thinking."
+    },
+    {
+        id: "programming-hero",
+        role: "Campus Hero",
+        org: "Programming Hero",
+        category: ["Leadership", "Community", "Communication"],
+        metrics: [
+            { label: "Institutions", value: "20+" },
+            { label: "Students Reached", value: "1,000+" }
+        ],
+        highlights: [
+            "Represented my university and coordinated a nationwide Campus Hero network.",
+            "Managed communication, updates, and engagement across 20+ institutions.",
+            "Promoted workshops, bootcamps, and online learning programs for students."
+        ],
+        desc: "I served as a Campus Hero for Programming Hero, promoting learning initiatives and building student engagement across digital platforms. Beyond representing my own university, I acted as a coordinator for 20+ institutions—managing communication, updates, and engagement across a nationwide student network. Through structured online outreach, the initiatives reached around 1,000 students and provided access to technical learning opportunities. This role strengthened my leadership and team management skills in large groups, and reinforced my community impact mindset—widening access to technology education continues to influence my entrepreneurial and academic goals."
+    },
+    {
+        id: "tbs-edge",
+        role: "EDGE Associate",
+        org: "The Business Standard",
+        category: ["PR / Media", "Communication"],
+        metrics: [
+            { label: "Articles Promoted", value: "30+" },
+            { label: "Campus Reach", value: "1,000+" }
+        ],
+        highlights: [
+            "Supported news outreach, student communication, and public relations activities.",
+            "Promoted selected news and initiatives through campus networks.",
+            "Learned consistent messaging and media communication in a professional context."
+        ],
+        desc: "As an EDGE Associate at The Business Standard, I supported the newspaper's youth development wing by helping with news outreach, student communication, and public relations activities. I promoted selected articles and initiatives across campus networks so relevant stories reached a wider student audience. This role gave me hands-on exposure to news distribution, campus-level PR, and media communication. It strengthened my ability to represent a national newspaper, maintain consistent messaging, and manage information flow between students and the organization—helping me understand how professional media platforms build trust and public image."
+    },
+    {
+        id: "banglay-ielts-crew",
+        role: "Campus Crew",
+        org: "Banglay IELTS & Immigration Centre",
+        category: ["Communication", "Community", "PR / Media"],
+        metrics: [
+            { label: "Sessions Supported", value: "10+" },
+            { label: "Students Guided", value: "200+" }
+        ],
+        highlights: [
+            "Promoted IELTS and study-abroad guidance sessions through campus networks.",
+            "Supported event coordination, student communication, and response handling.",
+            "Helped increase awareness of application steps, documentation, and timelines."
+        ],
+        desc: "I worked as a Campus Crew member at Banglay IELTS & Immigration Centre, supporting student outreach and engagement around IELTS preparation and study-abroad guidance. I helped promote sessions through campus networks, assisted in coordination, and supported student communication by answering common queries and guiding students to the right resources. This role strengthened my community outreach and communication skills, especially in handling high-volume student interest and maintaining clear, helpful messaging. It also improved my ability to coordinate small campaigns and support learning-focused events with a service mindset."
+    }
+];
+
+const skills = [
+    {
+        id: "uiux-gp",
+        name: "UI/UX Design",
+        issuer: "Grameenphone Academy (Grameenphone Ltd.)",
+        meta: ["8 months", "Freelancing Factory", "Top 5 learner", "$3000+ earnings"],
+        tags: ["Design", "UI/UX", "Figma", "Freelancing", "App Design", "Web Design", "UX Research"],
+        certificateLink: "",
+        short: "UI/UX design training through Grameenphone Academy's Freelancing Factory—focused on real market work, strong learning performance, and verified international freelancing earnings.",
+        details: "I completed the 8-month Grameenphone Academy Freelancing Factory program in UI/UX Design and was ranked among the top 5 learners. The program was built around learning with earning, so I applied my skills in real market projects. After finishing the course, my recorded freelancing earnings crossed $3000+. I received official certification from Grameenphone Ltd., and this experience became a major foundation for my professional journey and confidence in delivering design work for real clients."
+    },
+    {
+        id: "data-analytics-hdn",
+        name: "Data Analytics",
+        issuer: "Human Development Network Bangladesh (Accredited Bootcamp)",
+        meta: ["12-week bootcamp", "8+ real projects", "Excel • SQL • Python"],
+        tags: ["Analytics", "Excel", "Power BI", "SQL", "Python", "Dashboards"],
+        certificateLink: "assets/dataanalytics.png",
+        short: "12-week career bootcamp with 8+ real projects covering data cleaning, analysis, visualization, dashboards, and business reporting using Excel, SQL, and Python.",
+        details: "I completed a 12-week Data Analytics Career Bootcamp accredited by the Human Development Network Bangladesh, working on 8+ real data projects involving cleaning, exploration, visualization, and business reporting. The program included industry-oriented modules on Data Fundamentals, Excel Analytics, SQL & Databases, and Career Readiness. I practiced end-to-end workflows: collecting datasets, cleaning with Excel and Python, writing SQL queries, building dashboards, and presenting insights for decisions. This training strengthened my analytical thinking, attention to detail, and confidence with real datasets, preparing me for data-driven roles in modern business environments."
+    },
+    {
+        id: "mobile-app-edge",
+        name: "Mobile App Development",
+        issuer: "ICT Division, Government of Bangladesh (EDGE Project) • Bangladesh Computer Council",
+        meta: ["80 Hours", "Government funded", "Hands-on prototypes"],
+        tags: ["Mobile", "App Dev", "Flutter", "EDGE", "UI Basics", "Backend Concepts"],
+        certificateLink: "assets/mobileapp.jpg",
+        short: "Government-certified 80-hour training under the EDGE Project—mobile app fundamentals, UI basics, backend concepts, and hands-on prototype building with structured lessons.",
+        details: "I successfully completed an 80-hour Mobile App Development training under the Enhancing Digital Government and Economy (EDGE) Project, conducted by the ICT Division, Government of Bangladesh and the Bangladesh Computer Council, in collaboration with the Department of CSE, Jagannath University. I learned mobile app fundamentals, UI design basics, backend concepts, and the complete process of building functional app prototypes. Through structured lessons and hands-on tasks, I practiced real workflows and strengthened my foundation in mobile technology. Completing this government-certified program added value to my technical skill set and exposure to practical, industry-relevant ICT training."
+    },
+    {
+        id: "product-management-bohubrihi",
+        name: "Digital Product Management",
+        issuer: "Bohubrihi (4-Month Career Track Program)",
+        meta: ["4 months", "5 mini-projects", "1 capstone"],
+        tags: ["Product", "Strategy", "JIRA", "User Research", "Go-to-market", "UI/UX", "Development", "Engineering"],
+        certificateLink: "assets/product.jfif",
+        short: "4-month product career track covering full product lifecycle with 5 mini-projects + capstone—BMC, Kano, Hooked model, prioritization, JIRA, validation, and launch strategy.",
+        details: "I completed a 4-month Digital Product Management career track program from Bohubrihi, learning the full product lifecycle from idea to launch. I worked on five structured mini-projects and a capstone project—Business Model Canvas (Pathao), Kano Model (Netflix), Hooked Model (Dorik), JIRA-based task management, and a final capstone feature built by applying all concepts. The program covered hypothesis validation, user research, prioritization, development methodologies, go-to-market planning, and post-launch strategy. This training strengthened my product-thinking mindset and helped me connect design, business, and technical understanding toward building meaningful digital solutions."
+    },
+    {
+        id: "nssb-2019",
+        name: "National Skill Standard Computer Office Application",
+        issuer: "Bangladesh Technical Education Board (Government Certified)",
+        meta: ["360 Hours", "6 months", "A+ Grade", "2019"],
+        tags: ["Office Tools", "Documentation", "Digital Skills", "MS Word", "Typing", "Hardware"],
+        certificateLink: "assets/com.jpg",
+        short: "Government-recognized 360-hour National Skill Standard course in Computer Office Application—earned A+ in the national exam and built strong early foundation in digital tools and discipline.",
+        details: "In 2019, I earned a government-recognized certification from the Bangladesh Technical Education Board after completing a 360-hour (6-month) National Skill Standard Basic Course in Computer Office Application. The program was conducted by Daffodil International Professional Training Institute, Chandpur, and supervised under the Ministry of Education. I passed the national examination with an A+ grade. This certification built my foundation in essential computer skills, documentation, and professional office applications. Completing a government-standard course early helped build my discipline, interest in technology, and confidence to pursue higher-level digital skills later."
+    },
+    {
+        id: "doe-video-editing",
+        name: "Video Editing",
+        issuer: "The Duke of Edinburgh's International Award (Bronze Standard)",
+        meta: ["Bronze Award", "Skill: Video Editing", "Voluntary service: 30+ patients helped"],
+        tags: ["Video Editing", "Consistency", "Discipline", "Service", "Blood", "Football", "Sunamganj"],
+        certificateLink: "assets/duke.jpg",
+        short: "Bronze Duke of Edinburgh's Award—developed video editing as the skill track, football as physical recreation, and blood donation service supporting 30+ patients plus 4 personal donations.",
+        details: "I earned the Bronze Standard of the Duke of Edinburgh's International Award by completing all four phases with consistency and dedication. For the Skill section, I chose video editing and practiced weekly until I became confident. Physical Recreation focused on football training 3–4 days a week, improving discipline and teamwork. In Voluntary Service, I worked in emergency blood management and helped more than 30 patients by arranging blood on time, and I donated blood four times. The Adventurous Journey took place in Tanguar Haor, Sunamganj, building teamwork and adaptability. This award taught discipline, empathy, and personal growth through real responsibility."
+    }
+];
+
 const aboutHighlights = [
     {
         id: "buildsign-founder",
@@ -137,6 +299,192 @@ function renderPublicationsGrid() {
 }
 
 renderPublicationsGrid();
+
+// ==================== Activities Section ====================
+let currentFilter = 'All';
+
+function renderActivitiesGrid() {
+    const grid = document.getElementById('activitiesGrid');
+    if (!grid) return;
+    
+    const filteredActivities = currentFilter === 'All' 
+        ? activities 
+        : activities.filter(activity => activity.category.includes(currentFilter));
+    
+    grid.innerHTML = filteredActivities.map(activity => `
+        <div class="activity-card" onclick="openActivityDetails('${activity.id}')">
+            <div class="activity-card-gradient"></div>
+            <h3 class="activity-role">${activity.role}</h3>
+            <p class="activity-org">${activity.org}</p>
+            <div class="activity-metrics">
+                ${activity.metrics.slice(0, 2).map(metric => `
+                    <div class="activity-metric">
+                        <span class="metric-value">${metric.value}</span>
+                        <span class="metric-label">${metric.label}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <ul class="activity-highlights-preview">
+                ${activity.highlights.slice(0, 2).map(highlight => `
+                    <li>${highlight}</li>
+                `).join('')}
+            </ul>
+            <p class="activity-click-hint"><i class="fas fa-arrow-right"></i> Click to view more</p>
+        </div>
+    `).join('');
+}
+
+renderActivitiesGrid();
+
+// Filter functionality
+const filterChips = document.querySelectorAll('.filter-chip');
+filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+        filterChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentFilter = chip.getAttribute('data-filter');
+        renderActivitiesGrid();
+    });
+});
+
+// Activity Details Modal
+function openActivityDetails(id) {
+    const activity = activities.find(a => a.id === id);
+    if (!activity) return;
+    
+    document.getElementById('activity-modal-breadcrumb-title').textContent = activity.role;
+    document.getElementById('activity-modal-title').textContent = activity.role;
+    document.getElementById('activity-modal-org').textContent = activity.org;
+    
+    document.getElementById('activity-modal-metrics').innerHTML = activity.metrics.map(metric => `
+        <div class="activity-metric-large">
+            <span class="metric-value-large">${metric.value}</span>
+            <span class="metric-label-large">${metric.label}</span>
+        </div>
+    `).join('');
+    
+    document.getElementById('activity-modal-highlights-list').innerHTML = activity.highlights.map(highlight => `
+        <li>${highlight}</li>
+    `).join('');
+    
+    document.getElementById('activity-modal-description').textContent = activity.desc;
+    
+    document.getElementById('activity-details-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeActivityDetails() {
+    document.getElementById('activity-details-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close modal with ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeActivityDetails();
+        closeSkillDetails();
+        closeCertificateViewer();
+    }
+});
+
+// ==================== Skills & Certifications Section ====================
+function renderSkillsCompact() {
+    const container = document.getElementById('skillsCompactContainer');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="skill-compact-grid">
+            ${skills.map(skill => {
+                const visibleTags = skill.tags.slice(0, 3);
+                const hiddenCount = skill.tags.length - 3;
+                
+                return `
+                    <div class="skill-compact-card">
+                        <h4 class="skill-compact-name">${skill.name}</h4>
+                        <div class="skill-compact-tags">
+                            ${visibleTags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
+                            ${hiddenCount > 0 ? `<span class="skill-tag skill-tag-extra">+${hiddenCount}</span>` : ''}
+                        </div>
+                        <div class="skill-compact-actions">
+                            <button class="btn-skill-details" onclick="openSkillDetails('${skill.id}')">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </button>
+                            <button class="btn-skill-certificate ${skill.certificateLink ? '' : 'btn-skill-certificate-disabled'}" 
+                                    ${skill.certificateLink ? `onclick="openCertificate('${skill.certificateLink}')"` : 'disabled'}>
+                                <i class="fas fa-certificate"></i> 
+                                ${skill.certificateLink ? 'View Certificate' : 'View Certificate (Soon)'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
+function openSkillDetails(id) {
+    const skill = skills.find(s => s.id === id);
+    if (!skill) return;
+    
+    document.getElementById('skill-modal-breadcrumb-title').textContent = skill.name;
+    document.getElementById('skill-modal-title').textContent = skill.name;
+    document.getElementById('skill-modal-issuer').textContent = skill.issuer;
+    
+    document.getElementById('skill-modal-meta').innerHTML = skill.meta.map(item => `
+        <span class="skill-meta-chip">${item}</span>
+    `).join('');
+    
+    document.getElementById('skill-modal-tags').innerHTML = skill.tags.map(tag => `
+        <span class="skill-tag-large">${tag}</span>
+    `).join('');
+    
+    document.getElementById('skill-modal-details').textContent = skill.details;
+    
+    const certBtn = document.getElementById('skill-modal-certificate-btn');
+    const certLabel = document.getElementById('skill-certificate-label');
+    
+    if (skill.certificateLink) {
+        certBtn.disabled = false;
+        certBtn.classList.remove('btn-certificate-disabled');
+        certBtn.onclick = () => openCertificate(skill.certificateLink);
+        certLabel.textContent = 'View Certificate';
+    } else {
+        certBtn.disabled = true;
+        certBtn.classList.add('btn-certificate-disabled');
+        certBtn.onclick = null;
+        certLabel.textContent = 'View Certificate (Soon)';
+    }
+    
+    document.getElementById('skill-details-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function openCertificate(certificateLink) {
+    const ext = certificateLink.split('.').pop().toLowerCase();
+    
+    if (ext === 'pdf') {
+        window.open(certificateLink, '_blank', 'noopener,noreferrer');
+    } else if (['png', 'jpg', 'jpeg', 'jfif'].includes(ext)) {
+        const modal = document.getElementById('certificate-viewer-modal');
+        const img = document.getElementById('certificate-viewer-image');
+        img.src = certificateLink;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeCertificateViewer() {
+    const modal = document.getElementById('certificate-viewer-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function closeSkillDetails() {
+    document.getElementById('skill-details-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+renderSkillsCompact();
 
 // ==================== About Details Modal ====================
 function openAboutDetails(id) {

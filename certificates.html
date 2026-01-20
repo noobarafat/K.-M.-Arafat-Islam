@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="K M Arafat Islam - Certificates & Credentials">
+    <title>Other Certificates | K M Arafat Islam</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2>K M Arafat Islam</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#skills-new" class="nav-link">Skills</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Certificates Section -->
+    <section class="certificates-page-section">
+        <div class="container">
+            <div class="certificates-page-header">
+                <a href="index.html#skills-new" class="btn-back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Skills
+                </a>
+                <h1 class="certificates-page-title">Other Certificates</h1>
+                <p class="certificates-page-subtitle">A collection of additional course certificates and credentials.</p>
+            </div>
+            
+            <div class="certificates-gallery-grid" id="certificatesGalleryGrid"></div>
+        </div>
+    </section>
+
+    <!-- Certificate Viewer Modal -->
+    <div class="modal-overlay certificate-viewer-modal" id="certificate-viewer-modal">
+        <div class="certificate-viewer-container">
+            <button class="modal-close" onclick="closeCertificateViewer()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="certificate-viewer-content">
+                <h3 id="certificate-viewer-title" class="certificate-viewer-title"></h3>
+                <div class="certificate-viewer-image-wrapper">
+                    <img id="certificate-viewer-image" src="" alt="Certificate" class="certificate-viewer-image" style="display: none;">
+                    <canvas id="certificate-viewer-canvas" class="certificate-viewer-canvas" style="display: none;"></canvas>
+                </div>
+                <button class="btn-open-new-tab" id="btn-open-new-tab" style="display: none;">
+                    <i class="fas fa-external-link-alt"></i> Open in new tab
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 K M Arafat Islam. All rights reserved.</p>
+            <p>Designed & Developed with <i class="fas fa-heart"></i> by K M Arafat Islam</p>
+        </div>
+    </footer>
+
+    <script src="certificates.js"></script>
+</body>
+</html>
