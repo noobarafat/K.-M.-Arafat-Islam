@@ -511,6 +511,10 @@ function renderActivitiesGrid() {
             clickAction = 'navigateToCreativeIT()';
         } else if (activity.id === 'programming-hero') {
             clickAction = 'navigateToProgrammingHero()';
+        } else if (activity.id === 'tbs-edge') {
+            clickAction = 'navigateToTBSEdge()';
+        } else if (activity.id === 'banglay-ielts-crew') {
+            clickAction = 'navigateToBanglayIELTS()';
         } else {
             clickAction = `openActivityDetails('${activity.id}')`;
         }
@@ -553,6 +557,14 @@ function navigateToCreativeIT() {
 
 function navigateToProgrammingHero() {
     window.location.href = 'programming-hero.html';
+}
+
+function navigateToTBSEdge() {
+    window.location.href = 'tbs-edge.html';
+}
+
+function navigateToBanglayIELTS() {
+    window.location.href = 'banglay-ielts.html';
 }
 
 renderActivitiesGrid();
@@ -799,28 +811,415 @@ function openEventDetails(eventId) {
     if (!event) return;
     
     const modal = document.getElementById('event-details-modal');
-    document.getElementById('event-modal-institute').textContent = event.institute;
-    document.getElementById('event-modal-location').textContent = event.locationType;
-    document.getElementById('event-modal-title').textContent = event.title;
-    document.getElementById('event-modal-description').textContent = event.details;
     
-    const highlights = extractHighlights(event.details);
-    const highlightsContainer = document.getElementById('event-modal-highlights');
-    highlightsContainer.innerHTML = `
-        <h4>Key Highlights</h4>
-        <ul>
-            ${highlights.map(h => `<li>${h}</li>`).join('')}
-        </ul>
-    `;
+    // Special handling for CommTECH
+    if (eventId === 'comtech-2023') {
+        document.getElementById('event-modal-institute').textContent = 'Hosted by Institut Teknologi Sepuluh Nopember (ITS), Indonesia';
+        document.getElementById('event-modal-location').textContent = '';
+        document.getElementById('event-modal-title').textContent = 'CommTECH Nusantara 2023 — Virtual Exploration of Indonesia';
+        
+        document.getElementById('event-modal-description').innerHTML = `
+            <p>I participated in <strong>CommTECH Nusantara 2023: Virtual Exploration of Indonesia</strong>, an international academic program hosted by Institut Teknologi Sepuluh Nopember (ITS), one of Indonesia's top-ranked public universities. The program brought together participants from different countries to engage in a virtual academic and cultural exchange focused on Indonesia's approach to technology, innovation, and community development.</p>
+            
+            <p>Throughout the program, I took part in interactive workshops, guided discussions, and collaborative sessions with international participants. These activities explored Indonesian social innovation, local industry practices, and the role of technology in community-driven development. Working in a multinational learning environment strengthened my understanding of how cultural context influences technological solutions and policy thinking.</p>
+            
+            <p>This experience enhanced my cross-cultural communication skills and global academic awareness. Engaging with international peers helped me develop confidence in collaborative learning environments and broadened my perspective as a global learner. CommTECH Nusantara played a meaningful role in shaping my interest in international programs, academic exchange, and globally connected innovation.</p>
+        `;
+        
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <div class="event-inline-highlights">
+                <div class="event-highlight-item">
+                    <i class="fas fa-globe-asia"></i>
+                    <span>International academic exchange program</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-university"></i>
+                    <span>Hosted by a leading Southeast Asian public university</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-users"></i>
+                    <span>Multinational participant collaboration</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Focus on culture, technology, and community innovation</span>
+                </div>
+            </div>
+            
+            <div class="event-certificate-display">
+                <h4>Certificate of Participation</h4>
+                <div class="event-cert-preview" onclick="openCertificateLightbox('assets/int/comtech.png', 'Certificate of Participation — CommTECH Nusantara 2023')">
+                    <img src="assets/int/comtech.png" alt="CommTECH Certificate">
+                    <div class="cert-preview-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <span>Click to view full size</span>
+                    </div>
+                </div>
+                <p class="cert-label">Certificate of Participation — CommTECH Nusantara 2023</p>
+            </div>
+        `;
+    } else if (eventId === 'climate-summit-2023') {
+        document.getElementById('event-modal-institute').textContent = 'Organized by Global Youth Leadership Center • University of Dar es Salaam • Tanzania Forest Service Agency';
+        document.getElementById('event-modal-location').textContent = '';
+        document.getElementById('event-modal-title').textContent = 'Global Youth Climate Summit 2023 — Virtual Delegate';
+        
+        document.getElementById('event-modal-description').innerHTML = `
+            <p>I was selected as a <strong>Virtual Delegate</strong> for the Global Youth Climate Summit 2023, an international platform bringing together young leaders from across the world to discuss climate action, sustainability, and global environmental responsibility. The summit was organized by the Global Youth Leadership Center in collaboration with the University of Dar es Salaam and the Tanzania Forest Service Agency, creating a truly global and interdisciplinary learning environment.</p>
+            
+            <p>Throughout the summit, I engaged in high-level discussions on climate resilience, environmental policy, innovation for sustainability, and youth-driven solutions to global climate challenges. Participating alongside delegates from diverse countries helped me understand how environmental issues are approached differently across regions while reinforcing the importance of collective global action.</p>
+            
+            <p>Being selected as a delegate among a competitive international applicant pool was a meaningful milestone for me. This experience strengthened my global leadership mindset, improved my ability to engage in international dialogue, and connected me with youth changemakers and environmental initiatives worldwide. The summit deepened my sense of responsibility toward sustainable development and continues to influence my perspective on impact-driven work in a global context.</p>
+        `;
+        
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <div class="event-inline-highlights">
+                <div class="event-highlight-item">
+                    <i class="fas fa-award"></i>
+                    <span>Selected Virtual Delegate in a global youth summit</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Collaboration with international institutions and agencies</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-leaf"></i>
+                    <span>Focus on climate action, sustainability, and resilience</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Participation with youth leaders from multiple countries</span>
+                </div>
+            </div>
+            
+            <div class="event-certificate-display">
+                <h4>Certificate of Participation</h4>
+                <div class="event-cert-pdf-viewer">
+                    <embed src="assets/int/gsummit.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
+                    <p class="pdf-fallback-text">PDF viewer may not be supported in your browser. <a href="assets/int/gsummit.pdf" target="_blank" rel="noopener noreferrer">Click here to view certificate</a></p>
+                </div>
+                <p class="cert-label">Certificate of Participation — Global Youth Climate Summit 2023</p>
+            </div>
+        `;
+    } else if (eventId === 'rmi-week-2023') {
+        document.getElementById('event-modal-institute').textContent = 'Universitas Islam Sultan Agung (UNISSULA), Semarang, Indonesia';
+        document.getElementById('event-modal-location').textContent = '';
+        document.getElementById('event-modal-title').textContent = 'RMI Week 2023 — International Short Course';
+        
+        document.getElementById('event-modal-description').innerHTML = `
+            <p>I was selected to participate in the <strong>International Short Course on City Resilience, Disaster Mitigation, and Infrastructure (RMI Week 2023)</strong>, hosted by Universitas Islam Sultan Agung (UNISSULA) in Semarang, Indonesia. The program brought together students from multiple countries to explore how cities respond to climate risks, strengthen infrastructure, and build disaster-resilient communities through interdisciplinary and international collaboration.</p>
+            
+            <p>During the program, I worked closely with international peers in a mixed-country team to analyze real-world urban resilience challenges. One of the most impactful components of the course was a collaborative international case study, where our team combined engineering perspectives, policy insight, and community readiness to propose practical solutions for disaster mitigation and infrastructure resilience.</p>
+            
+            <p>In addition to the international coursework, I also presented the outcomes of this learning experience in Bangladesh, where the presentation received recognition for its analytical depth and clarity. This extended the impact of the program beyond the host country and reinforced my ability to translate international learning into local academic and professional contexts.</p>
+            
+            <p>Participating in RMI Week strengthened my confidence in global teamwork, analytical problem-solving, and structured communication. The experience deepened my understanding of how different countries approach resilience planning and prepared me for future work in international, impact-driven environments.</p>
+        `;
+        
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <div class="event-inline-highlights">
+                <div class="event-highlight-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>International short course hosted in Indonesia</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Multinational teamwork and case-study collaboration</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Focus on city resilience, disaster mitigation, and infrastructure</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-globe-asia"></i>
+                    <span>International learning translated into local academic recognition</span>
+                </div>
+            </div>
+            
+            <div class="event-certificate-display">
+                <h4>Certificates</h4>
+                <div class="event-multi-cert-grid">
+                    <div class="event-cert-item">
+                        <div class="event-cert-pdf-viewer">
+                            <embed src="assets/int/rmi.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
+                            <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/rmi.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+                        </div>
+                        <p class="cert-label">Certificate — RMI Week 2023 (UNISSULA, Indonesia)</p>
+                    </div>
+                    <div class="event-cert-item">
+                        <div class="event-cert-preview" onclick="openCertificateLightbox('assets/int/rmibd.jpg', 'Certificate — RMI Week Presentation & Recognition (Bangladesh)')">
+                            <img src="assets/int/rmibd.jpg" alt="RMI Bangladesh Certificate">
+                            <div class="cert-preview-overlay">
+                                <i class="fas fa-search-plus"></i>
+                                <span>Click to view full size</span>
+                            </div>
+                        </div>
+                        <p class="cert-label">Certificate — RMI Week Presentation & Recognition (Bangladesh)</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (eventId === 'ubaya-2023') {
+        document.getElementById('event-modal-institute').textContent = 'International • Online | Universitas Surabaya (UBAYA), Indonesia';
+        document.getElementById('event-modal-location').textContent = '';
+        document.getElementById('event-modal-title').textContent = 'UBAYA Online Summer Program 2023 — Global Short Courses';
+        
+        document.getElementById('event-modal-description').innerHTML = `
+            <p>I participated in the <strong>UBAYA Online Summer Program 2023</strong>, an international online initiative organized by Universitas Surabaya (UBAYA), one of Indonesia's leading private universities. The program brought together participants from different countries to explore how emerging digital technologies are shaping modern life, work, and global interaction through structured short courses and collaborative learning.</p>
+            
+            <p>The program consisted of two global short courses. The first, <strong>Digitalize Your Life</strong>, focused on digital transformation, personal branding, online communication, and productivity systems that influence how individuals and organizations operate in a digitally connected world. The second course, <strong>ChatGPT, Artificial Intelligence, and Metaverse for Our Daily Life</strong>, explored practical applications of AI, human–AI interaction, metaverse concepts, and the future of digital ecosystems.</p>
+            
+            <p>Engaging in discussions and learning activities with international participants helped me develop a broader global perspective on technology adoption and digital innovation. This experience strengthened my confidence in cross-cultural communication and kept me aligned with emerging global trends in AI and digital transformation, which continue to influence my academic interests and entrepreneurial thinking.</p>
+        `;
+        
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <div class="event-inline-highlights">
+                <div class="event-highlight-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>International online summer program hosted by a leading Indonesian university</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-users"></i>
+                    <span>Global participant interaction and collaborative learning</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-robot"></i>
+                    <span>Focus on digital transformation, AI, and future technologies</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Strengthened global communication and future-ready mindset</span>
+                </div>
+            </div>
+            
+            <div class="event-certificate-display">
+                <h4>Certificates</h4>
+                <div class="event-multi-cert-grid">
+                    <div class="event-cert-item">
+                        <div class="event-cert-pdf-viewer">
+                            <embed src="assets/int/ubaya1.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
+                            <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/ubaya1.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+                        </div>
+                        <p class="cert-label">Certificate — Digitalize Your Life (UBAYA Online Summer Program 2023)</p>
+                    </div>
+                    <div class="event-cert-item">
+                        <div class="event-cert-pdf-viewer">
+                            <embed src="assets/int/ubaya2.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
+                            <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/ubaya2.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+                        </div>
+                        <p class="cert-label">Certificate — ChatGPT, AI & Metaverse for Daily Life (UBAYA Online Summer Program 2023)</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (eventId === 'reuters-journalism') {
+        document.getElementById('event-modal-institute').textContent = 'Reuters • Sponsored by Meta Journalism Project';
+        document.getElementById('event-modal-location').textContent = '';
+        document.getElementById('event-modal-title').textContent = 'Introduction to Digital Journalism';
+        
+        document.getElementById('event-modal-description').innerHTML = `
+            <p>I completed the <strong>Introduction to Digital Journalism</strong> training offered by Reuters, one of the world's most respected international news organizations, and sponsored by the Meta Journalism Project. This global program focused on building essential skills required for responsible journalism in today's fast-evolving digital media landscape.</p>
+            
+            <p>Through five structured learning modules, the training covered core areas such as media ethics, fact-checking, sourcing reliable information, digital storytelling, and understanding how modern journalism operates in online environments. The program emphasized accuracy, credibility, and accountability—key principles that define professional news reporting worldwide.</p>
+            
+            <p>Participating in a globally recognized journalism program strengthened my ability to evaluate information critically and communicate clearly across digital platforms. This experience sharpened my understanding of responsible content creation and reinforced the importance of trust, transparency, and ethical standards—skills that continue to support my work in communication, entrepreneurship, and leadership roles.</p>
+        `;
+        
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <div class="event-inline-highlights">
+                <div class="event-highlight-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Training delivered by a globally trusted news organization</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Sponsored by the Meta Journalism Project</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-check-double"></i>
+                    <span>Focus on media ethics, fact-checking, and digital reporting</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Strengthened credibility-driven communication mindset</span>
+                </div>
+            </div>
+            
+            <div class="event-certificate-display">
+                <h4>Certificate of Completion</h4>
+                <div class="event-cert-preview" onclick="openCertificateLightbox('assets/int/reu.png', 'Certificate of Completion — Introduction to Digital Journalism (Reuters)')">
+                    <img src="assets/int/reu.png" alt="Reuters Digital Journalism Certificate">
+                    <div class="cert-preview-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <span>Click to view full size</span>
+                    </div>
+                </div>
+                <p class="cert-label">Certificate of Completion — Introduction to Digital Journalism (Reuters)</p>
+            </div>
+        `;
+    } else if (eventId === 'locust-2022') {
+        document.getElementById('event-modal-institute').textContent = 'Industrial Technology Faculty, Universitas Islam Sultan Agung (UNISSULA), Indonesia';
+        document.getElementById('event-modal-location').textContent = '';
+        document.getElementById('event-modal-title').textContent = 'LOCUST 2022 — Local Culture, Science & Technology Short Program';
+        
+        document.getElementById('event-modal-description').innerHTML = `
+            <p>I participated in <strong>LOCUST 2022: Local Culture, Science & Technology Short Program</strong>, an international academic initiative organized by the Industrial Technology Faculty of Universitas Islam Sultan Agung (UNISSULA), Indonesia. The program brought together participants to explore how cultural context, scientific knowledge, and technological innovation interact to support sustainable community and industrial development in Southeast Asia.</p>
+            
+            <p>Throughout the program, I engaged in lectures, interactive discussions, and cross-cultural learning activities that highlighted how technology adoption and innovation are shaped by local culture and societal needs. Learning alongside international participants helped me understand how technological solutions must adapt to cultural and regional contexts in order to create meaningful and sustainable impact.</p>
+            
+            <p>This experience strengthened my global perspective at an early stage of my academic journey. It improved my ability to collaborate across cultures and deepened my understanding of how science and technology can support local communities. LOCUST 2022 played a formative role in shaping my interest in international learning, innovation, and impact-driven development.</p>
+        `;
+        
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <div class="event-inline-highlights">
+                <div class="event-highlight-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>International short program hosted by an Indonesian university</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Focus on culture-driven technology and innovation</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-users"></i>
+                    <span>Cross-cultural academic interaction</span>
+                </div>
+                <div class="event-highlight-item">
+                    <i class="fas fa-globe-asia"></i>
+                    <span>Early global exposure in academic learning</span>
+                </div>
+            </div>
+            
+            <div class="event-certificate-display">
+                <h4>Certificate of Participation</h4>
+                <div class="event-cert-pdf-viewer">
+                    <embed src="assets/int/uni.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
+                    <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/uni.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+                </div>
+                <p class="cert-label">Certificate of Participation — LOCUST 2022 (UNISSULA, Indonesia)</p>
+            </div>
+        `;
+    } else {
+        // Default handling for other events
+        document.getElementById('event-modal-institute').textContent = event.institute;
+        document.getElementById('event-modal-location').textContent = event.locationType;
+        document.getElementById('event-modal-title').textContent = event.title;
+        document.getElementById('event-modal-description').textContent = event.details;
+        
+        const highlights = extractHighlights(event.details);
+        const highlightsContainer = document.getElementById('event-modal-highlights');
+        highlightsContainer.innerHTML = `
+            <h4>Key Highlights</h4>
+            <ul>
+                ${highlights.map(h => `<li>${h}</li>`).join('')}
+            </ul>
+        `;
+    }
     
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Initialize floating exit button
+    initFloatingExitButton();
+}
+
+function openCertificateLightbox(imageSrc, caption) {
+    let lightbox = document.getElementById('certificate-lightbox');
+    if (!lightbox) {
+        // Create lightbox if it doesn't exist
+        lightbox = document.createElement('div');
+        lightbox.id = 'certificate-lightbox';
+        lightbox.className = 'certificate-lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <button class="lightbox-close" onclick="closeCertificateLightbox()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="${imageSrc}" alt="${caption}">
+                <p class="lightbox-caption">${caption}</p>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+        
+        // Close on background click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeCertificateLightbox();
+            }
+        });
+        
+        setTimeout(() => lightbox.classList.add('active'), 10);
+    } else {
+        lightbox.querySelector('img').src = imageSrc;
+        lightbox.querySelector('img').alt = caption;
+        lightbox.querySelector('.lightbox-caption').textContent = caption;
+        lightbox.classList.add('active');
+    }
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCertificateLightbox() {
+    const lightbox = document.getElementById('certificate-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 function closeEventDetails() {
     const modal = document.getElementById('event-details-modal');
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    
+    // Remove floating button
+    const floatingBtn = document.getElementById('floating-exit-btn');
+    if (floatingBtn) floatingBtn.remove();
+}
+
+function initFloatingExitButton() {
+    // Remove existing button if present
+    const existing = document.getElementById('floating-exit-btn');
+    if (existing) existing.remove();
+    
+    // Create floating exit button
+    const floatingBtn = document.createElement('button');
+    floatingBtn.id = 'floating-exit-btn';
+    floatingBtn.className = 'floating-exit-btn';
+    floatingBtn.innerHTML = '<i class="fas fa-times"></i> Close';
+    floatingBtn.onclick = closeEventDetails;
+    floatingBtn.style.opacity = '0';
+    floatingBtn.style.visibility = 'hidden';
+    floatingBtn.style.pointerEvents = 'none';
+    
+    document.body.appendChild(floatingBtn);
+    
+    // Use IntersectionObserver on certificate display
+    const certDisplay = document.querySelector('.event-certificate-display');
+    if (!certDisplay) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                floatingBtn.style.opacity = '1';
+                floatingBtn.style.visibility = 'visible';
+                floatingBtn.style.pointerEvents = 'auto';
+            } else {
+                floatingBtn.style.opacity = '0';
+                floatingBtn.style.visibility = 'hidden';
+                floatingBtn.style.pointerEvents = 'none';
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+    });
+    
+    observer.observe(certDisplay);
 }
 
 let currentEventCertificates = [];

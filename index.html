@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="K M Arafat Islam - Professional Portfolio">
     <title>K M Arafat Islam | Portfolio</title>
+    <link rel="icon" type="image/jpeg" href="assets/icon.JPG">
+    <link rel="shortcut icon" type="image/jpeg" href="assets/icon.JPG">
+    <link rel="apple-touch-icon" href="assets/icon.JPG">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +21,9 @@
         <div class="container">
             <div class="logo">
                 <h2>K. M. Arafat Islam</h2>
+                <button id="search-toggle-btn" class="search-toggle-btn" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
@@ -37,6 +43,19 @@
         </div>
     </nav>
 
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-overlay-content">
+            <div class="search-overlay-header">
+                <input type="text" id="portfolio-search" class="search-overlay-input" placeholder="Search…" autocomplete="off">
+                <button id="search-close-btn" class="search-close-btn" aria-label="Close Search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="search-results-dropdown" class="search-results-dropdown"></div>
+        </div>
+    </div>
+
     <!-- Home Section -->
     <section id="home" class="home-section">
         <div class="hero-container">
@@ -44,13 +63,24 @@
                 <div class="hero-text">
                     <p class="greeting">Hello, I'm</p>
                     <h1 class="hero-name">K. M. Arafat Islam</h1>
-                    <p class="hero-subtitle">Founder & CEO @BuildSign | Digital Product Agency</p>
+                    <div class="hero-name-accent"></div>
+                    <p class="hero-subtitle">
+                        <span class="subtitle-text">Founder & CEO @BuildSign</span>
+                        <span class="subtitle-separator">|</span>
+                        <span class="subtitle-text">Digital Product Agency</span>
+                    </p>
                     <p class="hero-description">
-                        Curious young mind eager to learn and explore the world. Always seeking new knowledge and experiences. Lover of science, technology, and adventure.
+                        Curious young mind eager to learn and explore the world. Always seeking new knowledge and experiences.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn-primary-gradient">Get In Touch</a>
-                        <a href="#skills" class="btn-outline">View My Skills</a>
+                        <a href="#contact" class="btn-primary-gradient">
+                            Get In Touch
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#skills" class="btn-outline">
+                            View My Skills
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                     <div class="hero-social">
                         <a href="https://www.linkedin.com/in/kmarafatislam/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -415,11 +445,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 K M Arafat Islam. All rights reserved.</p>
+            <p>&copy; 2026 K. M. Arafat Islam. All rights reserved.</p>
             <p>Designed & Developed with <i class="fas fa-heart"></i> by K M Arafat Islam</p>
         </div>
     </footer>
 
+    <script src="search.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
