@@ -367,11 +367,11 @@ const aboutHighlights = [
             <div class="gp-content-grid">
                 <div class="gp-media-column">
                     <div class="gp-media-card" onclick="openGPLightbox(0)">
-                        <img src="/assets/gp.jpg" alt="Grameenphone Certification" loading="lazy">
+                        <img src="assets/gp.jpg" alt="Grameenphone Certification" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Certificate failed to load<br><small>assets/gp.jpg</small></div>'">
                         <p class="gp-media-label">Certification</p>
                     </div>
                     <div class="gp-media-card" onclick="openGPLightbox(1)">
-                        <img src="/assets/gp1.jpg" alt="Grameenphone Recognition" loading="lazy">
+                        <img src="assets/gp1.jpg" alt="Grameenphone Recognition" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Certificate failed to load<br><small>assets/gp1.jpg</small></div>'">
                         <p class="gp-media-label">Recognition</p>
                     </div>
                 </div>
@@ -1431,13 +1431,14 @@ document.addEventListener('keydown', (e) => {
 
 // ==================== GP Lightbox ====================
 function openGPLightbox(index) {
-    const images = ['/assets/gp.jpg', '/assets/gp1.jpg'];
+    const images = ['assets/gp.jpg', 'assets/gp1.jpg'];
     const labels = ['Certification', 'Recognition'];
     
     let lightbox = document.querySelector('.gp-lightbox');
     if (!lightbox) {
         lightbox = document.createElement('div');
         lightbox.className = 'gp-lightbox';
+        lightbox.style.cssText = 'position:fixed;inset:0;z-index:99999;';
         lightbox.innerHTML = `
             <div class="gp-lightbox-overlay" onclick="closeGPLightbox()"></div>
             <div class="gp-lightbox-content">

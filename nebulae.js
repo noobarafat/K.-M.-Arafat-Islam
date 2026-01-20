@@ -30,13 +30,14 @@ function handleNebulaeBackNavigation() {
 
 // Nebulae Certificate Lightbox
 function openNebulaeLightbox(index) {
-    const images = ['/assets/UI.jpg', '/assets/UX.jpg'];
+    const images = ['assets/UI.jpg', 'assets/UX.jpg'];
     const labels = ['UI Certificate', 'UX Certificate'];
     
     let lightbox = document.querySelector('.nebulae-lightbox');
     if (!lightbox) {
         lightbox = document.createElement('div');
         lightbox.className = 'nebulae-lightbox';
+        lightbox.style.cssText = 'position:fixed;inset:0;z-index:99999;';
         lightbox.innerHTML = `
             <div class="nebulae-lightbox-overlay" onclick="closeNebulaeLightbox()"></div>
             <div class="nebulae-lightbox-content">
