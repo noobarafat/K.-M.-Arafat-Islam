@@ -777,12 +777,39 @@ section {
     min-width: 300px;
 }
 
+.education-degree-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
 .education-degree {
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 12px;
+    margin-bottom: 0;
     line-height: 1.3;
+}
+
+.education-timeline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid var(--border-purple);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.education-timeline i {
+    font-size: 0.85rem;
+    color: var(--purple);
 }
 
 .education-university {
@@ -901,6 +928,12 @@ section {
         margin-bottom: 40px;
     }
     
+    .education-degree-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
     .education-degree {
         font-size: 1.6rem;
     }
@@ -977,6 +1010,148 @@ section {
     font-size: 1rem;
     color: var(--dark-text);
     margin: 0;
+}
+
+/* ==================== Publications Section ==================== */
+.publications-section {
+    background: var(--bg-main);
+    padding: 100px 0;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.publications-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.publication-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-purple);
+    border-radius: 20px;
+    padding: 32px;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.publication-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--purple);
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
+}
+
+.publication-header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.publication-index {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid var(--border-purple);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--purple);
+    transition: all 0.25s ease;
+}
+
+.publication-card:hover .publication-index {
+    background: rgba(124, 58, 237, 0.15);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.publication-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.publication-conference {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-style: italic;
+    margin: 0;
+}
+
+.publication-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+}
+
+.btn-read-paper {
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: transparent;
+    border: 2px solid var(--border-purple);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: not-allowed;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    opacity: 0.6;
+}
+
+.btn-read-paper i {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 992px) {
+    .publications-grid {
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .publications-section {
+        padding: 80px 0;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+    
+    .publications-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .publication-card {
+        padding: 24px;
+    }
+    
+    .publication-title {
+        font-size: 1.1rem;
+    }
+    
+    .btn-read-paper {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* ==================== Skills Section ==================== */
