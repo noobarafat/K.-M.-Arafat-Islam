@@ -727,23 +727,63 @@ function openSkillDetails(id) {
     
     document.getElementById('skill-modal-details').textContent = skill.details;
     
-    const certBtn = document.getElementById('skill-modal-certificate-btn');
-    const certLabel = document.getElementById('skill-certificate-label');
+    const certSection = document.getElementById('skill-modal-certificate-section');
     
     if (skill.certificateLink) {
-        certBtn.disabled = false;
-        certBtn.classList.remove('btn-certificate-disabled');
-        certBtn.onclick = () => openCertificate(skill.certificateLink);
-        certLabel.textContent = 'View Certificate';
+        const ext = skill.certificateLink.split('.').pop().toLowerCase();
+        
+        if (ext === 'pdf') {
+            certSection.innerHTML = `
+                <div class="skill-certificate-container">
+                    <div class="skill-certificate-header">
+                        <h3>Certificate</h3>
+                        <button class="btn-fullscreen" onclick="window.open('${skill.certificateLink}', '_blank')" title="Open Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="skill-certificate-preview">
+                        <iframe src="${skill.certificateLink}" class="skill-certificate-pdf" frameborder="0"></iframe>
+                    </div>
+                </div>
+            `;
+        } else if (['png', 'jpg', 'jpeg', 'jfif', 'webp'].includes(ext)) {
+            certSection.innerHTML = `
+                <div class="skill-certificate-container">
+                    <div class="skill-certificate-header">
+                        <h3>Certificate</h3>
+                        <button class="btn-fullscreen" onclick="openCertificateLightbox('${skill.certificateLink}')" title="View Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="skill-certificate-preview">
+                        <img src="${skill.certificateLink}" alt="${skill.name} Certificate" class="skill-certificate-image" onclick="openCertificateLightbox('${skill.certificateLink}')">
+                    </div>
+                </div>
+            `;
+        }
     } else {
-        certBtn.disabled = true;
-        certBtn.classList.add('btn-certificate-disabled');
-        certBtn.onclick = null;
-        certLabel.textContent = 'View Certificate (Soon)';
+        certSection.innerHTML = `
+            <div class="skill-certificate-container">
+                <div class="skill-certificate-header">
+                    <h3>Certificate</h3>
+                </div>
+                <div class="skill-certificate-placeholder">
+                    <i class="fas fa-certificate"></i>
+                    <p>Certificate Coming Soon</p>
+                </div>
+            </div>
+        `;
     }
     
     document.getElementById('skill-details-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
+}
+
+function openCertificateLightbox(certificateLink) {
+    const modal = document.getElementById('certificate-viewer-modal');
+    const img = document.getElementById('certificate-viewer-image');
+    img.src = certificateLink;
+    modal.classList.add('active');
 }
 
 function openCertificate(certificateLink) {

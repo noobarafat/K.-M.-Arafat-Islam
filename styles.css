@@ -7577,7 +7577,24 @@ section {
 
 /* Skill Details Modal */
 .skill-modal-content {
-    max-width: 900px;
+    max-width: 1200px;
+}
+
+.skill-modal-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .skill-modal-layout {
+        grid-template-columns: 1fr 400px;
+    }
+}
+
+.skill-modal-main {
+    min-width: 0;
 }
 
 .skill-modal-issuer {
@@ -7635,47 +7652,119 @@ section {
     margin: 0;
 }
 
+.skill-modal-certificate-section {
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    .skill-modal-certificate-section {
+        position: sticky;
+        top: 2rem;
+        align-self: start;
+    }
+}
+
+.skill-certificate-container {
+    background: rgba(14, 14, 26, 0.5);
+    border: 1px solid var(--border-purple);
+    border-radius: 16px;
+    padding: 1.5rem;
+    overflow: hidden;
+}
+
+.skill-certificate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.skill-certificate-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.btn-fullscreen {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 8px;
+    color: var(--purple);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 14px;
+}
+
+.btn-fullscreen:hover {
+    background: rgba(124, 58, 237, 0.2);
+    border-color: var(--purple);
+    transform: scale(1.05);
+}
+
+.skill-certificate-preview {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.skill-certificate-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.skill-certificate-image:hover {
+    transform: scale(1.02);
+}
+
+.skill-certificate-pdf {
+    width: 100%;
+    height: 500px;
+    display: block;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .skill-certificate-pdf {
+        height: 400px;
+    }
+}
+
+.skill-certificate-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.skill-certificate-placeholder i {
+    font-size: 3rem;
+    color: var(--purple);
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+.skill-certificate-placeholder p {
+    font-size: 1rem;
+    margin: 0;
+}
+
 .skill-modal-actions {
     display: flex;
     gap: 16px;
-    margin-top: 32px;
     flex-wrap: wrap;
-}
-
-.btn-certificate {
-    padding: 14px 28px;
-    border-radius: 12px;
-    background: var(--gradient-purple-blue);
-    border: none;
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.btn-certificate:hover:not(.btn-certificate-disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5);
-}
-
-.btn-certificate:active:not(.btn-certificate-disabled) {
-    transform: translateY(0);
-}
-
-.btn-certificate-disabled {
-    background: transparent;
-    border: 2px solid var(--border-purple);
-    color: var(--text-muted);
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.btn-certificate i {
-    font-size: 1rem;
 }
 
 /* Certificate Viewer Modal */

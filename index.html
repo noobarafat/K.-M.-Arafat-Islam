@@ -278,19 +278,25 @@
                     <span class="breadcrumb-separator">/</span>
                     <span id="skill-modal-breadcrumb-title"></span>
                 </div>
-                <h2 class="modal-title" id="skill-modal-title"></h2>
-                <p class="skill-modal-issuer" id="skill-modal-issuer"></p>
-                <div class="skill-modal-meta" id="skill-modal-meta"></div>
-                <div class="skill-modal-tags" id="skill-modal-tags"></div>
-                <div class="skill-modal-description">
-                    <h3>Full Details</h3>
-                    <p id="skill-modal-details"></p>
+                
+                <div class="skill-modal-layout">
+                    <div class="skill-modal-main">
+                        <h2 class="modal-title" id="skill-modal-title"></h2>
+                        <p class="skill-modal-issuer" id="skill-modal-issuer"></p>
+                        <div class="skill-modal-meta" id="skill-modal-meta"></div>
+                        <div class="skill-modal-tags" id="skill-modal-tags"></div>
+                        <div class="skill-modal-description">
+                            <h3>Full Details</h3>
+                            <p id="skill-modal-details"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-modal-certificate-section" id="skill-modal-certificate-section">
+                        <!-- Certificate will be rendered here automatically -->
+                    </div>
                 </div>
+                
                 <div class="skill-modal-actions">
-                    <button class="btn-certificate" id="skill-modal-certificate-btn">
-                        <i class="fas fa-certificate"></i>
-                        <span id="skill-certificate-label">View Certificate</span>
-                    </button>
                     <button class="btn-back" onclick="closeSkillDetails()">
                         <i class="fas fa-arrow-left"></i> Back to Skills
                     </button>
