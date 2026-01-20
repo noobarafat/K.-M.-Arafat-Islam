@@ -7252,15 +7252,15 @@ section {
 .skills-section {
     background: var(--bg-main);
     position: relative;
-    padding: clamp(3rem, 8vw, 6.25rem) 0;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 0;
 }
 
 .view-toggle {
     display: flex;
     justify-content: center;
     gap: 16px;
-    margin-top: clamp(2rem, 4vw, 2.5rem);
-    margin-bottom: clamp(2rem, 6vw, 3.75rem);
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
     flex-wrap: wrap;
 }
 
@@ -7297,8 +7297,6 @@ section {
     font-size: 1rem;
 }
 
-/* Orbit View removed - compact view remains */
-
 /* Compact View */
 .skills-compact-container {
     width: 100%;
@@ -7307,7 +7305,7 @@ section {
 .skill-compact-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: clamp(14px, 2vw, 18px);
 }
 
 @media (min-width: 640px) {
@@ -7324,29 +7322,33 @@ section {
 
 .skill-compact-card {
     background: var(--bg-surface);
-    border: 1px solid var(--border-purple);
-    border-radius: 16px;
-    padding: clamp(1.25rem, 3vw, 1.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: clamp(16px, 2vw, 18px);
+    padding: clamp(16px, 2.5vw, 20px);
     transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: clamp(12px, 2vw, 16px);
 }
 
-.skill-compact-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--purple);
-    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.3);
+@media (min-width: 768px) {
+    .skill-compact-card {
+        padding: clamp(20px, 3vw, 24px);
+    }
+    
+    .skill-compact-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--purple);
+        box-shadow: 0 12px 40px rgba(124, 58, 237, 0.3);
+    }
 }
 
 .skill-compact-name {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2vw, 1.125rem);
     font-weight: 700;
     color: var(--text-main);
     line-height: 1.3;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0;
 }
 
 .skill-compact-tags {
@@ -7357,18 +7359,20 @@ section {
 
 .skill-tag {
     font-size: 0.75rem;
-    padding: 4px 10px;
+    padding: 5px 10px;
     background: rgba(124, 58, 237, 0.1);
     border: 1px solid var(--border-purple);
     border-radius: 6px;
     color: var(--purple);
     font-weight: 600;
+    white-space: nowrap;
 }
 
-.skill-tag-extra {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.3);
-    color: var(--blue);
+.skill-tag-more {
+    background: rgba(156, 163, 175, 0.1);
+    border-color: rgba(156, 163, 175, 0.3);
+    color: var(--text-muted);
+    opacity: 0.7;
 }
 
 .skill-compact-actions {
@@ -7378,12 +7382,24 @@ section {
     margin-top: auto;
 }
 
+@media (min-width: 640px) {
+    .skill-compact-actions {
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    .skill-compact-actions > button {
+        flex: 1;
+    }
+}
+
 .btn-skill-details,
 .btn-skill-certificate {
-    padding: 12px 20px;
+    height: 44px;
+    padding: 0 20px;
     border-radius: 10px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.25s ease;
     display: inline-flex;
@@ -7391,6 +7407,7 @@ section {
     justify-content: center;
     gap: 8px;
     border: none;
+    white-space: nowrap;
 }
 
 .btn-skill-details {
@@ -7413,31 +7430,14 @@ section {
     background: transparent;
     border: 2px solid var(--purple);
     color: var(--purple);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-skill-certificate::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: var(--gradient-purple-blue);
-    transition: width 0.25s ease;
-    z-index: -1;
 }
 
 .btn-skill-certificate:hover:not(.btn-skill-certificate-disabled) {
+    background: var(--gradient-purple-blue);
     color: var(--text-main);
     border-color: transparent;
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5);
-}
-
-.btn-skill-certificate:hover:not(.btn-skill-certificate-disabled)::before {
-    width: 100%;
 }
 
 .btn-skill-certificate:active:not(.btn-skill-certificate-disabled) {
@@ -7446,10 +7446,15 @@ section {
 }
 
 .btn-skill-certificate-disabled {
-    border-color: var(--border-purple);
+    border-color: rgba(156, 163, 175, 0.3);
     color: var(--text-muted);
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.5;
+}
+
+.btn-skill-certificate-disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 /* Skill Details Modal */

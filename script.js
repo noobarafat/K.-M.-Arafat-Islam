@@ -638,7 +638,7 @@ function renderSkillsCompact() {
                         <h4 class="skill-compact-name">${skill.name}</h4>
                         <div class="skill-compact-tags">
                             ${visibleTags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
-                            ${hiddenCount > 0 ? `<span class="skill-tag skill-tag-extra">+${hiddenCount}</span>` : ''}
+                            ${hiddenCount > 0 ? `<span class="skill-tag skill-tag-more">+${hiddenCount}</span>` : ''}
                         </div>
                         <div class="skill-compact-actions">
                             <button class="btn-skill-details" onclick="openSkillDetails('${skill.id}')">
@@ -647,7 +647,7 @@ function renderSkillsCompact() {
                             <button class="btn-skill-certificate ${skill.certificateLink ? '' : 'btn-skill-certificate-disabled'}" 
                                     ${skill.certificateLink ? `onclick="openCertificate('${skill.certificateLink}')"` : 'disabled'}>
                                 <i class="fas fa-certificate"></i> 
-                                ${skill.certificateLink ? 'View Certificate' : 'View Certificate (Soon)'}
+                                ${skill.certificateLink ? 'View Certificate' : 'Certificate (Soon)'}
                             </button>
                         </div>
                     </div>
@@ -1805,35 +1805,42 @@ projectCards.forEach(card => {
 const scrollToTopBtn = document.createElement('button');
 scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
 scrollToTopBtn.className = 'scroll-to-top';
-scrollToTopBtn.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    z-index: 999;
-    transition: all 0.3s ease;
-`;
 
+const updateScrollBtnStyles = () => {
+    const isMobile = window.innerWidth < 768;
+    scrollToTopBtn.style.cssText = `
+        position: fixed;
+        bottom: ${isMobile ? 'calc(18px + env(safe-area-inset-bottom))' : '30px'};
+        right: ${isMobile ? '14px' : '30px'};
+        width: ${isMobile ? '40px' : '50px'};
+        height: ${isMobile ? '40px' : '50px'};
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        display: ${window.scrollY > 600 ? 'flex' : 'none'};
+        align-items: center;
+        justify-content: center;
+        font-size: ${isMobile ? '1rem' : '1.2rem'};
+        z-index: 50;
+        transition: all 0.3s ease;
+    `;
+};
+
+updateScrollBtnStyles();
 document.body.appendChild(scrollToTopBtn);
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
+    if (window.scrollY > 600) {
         scrollToTopBtn.style.display = 'flex';
     } else {
         scrollToTopBtn.style.display = 'none';
     }
 });
+
+window.addEventListener('resize', updateScrollBtnStyles);
 
 scrollToTopBtn.addEventListener('click', () => {
     window.scrollTo({
