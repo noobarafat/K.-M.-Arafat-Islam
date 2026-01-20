@@ -755,73 +755,30 @@ section {
     padding: 100px 0;
 }
 
-.education-content {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    gap: 60px;
-    align-items: center;
+.section-title-purple {
+    background: var(--gradient-purple-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
     margin-top: 60px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
 }
 
-.education-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.education-image-card {
-    position: relative;
-    border-radius: 24px;
-    padding: 0;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-purple);
-    backdrop-filter: blur(20px);
-    box-shadow: 
-        0 8px 32px rgba(124, 58, 237, 0.2),
-        0 0 80px rgba(59, 130, 246, 0.1);
-    width: 100%;
-    max-width: 500px;
-    overflow: hidden;
-    line-height: 0;
-    transition: all 0.3s ease;
-}
-
-.education-image-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 12px 40px rgba(124, 58, 237, 0.3),
-        0 0 100px rgba(59, 130, 246, 0.2);
-    border-color: var(--purple);
-}
-
-.education-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 24px;
-    object-fit: cover;
-}
-
-.education-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.education-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-purple);
-    border-radius: 20px;
-    padding: 40px;
-    transition: all 0.3s ease;
-}
-
-.education-card:hover {
-    border-color: var(--purple);
-    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.2);
+.education-intro {
+    flex: 1;
+    min-width: 300px;
 }
 
 .education-degree {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text-main);
     margin-bottom: 12px;
@@ -829,7 +786,7 @@ section {
 }
 
 .education-university {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 600;
     background: var(--gradient-purple-blue);
     -webkit-background-clip: text;
@@ -838,93 +795,136 @@ section {
     margin-bottom: 20px;
 }
 
-.education-description {
-    font-size: 1.05rem;
+.education-tagline {
+    font-size: 1.1rem;
     color: var(--text-muted);
     line-height: 1.7;
-    margin-bottom: 32px;
+    font-style: italic;
 }
 
-.education-ranks {
+.rankings-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
 }
 
-.rank-badge {
+.ranking-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-purple);
+    border-radius: 20px;
+    padding: 32px 24px;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ranking-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.ranking-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--purple);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+}
+
+.ranking-card:hover::before {
+    opacity: 1;
+}
+
+.ranking-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
     background: rgba(124, 58, 237, 0.1);
     border: 1px solid var(--border-purple);
-    border-radius: 12px;
-    padding: 16px 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
     transition: all 0.25s ease;
-    cursor: default;
 }
 
-.rank-badge:hover {
-    background: rgba(124, 58, 237, 0.15);
-    border-color: var(--purple);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+.ranking-card:hover .ranking-icon {
+    background: var(--gradient-purple-blue);
+    border-color: transparent;
 }
 
-.rank-badge i {
-    font-size: 1.5rem;
+.ranking-icon i {
+    font-size: 1.6rem;
     color: var(--purple);
+    transition: color 0.25s ease;
 }
 
-.rank-badge span {
-    font-size: 0.9rem;
-    font-weight: 600;
+.ranking-card:hover .ranking-icon i {
     color: var(--text-main);
-    text-align: center;
-    line-height: 1.3;
 }
 
-@media (max-width: 992px) {
-    .education-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .education-image-wrapper {
-        order: -1;
-    }
-    
-    .education-image-card {
-        max-width: 400px;
+.ranking-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.ranking-description {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+@media (max-width: 1200px) {
+    .rankings-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 640px) {
-    .education-card {
-        padding: 28px 24px;
+@media (max-width: 768px) {
+    .education-section {
+        padding: 80px 0;
+    }
+    
+    .education-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 40px;
+        margin-bottom: 40px;
     }
     
     .education-degree {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
     
     .education-university {
-        font-size: 1.1rem;
-    }
-    
-    .education-ranks {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .rank-badge {
-        flex-direction: row;
-        justify-content: center;
-        padding: 14px 20px;
-    }
-    
-    .rank-badge i {
         font-size: 1.2rem;
+    }
+    
+    .education-tagline {
+        font-size: 1rem;
+    }
+    
+    .btn-learn-more {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .rankings-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .ranking-card {
+        padding: 28px 20px;
     }
 }
 
