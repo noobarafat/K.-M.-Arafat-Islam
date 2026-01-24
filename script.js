@@ -2171,3 +2171,70 @@ window.addEventListener('scroll', debouncedSkillBars);
 console.log('%c👋 Welcome to my Portfolio!', 'color: #6366f1; font-size: 20px; font-weight: bold;');
 console.log('%cDeveloped with ❤️ by K M Arafat Islam', 'color: #8b5cf6; font-size: 14px;');
 console.log('%cInterested in the code? Check out my GitHub!', 'color: #10b981; font-size: 12px;');
+
+// ==================== Enhanced Scroll Reveal System ====================
+function initScrollReveal() {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // Optionally unobserve after revealing (one-time animation)
+                // revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -80px 0px'
+    });
+
+    // Select elements to reveal
+    const revealElements = document.querySelectorAll(`
+        .about-card,
+        .skill-card,
+        .project-card,
+        .experience-card,
+        .publication-card,
+        .activity-card,
+        section > .container > h2,
+        section > .container > p
+    `);
+
+    revealElements.forEach(el => {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
+}
+
+// Initialize on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveal);
+} else {
+    initScrollReveal();
+}
+
+// ==================== Navbar Scroll Progress ====================
+function updateScrollProgress() {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    document.documentElement.style.setProperty('--scroll-progress', scrolled + '%');
+}
+
+window.addEventListener('scroll', debounce(updateScrollProgress, 10));
+updateScrollProgress();
+
+// ==================== Smooth Card Hover Performance ====================
+// Add will-change to cards on hover for better performance
+document.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('.about-card, .skill-card, .project-card, .card-premium, .hover-lift');
+    if (card) {
+        card.style.willChange = 'transform, box-shadow';
+    }
+});
+
+document.addEventListener('mouseout', (e) => {
+    const card = e.target.closest('.about-card, .skill-card, .project-card, .card-premium, .hover-lift');
+    if (card) {
+        card.style.willChange = 'auto';
+    }
+});
+
