@@ -735,28 +735,28 @@ function openSkillDetails(id) {
         if (ext === 'pdf') {
             certSection.innerHTML = `
                 <div class="skill-certificate-container">
-                    <div class="skill-certificate-header">
-                        <h3>Certificate</h3>
-                        <button class="btn-fullscreen" onclick="window.open('${skill.certificateLink}', '_blank')" title="Open Fullscreen">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                    <div class="skill-certificate-preview">
-                        <iframe src="${skill.certificateLink}" class="skill-certificate-pdf" frameborder="0"></iframe>
-                    </div>
+                    <h3 class="skill-cert-heading">Certificate</h3>
+                    <div id="skill-cert-pdf-preview-${skill.id}" class="skill-cert-inline-container"></div>
                 </div>
             `;
+            
+            setTimeout(async () => {
+                const container = document.getElementById(`skill-cert-pdf-preview-${skill.id}`);
+                if (container) {
+                    const preview = await createSkillPdfPreview(skill.certificateLink, skill.id);
+                    container.appendChild(preview);
+                }
+            }, 100);
         } else if (['png', 'jpg', 'jpeg', 'jfif', 'webp'].includes(ext)) {
             certSection.innerHTML = `
                 <div class="skill-certificate-container">
-                    <div class="skill-certificate-header">
-                        <h3>Certificate</h3>
-                        <button class="btn-fullscreen" onclick="openCertificateLightbox('${skill.certificateLink}')" title="View Fullscreen">
+                    <h3 class="skill-cert-heading">Certificate</h3>
+                    <div class="skill-certificate-preview" onclick="openSkillCertificateFullscreen('${skill.certificateLink}', '${skill.name}')">
+                        <img src="${skill.certificateLink}" alt="${skill.name} Certificate" class="skill-certificate-image">
+                        <div class="skill-cert-overlay">
                             <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                    <div class="skill-certificate-preview">
-                        <img src="${skill.certificateLink}" alt="${skill.name} Certificate" class="skill-certificate-image" onclick="openCertificateLightbox('${skill.certificateLink}')">
+                            <span>Click to view fullscreen</span>
+                        </div>
                     </div>
                 </div>
             `;
@@ -764,12 +764,10 @@ function openSkillDetails(id) {
     } else {
         certSection.innerHTML = `
             <div class="skill-certificate-container">
-                <div class="skill-certificate-header">
-                    <h3>Certificate</h3>
-                </div>
+                <h3 class="skill-cert-heading">Certificate</h3>
                 <div class="skill-certificate-placeholder">
                     <i class="fas fa-certificate"></i>
-                    <p>Certificate Coming Soon</p>
+                    <p>Certificate coming soon</p>
                 </div>
             </div>
         `;
@@ -779,25 +777,78 @@ function openSkillDetails(id) {
     document.body.style.overflow = 'hidden';
 }
 
-function openCertificateLightbox(certificateLink) {
-    const modal = document.getElementById('certificate-viewer-modal');
-    const img = document.getElementById('certificate-viewer-image');
-    img.src = certificateLink;
-    modal.classList.add('active');
+async function createSkillPdfPreview(pdfUrl, skillId) {
+    const container = document.createElement('div');
+    container.className = 'skill-cert-pdf-inline';
+    container.style.cssText = 'position: relative; cursor: pointer; border: 2px solid rgba(124, 58, 237, 0.2); border-radius: 12px; overflow: hidden; transition: all 0.3s ease;';
+    
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'width: 100%; height: auto; display: block;';
+    container.appendChild(canvas);
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'skill-cert-overlay';
+    overlay.innerHTML = `
+        <i class="fas fa-expand" style="font-size: 2.5rem; color: var(--purple);"></i>
+        <span style="font-size: 1rem; color: var(--text-main); font-weight: 600;">Click to view fullscreen</span>
+    `;
+    container.appendChild(overlay);
+    
+    container.onclick = () => openSkillCertificateFullscreen(pdfUrl, skillId);
+    
+    container.onmouseenter = () => {
+        container.style.borderColor = 'rgba(124, 58, 237, 0.4)';
+        container.style.transform = 'scale(1.02)';
+    };
+    
+    container.onmouseleave = () => {
+        container.style.borderColor = 'rgba(124, 58, 237, 0.2)';
+        container.style.transform = 'scale(1)';
+    };
+    
+    try {
+        await renderPDFToCanvasEvent(pdfUrl, canvas, 800);
+    } catch (error) {
+        console.error('Failed to render PDF preview:', error);
+        container.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-secondary);"><i class="fas fa-file-pdf" style="font-size: 48px; margin-bottom: 16px; color: var(--accent-purple);"></i><p>Loading PDF...</p></div>`;
+        container.onclick = () => openSkillCertificateFullscreen(pdfUrl, skillId);
+    }
+    
+    return container;
 }
 
-function openCertificate(certificateLink) {
-    const ext = certificateLink.split('.').pop().toLowerCase();
+function openSkillCertificateFullscreen(certUrl, title) {
+    const ext = certUrl.split('.').pop().toLowerCase();
     
     if (ext === 'pdf') {
-        window.open(certificateLink, '_blank', 'noopener,noreferrer');
-    } else if (['png', 'jpg', 'jpeg', 'jfif'].includes(ext)) {
+        currentEventCertificates = [certUrl];
+        currentCertIndex = 0;
+        
+        const modal = document.getElementById('multi-certificate-viewer-modal');
+        document.getElementById('multi-certificate-viewer-title').textContent = title + ' Certificate';
+        document.getElementById('certificate-carousel-controls').style.display = 'none';
+        
+        displayCurrentCertificate();
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    } else {
         const modal = document.getElementById('certificate-viewer-modal');
         const img = document.getElementById('certificate-viewer-image');
-        img.src = certificateLink;
+        img.src = certUrl;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+}
+
+function openCertificateLightbox(certificateLink) {
+    // Redirect to unified fullscreen viewer
+    openSkillCertificateFullscreen(certificateLink, 'Certificate');
+}
+
+function openCertificate(certificateLink) {
+    // Redirect to unified fullscreen viewer
+    openSkillCertificateFullscreen(certificateLink, 'Certificate');
 }
 
 function closeCertificateViewer() {
@@ -820,7 +871,7 @@ const internationalEvents = [
         institute: "Institut Teknologi Sepuluh Nopember (ITS), Indonesia",
         title: "CommTECH Nusantara 2023 — Virtual Exploration of Indonesia",
         locationType: "International • Virtual",
-        certificates: ["assets/int/comtech.png"],
+        certificates: ["comtech.png"],
         short: "International virtual exchange exploring Indonesian culture, technology, and community-driven innovation through workshops and peer collaboration with global participants.",
         details: "I participated in the CommTECH Nusantara 2023: Virtual Exploration of Indonesia, an international program hosted by Institut Teknologi Sepuluh Nopember (ITS), Indonesia. The program brought together global participants to explore Indonesian culture, technology and community through a virtual academic exchange model. During the program, I learned about Indonesian social innovation, local industry practices, cultural heritage and the country's approach to community-driven development. The sessions included interactive workshops, cultural immersion activities, group discussions and problem-based learning with international peers. This experience developed cross-cultural communication, global awareness and international connections that continue to motivate my academic and professional growth."
     },
@@ -829,7 +880,7 @@ const internationalEvents = [
         institute: "Global Youth Leadership Center • University of Dar es Salaam • Tanzania Forest Service Agency",
         title: "Global Youth Climate Summit 2023 — Virtual Delegate",
         locationType: "International • Virtual",
-        certificates: ["assets/int/gsummit.pdf"],
+        certificates: ["gsummit.pdf"],
         short: "Selected as a global virtual delegate to engage in climate action discussions on sustainability, resilience, policy, and youth-led solutions with changemakers worldwide.",
         details: "I was selected as a virtual delegate for the Global Youth Climate Summit 2023, a global platform organized by the Global Youth Leadership Center in partnership with the University of Dar es Salaam and the Tanzania Forest Service Agency. More than a thousand youth applicants from different countries compete for a chance to join this summit each year, and being selected was a significant milestone. Throughout the summit, I engaged in discussions on climate resilience, global environmental policy, innovation for sustainability and youth-driven climate solutions. This experience strengthened my global perspective, enhanced my leadership mindset, and connected me with changemakers and youth leaders worldwide."
     },
@@ -838,7 +889,7 @@ const internationalEvents = [
         institute: "Universitas Islam Sultan Agung (UNISSULA), Semarang, Indonesia",
         title: "RMI Week 2023 — International Short Course",
         locationType: "International • Short Course",
-        certificates: ["assets/int/rmi.pdf", "assets/int/rmibd.jpg"],
+        certificates: ["rmi.pdf", "rmibd.jpg"],
         short: "International short course on city resilience and disaster mitigation, including cross-country teamwork and a case-study proposing solutions for real urban challenges.",
         details: "I was selected for the International Short Course on City Resilience, Disaster Mitigation and Infrastructure (RMI Week 2023) at UNISSULA. I worked with students from multiple countries to study climate risks, resilient infrastructure, and disaster-ready communities. A key part was a collaborative international case study where our mixed-country team analyzed real urban challenges and proposed solutions combining engineering, policy insight, and community readiness. This experience strengthened cross-cultural teamwork, problem-solving, and understanding of global disaster management strategies, aligning with my goals in innovation, entrepreneurship, and impact-driven leadership."
     },
@@ -847,7 +898,7 @@ const internationalEvents = [
         institute: "Universitas Surabaya (UBAYA), Indonesia",
         title: "UBAYA Online Summer Program 2023 — Global Short Courses",
         locationType: "International • Online",
-        certificates: ["assets/int/ubaya1.pdf", "assets/int/ubaya2.pdf"],
+        certificates: ["ubaya1.pdf", "ubaya2.pdf"],
         short: "Two global short courses on digital transformation, personal branding, and future tech—AI, ChatGPT, and metaverse concepts—through interactive learning with international peers.",
         details: "I participated in the UBAYA Online Summer Program 2023 organized by Universitas Surabaya (UBAYA). Across two global short courses, I explored how technology shapes modern life and collaborated with international participants. The first module, Digitalize Your Life, covered digital transformation trends, personal branding, online communication, and productivity tools. The second module focused on ChatGPT, AI applications, human–AI interaction, metaverse concepts, and future digital ecosystems. These programs strengthened my global exposure, cross-cultural communication, and understanding of emerging technologies, supporting my mindset as a future entrepreneur and digital product builder."
     },
@@ -856,7 +907,7 @@ const internationalEvents = [
         institute: "Reuters • Sponsored by Meta Journalism Project",
         title: "Introduction to Digital Journalism",
         locationType: "International • Online",
-        certificates: ["assets/int/reu.png"],
+        certificates: ["reu.png"],
         short: "Completed Reuters training covering media ethics, fact-checking, sourcing, misinformation handling, and producing digital content aligned with global journalism standards.",
         details: "I completed the Introduction to Digital Journalism online training offered by Reuters and sponsored by the Meta Journalism Project. The course covered media ethics, fact-checking, sourcing reliable information, producing digital content, and how journalism operates in today's fast-changing online environment. Through structured modules, I learned how journalists verify information, combat misinformation, and communicate effectively across digital platforms. This training improved my critical thinking, writing clarity, and understanding of global media standards—supporting my growth as an entrepreneur, communicator, and future global professional."
     },
@@ -865,7 +916,7 @@ const internationalEvents = [
         institute: "Industrial Technology Faculty, UNISSULA, Indonesia",
         title: "LOCUST 2022 — Local Culture, Science & Technology Short Program",
         locationType: "International • Short Program",
-        certificates: ["assets/int/uni.pdf"],
+        certificates: ["uni.pdf"],
         short: "International short program exploring how culture influences innovation and technology adoption, with cross-cultural interaction focused on community development and local industry practices.",
         details: "I participated in LOCUST 2022: Local Culture, Science & Technology Short Program, organized by the Industrial Technology Faculty of UNISSULA, Indonesia. The program brought together students to explore the connection between culture, innovation and technology in Southeast Asia. I learned about Indonesian local culture, scientific approaches to community development and technology-driven solutions used in local industries. Through lectures, discussions and cross-cultural interaction, I developed a broader perspective on how context shapes innovation. This experience strengthened my global mindset and interest in international learning and entrepreneurship."
     }
@@ -941,11 +992,11 @@ function openEventDetails(eventId) {
             
             <div class="event-certificate-display">
                 <h4>Certificate of Participation</h4>
-                <div class="event-cert-preview" onclick="openCertificateLightbox('assets/int/comtech.png', 'Certificate of Participation — CommTECH Nusantara 2023')">
+                <div class="event-cert-preview" onclick="openCertificateFromDetails('comtech-2023', 0)">
                     <img src="assets/int/comtech.png" alt="CommTECH Certificate">
                     <div class="cert-preview-overlay">
                         <i class="fas fa-search-plus"></i>
-                        <span>Click to view full size</span>
+                        <span>Click to view fullscreen</span>
                     </div>
                 </div>
                 <p class="cert-label">Certificate of Participation — CommTECH Nusantara 2023</p>
@@ -987,13 +1038,18 @@ function openEventDetails(eventId) {
             
             <div class="event-certificate-display">
                 <h4>Certificate of Participation</h4>
-                <div class="event-cert-pdf-viewer">
-                    <embed src="assets/int/gsummit.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
-                    <p class="pdf-fallback-text">PDF viewer may not be supported in your browser. <a href="assets/int/gsummit.pdf" target="_blank" rel="noopener noreferrer">Click here to view certificate</a></p>
-                </div>
+                <div id="climate-cert-preview" class="event-cert-inline-container"></div>
                 <p class="cert-label">Certificate of Participation — Global Youth Climate Summit 2023</p>
             </div>
         `;
+        
+        setTimeout(async () => {
+            const certContainer = document.getElementById('climate-cert-preview');
+            if (certContainer) {
+                const preview = await createInlinePdfPreview('assets/int/gsummit.pdf', 'climate-summit-2023', 0);
+                certContainer.appendChild(preview);
+            }
+        }, 100);
     } else if (eventId === 'rmi-week-2023') {
         document.getElementById('event-modal-institute').textContent = 'Universitas Islam Sultan Agung (UNISSULA), Semarang, Indonesia';
         document.getElementById('event-modal-location').textContent = '';
@@ -1034,18 +1090,15 @@ function openEventDetails(eventId) {
                 <h4>Certificates</h4>
                 <div class="event-multi-cert-grid">
                     <div class="event-cert-item">
-                        <div class="event-cert-pdf-viewer">
-                            <embed src="assets/int/rmi.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
-                            <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/rmi.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
-                        </div>
+                        <div id="rmi-cert-preview" class="event-cert-inline-container"></div>
                         <p class="cert-label">Certificate — RMI Week 2023 (UNISSULA, Indonesia)</p>
                     </div>
                     <div class="event-cert-item">
-                        <div class="event-cert-preview" onclick="openCertificateLightbox('assets/int/rmibd.jpg', 'Certificate — RMI Week Presentation & Recognition (Bangladesh)')">
+                        <div class="event-cert-preview" onclick="openCertificateFromDetails('rmi-week-2023', 1)">
                             <img src="assets/int/rmibd.jpg" alt="RMI Bangladesh Certificate">
                             <div class="cert-preview-overlay">
                                 <i class="fas fa-search-plus"></i>
-                                <span>Click to view full size</span>
+                                <span>Click to view fullscreen</span>
                             </div>
                         </div>
                         <p class="cert-label">Certificate — RMI Week Presentation & Recognition (Bangladesh)</p>
@@ -1053,6 +1106,14 @@ function openEventDetails(eventId) {
                 </div>
             </div>
         `;
+        
+        setTimeout(async () => {
+            const certContainer = document.getElementById('rmi-cert-preview');
+            if (certContainer) {
+                const preview = await createInlinePdfPreview('assets/int/rmi.pdf', 'rmi-week-2023', 0);
+                certContainer.appendChild(preview);
+            }
+        }, 100);
     } else if (eventId === 'ubaya-2023') {
         document.getElementById('event-modal-institute').textContent = 'International • Online | Universitas Surabaya (UBAYA), Indonesia';
         document.getElementById('event-modal-location').textContent = '';
@@ -1091,22 +1152,30 @@ function openEventDetails(eventId) {
                 <h4>Certificates</h4>
                 <div class="event-multi-cert-grid">
                     <div class="event-cert-item">
-                        <div class="event-cert-pdf-viewer">
-                            <embed src="assets/int/ubaya1.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
-                            <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/ubaya1.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
-                        </div>
+                        <div id="ubaya1-cert-preview" class="event-cert-inline-container"></div>
                         <p class="cert-label">Certificate — Digitalize Your Life (UBAYA Online Summer Program 2023)</p>
                     </div>
                     <div class="event-cert-item">
-                        <div class="event-cert-pdf-viewer">
-                            <embed src="assets/int/ubaya2.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
-                            <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/ubaya2.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
-                        </div>
+                        <div id="ubaya2-cert-preview" class="event-cert-inline-container"></div>
                         <p class="cert-label">Certificate — ChatGPT, AI & Metaverse for Daily Life (UBAYA Online Summer Program 2023)</p>
                     </div>
                 </div>
             </div>
         `;
+        
+        setTimeout(async () => {
+            const cert1Container = document.getElementById('ubaya1-cert-preview');
+            if (cert1Container) {
+                const preview1 = await createInlinePdfPreview('assets/int/ubaya1.pdf', 'ubaya-2023', 0);
+                cert1Container.appendChild(preview1);
+            }
+            
+            const cert2Container = document.getElementById('ubaya2-cert-preview');
+            if (cert2Container) {
+                const preview2 = await createInlinePdfPreview('assets/int/ubaya2.pdf', 'ubaya-2023', 1);
+                cert2Container.appendChild(preview2);
+            }
+        }, 100);
     } else if (eventId === 'reuters-journalism') {
         document.getElementById('event-modal-institute').textContent = 'Reuters • Sponsored by Meta Journalism Project';
         document.getElementById('event-modal-location').textContent = '';
@@ -1143,11 +1212,11 @@ function openEventDetails(eventId) {
             
             <div class="event-certificate-display">
                 <h4>Certificate of Completion</h4>
-                <div class="event-cert-preview" onclick="openCertificateLightbox('assets/int/reu.png', 'Certificate of Completion — Introduction to Digital Journalism (Reuters)')">
+                <div class="event-cert-preview" onclick="openCertificateFromDetails('reuters-journalism', 0)">
                     <img src="assets/int/reu.png" alt="Reuters Digital Journalism Certificate">
                     <div class="cert-preview-overlay">
                         <i class="fas fa-search-plus"></i>
-                        <span>Click to view full size</span>
+                        <span>Click to view fullscreen</span>
                     </div>
                 </div>
                 <p class="cert-label">Certificate of Completion — Introduction to Digital Journalism (Reuters)</p>
@@ -1189,13 +1258,18 @@ function openEventDetails(eventId) {
             
             <div class="event-certificate-display">
                 <h4>Certificate of Participation</h4>
-                <div class="event-cert-pdf-viewer">
-                    <embed src="assets/int/uni.pdf#toolbar=0" type="application/pdf" class="event-cert-pdf-embed">
-                    <p class="pdf-fallback-text">PDF viewer may not be supported. <a href="assets/int/uni.pdf" target="_blank" rel="noopener noreferrer">View certificate</a></p>
-                </div>
-                <p class="cert-label">Certificate of Participation — LOCUST 2022 (UNISSULA, Indonesia)</p>
+                <div id="locust-cert-preview" class="event-cert-inline-container"></div>
+                <p class="cert-label" style="margin-top: 16px;">Certificate of Participation — LOCUST 2022 (UNISSULA, Indonesia)</p>
             </div>
         `;
+        
+        setTimeout(async () => {
+            const certContainer = document.getElementById('locust-cert-preview');
+            if (certContainer) {
+                const preview = await createInlinePdfPreview('assets/int/uni.pdf', 'locust-2022', 0);
+                certContainer.appendChild(preview);
+            }
+        }, 100);
     } else {
         // Default handling for other events
         document.getElementById('event-modal-institute').textContent = event.institute;
@@ -1221,41 +1295,44 @@ function openEventDetails(eventId) {
 }
 
 function openCertificateLightbox(imageSrc, caption) {
-    let lightbox = document.getElementById('certificate-lightbox');
-    if (!lightbox) {
-        // Create lightbox if it doesn't exist
-        lightbox = document.createElement('div');
-        lightbox.id = 'certificate-lightbox';
-        lightbox.className = 'certificate-lightbox';
-        lightbox.innerHTML = `
-            <div class="lightbox-content">
-                <button class="lightbox-close" onclick="closeCertificateLightbox()">
-                    <i class="fas fa-times"></i>
-                </button>
-                <img src="${imageSrc}" alt="${caption}">
-                <p class="lightbox-caption">${caption}</p>
-            </div>
-        `;
-        document.body.appendChild(lightbox);
+    // Deprecated - redirect to fullscreen viewer
+    // Extract event from current modal context or use generic display
+    console.warn('openCertificateLightbox deprecated, using fullscreen viewer');
+}
+
+function openCertificateFromDetails(eventId, certIndex) {
+    // Close the details modal first
+    closeEventDetails();
+    
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+        const event = internationalEvents.find(e => e.id === eventId);
+        if (!event || !event.certificates || !event.certificates.length) {
+            console.error('No certificates available');
+            return;
+        }
         
-        // Close on background click
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox) {
-                closeCertificateLightbox();
-            }
-        });
+        currentEventCertificates = event.certificates.map(cert => 'assets/int/' + cert);
+        currentCertIndex = certIndex || 0;
         
-        setTimeout(() => lightbox.classList.add('active'), 10);
-    } else {
-        lightbox.querySelector('img').src = imageSrc;
-        lightbox.querySelector('img').alt = caption;
-        lightbox.querySelector('.lightbox-caption').textContent = caption;
-        lightbox.classList.add('active');
-    }
-    document.body.style.overflow = 'hidden';
+        const modal = document.getElementById('multi-certificate-viewer-modal');
+        document.getElementById('multi-certificate-viewer-title').textContent = event.title;
+        
+        if (currentEventCertificates.length > 1) {
+            document.getElementById('certificate-carousel-controls').style.display = 'flex';
+        } else {
+            document.getElementById('certificate-carousel-controls').style.display = 'none';
+        }
+        
+        displayCurrentCertificate();
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }, 150);
 }
 
 function closeCertificateLightbox() {
+    // Deprecated
     const lightbox = document.getElementById('certificate-lightbox');
     if (lightbox) {
         lightbox.classList.remove('active');
@@ -1319,9 +1396,15 @@ let currentCertIndex = 0;
 
 async function openEventCertificates(eventId) {
     const event = internationalEvents.find(e => e.id === eventId);
-    if (!event || !event.certificates.length) return;
+    if (!event || !event.certificates || !event.certificates.length) {
+        console.error('No certificates available for event:', eventId);
+        return;
+    }
     
-    currentEventCertificates = event.certificates;
+    currentEventCertificates = event.certificates.map(cert => {
+        const basePath = 'assets/int/';
+        return basePath + cert;
+    });
     currentCertIndex = 0;
     
     const modal = document.getElementById('multi-certificate-viewer-modal');
@@ -1345,52 +1428,74 @@ async function displayCurrentCertificate() {
     const canvas = document.getElementById('multi-certificate-viewer-canvas');
     const newTabBtn = document.getElementById('btn-multi-open-new-tab');
     const counter = document.getElementById('certificate-counter');
+    const wrapper = document.querySelector('#multi-certificate-viewer-modal .certificate-viewer-image-wrapper');
     
+    // Reset display
     img.style.display = 'none';
     canvas.style.display = 'none';
     newTabBtn.style.display = 'none';
+    
+    // Restore original wrapper structure if modified
+    if (!wrapper.contains(img) || !wrapper.contains(canvas)) {
+        wrapper.innerHTML = '';
+        wrapper.appendChild(img);
+        wrapper.appendChild(canvas);
+    }
     
     counter.textContent = `${currentCertIndex + 1} / ${currentEventCertificates.length}`;
     
     const isPdf = url.toLowerCase().endsWith('.pdf');
     
     if (isPdf) {
-        try {
-            const success = await renderPDFToCanvasEvent(url, canvas, 1200);
-            if (success) {
-                canvas.style.display = 'block';
-            } else {
-                throw new Error('PDF rendering failed');
-            }
-        } catch (error) {
-            console.error('PDF rendering error:', error);
-            // Fallback: try iframe
-            const iframe = document.createElement('iframe');
-            iframe.src = url;
-            iframe.style.width = '100%';
-            iframe.style.height = '80vh';
-            iframe.style.border = 'none';
-            iframe.style.borderRadius = '12px';
-            
-            const wrapper = document.querySelector('#multi-certificate-viewer-modal .certificate-viewer-image-wrapper');
-            wrapper.innerHTML = '';
-            wrapper.appendChild(iframe);
-            
-            // Show fallback button
-            newTabBtn.style.display = 'inline-flex';
-            newTabBtn.onclick = () => window.open(url, '_blank');
+        // Always try pdf.js first
+        const success = await renderPDFToCanvasEvent(url, canvas, 1200);
+        if (success) {
+            canvas.style.display = 'block';
+            return;
         }
+        
+        // Fallback: iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = url + '#view=FitH&toolbar=0&navpanes=0';
+        iframe.style.width = '90vw';
+        iframe.style.maxWidth = '1200px';
+        iframe.style.height = '85vh';
+        iframe.style.border = 'none';
+        iframe.style.borderRadius = '12px';
+        iframe.style.background = 'white';
+        iframe.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.8)';
+        
+        wrapper.innerHTML = '';
+        wrapper.appendChild(iframe);
+        
+        newTabBtn.style.display = 'inline-flex';
+        newTabBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Open in New Tab';
+        newTabBtn.onclick = () => window.open(url, '_blank');
     } else {
+        // Image display
         img.src = url;
         img.alt = 'Certificate';
         img.style.display = 'block';
         img.onerror = () => {
-            console.error('Image load failed:', url);
+            img.style.display = 'none';
+            const errorMsg = document.createElement('div');
+            errorMsg.style.cssText = 'padding: 40px; text-align: center; color: var(--text-secondary);';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 20px; color: #f59e0b;"></i><p>Unable to load certificate image</p>';
+            wrapper.innerHTML = '';
+            wrapper.appendChild(errorMsg);
             newTabBtn.style.display = 'inline-flex';
-            newTabBtn.textContent = 'Open Certificate';
+            newTabBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Try Opening';
             newTabBtn.onclick = () => window.open(url, '_blank');
         };
     }
+}
+
+function showPDFFallbackButton(url, wrapper) {
+    wrapper.innerHTML = '<div style="padding: 60px; text-align: center; color: var(--text-secondary);"><i class="fas fa-file-pdf" style="font-size: 72px; margin-bottom: 24px; color: var(--accent-purple);"></i><p style="font-size: 1.1rem; margin-bottom: 24px;">Click below to open the PDF certificate</p></div>';
+    const btn = document.getElementById('btn-multi-open-new-tab');
+    btn.style.display = 'inline-flex';
+    btn.innerHTML = '<i class="fas fa-external-link-alt"></i> Open Certificate';
+    btn.onclick = () => window.open(url, '_blank');
 }
 
 const pdfCacheEvent = new Map();
@@ -1432,6 +1537,46 @@ async function renderPDFToCanvasEvent(url, canvas, maxWidth = 1200) {
     }
 }
 
+async function createInlinePdfPreview(pdfUrl, eventId, certIndex) {
+    const container = document.createElement('div');
+    container.className = 'event-cert-pdf-inline';
+    container.style.cssText = 'position: relative; cursor: pointer; border: 2px solid rgba(124, 58, 237, 0.2); border-radius: 12px; overflow: hidden; transition: all 0.3s ease;';
+    
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'width: 100%; height: auto; display: block;';
+    container.appendChild(canvas);
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'cert-preview-overlay';
+    overlay.innerHTML = `
+        <i class="fas fa-expand" style="font-size: 2.5rem; color: var(--purple);"></i>
+        <span style="font-size: 1rem; color: var(--text-main); font-weight: 600;">Click to view fullscreen</span>
+    `;
+    container.appendChild(overlay);
+    
+    container.onclick = () => openCertificateFromDetails(eventId, certIndex);
+    
+    container.onmouseenter = () => {
+        container.style.borderColor = 'rgba(124, 58, 237, 0.4)';
+        container.style.transform = 'scale(1.02)';
+    };
+    
+    container.onmouseleave = () => {
+        container.style.borderColor = 'rgba(124, 58, 237, 0.2)';
+        container.style.transform = 'scale(1)';
+    };
+    
+    try {
+        await renderPDFToCanvasEvent(pdfUrl, canvas, 800);
+    } catch (error) {
+        console.error('Failed to render PDF preview:', error);
+        container.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-secondary);"><i class="fas fa-file-pdf" style="font-size: 48px; margin-bottom: 16px; color: var(--accent-purple);"></i><p>Loading PDF...</p></div>`;
+        container.onclick = () => openCertificateFromDetails(eventId, certIndex);
+    }
+    
+    return container;
+}
+
 function prevCertificate() {
     if (currentCertIndex > 0) {
         currentCertIndex--;
@@ -1464,6 +1609,26 @@ function closeMultiCertificateViewer() {
         wrapper.appendChild(canvas);
     }
 }
+
+// Add keyboard navigation for certificate viewer
+document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('multi-certificate-viewer-modal');
+    const detailsModal = document.getElementById('event-details-modal');
+    
+    if (modal && modal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+            closeMultiCertificateViewer();
+        } else if (e.key === 'ArrowLeft') {
+            prevCertificate();
+        } else if (e.key === 'ArrowRight') {
+            nextCertificate();
+        }
+    } else if (detailsModal && detailsModal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+            closeEventDetails();
+        }
+    }
+});
 
 renderEventsGrid();
 

@@ -7581,16 +7581,13 @@ section {
 }
 
 .skill-modal-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     margin-bottom: 2rem;
-}
-
-@media (min-width: 1024px) {
-    .skill-modal-layout {
-        grid-template-columns: 1fr 400px;
-    }
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .skill-modal-main {
@@ -7654,22 +7651,75 @@ section {
 
 .skill-modal-certificate-section {
     position: relative;
-}
-
-@media (min-width: 1024px) {
-    .skill-modal-certificate-section {
-        position: sticky;
-        top: 2rem;
-        align-self: start;
-    }
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(124, 58, 237, 0.2);
 }
 
 .skill-certificate-container {
     background: rgba(14, 14, 26, 0.5);
     border: 1px solid var(--border-purple);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 2rem;
     overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.skill-cert-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+.skill-cert-inline-container {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-cert-pdf-inline {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid rgba(124, 58, 237, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.skill-cert-pdf-inline:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    transform: scale(1.02);
+}
+
+.skill-cert-pdf-inline canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.skill-cert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.skill-cert-pdf-inline:hover .skill-cert-overlay,
+.skill-certificate-preview:hover .skill-cert-overlay {
+    opacity: 1;
 }
 
 .skill-certificate-header {
@@ -7686,44 +7736,25 @@ section {
     margin: 0;
 }
 
-.btn-fullscreen {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    border-radius: 8px;
-    color: var(--purple);
-    cursor: pointer;
-    transition: all 0.25s ease;
-    font-size: 14px;
-}
-
-.btn-fullscreen:hover {
-    background: rgba(124, 58, 237, 0.2);
-    border-color: var(--purple);
-    transform: scale(1.05);
-}
-
 .skill-certificate-preview {
+    position: relative;
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border: 2px solid rgba(124, 58, 237, 0.2);
+    transition: all 0.3s ease;
+}
+
+.skill-certificate-preview:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    transform: scale(1.02);
 }
 
 .skill-certificate-image {
     width: 100%;
     height: auto;
     display: block;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.skill-certificate-image:hover {
-    transform: scale(1.02);
 }
 
 .skill-certificate-pdf {
@@ -7744,21 +7775,25 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 1.5rem;
+    padding: 4rem 2rem;
     text-align: center;
     color: var(--text-muted);
+    border: 2px dashed rgba(124, 58, 237, 0.3);
+    border-radius: 12px;
+    min-height: 250px;
 }
 
 .skill-certificate-placeholder i {
-    font-size: 3rem;
+    font-size: 4rem;
     color: var(--purple);
     opacity: 0.5;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .skill-certificate-placeholder p {
     font-size: 1rem;
     margin: 0;
+    color: var(--text-muted);
 }
 
 .skill-modal-actions {
@@ -7770,6 +7805,7 @@ section {
 /* Certificate Viewer Modal */
 .certificate-viewer-modal {
     animation: fadeIn 0.25s ease;
+    z-index: 99999 !important;
 }
 
 .certificate-viewer-container {
@@ -7788,6 +7824,7 @@ section {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
 .certificate-viewer-title {
@@ -7799,8 +7836,8 @@ section {
 }
 
 .certificate-viewer-image-wrapper {
-    max-width: 100%;
-    max-height: 75vh;
+    max-width: 95vw;
+    max-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7808,8 +7845,8 @@ section {
 
 .certificate-viewer-image,
 .certificate-viewer-canvas {
-    max-width: 100%;
-    max-height: 75vh;
+    max-width: 95vw;
+    max-height: 85vh;
     object-fit: contain;
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
@@ -8632,6 +8669,49 @@ section {
     font-size: 1rem;
     color: var(--text-main);
     font-weight: 600;
+}
+
+.event-cert-preview-pdf {
+    cursor: pointer;
+    padding: 40px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.event-cert-preview-pdf:hover {
+    border-color: var(--accent-purple);
+    transform: scale(1.02);
+}
+
+.event-cert-inline-container {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-cert-pdf-inline {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid rgba(124, 58, 237, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.event-cert-pdf-inline:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    transform: scale(1.02);
+}
+
+.event-cert-pdf-inline canvas {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .cert-label {
