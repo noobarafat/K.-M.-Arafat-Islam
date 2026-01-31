@@ -9445,7 +9445,83 @@ section {
     background: var(--dark-bg);
     color: var(--light-text);
     text-align: center;
-    padding: clamp(1.5rem, 4vw, 1.875rem) 1rem;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 1rem clamp(1.5rem, 4vw, 1.875rem);
+}
+
+.footer-subscribe {
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+}
+
+.footer-subscribe-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--light-text);
+}
+
+.footer-subscribe-text {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+}
+
+.subscribe-form {
+    width: 100%;
+}
+
+.subscribe-input-group {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.subscribe-input {
+    flex: 1;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light-text);
+    font-size: 0.9375rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.subscribe-input:focus {
+    outline: none;
+    border-color: var(--purple);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.subscribe-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.subscribe-btn {
+    padding: 0.875rem 2rem;
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.subscribe-btn:hover:not(:disabled) {
+    background: var(--purple-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.subscribe-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .footer p {
@@ -9455,6 +9531,28 @@ section {
 
 .footer i {
     color: var(--accent-color);
+}
+
+.toast.toast-success i {
+    color: #10b981;
+}
+
+.toast.toast-error {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.toast.toast-error i {
+    color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .subscribe-input-group {
+        flex-direction: column;
+    }
+    
+    .subscribe-btn {
+        width: 100%;
+    }
 }
 
 /* ==================== Animations ==================== */

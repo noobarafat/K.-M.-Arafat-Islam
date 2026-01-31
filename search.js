@@ -136,8 +136,10 @@ function initSearchBar() {
             updateFocusedResult(resultsItems);
         } else if (e.key === 'Enter') {
             e.preventDefault();
+            e.stopPropagation();
             if (currentFocusIndex >= 0 && resultsItems[currentFocusIndex]) {
-                resultsItems[currentFocusIndex].click();
+                const href = resultsItems[currentFocusIndex].getAttribute('data-href');
+                navigateToResult(href);
             }
         }
     });
@@ -190,7 +192,7 @@ function renderSearchResults(results) {
     }
     
     searchDropdown.innerHTML = results.map((item, index) => `
-        <div class="search-result-item" data-index="${index}" data-href="${item.href}" onclick="navigateToResult('${item.href}')">
+        <div class="search-result-item" data-index="${index}" data-href="${item.href}">
             <div class="search-result-icon">
                 <i class="fas ${getResultIcon(item.type)}"></i>
             </div>
@@ -201,6 +203,16 @@ function renderSearchResults(results) {
             <div class="search-result-type">${item.type}</div>
         </div>
     `).join('');
+    
+    // Add click listeners with proper event handling
+    searchDropdown.querySelectorAll('.search-result-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const href = item.getAttribute('data-href');
+            navigateToResult(href);
+        });
+    });
     
     searchDropdown.classList.add('active');
 }
@@ -230,25 +242,40 @@ function updateFocusedResult(items) {
 
 function navigateToResult(href) {
     const searchOverlay = document.getElementById('search-overlay');
-    searchOverlay.classList.remove('active');
-    closeSearchDropdown();
-    document.getElementById('portfolio-search').value = '';
+    const searchInput = document.getElementById('portfolio-search');
     
     if (href.startsWith('/#')) {
-        // Hash navigation
+        // Hash navigation - same page
         const hash = href.substring(2);
         
         if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            // Different page - need to navigate
             window.location.href = href;
         } else {
+            // Same page - smooth scroll without reload
             const section = document.getElementById(hash);
             if (section) {
+                // Close overlay AFTER navigation starts
+                setTimeout(() => {
+                    searchOverlay.classList.remove('active');
+                    closeSearchDropdown();
+                    searchInput.value = '';
+                }, 100);
+                
                 section.scrollIntoView({ behavior: 'smooth' });
             }
         }
     } else {
-        // Page navigation
-        window.location.href = href;
+        // Page navigation - different HTML page
+        // Close overlay first, then navigate
+        searchOverlay.classList.remove('active');
+        closeSearchDropdown();
+        searchInput.value = '';
+        
+        // Use a small delay to ensure overlay closes on mobile
+        setTimeout(() => {
+            window.location.href = href;
+        }, 150);
     }
 }
 

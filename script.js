@@ -1964,6 +1964,9 @@ window.addEventListener('scroll', revealElements);
 window.addEventListener('load', revealElements);
 
 // ==================== Contact Section ====================
+// ==================== Formspree Configuration ====================
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_REAL_ID";
+
 function copyEmail() {
     const email = 'uxdev.arafat@gmail.com';
     navigator.clipboard.writeText(email).then(() => {
@@ -1973,7 +1976,7 @@ function copyEmail() {
         copyBtn.innerHTML = '<i class="fas fa-check"></i>';
         copyBtn.classList.add('copied');
         
-        showToast('Email copied to clipboard!');
+        showToast('Email copied to clipboard!', 'success');
         
         setTimeout(() => {
             copyBtn.innerHTML = originalHTML;
@@ -1981,32 +1984,16 @@ function copyEmail() {
         }, 1500);
     }).catch(err => {
         console.error('Failed to copy:', err);
-        showToast('Failed to copy email');
+        showToast('Failed to copy email', 'error');
     });
 }
 
-function handleContactSubmit(event) {
-    event.preventDefault();
-    
-    const name = document.getElementById('contact-name').value;
-    const email = document.getElementById('contact-email').value;
-    const message = document.getElementById('contact-message').value;
-    
-    const subject = `Portfolio Contact — ${name}`;
-    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-    
-    showToast('Message prepared. Email opened.');
-    
-    setTimeout(() => {
-        window.location.href = `mailto:uxdev.arafat@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    }, 500);
-    
-    document.getElementById('contactForm').reset();
-}
-
-function showToast(message) {
+function showToast(message, type = 'success') {
     const toast = document.getElementById('contactToast');
     const toastMessage = document.getElementById('toastMessage');
+    
+    toast.className = 'toast';
+    if (type) toast.classList.add(`toast-${type}`);
     
     toastMessage.textContent = message;
     toast.classList.add('show');
@@ -2014,6 +2001,161 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);
+}
+
+function validateFormspreeEndpoint() {
+    if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT.includes('REPLACE_WITH_REAL_ID')) {
+        showToast('Form setup incomplete. Please configure Form ID.', 'error');
+        console.error('[Formspree Config] Endpoint not configured:', FORMSPREE_ENDPOINT);
+        return false;
+    }
+    return true;
+}
+
+function handleFormspreeError(response, error) {
+    if (response) {
+        if (response.status === 404) {
+            showToast('Form endpoint is invalid. Please update Formspree Form ID.', 'error');
+            console.error('[Formspree] Form not found (404). Endpoint:', FORMSPREE_ENDPOINT);
+            return;
+        }
+        if (response.status === 403) {
+            showToast('Form access denied. Please verify Formspree configuration.', 'error');
+            console.error('[Formspree] Access forbidden (403). Endpoint:', FORMSPREE_ENDPOINT);
+            return;
+        }
+    }
+    if (error) {
+        const errorMsg = error.message || String(error);
+        if (errorMsg.toLowerCase().includes('not found') || errorMsg.toLowerCase().includes('404')) {
+            showToast('Form endpoint is invalid. Please update Formspree Form ID.', 'error');
+            console.error('[Formspree] Form not found error:', error, 'Endpoint:', FORMSPREE_ENDPOINT);
+            return;
+        }
+    }
+    showToast('Oops! Something went wrong. Please try again.', 'error');
+    console.error('[Formspree] Submission error:', error || response, 'Endpoint:', FORMSPREE_ENDPOINT);
+}
+
+// Contact Form Handler
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateFormspreeEndpoint()) return;
+        
+        const submitBtn = document.getElementById('contact-submit-btn');
+        const btnText = submitBtn.querySelector('span');
+        const btnIcon = submitBtn.querySelector('i');
+        const emailInput = document.getElementById('contact-email');
+        const replytoInput = document.getElementById('contact-replyto');
+        
+        replytoInput.value = emailInput.value;
+        
+        const originalBtnText = btnText.textContent;
+        btnText.textContent = 'Sending...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
+        submitBtn.disabled = true;
+        
+        try {
+            const formData = new FormData(this);
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.reset();
+            } else {
+                try {
+                    const data = await response.json();
+                    if (data.errors && Array.isArray(data.errors)) {
+                        showToast(data.errors.map(e => e.message).join(', '), 'error');
+                    } else if (data.error) {
+                        handleFormspreeError(response, new Error(data.error));
+                    } else {
+                        handleFormspreeError(response, null);
+                    }
+                } catch {
+                    handleFormspreeError(response, null);
+                }
+            }
+        } catch (error) {
+            if (error.message && error.message.toLowerCase().includes('fetch')) {
+                showToast('Connection error. Please check your internet and try again.', 'error');
+            } else {
+                handleFormspreeError(null, error);
+            }
+        } finally {
+            btnText.textContent = originalBtnText;
+            btnIcon.className = 'fas fa-paper-plane';
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+// Subscribe Form Handler
+const subscribeForm = document.getElementById('subscribeForm');
+if (subscribeForm) {
+    subscribeForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateFormspreeEndpoint()) return;
+        
+        const submitBtn = document.getElementById('subscribe-submit-btn');
+        const btnText = submitBtn.querySelector('span');
+        const emailInput = document.getElementById('subscribe-email');
+        const replytoInput = document.getElementById('subscribe-replyto');
+        
+        replytoInput.value = emailInput.value;
+        
+        const originalBtnText = btnText.textContent;
+        btnText.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        submitBtn.disabled = true;
+        
+        try {
+            const formData = new FormData(this);
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                showToast('Successfully subscribed! Thank you for staying connected.', 'success');
+                this.reset();
+            } else {
+                try {
+                    const data = await response.json();
+                    if (data.errors && Array.isArray(data.errors)) {
+                        showToast(data.errors.map(e => e.message).join(', '), 'error');
+                    } else if (data.error) {
+                        handleFormspreeError(response, new Error(data.error));
+                    } else {
+                        handleFormspreeError(response, null);
+                    }
+                } catch {
+                    handleFormspreeError(response, null);
+                }
+            }
+        } catch (error) {
+            if (error.message && error.message.toLowerCase().includes('fetch')) {
+                showToast('Connection error. Please check your internet and try again.', 'error');
+            } else {
+                handleFormspreeError(null, error);
+            }
+        } finally {
+            btnText.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
 }
 
 // ==================== Typing Effect for Tagline ====================
