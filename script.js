@@ -164,7 +164,7 @@ const skills = [
         issuer: "Grameenphone Academy (Grameenphone Ltd.)",
         meta: ["8 months", "Freelancing Factory", "Top 5 learner", "$3000+ earnings"],
         tags: ["Design", "UI/UX", "Figma", "Freelancing", "App Design", "Web Design", "UX Research"],
-        certificateLink: "",
+        certificateLink: "assets/gpui.jpg",
         short: "UI/UX design training through Grameenphone Academy's Freelancing Factory—focused on real market work, strong learning performance, and verified international freelancing earnings.",
         details: "I completed the 8-month Grameenphone Academy Freelancing Factory program in UI/UX Design and was ranked among the top 5 learners. The program was built around learning with earning, so I applied my skills in real market projects. After finishing the course, my recorded freelancing earnings crossed $3000+. I received official certification from Grameenphone Ltd., and this experience became a major foundation for my professional journey and confidence in delivering design work for real clients."
     },
