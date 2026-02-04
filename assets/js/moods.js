@@ -1133,6 +1133,37 @@ const handleResize = debounce(() => {
     }
 }, 250);
 
+// ==================== Back to Top Button ====================
+
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    if (!backToTopBtn) return;
+    
+    // Debounced scroll handler
+    const handleScroll = debounce(() => {
+        if (window.scrollY > 250) {
+            backToTopBtn.classList.add('is-visible');
+        } else {
+            backToTopBtn.classList.remove('is-visible');
+        }
+    }, 100);
+    
+    // Scroll to top on click
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Listen to scroll events
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial check
+    handleScroll();
+}
+
 // ==================== Initialize ====================
 
 if (document.readyState === 'loading') {
@@ -1140,6 +1171,7 @@ if (document.readyState === 'loading') {
         initMoodSwitcher();
         initMoodToolkit();
         initVideoEmbeds();
+        initBackToTop();
         window.addEventListener('resize', handleResize);
         window.addEventListener('resize', handleToolkitResize);
     });
@@ -1147,6 +1179,7 @@ if (document.readyState === 'loading') {
     initMoodSwitcher();
     initMoodToolkit();
     initVideoEmbeds();
+    initBackToTop();
     window.addEventListener('resize', handleResize);
     window.addEventListener('resize', handleToolkitResize);
 }
