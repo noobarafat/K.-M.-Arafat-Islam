@@ -898,14 +898,29 @@ const moodActivities = {
 
 let currentPanel = null;
 
+// Activity hint messages per mood
+const activityHints = {
+    happy: "Pick an activity card to boost your vibe — click to start →",
+    chill: "Tap an activity card to relax your mind — click to start →",
+    love: "Choose a card to feel more connected — click to start →",
+    sad: "Click a card for a gentle step right now — click to start →",
+    angry: "Click a card to release tension safely — click to start →"
+};
+
 function initMoodToolkit() {
     const mood = getCurrentMood();
     if (!mood || !moodActivities[mood]) return;
     
     const toolkit = document.getElementById('moodToolkit');
     const panel = document.getElementById('activityPanel');
+    const hint = document.getElementById('activityHint');
     
     if (!toolkit || !panel) return;
+    
+    // Set activity hint text
+    if (hint && activityHints[mood]) {
+        hint.textContent = activityHints[mood];
+    }
     
     const activities = moodActivities[mood];
     
@@ -980,14 +995,86 @@ function closeActivityPanel() {
     currentPanel = null;
 }
 
+// ==================== Video Smart Autoplay ====================
+
+function isMobileDevice() {
+    return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function buildYouTubeURL(videoId, isMobile) {
+    const origin = encodeURIComponent(window.location.origin);
+    const baseUrl = `https://www.youtube.com/embed/${videoId}`;
+    
+    const params = new URLSearchParams({
+        autoplay: isMobile ? '0' : '1',
+        mute: isMobile ? '0' : '1',
+        playsinline: '1',
+        controls: '1',
+        modestbranding: '1',
+        rel: '0',
+        origin: origin
+    });
+    
+    return `${baseUrl}?${params.toString()}`;
+}
+
+function initVideoEmbeds() {
+    const iframes = document.querySelectorAll('.video-shell iframe');
+    
+    iframes.forEach(iframe => {
+        const videoShell = iframe.closest('.video-shell');
+        if (!videoShell) return;
+        
+        const videoId = videoShell.getAttribute('data-video-id');
+        if (!videoId) return;
+        
+        const isMobile = isMobileDevice();
+        const newSrc = buildYouTubeURL(videoId, isMobile);
+        
+        // Only update if different to avoid unnecessary reload
+        if (iframe.src !== newSrc) {
+            iframe.src = newSrc;
+        }
+    });
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Handle resize events (debounced to avoid excessive reloads)
+let lastIsMobile = isMobileDevice();
+
+const handleResize = debounce(() => {
+    const currentIsMobile = isMobileDevice();
+    
+    // Only reinitialize if we crossed the mobile/desktop boundary
+    if (currentIsMobile !== lastIsMobile) {
+        lastIsMobile = currentIsMobile;
+        initVideoEmbeds();
+    }
+}, 250);
+
 // ==================== Initialize ====================
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initMoodSwitcher();
         initMoodToolkit();
+        initVideoEmbeds();
+        window.addEventListener('resize', handleResize);
     });
 } else {
     initMoodSwitcher();
     initMoodToolkit();
+    initVideoEmbeds();
+    window.addEventListener('resize', handleResize);
 }

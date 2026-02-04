@@ -106,19 +106,22 @@
                     <i class="fas fa-music"></i>
                     A Song for You
                 </h2>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/Se6HAC3bonE?si=C5m_ippf6AeyAvAf&autoplay=1&mute=1&playsinline=1&controls=1&modestbranding=1&rel=0" 
-                        title="Happy Mood Music" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
+                <div class="video-shell" data-video-id="Se6HAC3bonE">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/Se6HAC3bonE" 
+                            title="Happy Mood Music" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
 
                 <!-- Mood Toolkit -->
                 <div class="toolkit-divider"></div>
+                <p id="activityHint" class="activity-hint"></p>
                 <div id="moodToolkit"></div>
                 <div id="activityPanel"></div>
             </div>
