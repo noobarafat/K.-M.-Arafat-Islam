@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sad Mood - K M Arafat Islam">
+    <title>It's Okay | K M Arafat Islam</title>
+    <link rel="icon" type="image/jpeg" href="../assets/icon.JPG">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../assets/css/moods.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="mood-page mood-sad">
+    <div class="mood-container">
+        <!-- Hero Section -->
+        <div class="mood-hero">
+            <div class="mood-badge">
+                <span class="mood-badge-emoji">😢</span>
+                <span>It's Okay to Feel</span>
+            </div>
+            <h1 class="mood-title">You're Not Alone</h1>
+            <p class="mood-subtitle">Your feelings are valid, and this too shall pass</p>
+            
+            <div class="mood-actions">
+                <a href="../index.html" class="btn-mood btn-primary-mood">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+                <div class="mood-switch">
+                    <button type="button" class="btn-mood btn-secondary-mood switch-mood-btn" aria-expanded="false">
+                        <i class="fas fa-sync-alt btn-icon"></i>
+                        Switch Mood
+                    </button>
+                    <div class="mood-menu" hidden role="menu">
+                        <div class="mood-menu-title">CHOOSE YOUR MOOD</div>
+                        <div class="mood-items">
+                            <a href="happy.html" class="mood-item" data-mood="happy" role="menuitem">
+                                <span class="mood-item-emoji">😄</span>
+                                <span class="mood-item-name">Happy</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="chill.html" class="mood-item" data-mood="chill" role="menuitem">
+                                <span class="mood-item-emoji">😎</span>
+                                <span class="mood-item-name">Chill</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="love.html" class="mood-item" data-mood="love" role="menuitem">
+                                <span class="mood-item-emoji">❤️</span>
+                                <span class="mood-item-name">Love</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="sad.html" class="mood-item" data-mood="sad" role="menuitem">
+                                <span class="mood-item-emoji">😢</span>
+                                <span class="mood-item-name">Sad</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="angry.html" class="mood-item" data-mood="angry" role="menuitem">
+                                <span class="mood-item-emoji">😤</span>
+                                <span class="mood-item-name">Angry</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="mood-grid">
+            <!-- Mood Notes Card -->
+            <div class="mood-card">
+                <h2 class="mood-card-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Mood Notes
+                </h2>
+                <ul class="mood-notes-list">
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">💙</span>
+                        <p class="mood-note-text">Sadness is not weakness—it's a natural human emotion that signals you care deeply about something or someone.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">💧</span>
+                        <p class="mood-note-text">Allow yourself to feel without judgment. Suppressing emotions often makes them heavier; acknowledging them creates space for healing.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🤝</span>
+                        <p class="mood-note-text">Reach out to someone you trust if you need support. Connection, even in small doses, can lighten the weight you're carrying.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🌱</span>
+                        <p class="mood-note-text">Be gentle with yourself. You don't have to "fix" everything right now. Sometimes healing starts with simply being present with what is.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">⏳</span>
+                        <p class="mood-note-text">Remember that this feeling, like all feelings, is temporary. You've moved through difficult moments before, and you will again.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Video Card -->
+            <div class="mood-card mood-video-card">
+                <h2 class="mood-card-title">
+                    <i class="fas fa-music"></i>
+                    A Song for You
+                </h2>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/ybf8Jvv4aK8?autoplay=1&mute=1&playsinline=1&controls=1&modestbranding=1&rel=0" 
+                        title="Sad Mood Music" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Mood Toolkit -->
+                <div class="toolkit-divider"></div>
+                <div id="moodToolkit"></div>
+                <div id="activityPanel"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/moods.js"></script>
+</body>
+</html>

@@ -1,0 +1,910 @@
+/* ==================== Mood Switcher Component ==================== */
+
+/* Switch Container */
+.mood-switch {
+    position: relative;
+    display: inline-block;
+}
+
+/* Mood Menu (Dropdown/Popover) */
+.mood-menu {
+    position: fixed;
+    width: 300px;
+    max-width: 92vw;
+    background: rgba(8, 10, 16, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 16px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 99999;
+}
+
+.mood-menu.is-open {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
+}
+
+.mood-menu[hidden] {
+    display: none !important;
+}
+
+/* Menu Title */
+.mood-menu-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(255, 255, 255, 0.45);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Mood Items Container */
+.mood-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Individual Mood Item (ONE ROW) */
+.mood-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    min-height: 52px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+}
+
+.mood-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateX(3px);
+}
+
+/* Emoji Badge (inside row, left side) */
+.mood-item-emoji {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+}
+
+/* Mood Name (middle, grows) */
+.mood-item-name {
+    flex: 1;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Color Dot Indicator (right side) */
+.mood-item-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Mood-Specific Colors */
+.mood-item[data-mood="happy"] .mood-item-indicator {
+    background: #ff9a00;
+    box-shadow: 0 0 10px rgba(255, 154, 0, 0.6);
+}
+
+.mood-item[data-mood="chill"] .mood-item-indicator {
+    background: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
+}
+
+.mood-item[data-mood="love"] .mood-item-indicator {
+    background: #f5576c;
+    box-shadow: 0 0 10px rgba(245, 87, 108, 0.6);
+}
+
+.mood-item[data-mood="sad"] .mood-item-indicator {
+    background: #4facfe;
+    box-shadow: 0 0 10px rgba(79, 172, 254, 0.6);
+}
+
+.mood-item[data-mood="angry"] .mood-item-indicator {
+    background: #fa709a;
+    box-shadow: 0 0 10px rgba(250, 112, 154, 0.6);
+}
+
+/* Hover Glow Effects */
+.mood-item[data-mood="happy"]:hover {
+    box-shadow: 0 4px 16px rgba(255, 154, 0, 0.15);
+    border-color: rgba(255, 154, 0, 0.25);
+}
+
+.mood-item[data-mood="chill"]:hover {
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.25);
+}
+
+.mood-item[data-mood="love"]:hover {
+    box-shadow: 0 4px 16px rgba(245, 87, 108, 0.15);
+    border-color: rgba(245, 87, 108, 0.25);
+}
+
+.mood-item[data-mood="sad"]:hover {
+    box-shadow: 0 4px 16px rgba(79, 172, 254, 0.15);
+    border-color: rgba(79, 172, 254, 0.25);
+}
+
+.mood-item[data-mood="angry"]:hover {
+    box-shadow: 0 4px 16px rgba(250, 112, 154, 0.15);
+    border-color: rgba(250, 112, 154, 0.25);
+}
+
+/* Button Icon Rotation */
+.btn-secondary-mood .btn-icon {
+    transition: transform 0.25s ease;
+}
+
+.btn-secondary-mood[aria-expanded="true"] .btn-icon {
+    transform: rotate(180deg);
+}
+
+/* ==================== Mood Toolkit ==================== */
+
+/* Toolkit Divider */
+.toolkit-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 1.5rem 0;
+}
+
+/* Activity Cards Grid */
+#moodToolkit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.activity-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.activity-card:hover {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.activity-card.active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--mood-color-1);
+}
+
+.activity-card-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.activity-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    line-height: 1.25;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+.activity-card-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.4;
+    margin: 0;
+    max-width: 90%;
+    text-align: center;
+}
+
+.activity-card-status {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.75rem;
+    color: #4ade80;
+    font-weight: 600;
+}
+
+/* Activity Panel (Accordion) */
+#activityPanel {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+#activityPanel.open {
+    padding: 1.5rem;
+    max-height: 800px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.panel-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+}
+
+.panel-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.panel-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 1);
+}
+
+.panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Timer Display */
+.timer-big {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 1rem 0;
+}
+
+.timer-phase {
+    font-size: 1.1rem;
+    text-align: center;
+    color: var(--mood-color-1);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.timer-prompt {
+    font-size: 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0.5rem 0;
+}
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mood-color-1), var(--mood-color-2));
+    width: 0%;
+    transition: width 1s linear;
+    border-radius: 5px;
+}
+
+/* Input Fields */
+.panel-input,
+.panel-textarea {
+    width: 100%;
+    padding: 0.875rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.panel-input::placeholder,
+.panel-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.panel-input:focus,
+.panel-textarea:focus {
+    outline: none;
+    border-color: var(--mood-color-1);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.panel-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Buttons */
+.panel-btn {
+    padding: 0.875rem 1.75rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.panel-btn-primary {
+    background: linear-gradient(135deg, var(--mood-color-1), var(--mood-color-2));
+    color: white;
+}
+
+.panel-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.panel-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.panel-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.panel-btn-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* List Items */
+.panel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.panel-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+}
+
+.panel-list-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.panel-list-item input[type="text"] {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 0.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9rem;
+}
+
+.panel-list-item input[type="text"]:focus {
+    outline: none;
+    border-color: var(--mood-color-1);
+}
+
+.panel-list-item label {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+/* Chips/Pills */
+.chip-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 0.625rem 1.25rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.chip.selected {
+    background: linear-gradient(135deg, var(--mood-color-1), var(--mood-color-2));
+    border-color: transparent;
+    color: white;
+}
+
+/* Slider */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.slider-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--mood-color-1);
+    text-align: center;
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--mood-color-1);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--mood-color-1);
+    cursor: pointer;
+    border: none;
+}
+
+/* Steps Progress */
+.steps-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.step-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.step-dot.active {
+    background: var(--mood-color-1);
+    transform: scale(1.3);
+}
+
+/* Success Message */
+.success-msg {
+    text-align: center;
+    font-size: 1rem;
+    color: #4ade80;
+    font-weight: 600;
+    padding: 1rem;
+    background: rgba(74, 222, 128, 0.1);
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+/* Responsive for Dynamic Toolkit */
+@media (max-width: 768px) {
+    #moodToolkit {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .activity-card {
+        padding: 1.25rem;
+    }
+    
+    #activityPanel.open {
+        max-height: 1000px;
+    }
+}
+
+/* Mood Toolkit Container */
+.mood-toolkit {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Now Playing Info */
+.toolkit-now-playing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toolkit-mood-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.toolkit-subtitle {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Quick Actions */
+.toolkit-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.toolkit-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0.75rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.toolkit-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.toolkit-btn-icon {
+    font-size: 1.5rem;
+}
+
+.toolkit-btn-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Toolkit Panels */
+.toolkit-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.toolkit-panel {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.25rem;
+    animation: panelSlideIn 0.25s ease;
+}
+
+@keyframes panelSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toolkit-panel[hidden] {
+    display: none;
+}
+
+/* Panel Headers */
+.breathing-header,
+.grounding-header,
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.toolkit-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+}
+
+.toolkit-close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toolkit-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Breathing Panel */
+.breathing-instructions {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1rem;
+}
+
+.breathing-timer {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.timer-display {
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mood-color-1), var(--mood-color-2));
+    width: 0%;
+    transition: width 1s linear;
+    border-radius: 4px;
+}
+
+.breathing-controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+/* Grounding Panel */
+.grounding-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.grounding-item {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.grounding-item strong {
+    color: var(--mood-color-1);
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+/* Journal Panel */
+.journal-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.875rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: vertical;
+    margin-bottom: 0.75rem;
+}
+
+.journal-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.journal-textarea:focus {
+    outline: none;
+    border-color: var(--mood-color-1);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.journal-saved-msg {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #4ade80;
+    margin: 0.5rem 0 0;
+    font-weight: 600;
+}
+
+/* Toolkit Buttons */
+.toolkit-btn-primary,
+.toolkit-btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.toolkit-btn-primary {
+    background: linear-gradient(135deg, var(--mood-color-1), var(--mood-color-2));
+    color: white;
+}
+
+.toolkit-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toolkit-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toolkit-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive for Toolkit */
+@media (max-width: 768px) {
+    .toolkit-actions {
+        gap: 0.5rem;
+    }
+    
+    .toolkit-btn {
+        padding: 0.875rem 0.5rem;
+    }
+    
+    .toolkit-btn-icon {
+        font-size: 1.25rem;
+    }
+    
+    .toolkit-btn-text {
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .mood-menu {
+        width: 280px;
+    }
+    
+    .mood-item {
+        padding: 9px 10px;
+        min-height: 48px;
+        gap: 10px;
+    }
+    
+    .mood-item-emoji {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+    }
+    
+    .mood-item-name {
+        font-size: 0.95rem;
+    }
+    
+    .toolkit-actions {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .toolkit-btn {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 1rem;
+    }
+    
+    .toolkit-btn-icon {
+        font-size: 1.5rem;
+    }
+    
+    .toolkit-btn-text {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chill Mood - K M Arafat Islam">
+    <title>Chill Mode | K M Arafat Islam</title>
+    <link rel="icon" type="image/jpeg" href="../assets/icon.JPG">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../assets/css/moods.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="mood-page mood-chill">
+    <div class="mood-container">
+        <!-- Hero Section -->
+        <div class="mood-hero">
+            <div class="mood-badge">
+                <span class="mood-badge-emoji">😎</span>
+                <span>Chill Mode</span>
+            </div>
+            <h1 class="mood-title">Find Your Calm</h1>
+            <p class="mood-subtitle">Let go, breathe deeply, and embrace the stillness</p>
+            
+            <div class="mood-actions">
+                <a href="../index.html" class="btn-mood btn-primary-mood">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+                <div class="mood-switch">
+                    <button type="button" class="btn-mood btn-secondary-mood switch-mood-btn" aria-expanded="false">
+                        <i class="fas fa-sync-alt btn-icon"></i>
+                        Switch Mood
+                    </button>
+                    <div class="mood-menu" hidden role="menu">
+                        <div class="mood-menu-title">CHOOSE YOUR MOOD</div>
+                        <div class="mood-items">
+                            <a href="happy.html" class="mood-item" data-mood="happy" role="menuitem">
+                                <span class="mood-item-emoji">😄</span>
+                                <span class="mood-item-name">Happy</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="chill.html" class="mood-item" data-mood="chill" role="menuitem">
+                                <span class="mood-item-emoji">😎</span>
+                                <span class="mood-item-name">Chill</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="love.html" class="mood-item" data-mood="love" role="menuitem">
+                                <span class="mood-item-emoji">❤️</span>
+                                <span class="mood-item-name">Love</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="sad.html" class="mood-item" data-mood="sad" role="menuitem">
+                                <span class="mood-item-emoji">😢</span>
+                                <span class="mood-item-name">Sad</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="angry.html" class="mood-item" data-mood="angry" role="menuitem">
+                                <span class="mood-item-emoji">😤</span>
+                                <span class="mood-item-name">Angry</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="mood-grid">
+            <!-- Mood Notes Card -->
+            <div class="mood-card">
+                <h2 class="mood-card-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Mood Notes
+                </h2>
+                <ul class="mood-notes-list">
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🌙</span>
+                        <p class="mood-note-text">Taking time to simply be—without pressure or agenda—is not laziness. It's essential self-care that recharges your mind and body.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🌊</span>
+                        <p class="mood-note-text">Notice your breath. Slow, deep breathing activates your body's natural relaxation response and brings you into the present moment.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">☁️</span>
+                        <p class="mood-note-text">You don't have to be productive every moment. Rest is productive too—it's when healing, creativity, and clarity emerge.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">💤</span>
+                        <p class="mood-note-text">Let your shoulders drop, soften your jaw, and release the tension you've been carrying. Your body deserves this ease.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🎧</span>
+                        <p class="mood-note-text">Create a ritual for relaxation: dim lights, calming sounds, a favorite beverage, or simply stillness. Make peace a practice.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Video Card -->
+            <div class="mood-card mood-video-card">
+                <h2 class="mood-card-title">
+                    <i class="fas fa-music"></i>
+                    A Song for You
+                </h2>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/k4yXQkG2s1E?autoplay=1&mute=1&playsinline=1&controls=1&modestbranding=1&rel=0" 
+                        title="Chill Mood Music" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Mood Toolkit -->
+                <div class="toolkit-divider"></div>
+                <div id="moodToolkit"></div>
+                <div id="activityPanel"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/moods.js"></script>
+</body>
+</html>

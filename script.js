@@ -2380,3 +2380,93 @@ document.addEventListener('mouseout', (e) => {
     }
 });
 
+// ==================== Mood Picker Feature ====================
+
+// Mood emoji sets
+const moodEmojis = {
+    happy: ['😄', '✨', '🌟', '😊', '🎉', '⭐', '🌈', '💫'],
+    chill: ['😎', '🧊', '🌙', '🎵', '🌊', '☁️', '💤', '🎧'],
+    love: ['❤️', '😍', '💖', '💕', '💝', '💗', '🥰', '💘'],
+    sad: ['😢', '💧', '🥲', '😔', '💔', '🌧️', '😿', '🥺'],
+    angry: ['😤', '🔥', '💢', '😠', '⚡', '💥', '👿', '🌋']
+};
+
+// Toggle mood panel
+const moodToggleBtn = document.getElementById('moodToggleBtn');
+const moodPanel = document.getElementById('moodPanel');
+
+if (moodToggleBtn && moodPanel) {
+    moodToggleBtn.addEventListener('click', () => {
+        moodToggleBtn.classList.toggle('active');
+        moodPanel.classList.toggle('active');
+    });
+}
+
+// Mood button click handlers
+const moodButtons = document.querySelectorAll('.mood-btn');
+const particlesContainer = document.getElementById('moodParticlesContainer');
+
+moodButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const mood = this.getAttribute('data-mood');
+        handleMoodClick(mood, this);
+    });
+});
+
+// Handle mood button click: launch emojis + redirect
+function handleMoodClick(mood, buttonElement) {
+    // Launch emoji particles
+    createMoodParticles(mood, buttonElement);
+    
+    // Save mood to localStorage
+    localStorage.setItem('lastMood', mood);
+    
+    // Redirect to mood page after delay (600ms)
+    setTimeout(() => {
+        window.location.href = `moods/${mood}.html`;
+    }, 600);
+}
+
+// Create and animate emoji particles
+function createMoodParticles(mood, buttonElement) {
+    const emojis = moodEmojis[mood];
+    const particleCount = Math.floor(Math.random() * 8) + 8; // 8-15 particles
+    
+    // Get button position for particle origin
+    const rect = buttonElement.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = window.innerHeight - rect.bottom;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'mood-particle';
+        
+        // Random emoji from the set
+        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        particle.textContent = randomEmoji;
+        
+        // Random horizontal drift (-50px to +50px)
+        const driftX = (Math.random() - 0.5) * 100;
+        particle.style.setProperty('--drift-x', `${driftX}px`);
+        
+        // Position particle at button location
+        particle.style.left = `${originX}px`;
+        particle.style.bottom = `${originY}px`;
+        
+        // Random animation delay for staggered effect
+        particle.style.animationDelay = `${Math.random() * 0.2}s`;
+        
+        // Random animation duration (1.5s to 2.5s)
+        particle.style.animationDuration = `${1.5 + Math.random()}s`;
+        
+        particlesContainer.appendChild(particle);
+        
+        // Remove particle after animation completes
+        setTimeout(() => {
+            if (particle.parentNode === particlesContainer) {
+                particlesContainer.removeChild(particle);
+            }
+        }, 2500);
+    }
+}
+

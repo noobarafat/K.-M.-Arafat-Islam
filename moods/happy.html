@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Happy Mood - K M Arafat Islam">
+    <title>Happy Mode | K M Arafat Islam</title>
+    <link rel="icon" type="image/jpeg" href="../assets/icon.JPG">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../assets/css/moods.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="mood-page mood-happy">
+    <div class="mood-container">
+        <!-- Hero Section -->
+        <div class="mood-hero">
+            <div class="mood-badge">
+                <span class="mood-badge-emoji">😄</span>
+                <span>Happy Mode</span>
+            </div>
+            <h1 class="mood-title">Embrace Your Joy</h1>
+            <p class="mood-subtitle">Happiness is your natural state—let it flow freely</p>
+            
+            <div class="mood-actions">
+                <a href="../index.html" class="btn-mood btn-primary-mood">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+                <div class="mood-switch">
+                    <button type="button" class="btn-mood btn-secondary-mood switch-mood-btn" aria-expanded="false">
+                        <i class="fas fa-sync-alt btn-icon"></i>
+                        Switch Mood
+                    </button>
+                    <div class="mood-menu" hidden role="menu">
+                        <div class="mood-menu-title">CHOOSE YOUR MOOD</div>
+                        <div class="mood-items">
+                            <a href="happy.html" class="mood-item" data-mood="happy" role="menuitem">
+                                <span class="mood-item-emoji">😄</span>
+                                <span class="mood-item-name">Happy</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="chill.html" class="mood-item" data-mood="chill" role="menuitem">
+                                <span class="mood-item-emoji">😎</span>
+                                <span class="mood-item-name">Chill</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="love.html" class="mood-item" data-mood="love" role="menuitem">
+                                <span class="mood-item-emoji">❤️</span>
+                                <span class="mood-item-name">Love</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="sad.html" class="mood-item" data-mood="sad" role="menuitem">
+                                <span class="mood-item-emoji">😢</span>
+                                <span class="mood-item-name">Sad</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                            <a href="angry.html" class="mood-item" data-mood="angry" role="menuitem">
+                                <span class="mood-item-emoji">😤</span>
+                                <span class="mood-item-name">Angry</span>
+                                <span class="mood-item-indicator"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="mood-grid">
+            <!-- Mood Notes Card -->
+            <div class="mood-card">
+                <h2 class="mood-card-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Mood Notes
+                </h2>
+                <ul class="mood-notes-list">
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">✨</span>
+                        <p class="mood-note-text">Happiness isn't just about big moments—it thrives in small everyday wins, genuine connections, and moments of gratitude.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">💫</span>
+                        <p class="mood-note-text">When you feel joy, let yourself fully experience it without guilt. Positive emotions strengthen resilience and help you navigate challenges.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🌟</span>
+                        <p class="mood-note-text">Share your happiness with others—kindness and laughter are contagious and create ripple effects of positivity.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">⭐</span>
+                        <p class="mood-note-text">Take a moment to acknowledge what brought you here: your effort, your courage, or simply being present in this moment.</p>
+                    </li>
+                    <li class="mood-note-item">
+                        <span class="mood-note-icon">🎯</span>
+                        <p class="mood-note-text">Use this energy to do something meaningful—create, connect, move your body, or simply savor the feeling of being alive.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Video Card -->
+            <div class="mood-card mood-video-card">
+                <h2 class="mood-card-title">
+                    <i class="fas fa-music"></i>
+                    A Song for You
+                </h2>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Se6HAC3bonE?si=C5m_ippf6AeyAvAf&autoplay=1&mute=1&playsinline=1&controls=1&modestbranding=1&rel=0" 
+                        title="Happy Mood Music" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Mood Toolkit -->
+                <div class="toolkit-divider"></div>
+                <div id="moodToolkit"></div>
+                <div id="activityPanel"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/moods.js"></script>
+</body>
+</html>

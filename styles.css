@@ -10930,3 +10930,558 @@ h3 {
     background: rgba(124, 58, 237, 0.15);
     border-color: rgba(124, 58, 237, 0.3);
 }
+
+/* ==================== Mood Picker Feature ==================== */
+
+/* Mood Picker Section */
+.mood-picker-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Toggle Button */
+.mood-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    font-family: inherit;
+}
+
+.mood-toggle-btn:hover {
+    text-decoration-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.mood-arrow {
+    display: inline-block;
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+    font-size: 0.75rem;
+}
+
+.mood-toggle-btn.active .mood-arrow {
+    transform: rotate(180deg);
+}
+
+/* Mood Panel */
+.mood-panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0;
+}
+
+.mood-panel.active {
+    max-height: 200px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 1.5rem;
+}
+
+/* Mood Buttons Container */
+.mood-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Individual Mood Buttons */
+.mood-btn {
+    padding: 0.625rem 1.25rem;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.mood-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mood-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Mood Button Colors */
+.mood-happy {
+    background: linear-gradient(135deg, #FFC837 0%, #FF8008 100%);
+    color: #1a1a1a;
+}
+
+.mood-happy:hover {
+    box-shadow: 0 8px 25px rgba(255, 200, 55, 0.5);
+}
+
+.mood-chill {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+}
+
+.mood-chill:hover {
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.mood-love {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #ffffff;
+}
+
+.mood-love:hover {
+    box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+}
+
+.mood-sad {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #1a1a1a;
+}
+
+.mood-sad:hover {
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.5);
+}
+
+.mood-angry {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: #1a1a1a;
+}
+
+.mood-angry:hover {
+    box-shadow: 0 8px 25px rgba(250, 112, 154, 0.5);
+}
+
+/* Particles Container */
+.mood-particles-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Individual Particle */
+.mood-particle {
+    position: absolute;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: float-up 2s ease-out forwards;
+    z-index: 10000;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-300px) translateX(var(--drift-x, 0px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mood-buttons {
+        gap: 0.5rem;
+    }
+    
+    .mood-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .mood-toggle-btn {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mood-btn {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8rem;
+    }
+    
+    .mood-particle {
+        font-size: 1.5rem;
+    }
+}
+
+/* ==================== Mood Pages Styling ==================== */
+
+/* Mood Page Variables (overridden per page) */
+:root {
+    --mood-bg1: #0f0f23;
+    --mood-bg2: #1a1a2e;
+    --mood-accent: #7c3aed;
+    --mood-card: rgba(255, 255, 255, 0.08);
+    --mood-text: rgba(255, 255, 255, 0.9);
+}
+
+/* Mood Page Base */
+.mood-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--mood-bg1) 0%, var(--mood-bg2) 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.mood-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 50%, var(--mood-accent) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--mood-accent) 0%, transparent 50%);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Container */
+.mood-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero Section */
+.mood-hero {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mood-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--mood-card);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(20px);
+    color: var(--mood-text);
+}
+
+.mood-badge-emoji {
+    font-size: 1.25rem;
+}
+
+.mood-title {
+    font-size: clamp(2.75rem, 7vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+}
+
+.mood-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 400;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mood-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.btn-mood {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-primary-mood {
+    background: linear-gradient(135deg, var(--mood-accent) 0%, rgba(124, 58, 237, 0.8) 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+}
+
+.btn-primary-mood:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
+}
+
+.btn-secondary-mood {
+    background: var(--mood-card);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    backdrop-filter: blur(20px);
+}
+
+.btn-secondary-mood:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Main Content Grid */
+.mood-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* Card Base */
+.mood-card {
+    background: var(--mood-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.mood-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mood-card-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #ffffff;
+}
+
+.mood-card-title i {
+    font-size: 1.5rem;
+    color: var(--mood-accent);
+}
+
+/* Mood Notes */
+.mood-notes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.mood-note-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border-left: 3px solid var(--mood-accent);
+    transition: all 0.3s ease;
+}
+
+.mood-note-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(4px);
+}
+
+.mood-note-icon {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    margin-top: 0.125rem;
+}
+
+.mood-note-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+/* Video Card */
+.mood-video-card {
+    position: relative;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 20px;
+}
+
+/* Mood Theme Color Overrides */
+.mood-happy {
+    --mood-bg1: #1a0f0a;
+    --mood-bg2: #2d1810;
+    --mood-accent: #ff9a00;
+}
+
+.mood-chill {
+    --mood-bg1: #0f0f23;
+    --mood-bg2: #1a1a3e;
+    --mood-accent: #667eea;
+}
+
+.mood-love {
+    --mood-bg1: #1f0818;
+    --mood-bg2: #2d1220;
+    --mood-accent: #f5576c;
+}
+
+.mood-sad {
+    --mood-bg1: #0a1420;
+    --mood-bg2: #0f1f30;
+    --mood-accent: #4facfe;
+}
+
+.mood-angry {
+    --mood-bg1: #200a10;
+    --mood-bg2: #301018;
+    --mood-accent: #fa709a;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .mood-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mood-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mood-hero {
+        padding: 3rem 0 2rem;
+    }
+    
+    .mood-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+    
+    .mood-card {
+        padding: 1.75rem;
+    }
+    
+    .mood-card-title {
+        font-size: 1.5rem;
+    }
+    
+    .mood-note-text {
+        font-size: 0.95rem;
+    }
+    
+    .btn-mood {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mood-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .mood-hero {
+        padding: 2rem 0 1.5rem;
+    }
+    
+    .mood-card {
+        padding: 1.5rem;
+    }
+    
+    .mood-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-mood {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .mood-note-item {
+        padding: 0.875rem 1rem;
+    }
+}
+
+
+
