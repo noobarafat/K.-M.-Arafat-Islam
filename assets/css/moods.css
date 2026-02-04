@@ -291,6 +291,19 @@
     max-height: 800px;
 }
 
+/* Mobile inline panel */
+#activityPanel.mobile-inline {
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+    #activityPanel.mobile-inline.open {
+        grid-column: 1 / -1;
+    }
+}
+
 .panel-header {
     display: flex;
     justify-content: space-between;

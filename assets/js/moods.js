@@ -897,6 +897,8 @@ const moodActivities = {
 // ==================== Toolkit Rendering ====================
 
 let currentPanel = null;
+let originalPanelParent = null;
+let originalPanelNextSibling = null;
 
 // Activity hint messages per mood
 const activityHints = {
@@ -907,6 +909,10 @@ const activityHints = {
     angry: "Click a card to release tension safely — click to start →"
 };
 
+function isMobileView() {
+    return window.innerWidth <= 768;
+}
+
 function initMoodToolkit() {
     const mood = getCurrentMood();
     if (!mood || !moodActivities[mood]) return;
@@ -916,6 +922,12 @@ function initMoodToolkit() {
     const hint = document.getElementById('activityHint');
     
     if (!toolkit || !panel) return;
+    
+    // Store original panel position for restoring later
+    if (!originalPanelParent) {
+        originalPanelParent = panel.parentElement;
+        originalPanelNextSibling = panel.nextSibling;
+    }
     
     // Set activity hint text
     if (hint && activityHints[mood]) {
@@ -981,6 +993,24 @@ function openActivityPanel(activity, card) {
     panel.classList.add('open');
     currentPanel = activity.id;
     
+    // On mobile, move panel right after the clicked card
+    if (isMobileView()) {
+        panel.classList.add('mobile-inline');
+        card.insertAdjacentElement('afterend', panel);
+        
+        // Smooth scroll to panel with slight offset
+        setTimeout(() => {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+                window.scrollBy({ top: -16, left: 0, behavior: 'smooth' });
+            }, 100);
+        }, 50);
+    } else {
+        panel.classList.remove('mobile-inline');
+        // Ensure panel is in original position on desktop
+        restorePanelToOriginalPosition();
+    }
+    
     activity.init();
     
     panel.querySelector('.panel-close').addEventListener('click', closeActivityPanel);
@@ -991,9 +1021,49 @@ function closeActivityPanel() {
     const cards = document.querySelectorAll('.activity-card');
     
     panel.classList.remove('open');
+    panel.classList.remove('mobile-inline');
     cards.forEach(c => c.classList.remove('active'));
     currentPanel = null;
+    
+    // Restore panel to original position
+    restorePanelToOriginalPosition();
 }
+
+function restorePanelToOriginalPosition() {
+    const panel = document.getElementById('activityPanel');
+    
+    if (!panel || !originalPanelParent) return;
+    
+    // Only move if it's not already in the correct position
+    if (panel.parentElement !== originalPanelParent) {
+        if (originalPanelNextSibling) {
+            originalPanelParent.insertBefore(panel, originalPanelNextSibling);
+        } else {
+            originalPanelParent.appendChild(panel);
+        }
+    }
+}
+
+// Handle view changes (mobile ↔ desktop)
+let lastWasMobile = isMobileView();
+
+const handleToolkitResize = debounce(() => {
+    const currentIsMobile = isMobileView();
+    
+    // If we crossed the mobile/desktop boundary
+    if (currentIsMobile !== lastWasMobile) {
+        lastWasMobile = currentIsMobile;
+        
+        const panel = document.getElementById('activityPanel');
+        if (panel && panel.classList.contains('open')) {
+            // Restore panel to original position when switching viewports
+            if (!currentIsMobile) {
+                panel.classList.remove('mobile-inline');
+                restorePanelToOriginalPosition();
+            }
+        }
+    }
+}, 250);
 
 // ==================== Video Smart Autoplay ====================
 
@@ -1071,10 +1141,12 @@ if (document.readyState === 'loading') {
         initMoodToolkit();
         initVideoEmbeds();
         window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', handleToolkitResize);
     });
 } else {
     initMoodSwitcher();
     initMoodToolkit();
     initVideoEmbeds();
     window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleToolkitResize);
 }
