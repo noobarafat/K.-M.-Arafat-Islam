@@ -6820,6 +6820,10 @@ section {
     gap: 24px;
 }
 
+.ranking-mobile-summary {
+    display: none;
+}
+
 .ranking-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-purple);
@@ -6937,12 +6941,65 @@ section {
     }
     
     .rankings-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        display: none;
     }
-    
-    .ranking-card {
-        padding: 28px 20px;
+
+    .ranking-mobile-summary {
+        display: block;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-purple);
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+        animation: rankingSummaryFadeIn 0.35s ease;
+    }
+
+    .ranking-mobile-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin: 0 0 12px;
+    }
+
+    .ranking-mobile-divider {
+        height: 1px;
+        width: 100%;
+        margin-bottom: 18px;
+        background: linear-gradient(90deg, rgba(124, 58, 237, 0), rgba(124, 58, 237, 0.65), rgba(59, 130, 246, 0.65), rgba(59, 130, 246, 0));
+    }
+
+    .ranking-mobile-item {
+        margin-bottom: 18px;
+    }
+
+    .ranking-mobile-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .ranking-mobile-item h4 {
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-main);
+        line-height: 1.5;
+    }
+
+    .ranking-mobile-item p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.65;
+    }
+}
+
+@keyframes rankingSummaryFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
