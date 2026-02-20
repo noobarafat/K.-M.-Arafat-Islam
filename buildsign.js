@@ -86,50 +86,42 @@ const buildsignServicesDetails = {
 const buildsignProcess = [
     {
         step: '01',
-        title: 'Discovery & Requirements',
-        description: 'We listen to your needs, understand your goals, and define clear project scope with transparent timelines.',
-        icon: 'fas fa-search'
+        title: 'Discovery & Strategy',
+        description: 'We begin by understanding your business goals, target audience, and project requirements to define a clear and actionable roadmap.'
     },
     {
         step: '02',
-        title: 'Design & Prototype',
-        description: 'Visual mockups and interactive prototypes help you see the solution before development begins.',
-        icon: 'fas fa-pencil-ruler'
+        title: 'Planning & Design',
+        description: 'We create structured layouts and refined UI concepts that align with your brand and ensure a seamless user experience.'
     },
     {
         step: '03',
-        title: 'Development & QA',
-        description: 'Clean code, regular updates, and thorough testing ensure quality at every stage of development.',
-        icon: 'fas fa-code'
+        title: 'Development & Testing',
+        description: 'Using clean, scalable code, we build your solution with performance optimization and thorough testing at every stage.'
     },
     {
         step: '04',
         title: 'Delivery & Support',
-        description: 'Launch with confidence. We provide documentation, training, and ongoing support after delivery.',
-        icon: 'fas fa-rocket'
+        description: 'After successful deployment, we provide guidance, monitoring, and ongoing support to ensure long-term success.'
     }
 ];
 
 const buildsignWhy = [
     {
         title: 'System-based delivery',
-        description: 'Organized workflows, clear milestones, and predictable outcomes—no chaos, just quality.',
-        icon: 'fas fa-cogs'
+        description: 'Organized workflows, clear milestones, and predictable outcomes—no chaos, just quality.'
     },
     {
         title: 'Clear communication',
-        description: 'Regular updates, transparent timelines, and honest conversations keep projects on track.',
-        icon: 'fas fa-comments'
+        description: 'Regular updates, transparent timelines, and honest conversations keep every project on track.'
     },
     {
         title: 'Remote collaboration',
-        description: 'Built for remote teams. Flexible schedules, async communication, and global accessibility.',
-        icon: 'fas fa-globe'
+        description: 'Built for remote teams with async-friendly workflows, flexible schedules, and smooth coordination.'
     },
     {
         title: 'Quality without rush culture',
-        description: 'Sustainable pace, realistic deadlines, and focus on long-term excellence over quick fixes.',
-        icon: 'fas fa-award'
+        description: 'Sustainable pace, realistic deadlines, and long-term excellence over quick fixes.'
     }
 ];
 
@@ -157,7 +149,7 @@ function handleBackNavigation() {
     if (window.history.length > 1 && document.referrer.includes(window.location.hostname)) {
         window.history.back();
     } else {
-        window.location.href = 'index.html';
+        window.location.href = 'index.html#about';
     }
 }
 
@@ -168,13 +160,10 @@ function renderServicesGrid() {
     
     grid.innerHTML = buildsignServices.map(service => `
         <div class="buildsign-service-card reveal-stagger" onclick="openServiceModal('${service.id}')">
-            <div class="service-card-icon">
-                <i class="${service.icon}"></i>
-            </div>
-            <h3>${service.title}</h3>
-            <p>${service.description}</p>
+            <h3 class="service-card-title">${service.title}</h3>
+            <p class="service-card-description">${service.description}</p>
             <div class="service-card-action">
-                <span>View Details</span>
+                <span class="service-card-action-label">View Details</span>
                 <i class="fas fa-arrow-right"></i>
             </div>
         </div>
@@ -187,12 +176,10 @@ function renderProcessGrid() {
     
     grid.innerHTML = buildsignProcess.map(step => `
         <div class="buildsign-process-card reveal-stagger">
-            <div class="process-step-number">${step.step}</div>
-            <div class="process-icon">
-                <i class="${step.icon}"></i>
-            </div>
+            <span class="process-step-label">STEP ${step.step}</span>
             <h3>${step.title}</h3>
             <p>${step.description}</p>
+            <span class="process-bg-number" aria-hidden="true">${step.step}</span>
         </div>
     `).join('');
 }
@@ -201,15 +188,17 @@ function renderWhyGrid() {
     const grid = document.getElementById('whyGrid');
     if (!grid) return;
     
-    grid.innerHTML = buildsignWhy.map(item => `
+    grid.innerHTML = buildsignWhy.map((item, index) => {
+        const number = String(index + 1).padStart(2, '0');
+        return `
         <div class="buildsign-why-card reveal-stagger">
-            <div class="why-icon">
-                <i class="${item.icon}"></i>
-            </div>
+            <span class="why-step-badge">${number}</span>
             <h3>${item.title}</h3>
             <p>${item.description}</p>
+            <span class="why-bg-number" aria-hidden="true">${number}</span>
         </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 function renderFAQGrid() {

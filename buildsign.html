@@ -36,20 +36,16 @@
         </div>
     </nav>
 
-    <!-- Back Button -->
-    <div class="buildsign-back-container">
-        <div class="container">
-            <button class="buildsign-back-btn" onclick="handleBackNavigation()">
-                <i class="fas fa-arrow-left"></i>
-                <span>Back</span>
-            </button>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <section id="bs-hero" class="buildsign-hero">
         <div class="buildsign-hero-bg"></div>
         <div class="container">
+            <div class="buildsign-content-intro">
+                <button class="buildsign-back-btn" onclick="handleBackNavigation()">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
             <div class="buildsign-hero-grid">
                 <div class="buildsign-hero-left reveal">
                     <div class="buildsign-badge">
@@ -132,8 +128,10 @@
     <!-- Process -->
     <section id="bs-process" class="buildsign-process">
         <div class="container">
-            <div class="buildsign-section-header reveal">
-                <h2>How we work</h2>
+            <div class="buildsign-section-header buildsign-process-header reveal">
+                <h2>How We Work</h2>
+                <p class="buildsign-process-subtitle">A simple, transparent and efficient process</p>
+                <div class="buildsign-process-divider" aria-hidden="true"></div>
             </div>
             <div class="buildsign-process-grid" id="processGrid"></div>
         </div>
@@ -142,8 +140,10 @@
     <!-- Why Us -->
     <section id="bs-why" class="buildsign-why">
         <div class="container">
-            <div class="buildsign-section-header reveal">
+            <div class="buildsign-section-header buildsign-why-header reveal">
                 <h2>Why clients choose BuildSign</h2>
+                <p class="buildsign-why-subtitle">Trusted process. Clear communication. Quality delivery.</p>
+                <div class="buildsign-why-divider" aria-hidden="true"></div>
             </div>
             <div class="buildsign-why-grid" id="whyGrid"></div>
         </div>

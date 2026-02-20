@@ -207,3 +207,190 @@ renderPublicationsGrid();
         justify-content: center;
     }
 }
+
+.buildsign-services {
+    padding: 56px 0;
+}
+
+.buildsign-services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.4vw, 28px);
+}
+
+@media (min-width: 768px) {
+    .buildsign-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .buildsign-services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.buildsign-service-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(22px, 3vw, 28px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(3, 7, 18, 0.2);
+}
+
+.buildsign-service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 42%);
+    opacity: 0.7;
+}
+
+.buildsign-service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(420px circle at 10% 0%, rgba(124, 58, 237, 0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.buildsign-service-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(124, 58, 237, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(16, 24, 40, 0.3);
+}
+
+.buildsign-service-card:hover::after {
+    opacity: 1;
+}
+
+.service-card-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.92), rgba(59, 130, 246, 0.9));
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.28);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.buildsign-service-card:hover .service-card-icon {
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+}
+
+.service-card-title {
+    font-size: clamp(1.08rem, 1.7vw, 1.2rem);
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.35;
+}
+
+.service-card-description {
+    font-size: 0.92rem;
+    line-height: 1.72;
+    color: var(--text-muted);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.service-card-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(124, 58, 237, 0.16);
+    color: var(--purple);
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card-action-label {
+    transition: color 0.3s ease;
+}
+
+.service-card-action i {
+    transition: transform 0.3s ease;
+}
+
+.buildsign-service-card:hover .service-card-action {
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.buildsign-service-card:hover .service-card-action-label {
+    color: var(--text-main);
+}
+
+.buildsign-service-card:hover .service-card-action i {
+    transform: translateX(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .buildsign-service-card,
+    .buildsign-service-card::after,
+    .service-card-icon,
+    .service-card-action,
+    .service-card-action-label,
+    .service-card-action i {
+        transition: none;
+    }
+
+    .buildsign-service-card:hover {
+        transform: none;
+    }
+}
+
+<section id="bs-services" class="buildsign-services">
+    <div class="container">
+        <div class="buildsign-section-header reveal">
+            <h2>Services</h2>
+        </div>
+        <div class="buildsign-services-grid" id="servicesGrid">
+            <!-- Rendered per item -->
+            <!--
+            <div class="buildsign-service-card reveal-stagger" onclick="openServiceModal('app-design')">
+                <div class="service-card-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3 class="service-card-title">App Design</h3>
+                <p class="service-card-description">User-centered mobile experiences that feel intuitive and premium.</p>
+                <div class="service-card-action">
+                    <span class="service-card-action-label">View Details</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</section>
