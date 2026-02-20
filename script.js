@@ -945,15 +945,47 @@ function renderEventsGrid() {
             <h3 class="event-title">${event.title}</h3>
             <p class="event-short">${event.short}</p>
             <div class="event-actions">
-                <button class="btn-event-certificate" onclick="event.stopPropagation(); openEventCertificates('${event.id}')">
+                <button type="button" class="btn-event-certificate" onclick="openEventCertificates('${event.id}')">
                     <i class="fas fa-certificate"></i> View Certificate
                 </button>
-                <button class="btn-event-details" onclick="event.stopPropagation(); openEventDetails('${event.id}')">
+                <button type="button" class="btn-event-details" onclick="openEventDetails('${event.id}')">
                     <i class="fas fa-info-circle"></i> View Details
                 </button>
             </div>
         </div>
     `).join('');
+}
+
+function resolveEventCertificatePath(certificate) {
+    if (!certificate) return '';
+
+    if (/^(https?:\/\/|data:|\/)/i.test(certificate)) {
+        return certificate;
+    }
+
+    if (certificate.startsWith('assets/')) {
+        return certificate;
+    }
+
+    return `assets/int/${certificate}`;
+}
+
+function handleEventInlineCertificateError(imageElement, certificatePath) {
+    if (!imageElement || !imageElement.parentElement) return;
+
+    const previewContainer = imageElement.parentElement;
+    const resolvedPath = resolveEventCertificatePath(certificatePath);
+
+    previewContainer.innerHTML = `
+        <div class="event-cert-fallback" role="status" aria-live="polite">
+            <i class="fas fa-file-image"></i>
+            <p>Certificate preview unavailable</p>
+            <a class="btn-event-cert-fallback" href="${resolvedPath}" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i>
+                View Certificate
+            </a>
+        </div>
+    `;
 }
 
 function extractHighlights(text) {
@@ -1005,7 +1037,7 @@ function openEventDetails(eventId) {
             <div class="event-certificate-display">
                 <h4>Certificate of Participation</h4>
                 <div class="event-cert-preview" onclick="openCertificateFromDetails('comtech-2023', 0)">
-                    <img src="assets/int/comtech.png" alt="CommTECH Certificate">
+                    <img src="assets/int/comtech.png" alt="CommTECH Certificate" loading="lazy" onerror="handleEventInlineCertificateError(this, 'comtech.png')">
                     <div class="cert-preview-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>Click to view fullscreen</span>
@@ -1107,7 +1139,7 @@ function openEventDetails(eventId) {
                     </div>
                     <div class="event-cert-item">
                         <div class="event-cert-preview" onclick="openCertificateFromDetails('rmi-week-2023', 1)">
-                            <img src="assets/int/rmibd.jpg" alt="RMI Bangladesh Certificate">
+                            <img src="assets/int/rmibd.jpg" alt="RMI Bangladesh Certificate" loading="lazy" onerror="handleEventInlineCertificateError(this, 'rmibd.jpg')">
                             <div class="cert-preview-overlay">
                                 <i class="fas fa-search-plus"></i>
                                 <span>Click to view fullscreen</span>
@@ -1225,7 +1257,7 @@ function openEventDetails(eventId) {
             <div class="event-certificate-display">
                 <h4>Certificate of Completion</h4>
                 <div class="event-cert-preview" onclick="openCertificateFromDetails('reuters-journalism', 0)">
-                    <img src="assets/int/reu.png" alt="Reuters Digital Journalism Certificate">
+                    <img src="assets/int/reu.png" alt="Reuters Digital Journalism Certificate" loading="lazy" onerror="handleEventInlineCertificateError(this, 'reu.png')">
                     <div class="cert-preview-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>Click to view fullscreen</span>
@@ -1324,7 +1356,7 @@ function openCertificateFromDetails(eventId, certIndex) {
             return;
         }
         
-        currentEventCertificates = event.certificates.map(cert => 'assets/int/' + cert);
+        currentEventCertificates = event.certificates.map(resolveEventCertificatePath);
         currentCertIndex = certIndex || 0;
         
         const modal = document.getElementById('multi-certificate-viewer-modal');
@@ -1335,11 +1367,11 @@ function openCertificateFromDetails(eventId, certIndex) {
         } else {
             document.getElementById('certificate-carousel-controls').style.display = 'none';
         }
-        
-        displayCurrentCertificate();
-        
+
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        displayCurrentCertificate();
     }, 150);
 }
 
@@ -1413,10 +1445,7 @@ async function openEventCertificates(eventId) {
         return;
     }
     
-    currentEventCertificates = event.certificates.map(cert => {
-        const basePath = 'assets/int/';
-        return basePath + cert;
-    });
+    currentEventCertificates = event.certificates.map(resolveEventCertificatePath);
     currentCertIndex = 0;
     
     const modal = document.getElementById('multi-certificate-viewer-modal');
@@ -1427,11 +1456,11 @@ async function openEventCertificates(eventId) {
     } else {
         document.getElementById('certificate-carousel-controls').style.display = 'none';
     }
-    
-    await displayCurrentCertificate();
-    
+
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    displayCurrentCertificate();
 }
 
 async function displayCurrentCertificate() {
@@ -1441,6 +1470,11 @@ async function displayCurrentCertificate() {
     const newTabBtn = document.getElementById('btn-multi-open-new-tab');
     const counter = document.getElementById('certificate-counter');
     const wrapper = document.querySelector('#multi-certificate-viewer-modal .certificate-viewer-image-wrapper');
+
+    if (!url || !img || !canvas || !newTabBtn || !counter || !wrapper) {
+        console.error('Certificate viewer elements missing or invalid certificate URL');
+        return;
+    }
     
     // Reset display
     img.style.display = 'none';
@@ -1459,9 +1493,14 @@ async function displayCurrentCertificate() {
     const isPdf = url.toLowerCase().endsWith('.pdf');
     
     if (isPdf) {
+        wrapper.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-secondary);"><i class="fas fa-file-pdf" style="font-size: 48px; margin-bottom: 16px; color: var(--accent-purple);"></i><p>Loading certificate…</p></div>';
+
         // Always try pdf.js first
-        const success = await renderPDFToCanvasEvent(url, canvas, 1200);
+        const success = await renderPDFToCanvasEventWithTimeout(url, canvas, 1200, 6000);
         if (success) {
+            wrapper.innerHTML = '';
+            wrapper.appendChild(img);
+            wrapper.appendChild(canvas);
             canvas.style.display = 'block';
             return;
         }
@@ -1496,9 +1535,25 @@ async function displayCurrentCertificate() {
             wrapper.innerHTML = '';
             wrapper.appendChild(errorMsg);
             newTabBtn.style.display = 'inline-flex';
-            newTabBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Try Opening';
+            newTabBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> View Certificate';
             newTabBtn.onclick = () => window.open(url, '_blank');
         };
+    }
+}
+
+async function renderPDFToCanvasEventWithTimeout(url, canvas, maxWidth = 1200, timeoutMs = 6000) {
+    try {
+        const timeoutPromise = new Promise(resolve => {
+            setTimeout(() => resolve(false), timeoutMs);
+        });
+
+        return await Promise.race([
+            renderPDFToCanvasEvent(url, canvas, maxWidth),
+            timeoutPromise
+        ]);
+    } catch (error) {
+        console.error('Timed PDF render failed:', error);
+        return false;
     }
 }
 
