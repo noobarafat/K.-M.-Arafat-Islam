@@ -2,17 +2,21 @@
 const publications = [
     {
         id: "oct-vit-explainable",
-        title: "Explainable Deep Neural Diagnostics: Vision Transformer-Based Retinal Disease Classification from OCT Images Using Gradient-Driven Visual Attribution",
-        conference: "3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025) — Dhaka International University, Bangladesh",
-        index: "Springer / Kluwer",
-        desc: "Vision Transformer–based OCT classification with gradient-driven visual attribution to improve transparency and interpretability for real clinical retinal disease screening."
+        title: "Explainable Deep Neural Diagnostics: Vision Transformer-Based Retinal Disease Classification",
+        conference: "Proceedings of the 3rd International Conference on Big Data, IoT and Machine Learning (Springer)",
+        index: "Indexed Publication",
+        publisher: "Springer",
+        link: "https://link.springer.com/chapter/10.1007/978-3-032-15346-3_17#citeas",
+        desc: "Vision Transformer-driven retinal diagnostics with explainability features, published in Springer conference proceedings."
     },
     {
         id: "deepcactus",
         title: "DeepCactus: A Transfer Learning-Driven CNN Model for Accurate Identification of Morphologically Overlapping Cactus Breeds",
-        conference: "3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025) — Dhaka International University, Bangladesh",
-        index: "Springer / Kluwer",
-        desc: "Transfer learning framework using VGG16 achieved ~96.83% accuracy in distinguishing visually overlapping cactus species from real-world field image data."
+        conference: "Proceedings of the 3rd International Conference on Big Data, IoT and Machine Learning (Springer)",
+        index: "Indexed Publication",
+        publisher: "Springer",
+        link: "https://link.springer.com/chapter/10.1007/978-3-032-15346-3_44",
+        desc: "Transfer learning-based cactus breed identification study in Springer proceedings, focused on morphologically overlapping species."
     },
     {
         id: "walmart-forecasting",
@@ -476,14 +480,22 @@ function renderPublicationsGrid() {
         <div class="publication-card">
             <div class="publication-header">
                 <span class="publication-index">${pub.index}</span>
+                ${pub.publisher === 'Springer' ? '<span class="publication-badge springer-badge">Springer</span>' : ''}
             </div>
-            <h3 class="publication-title">${pub.title}</h3>
+            <h3 class="publication-title"><strong>${pub.title}</strong></h3>
             <p class="publication-conference">${pub.conference}</p>
             <p class="publication-desc">${pub.desc}</p>
-            <button class="btn-read-paper" disabled>
-                <i class="fas fa-file-alt"></i>
-                Read Paper (Soon)
-            </button>
+            ${pub.link ? `
+                <a class="btn-view-publication" href="${pub.link}" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i>
+                    View Publication
+                </a>
+            ` : `
+                <button class="btn-read-paper" disabled>
+                    <i class="fas fa-file-alt"></i>
+                    Read Paper (Soon)
+                </button>
+            `}
         </div>
     `).join('');
 }

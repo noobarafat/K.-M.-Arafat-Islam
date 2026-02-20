@@ -7047,7 +7047,9 @@ section {
 
 .publication-header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 .publication-index {
@@ -7065,6 +7067,21 @@ section {
 .publication-card:hover .publication-index {
     background: rgba(124, 58, 237, 0.15);
     box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.publication-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.springer-badge {
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.4);
+    color: var(--purple);
 }
 
 .publication-title {
@@ -7114,6 +7131,31 @@ section {
     font-size: 0.9rem;
 }
 
+.btn-view-publication {
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-600));
+    border: 2px solid transparent;
+    color: var(--btnText);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    text-decoration: none;
+}
+
+.btn-view-publication:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+}
+
+.btn-view-publication i {
+    font-size: 0.9rem;
+}
+
 @media (max-width: 992px) {
     .publications-grid {
         gap: 24px;
@@ -7144,6 +7186,11 @@ section {
     }
     
     .btn-read-paper {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-view-publication {
         width: 100%;
         justify-content: center;
     }
