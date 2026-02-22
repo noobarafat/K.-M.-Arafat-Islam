@@ -322,8 +322,13 @@ section {
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-purple);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 9999;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar,
+.navbar * {
+    pointer-events: auto;
 }
 
 [data-theme="light"] .navbar {
@@ -340,6 +345,7 @@ section {
     height: 2px;
     background: var(--gradient-purple-blue);
     transition: width 0.1s linear;
+    pointer-events: none;
 }
 
 .navbar .container {
@@ -451,6 +457,9 @@ section {
         border-top: 1px solid var(--border-purple);
         max-height: calc(100vh - 70px);
         overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
     .nav-menu li {
@@ -466,6 +475,9 @@ section {
 
     .nav-menu.active {
         left: 0;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     .hamburger {
@@ -1412,6 +1424,7 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-top: 3rem;
+    align-items: stretch;
 }
 
 @media (min-width: 640px) {
@@ -1429,13 +1442,20 @@ section {
 }
 
 .about-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(1.75rem, 3vw, 2.15rem);
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: transform 240ms ease-out, box-shadow 240ms ease-out, border-color 220ms ease-out, background 220ms ease-out;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 24px rgba(8, 8, 18, 0.34);
 }
 
 .about-card::before {
@@ -1445,9 +1465,9 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent 50%);
-    opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 28%, transparent 56%);
+    opacity: 0.52;
+    transition: opacity 220ms ease-out;
     pointer-events: none;
 }
 
@@ -1455,21 +1475,22 @@ section {
     content: '';
     position: absolute;
     inset: -1px;
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(59, 130, 246, 0.4));
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(59, 130, 246, 0.22));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 220ms ease-out;
     pointer-events: none;
 }
 
 .about-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-7px);
+    border-color: rgba(124, 58, 237, 0.38);
+    box-shadow: 0 18px 38px rgba(8, 8, 20, 0.45), 0 0 0 1px rgba(124, 58, 237, 0.16), 0 0 22px rgba(124, 58, 237, 0.18);
 }
 
 .about-card:hover::before,
@@ -1477,64 +1498,94 @@ section {
     opacity: 1;
 }
 
+.about-card:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba(124, 58, 237, 0.42);
+    box-shadow: 0 12px 28px rgba(7, 10, 24, 0.4), 0 0 0 2px rgba(124, 58, 237, 0.28);
+}
+
 .about-card-title {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: clamp(1.18rem, 1.15rem + 0.35vw, 1.4rem);
+    font-weight: 750;
     color: var(--heading);
-    margin-bottom: 16px;
-    line-height: 1.4;
+    margin: 0;
+    line-height: 1.42;
+    letter-spacing: 0.012em;
 }
 
 .about-card-short {
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 24px;
+    font-size: 0.98rem;
+    color: rgba(236, 238, 250, 0.84);
+    line-height: 1.72;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
 }
 
 .btn-view-details {
-    padding: 12px 24px;
-    border-radius: 10px;
-    background: transparent;
-    border: 2px solid var(--purple);
-    color: var(--purple);
+    margin-top: auto;
+    padding: 0.72rem 1.15rem;
+    border-radius: 999px;
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.38);
+    color: rgba(208, 186, 255, 0.98);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background 220ms ease-out, border-color 220ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out, color 220ms ease-out;
     position: relative;
     overflow: hidden;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    align-self: flex-start;
+    min-height: 42px;
 }
 
 .btn-view-details::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary), var(--primary2));
-    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
+    display: none;
 }
 
 .btn-view-details:hover {
-    color: var(--btnText);
-    border-color: transparent;
+    color: #f3ebff;
+    background: rgba(124, 58, 237, 0.24);
+    border-color: rgba(167, 139, 250, 0.62);
     transform: translateY(-2px);
-    box-shadow: var(--card-hover-shadow);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.26);
 }
 
-.btn-view-details:hover::before {
-    width: 100%;
+.btn-view-details:hover i {
+    transform: translateX(3px);
 }
 
 .btn-view-details:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+    transform: translateY(0) scale(0.985);
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.28);
+}
+
+.btn-view-details i {
+    transition: transform 220ms ease-out;
+}
+
+.btn-view-details:focus-visible {
+    outline: 2px solid rgba(167, 139, 250, 0.8);
+    outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+    }
+
+    .about-card {
+        padding: 1.35rem;
+    }
 }
 
 /* Modal Styles */
@@ -9901,10 +9952,16 @@ section {
         box-shadow: var(--shadow);
         padding: 20px 0;
         border-top: 1px solid rgba(124, 58, 237, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
     .nav-menu.active {
         left: 0;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     .hamburger.active .bar:nth-child(2) {

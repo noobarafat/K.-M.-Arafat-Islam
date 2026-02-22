@@ -184,14 +184,41 @@ function closeCertificateViewer() {
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+function closeMobileMenu() {
+    hamburger?.classList.remove('active');
+    navMenu?.classList.remove('active');
+}
+
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
+
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        closeMobileMenu();
+    });
+});
+
+document.addEventListener('click', (event) => {
+    if (!navMenu?.classList.contains('active')) return;
+    if (navMenu.contains(event.target) || hamburger?.contains(event.target)) return;
+    closeMobileMenu();
+});
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1023) {
+        closeMobileMenu();
+    }
 });
 
 // ==================== ESC Key Handler ====================
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+        closeMobileMenu();
         closeCertificateViewer();
     }
 });

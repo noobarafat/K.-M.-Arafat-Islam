@@ -1875,9 +1875,10 @@ window.addEventListener('pageshow', (event) => {
 function updateNavbarActiveState() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
+    const isHomePage = currentPath.endsWith('/') || currentPath.endsWith('/index.html');
     
     // If not on homepage, remove all active states
-    if (currentPath !== '/' && currentPath !== '/index.html' && !currentPath.endsWith('/K M Arafat Islam/')) {
+    if (!isHomePage) {
         navLinks.forEach(link => link.classList.remove('active'));
         return;
     }
@@ -1923,17 +1924,36 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+function closeMobileMenu() {
+    hamburger?.classList.remove('active');
+    navMenu?.classList.remove('active');
+}
+
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close menu when clicking on a nav link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        closeMobileMenu();
     });
+});
+
+document.addEventListener('click', (event) => {
+    if (!navMenu?.classList.contains('active')) return;
+    if (navMenu.contains(event.target) || hamburger?.contains(event.target)) return;
+    closeMobileMenu();
+});
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1023) {
+        closeMobileMenu();
+    }
 });
 
 // ==================== Navbar Scroll Effect ====================
@@ -1972,8 +1992,12 @@ window.addEventListener('scroll', () => {
 // ==================== Smooth Scrolling ====================
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-        e.preventDefault();
         const targetId = link.getAttribute('href');
+        if (!targetId || !targetId.startsWith('#')) {
+            return;
+        }
+
+        e.preventDefault();
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
