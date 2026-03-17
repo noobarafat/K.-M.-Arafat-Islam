@@ -11,6 +11,7 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.3.1",
     "@vercel/kv": "^1.0.1",
     "formidable": "^3.5.4"
