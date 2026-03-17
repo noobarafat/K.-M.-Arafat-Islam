@@ -54,9 +54,7 @@ const dashboardView = document.getElementById('dashboard-view');
 const sectionNav = document.getElementById('section-nav');
 const formRoot = document.getElementById('form-root');
 const panelTitle = document.getElementById('panel-title');
-const sectionDescription = document.getElementById('section-description');
 const saveStatus = document.getElementById('save-status');
-
 function getAtPath(obj, path) {
   return path.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
 }
@@ -133,7 +131,6 @@ function renderSection() {
   state.sectionKey = section.key;
 
   panelTitle.textContent = section.title;
-  sectionDescription.textContent = section.description;
 
   sectionNav.querySelectorAll('button').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.key === section.key);
