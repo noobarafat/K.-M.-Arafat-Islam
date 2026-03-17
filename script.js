@@ -1923,6 +1923,10 @@ async function loadDynamicPortfolioContent() {
     renderActivitiesGrid();
     renderSkillsCompact();
     renderEventsGrid();
+
+    // Dynamic renders can replace hidden .reveal-stagger nodes (About cards).
+    // Re-initialize reveal observer so newly inserted elements can animate in.
+    initRevealAnimations();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
