@@ -3,7 +3,6 @@ const path = require('path');
 
 let kvClient = null;
 try {
-  // Optional dependency usage in environments where KV is configured.
   // eslint-disable-next-line global-require
   kvClient = require('@vercel/kv').kv;
 } catch (error) {
@@ -14,6 +13,9 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const SEED_FILE = path.join(ROOT, 'data', 'content.seed.json');
 const RUNTIME_FILE = path.join(ROOT, 'data', 'content.runtime.json');
 const CONTENT_KEY = process.env.CONTENT_KV_KEY || 'portfolio:content';
+
+// In-memory cache used when filesystem is read-only (e.g. Vercel serverless)
+let memoryCache = null;
 
 function hasKvConfig() {
   return Boolean(
@@ -30,7 +32,6 @@ function normalizeContent(seedPayload) {
   if (!seedPayload || typeof seedPayload !== 'object') {
     throw new Error('Invalid seed payload');
   }
-
   return {
     index: seedPayload.index || { static: {}, datasets: {} },
     search: seedPayload.search || { searchIndex: [] },
@@ -40,13 +41,23 @@ function normalizeContent(seedPayload) {
 }
 
 function readJsonSync(filePath) {
-  if (!fs.existsSync(filePath)) return null;
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  try {
+    if (!fs.existsSync(filePath)) return null;
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (error) {
+    return null;
+  }
 }
 
 function writeJsonSync(filePath, data) {
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+  try {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+    return true;
+  } catch (error) {
+    // Read-only filesystem (e.g. Vercel) — fall through to memory cache
+    return false;
+  }
 }
 
 function loadSeedContent() {
@@ -60,20 +71,26 @@ function loadSeedContent() {
 async function getContent() {
   if (hasKvConfig()) {
     const existing = await kvClient.get(CONTENT_KEY);
-    if (existing) {
-      return clone(existing);
-    }
-
+    if (existing) return clone(existing);
     const seed = loadSeedContent();
     await kvClient.set(CONTENT_KEY, seed);
     return clone(seed);
   }
 
-  const runtime = readJsonSync(RUNTIME_FILE);
-  if (runtime) return normalizeContent(runtime);
+  // In-memory cache (survives within same serverless instance)
+  if (memoryCache) return clone(memoryCache);
 
+  // Try writable runtime file (local dev)
+  const runtime = readJsonSync(RUNTIME_FILE);
+  if (runtime) {
+    memoryCache = normalizeContent(runtime);
+    return clone(memoryCache);
+  }
+
+  // Fall back to seed file (always present in repo, readable on Vercel)
   const seed = loadSeedContent();
-  writeJsonSync(RUNTIME_FILE, seed);
+  memoryCache = seed;
+  writeJsonSync(RUNTIME_FILE, seed); // succeeds locally, silently skipped on Vercel
   return clone(seed);
 }
 
@@ -82,10 +99,13 @@ async function saveContent(content) {
 
   if (hasKvConfig()) {
     await kvClient.set(CONTENT_KEY, normalized);
+    memoryCache = clone(normalized);
     return clone(normalized);
   }
 
-  writeJsonSync(RUNTIME_FILE, normalized);
+  // Always update memory cache so changes persist within the same instance
+  memoryCache = clone(normalized);
+  writeJsonSync(RUNTIME_FILE, normalized); // silently skipped if read-only
   return clone(normalized);
 }
 
