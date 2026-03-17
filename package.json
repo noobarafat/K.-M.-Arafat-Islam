@@ -7,6 +7,9 @@
     "extract:seed": "node scripts/extract-seed-from-source.js",
     "seed:content": "node scripts/seed-content.js"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@vercel/kv": "^1.0.1"
   }
