@@ -65,6 +65,24 @@ function isPDF(filename) {
     return getFileExtension(filename) === 'pdf';
 }
 
+function getCertificateUrl(fileRef) {
+    if (!fileRef) return '';
+    if (/^https?:\/\//i.test(fileRef)) return fileRef;
+    return `assets/soft/${fileRef}`;
+}
+
+function getCertificateDisplayName(fileRef) {
+    if (!fileRef) return '';
+    if (!/^https?:\/\//i.test(fileRef)) return fileRef;
+    try {
+        const url = new URL(fileRef);
+        const segments = url.pathname.split('/').filter(Boolean);
+        return decodeURIComponent(segments[segments.length - 1] || fileRef);
+    } catch (error) {
+        return fileRef;
+    }
+}
+
 // ==================== PDF Rendering ====================
 const pdfCache = new Map();
 
@@ -106,9 +124,10 @@ async function renderCertificatesGrid() {
     if (!grid) return;
     
     grid.innerHTML = certificateFiles.map((filename, index) => {
-        const title = generateTitleFromFilename(filename) || 'Certificate';
-        const url = `assets/soft/${filename}`;
-        const isImage = !isPDF(filename);
+        const displayName = getCertificateDisplayName(filename);
+        const title = generateTitleFromFilename(displayName) || 'Certificate';
+        const url = getCertificateUrl(filename);
+        const isImage = !isPDF(displayName);
         
         return `
             <div class="certificate-gallery-card" data-index="${index}">

@@ -8,7 +8,8 @@ const state = {
   content: null,
   view: 'dashboard',
   dirty: false,
-  drawerMeta: null   // { collection, index }  or null for new
+  drawerMeta: null,   // { collection, index }  or null for new
+  persistence: null
 };
 
 /* ── DOM refs ── */
@@ -43,9 +44,11 @@ function toast(msg, type = 'info') {
 
 /* ── Confirm dialog ── */
 function confirm(title, message) {
+  const resolvedTitle = message ? title : 'Please confirm';
+  const resolvedMessage = message || title;
   return new Promise(resolve => {
-    document.getElementById('confirm-title').textContent = title;
-    document.getElementById('confirm-message').textContent = message;
+    document.getElementById('confirm-title').textContent = resolvedTitle;
+    document.getElementById('confirm-message').textContent = resolvedMessage;
     confirmOverlay.classList.add('open');
     const ok = document.getElementById('confirm-ok');
     const cancel = document.getElementById('confirm-cancel');
@@ -82,16 +85,55 @@ async function apiFetch(url, options = {}) {
 async function loadContent() {
   const data = await apiFetch('/api/admin/content');
   state.content = data.content;
+  state.persistence = data.persistence || null;
 }
 
 async function saveContent() {
-  await apiFetch('/api/admin/content', {
+  const data = await apiFetch('/api/admin/content', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ content: state.content })
   });
+  state.content = data.content;
+  state.persistence = data.persistence || state.persistence;
   clearDirty();
   updateBadges();
+}
+
+async function uploadMediaFile(file, folder = 'certificates') {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('folder', folder);
+
+  const data = await apiFetch('/api/admin/media', {
+    method: 'POST',
+    body: formData
+  });
+
+  return data.file;
+}
+
+function isLivePersistenceEnabled() {
+  return Boolean(state.persistence && state.persistence.live);
+}
+
+function renderPersistenceBadge() {
+  if (!state.persistence) return '';
+
+  const live = isLivePersistenceEnabled();
+  const label = live ? 'Live storage: Vercel KV' : 'Local fallback active';
+  const detail = live
+    ? 'Admin saves and public reads use the shared backend.'
+    : 'Production should use Vercel KV. Local fallback is only suitable for development.';
+
+  return `
+    <div class="persistence-banner ${live ? 'live' : 'warning'}">
+      <div>
+        <strong>${label}</strong>
+        <span>${detail}</span>
+      </div>
+    </div>
+  `;
 }
 
 /* ── Path helpers ── */
@@ -1433,23 +1475,27 @@ function renderBuildsignSettings() {
 
 /* ── Certificate Files ── */
 function renderCertificateFiles() {
-  const files = (state.content && state.content.certificates && state.content.certificates.certificateFiles) || [];
-
   function renderList() {
     const currentFiles = (state.content.certificates && state.content.certificates.certificateFiles) || [];
     adminContent.innerHTML = `
       <div class="view-header">
         <h2 class="view-title">Certificate Files <span class="item-count">${currentFiles.length}</span></h2>
       </div>
+      ${renderPersistenceBadge()}
       <div class="settings-section">
         <div class="settings-section-header">Add New File</div>
         <div class="settings-section-body">
-          <div class="fields-grid">
+          <div class="fields-grid media-upload-grid">
             <div class="field-group">
-              <input class="field-input" id="cert-new-input" placeholder="e.g. comtech2023.png">
+              <input class="field-input" id="cert-new-input" placeholder="Paste an existing public URL or legacy filename">
+              <div class="field-hint">Use this for an existing public asset. Stored value is shared in the central content store.</div>
             </div>
             <div class="field-group" style="flex:0">
               <button class="btn-primary" id="cert-add-btn"><i class="fas fa-plus"></i> Add</button>
+            </div>
+            <div class="field-group span-2 media-upload-inline">
+              <input class="field-input" id="cert-upload-input" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.jfif,application/pdf,image/png,image/jpeg,image/webp">
+              <button class="btn-secondary" id="cert-upload-btn"><i class="fas fa-upload"></i> Upload To Shared Storage</button>
             </div>
           </div>
         </div>
@@ -1460,6 +1506,7 @@ function renderCertificateFiles() {
             <span class="item-drag-handle"><i class="fas fa-grip-vertical"></i></span>
             <div class="item-body" style="flex:1">
               <span class="item-title"><i class="fas fa-file-image" style="margin-right:6px;opacity:.5;"></i>${esc(f)}</span>
+              <span class="item-meta">${/^https?:\/\//i.test(f) ? 'Blob URL' : 'Legacy local asset reference'}</span>
             </div>
             <div class="item-actions">
               <button class="item-btn danger" data-cert-del="${i}" title="Remove"><i class="fas fa-trash"></i></button>
@@ -1480,6 +1527,32 @@ function renderCertificateFiles() {
       markDirty();
       renderList();
       toast('File added. Save to publish.', 'success');
+    });
+
+    document.getElementById('cert-upload-btn').addEventListener('click', async () => {
+      const input = document.getElementById('cert-upload-input');
+      const file = input.files && input.files[0];
+
+      if (!file) {
+        toast('Choose a file first.', 'warning');
+        return;
+      }
+
+      try {
+        const button = document.getElementById('cert-upload-btn');
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+
+        const uploaded = await uploadMediaFile(file, 'certificates');
+        if (!state.content.certificates) state.content.certificates = {};
+        if (!state.content.certificates.certificateFiles) state.content.certificates.certificateFiles = [];
+        state.content.certificates.certificateFiles.push(uploaded.url);
+        markDirty();
+        renderList();
+        toast('Uploaded to shared storage. Click Save to publish.', 'success');
+      } catch (e) {
+        toast(e.message, 'error');
+      }
     });
 
     document.querySelectorAll('[data-cert-del]').forEach(btn => {

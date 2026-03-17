@@ -773,6 +773,52 @@ body {
   margin-bottom: 4px;
 }
 
+.persistence-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.persistence-banner strong {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--text);
+}
+
+.persistence-banner span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.persistence-banner.live {
+  border-color: rgba(66, 191, 130, 0.28);
+  background: rgba(66, 191, 130, 0.08);
+}
+
+.persistence-banner.warning {
+  border-color: rgba(240, 173, 78, 0.3);
+  background: rgba(240, 173, 78, 0.08);
+}
+
+.media-upload-grid {
+  align-items: end;
+}
+
+.media-upload-inline {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
 /* Array field (chips/tags) */
 .array-field {
   display: flex;

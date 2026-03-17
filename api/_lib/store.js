@@ -13,6 +13,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const SEED_FILE = path.join(ROOT, 'data', 'content.seed.json');
 const RUNTIME_FILE = path.join(ROOT, 'data', 'content.runtime.json');
 const CONTENT_KEY = process.env.CONTENT_KV_KEY || 'portfolio:content';
+const IS_PRODUCTION_RUNTIME = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
 
 // In-memory cache used when filesystem is read-only (e.g. Vercel serverless)
 let memoryCache = null;
@@ -22,6 +23,23 @@ function hasKvConfig() {
     kvClient &&
       (process.env.KV_REST_API_URL || process.env.KV_URL || process.env.KV_REST_API_TOKEN)
   );
+}
+
+function getPersistenceInfo() {
+  const live = hasKvConfig();
+  return {
+    live,
+    mode: live ? 'vercel-kv' : 'local-dev-fallback',
+    productionLike: IS_PRODUCTION_RUNTIME
+  };
+}
+
+function assertLiveStoreConfigured() {
+  if (!hasKvConfig() && IS_PRODUCTION_RUNTIME) {
+    throw new Error(
+      'Live content storage is not configured. Connect Vercel KV and redeploy so admin and public content use a shared database.'
+    );
+  }
 }
 
 function clone(value) {
@@ -75,6 +93,8 @@ function loadSeedContent() {
 }
 
 async function getContent() {
+  assertLiveStoreConfigured();
+
   if (hasKvConfig()) {
     const existing = await kvClient.get(CONTENT_KEY);
     if (existing) return clone(existing);
@@ -109,6 +129,12 @@ async function saveContent(content) {
     return clone(normalized);
   }
 
+  if (IS_PRODUCTION_RUNTIME) {
+    throw new Error(
+      'Cannot save content without Vercel KV. Live persistence is required in production.'
+    );
+  }
+
   // Always update memory cache so changes persist within the same instance
   memoryCache = clone(normalized);
   writeJsonSync(RUNTIME_FILE, normalized); // silently skipped if read-only
@@ -119,5 +145,6 @@ module.exports = {
   getContent,
   saveContent,
   loadSeedContent,
-  hasKvConfig
+  hasKvConfig,
+  getPersistenceInfo
 };

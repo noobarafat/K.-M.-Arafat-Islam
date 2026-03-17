@@ -7,8 +7,9 @@ This project keeps the existing public portfolio UI unchanged while adding dynam
 - Static multipage frontend: HTML + CSS + vanilla JS
 - Serverless API endpoints: Vercel Functions (`api/*`)
 - Storage:
-    - Production: Vercel KV (if configured)
-    - Local fallback: `data/content.runtime.json`
+    - Production content store: Vercel KV
+    - Production media store: Vercel Blob
+    - Local development fallback: `data/content.runtime.json`
 
 ## What Was Added
 
@@ -38,9 +39,9 @@ Route:
 Capabilities:
 
 - Secure login/logout with httpOnly cookie session
-- Sidebar-based section editor
-- Form editor for static fields
-- JSON editor for existing datasets
+- CMS-style dashboard, collection managers, and drawer editors
+- Shared live content reads/writes through the same API used by the public site
+- Certificate/media upload to shared blob storage
 - Validation before save
 - Reload latest server content
 
@@ -51,6 +52,7 @@ Admin APIs:
 - `GET /api/admin/session`
 - `GET /api/admin/content`
 - `PUT /api/admin/content`
+- `POST /api/admin/media`
 
 Public API:
 
@@ -64,8 +66,13 @@ Copy `.env.example` to `.env` and set:
 - `ADMIN_PASSWORD`
 - `ADMIN_SESSION_SECRET`
 - `CONTENT_KV_KEY` (optional override)
+- `KV_REST_API_URL`
+- `KV_REST_API_TOKEN`
+- `BLOB_READ_WRITE_TOKEN`
 
-If KV is not configured, the app automatically uses local file fallback.
+Production requires Vercel KV for content persistence and Vercel Blob for shared media uploads.
+
+Local development can still use the runtime file fallback, but deployed admin saves are now expected to use the live backend instead of memory or local files.
 
 ## Setup
 
@@ -89,6 +96,11 @@ npm run seed:content
 
 4. Run locally using your preferred static/API workflow (for example `vercel dev`).
 
+5. In Vercel, connect both Storage products before deployment:
+
+- Vercel KV: stores the shared content document used by admin and public pages
+- Vercel Blob: stores uploaded certificates/media so files are shared across devices
+
 ## Seed Scripts
 
 - `scripts/extract-seed-from-source.js`
@@ -103,7 +115,10 @@ npm run seed:content
 
 - `vercel.json` sets Node runtime for all API functions
 - Configure env vars in Vercel Project Settings
+- Connect Vercel KV and Vercel Blob in the project dashboard
 - Seed data after deployment using your preferred workflow
+- After KV is connected, admin saves update the live shared store used by `/api/content`
+- After Blob is connected, uploaded certificate/media files are stored centrally and can be reused from any device
 
 ## Public UI Parity Notes
 
