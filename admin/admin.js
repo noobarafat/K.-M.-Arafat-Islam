@@ -303,19 +303,43 @@ function buildArrayChips(containerId, items = []) {
   items.forEach(val => addChip(el, val));
 
   const input = document.createElement('input');
+  input.dataset.chipInput = '1';
   input.placeholder = 'Add, press Enter…';
+  const commitChipValue = () => {
+    const v = input.value.trim().replace(/,$/, '');
+    if (!v) return;
+    addChip(el, v);
+    input.value = '';
+  };
+
   input.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
-      const v = input.value.trim().replace(/,$/, '');
-      if (v) { addChip(el, v); input.value = ''; }
+      commitChipValue();
     }
     if (e.key === 'Backspace' && !input.value) {
       const chips = el.querySelectorAll('.array-chip');
       if (chips.length) chips[chips.length - 1].remove();
     }
   });
+
+  input.addEventListener('blur', () => {
+    // On mobile, users often tap away instead of pressing Enter.
+    commitChipValue();
+  });
+
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'array-chip-add';
+  addBtn.setAttribute('aria-label', 'Add value');
+  addBtn.innerHTML = '<i class="fas fa-plus"></i>';
+  addBtn.addEventListener('click', () => {
+    commitChipValue();
+    input.focus();
+  });
+
   el.appendChild(input);
+  el.appendChild(addBtn);
 }
 
 function addChip(container, value) {
@@ -324,7 +348,12 @@ function addChip(container, value) {
   chip.dataset.val = value;
   chip.innerHTML = `${esc(value)}<button class="array-chip-del" type="button" aria-label="Remove"><i class="fas fa-times"></i></button>`;
   chip.querySelector('.array-chip-del').addEventListener('click', () => chip.remove());
-  container.insertBefore(chip, container.lastChild);
+  const input = container.querySelector('input[data-chip-input="1"]');
+  if (input) {
+    container.insertBefore(chip, input);
+  } else {
+    container.appendChild(chip);
+  }
 }
 
 function getChips(containerId) {
@@ -1261,10 +1290,24 @@ function renderHomepageSettings() {
   const contact = s.contact || {};
   const footer  = s.footer  || {};
 
+  const heroTitle = hero.title || hero.headline || '';
+  const heroSubline = hero.subtitle || hero.tagline || '';
+  const heroPrimary = hero.subtitlePrimary || heroSubline;
+  const heroSecondary = hero.subtitleSecondary || '';
+  const heroDescription = hero.description || hero.bio || '';
+  const heroImage = hero.image || hero.profileImage || '';
+  const heroCv = hero.cvLink || hero.resumeLink || '';
+
+  const emailHref = contact.emailHref || contact.email || '';
+  const linkedinHref = contact.linkedinHref || contact.linkedin || '';
+  const footerText = footer.copyright || footer.text || '';
+
+  topbarActions.innerHTML = '<button class="btn btn-primary" id="hp-save-top-btn"><i class="fas fa-save"></i> Save Homepage</button>';
+
   adminContent.innerHTML = `
     <div class="view-header">
       <h2 class="view-title">Homepage Settings</h2>
-      <button class="btn-primary" id="hp-save-btn"><i class="fas fa-save"></i> Save All</button>
+      <button class="btn btn-primary" id="hp-save-btn"><i class="fas fa-save"></i> Save All</button>
     </div>
 
     <div class="settings-section">
@@ -1291,29 +1334,33 @@ function renderHomepageSettings() {
       <div class="settings-section-header">Hero Section</div>
       <div class="settings-section-body">
         <div class="fields-grid">
+          <div class="field-group span-2">
+            <label class="field-label">Hero Main Heading (optional legacy)</label>
+            <input class="field-input" id="hps-hero-title" value="${av(heroTitle)}">
+          </div>
           <div class="field-group">
             <label class="field-label">Name</label>
             <input class="field-input" id="hps-hero-name" value="${av(hero.name)}">
           </div>
           <div class="field-group">
-            <label class="field-label">Title / Headline</label>
-            <input class="field-input" id="hps-hero-title" value="${av(hero.title || hero.headline || '')}">
+            <label class="field-label">Subtitle Primary</label>
+            <input class="field-input" id="hps-hero-sub-primary" value="${av(heroPrimary)}">
           </div>
-          <div class="field-group span-2">
-            <label class="field-label">Sub-headline / Tagline</label>
-            <input class="field-input" id="hps-hero-sub" value="${av(hero.subtitle || hero.tagline || '')}">
+          <div class="field-group">
+            <label class="field-label">Subtitle Secondary</label>
+            <input class="field-input" id="hps-hero-sub-secondary" value="${av(heroSecondary)}">
           </div>
           <div class="field-group span-2">
             <label class="field-label">Bio / Description</label>
-            <textarea class="field-textarea" id="hps-hero-bio">${esc(hero.bio || hero.description || '')}</textarea>
+            <textarea class="field-textarea" id="hps-hero-bio">${esc(heroDescription)}</textarea>
           </div>
           <div class="field-group span-2">
             <label class="field-label">Profile Image path</label>
-            <input class="field-input" id="hps-hero-img" value="${av(hero.image || hero.profileImage || '')}">
+            <input class="field-input" id="hps-hero-img" value="${av(heroImage)}">
           </div>
           <div class="field-group">
             <label class="field-label">CV / Resume URL</label>
-            <input class="field-input" id="hps-hero-cv" value="${av(hero.cvLink || hero.resumeLink || '')}">
+            <input class="field-input" id="hps-hero-cv" value="${av(heroCv)}">
           </div>
         </div>
       </div>
@@ -1323,29 +1370,25 @@ function renderHomepageSettings() {
       <div class="settings-section-header">Contact</div>
       <div class="settings-section-body">
         <div class="fields-grid">
-          <div class="field-group">
-            <label class="field-label">Email</label>
-            <input class="field-input" id="hps-contact-email" value="${av(contact.email)}">
+          <div class="field-group span-2">
+            <label class="field-label">Email Href (mailto:)</label>
+            <input class="field-input" id="hps-contact-email-href" value="${av(emailHref)}">
           </div>
-          <div class="field-group">
-            <label class="field-label">Phone</label>
-            <input class="field-input" id="hps-contact-phone" value="${av(contact.phone || '')}">
+          <div class="field-group span-2">
+            <label class="field-label">Email Display Text</label>
+            <input class="field-input" id="hps-contact-email-text" value="${av(contact.emailText || '')}">
           </div>
-          <div class="field-group">
-            <label class="field-label">LinkedIn</label>
-            <input class="field-input" id="hps-contact-linkedin" value="${av(contact.linkedin || '')}">
+          <div class="field-group span-2">
+            <label class="field-label">LinkedIn URL</label>
+            <input class="field-input" id="hps-contact-linkedin-href" value="${av(linkedinHref)}">
           </div>
-          <div class="field-group">
-            <label class="field-label">GitHub</label>
-            <input class="field-input" id="hps-contact-github" value="${av(contact.github || '')}">
+          <div class="field-group span-2">
+            <label class="field-label">LinkedIn Display Text</label>
+            <input class="field-input" id="hps-contact-linkedin-text" value="${av(contact.linkedinText || '')}">
           </div>
-          <div class="field-group">
-            <label class="field-label">ORCID</label>
-            <input class="field-input" id="hps-contact-orcid" value="${av(contact.orcid || '')}">
-          </div>
-          <div class="field-group">
-            <label class="field-label">ResearchGate</label>
-            <input class="field-input" id="hps-contact-rg" value="${av(contact.researchGate || '')}">
+          <div class="field-group span-2">
+            <label class="field-label">Location Text</label>
+            <input class="field-input" id="hps-contact-location" value="${av(contact.location || '')}">
           </div>
         </div>
       </div>
@@ -1356,15 +1399,19 @@ function renderHomepageSettings() {
       <div class="settings-section-body">
         <div class="fields-grid">
           <div class="field-group span-2">
-            <label class="field-label">Footer Text</label>
-            <input class="field-input" id="hps-footer-text" value="${av(footer.text || footer.copyright || '')}">
+            <label class="field-label">Copyright HTML/Text</label>
+            <input class="field-input" id="hps-footer-text" value="${av(footerText)}">
+          </div>
+          <div class="field-group span-2">
+            <label class="field-label">Developed Text (HTML allowed)</label>
+            <input class="field-input" id="hps-footer-developed" value="${av(footer.developedText || '')}">
           </div>
         </div>
       </div>
     </div>
   `;
 
-  document.getElementById('hp-save-btn').addEventListener('click', () => {
+  const saveHomepageSettings = () => {
     // SEO
     if (!state.content.index.static.seo) state.content.index.static.seo = {};
     state.content.index.static.seo.title       = document.getElementById('hps-seo-title').value;
@@ -1373,35 +1420,44 @@ function renderHomepageSettings() {
     // Hero
     if (!state.content.index.static.hero) state.content.index.static.hero = {};
     const hObj = state.content.index.static.hero;
-    if ('name'     in hObj || !hObj.name)       hObj.name        = document.getElementById('hps-hero-name').value;
-    if ('headline' in hObj)                     hObj.headline    = document.getElementById('hps-hero-title').value;
-    else                                        hObj.title       = document.getElementById('hps-hero-title').value;
-    if ('tagline'  in hObj)                     hObj.tagline     = document.getElementById('hps-hero-sub').value;
-    else                                        hObj.subtitle    = document.getElementById('hps-hero-sub').value;
-    if ('description' in hObj)                  hObj.description = document.getElementById('hps-hero-bio').value;
-    else                                        hObj.bio         = document.getElementById('hps-hero-bio').value;
-    if ('profileImage' in hObj)                 hObj.profileImage = document.getElementById('hps-hero-img').value;
-    else                                        hObj.image       = document.getElementById('hps-hero-img').value;
-    if ('resumeLink' in hObj)                   hObj.resumeLink  = document.getElementById('hps-hero-cv').value;
-    else                                        hObj.cvLink      = document.getElementById('hps-hero-cv').value;
+    hObj.name = document.getElementById('hps-hero-name').value;
+    hObj.title = document.getElementById('hps-hero-title').value;
+    hObj.headline = document.getElementById('hps-hero-title').value;
+    hObj.subtitlePrimary = document.getElementById('hps-hero-sub-primary').value;
+    hObj.subtitleSecondary = document.getElementById('hps-hero-sub-secondary').value;
+    hObj.subtitle = hObj.subtitlePrimary;
+    hObj.tagline = hObj.subtitlePrimary;
+    hObj.description = document.getElementById('hps-hero-bio').value;
+    hObj.bio = hObj.description;
+    hObj.image = document.getElementById('hps-hero-img').value;
+    hObj.profileImage = hObj.image;
+    hObj.cvLink = document.getElementById('hps-hero-cv').value;
+    hObj.resumeLink = hObj.cvLink;
+
     // Contact
     if (!state.content.index.static.contact) state.content.index.static.contact = {};
     const cObj = state.content.index.static.contact;
-    cObj.email   = document.getElementById('hps-contact-email').value;
-    cObj.phone   = document.getElementById('hps-contact-phone').value;
-    cObj.linkedin = document.getElementById('hps-contact-linkedin').value;
-    cObj.github  = document.getElementById('hps-contact-github').value;
-    cObj.orcid   = document.getElementById('hps-contact-orcid').value;
-    cObj.researchGate = document.getElementById('hps-contact-rg').value;
+    cObj.emailHref = document.getElementById('hps-contact-email-href').value;
+    cObj.emailText = document.getElementById('hps-contact-email-text').value;
+    cObj.linkedinHref = document.getElementById('hps-contact-linkedin-href').value;
+    cObj.linkedinText = document.getElementById('hps-contact-linkedin-text').value;
+    cObj.location = document.getElementById('hps-contact-location').value;
+    cObj.email = cObj.emailHref;
+    cObj.linkedin = cObj.linkedinHref;
+
     // Footer
     if (!state.content.index.static.footer) state.content.index.static.footer = {};
     const fObj = state.content.index.static.footer;
-    if ('copyright' in fObj) fObj.copyright = document.getElementById('hps-footer-text').value;
-    else                     fObj.text      = document.getElementById('hps-footer-text').value;
+    fObj.copyright = document.getElementById('hps-footer-text').value;
+    fObj.text = fObj.copyright;
+    fObj.developedText = document.getElementById('hps-footer-developed').value;
 
     markDirty();
     saveContent().then(() => toast('Homepage settings saved!', 'success')).catch(e => toast(e.message, 'error'));
-  });
+  };
+
+  document.getElementById('hp-save-btn').addEventListener('click', saveHomepageSettings);
+  document.getElementById('hp-save-top-btn').addEventListener('click', saveHomepageSettings);
 }
 
 /* ── BuildSign Settings ── */
@@ -1414,7 +1470,7 @@ function renderBuildsignSettings() {
   adminContent.innerHTML = `
     <div class="view-header">
       <h2 class="view-title">BuildSign Settings</h2>
-      <button class="btn-primary" id="bs-save-btn"><i class="fas fa-save"></i> Save All</button>
+      <button class="btn btn-primary" id="bs-save-btn"><i class="fas fa-save"></i> Save All</button>
     </div>
 
     <div class="settings-section">
