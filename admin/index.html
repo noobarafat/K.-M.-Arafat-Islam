@@ -1,41 +1,163 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Portfolio Content</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/admin/admin.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Admin — Portfolio CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body>
-    <main class="admin-app">
-        <section id="dashboard-view" class="dashboard-view">
-            <aside class="sidebar">
-                <div class="sidebar-header">
-                    <h2>Content Admin</h2>
-                </div>
-                <nav id="section-nav" class="section-nav"></nav>
-                <button id="logout-btn" class="btn-ghost">Logout</button>
-            </aside>
 
-            <section class="editor-panel">
-                <header class="panel-header">
-                    <h1 id="panel-title">Content</h1>
-                    <div class="panel-actions">
-                        <button id="reload-btn" class="btn-ghost">Reload</button>
-                        <button id="save-btn" class="btn-primary">Save Changes</button>
-                    </div>
-                </header>
+<div id="toast-container" class="toast-container"></div>
 
-                <div id="form-root" class="form-root"></div>
+<div id="confirm-overlay" class="confirm-overlay">
+  <div class="confirm-dialog">
+    <h4 id="confirm-title">Are you sure?</h4>
+    <p id="confirm-message">This action cannot be undone.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" id="confirm-cancel">Cancel</button>
+      <button class="btn btn-danger" id="confirm-ok">Delete</button>
+    </div>
+  </div>
+</div>
 
-                <p id="save-status" class="status" hidden></p>
-            </section>
-        </section>
-    </main>
+<div class="mobile-backdrop" id="mobile-backdrop"></div>
 
-    <script src="/admin/admin.js"></script>
+<div class="admin-app" id="dashboard-view">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon"><i class="fas fa-layer-group"></i></div>
+      <h1>Portfolio CMS</h1>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <span class="nav-group-label">Overview</span>
+      <button class="nav-item active" data-view="dashboard">
+        <i class="fas fa-grid-2 nav-icon"></i> Dashboard
+      </button>
+
+      <span class="nav-group-label">Portfolio</span>
+      <button class="nav-item" data-view="homepage-settings">
+        <i class="fas fa-sliders nav-icon"></i> Homepage Settings
+      </button>
+      <button class="nav-item" data-view="publications">
+        <i class="fas fa-file-alt nav-icon"></i> Publications
+        <span class="nav-badge" id="badge-publications">0</span>
+      </button>
+      <button class="nav-item" data-view="activities">
+        <i class="fas fa-bolt nav-icon"></i> Activities / ECA
+        <span class="nav-badge" id="badge-activities">0</span>
+      </button>
+      <button class="nav-item" data-view="skills">
+        <i class="fas fa-certificate nav-icon"></i> Skills &amp; Certs
+        <span class="nav-badge" id="badge-skills">0</span>
+      </button>
+      <button class="nav-item" data-view="about-highlights">
+        <i class="fas fa-user nav-icon"></i> About Highlights
+        <span class="nav-badge" id="badge-about-highlights">0</span>
+      </button>
+      <button class="nav-item" data-view="events">
+        <i class="fas fa-globe nav-icon"></i> Int'l Events
+        <span class="nav-badge" id="badge-events">0</span>
+      </button>
+
+      <span class="nav-group-label">BuildSign</span>
+      <button class="nav-item" data-view="buildsign-settings">
+        <i class="fas fa-building nav-icon"></i> BuildSign Settings
+      </button>
+      <button class="nav-item" data-view="bs-services">
+        <i class="fas fa-briefcase nav-icon"></i> Services
+        <span class="nav-badge" id="badge-bs-services">0</span>
+      </button>
+      <button class="nav-item" data-view="bs-process">
+        <i class="fas fa-list-ol nav-icon"></i> Process Steps
+        <span class="nav-badge" id="badge-bs-process">0</span>
+      </button>
+      <button class="nav-item" data-view="bs-why">
+        <i class="fas fa-star nav-icon"></i> Why Us
+        <span class="nav-badge" id="badge-bs-why">0</span>
+      </button>
+      <button class="nav-item" data-view="bs-faqs">
+        <i class="fas fa-question-circle nav-icon"></i> FAQs
+        <span class="nav-badge" id="badge-bs-faqs">0</span>
+      </button>
+
+      <span class="nav-group-label">System</span>
+      <button class="nav-item" data-view="search-index">
+        <i class="fas fa-search nav-icon"></i> Search Index
+        <span class="nav-badge" id="badge-search-index">0</span>
+      </button>
+      <button class="nav-item" data-view="certificate-files">
+        <i class="fas fa-folder-open nav-icon"></i> Certificate Files
+        <span class="nav-badge" id="badge-certificate-files">0</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="nav-item btn-ghost" id="logout-btn" style="width:100%;color:var(--muted);">
+        <i class="fas fa-sign-out-alt nav-icon"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-mobile-toggle" id="mobile-menu-btn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="topbar-breadcrumb">
+          <span class="crumb-parent">Portfolio CMS</span>
+          <span class="crumb-sep">/</span>
+          <span class="crumb-current" id="topbar-title">Dashboard</span>
+        </div>
+      </div>
+      <div class="topbar-right" id="topbar-actions">
+        <!-- injected per view -->
+      </div>
+    </div>
+
+    <div class="unsaved-bar" id="unsaved-bar">
+      <i class="fas fa-circle-dot"></i>
+      <span>You have unsaved changes</span>
+      <button class="unsaved-save-btn" id="unsaved-save-topbtn">Save Now</button>
+    </div>
+
+    <div class="admin-content" id="admin-content">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <span>Loading…</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ITEM EDITOR DRAWER -->
+<div class="editor-overlay" id="editor-overlay"></div>
+<div class="editor-drawer" id="editor-drawer">
+  <div class="drawer-header">
+    <h3 id="drawer-title">Edit Item</h3>
+    <button class="drawer-close" id="drawer-close"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+  <div class="drawer-footer">
+    <button class="btn btn-danger btn-sm" id="drawer-delete" style="display:none">
+      <i class="fas fa-trash"></i> Delete
+    </button>
+    <div style="display:flex;gap:8px;margin-left:auto">
+      <button class="btn btn-ghost" id="drawer-cancel">Cancel</button>
+      <button class="btn btn-primary" id="drawer-save">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="/admin/admin.js"></script>
 </body>
 </html>
