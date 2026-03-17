@@ -1,18 +1,16 @@
 const { createToken, setSessionCookie } = require('../_lib/auth');
 
+const DEFAULT_USERNAME = 'kmarafatislam@gmail.com';
+const DEFAULT_PASSWORD = '1234';
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, message: 'Method not allowed' });
     return;
   }
 
-  const expectedUsername = process.env.ADMIN_USERNAME;
-  const expectedPassword = process.env.ADMIN_PASSWORD;
-
-  if (!expectedUsername || !expectedPassword) {
-    res.status(500).json({ ok: false, message: 'Admin credentials are not configured' });
-    return;
-  }
+  const expectedUsername = process.env.ADMIN_USERNAME || DEFAULT_USERNAME;
+  const expectedPassword = process.env.ADMIN_PASSWORD || DEFAULT_PASSWORD;
 
   const { username, password } = req.body || {};
 
