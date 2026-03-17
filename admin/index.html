@@ -11,29 +11,10 @@
 </head>
 <body>
     <main class="admin-app">
-        <section id="login-view" class="login-view">
-            <div class="login-card">
-                <h1>Admin Login</h1>
-                <form id="login-form" class="stack">
-                    <label>
-                        Username
-                        <input type="text" id="login-username" required autocomplete="username">
-                    </label>
-                    <label>
-                        Password
-                        <input type="password" id="login-password" required autocomplete="current-password">
-                    </label>
-                    <button type="submit" class="btn-primary">Sign In</button>
-                    <p id="login-error" class="status error" hidden></p>
-                </form>
-            </div>
-        </section>
-
-        <section id="dashboard-view" class="dashboard-view" hidden>
+        <section id="dashboard-view" class="dashboard-view">
             <aside class="sidebar">
                 <div class="sidebar-header">
                     <h2>Content Admin</h2>
-                    <p id="session-user"></p>
                 </div>
                 <nav id="section-nav" class="section-nav"></nav>
                 <button id="logout-btn" class="btn-ghost">Logout</button>

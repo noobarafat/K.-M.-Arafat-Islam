@@ -49,7 +49,6 @@ const sectionDefinitions = [
   { key: 'buildsignFaqs', title: 'BuildSign FAQs', description: 'BuildSign FAQ records.', mode: 'json', path: 'buildsign.datasets.buildsignFAQs', expectedType: 'array' }
 ];
 
-const loginView = document.getElementById('login-view');
 const dashboardView = document.getElementById('dashboard-view');
 const sectionNav = document.getElementById('section-nav');
 const formRoot = document.getElementById('form-root');
@@ -208,60 +207,27 @@ async function loadContent() {
   renderSection();
 }
 
-async function ensureSession() {
-  const data = await fetchJson('/api/admin/session', { method: 'GET' });
-
-  if (!data.authenticated) {
-    loginView.hidden = false;
-    dashboardView.hidden = true;
-    return;
-  }
-
-  document.getElementById('session-user').textContent = data.username || 'admin';
-  loginView.hidden = true;
+async function init() {
   dashboardView.hidden = false;
-
   renderNav();
 
-  // Load content after showing dashboard — errors shown in panel, not login
+  // Silently establish a session, then load content
+  try {
+    await fetchJson('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: 'kmarafatislam@gmail.com', password: '1234' })
+    });
+  } catch (_) {
+    // Already logged in or credentials unused — continue
+  }
+
   try {
     await loadContent();
   } catch (error) {
     showStatus('Could not load content: ' + error.message, 'error');
   }
 }
-
-document.getElementById('login-form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const username = document.getElementById('login-username').value;
-  const password = document.getElementById('login-password').value;
-  const errorEl = document.getElementById('login-error');
-
-  try {
-    // Step 1: authenticate
-    await fetchJson('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-    errorEl.hidden = true;
-  } catch (error) {
-    errorEl.hidden = false;
-    errorEl.textContent = error.message;
-    return;
-  }
-
-  // Step 2: load dashboard (separate — login already succeeded)
-  try {
-    await ensureSession();
-  } catch (error) {
-    // Session/content error: show dashboard anyway, display error in panel
-    loginView.hidden = true;
-    dashboardView.hidden = false;
-    renderNav();
-    showStatus('Logged in. Content load error: ' + error.message, 'error');
-  }
-});
 
 document.getElementById('save-btn').addEventListener('click', async () => {
   clearStatus();
@@ -296,16 +262,10 @@ document.getElementById('logout-btn').addEventListener('click', async () => {
   try {
     await fetchJson('/api/admin/logout', { method: 'POST' });
   } catch (error) {
-    // Ignore to allow local reset.
+    // Ignore
   }
-
   state.content = null;
-  loginView.hidden = false;
-  dashboardView.hidden = true;
+  init();
 });
 
-ensureSession().catch((error) => {
-  const errorEl = document.getElementById('login-error');
-  errorEl.hidden = false;
-  errorEl.textContent = error.message;
-});
+init();
