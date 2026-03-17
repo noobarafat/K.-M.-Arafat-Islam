@@ -1388,7 +1388,7 @@ body.confirm-open .mobile-save-fab {
 
 @media (max-width: 414px) {
   .stats-grid { grid-template-columns: 1fr; }
-  .admin-content { padding: 12px 12px 28px; }
+  .admin-content { padding: 12px 12px 92px; }
   .topbar-breadcrumb .crumb-current { max-width: 180px; }
 }
 

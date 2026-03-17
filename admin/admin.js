@@ -1557,6 +1557,7 @@ function renderCertificateFiles() {
     adminContent.innerHTML = `
       <div class="view-header">
         <h2 class="view-title">Certificate Files <span class="item-count">${currentFiles.length}</span></h2>
+        <button class="btn btn-primary" id="cert-save-btn"><i class="fas fa-save"></i> Save Changes</button>
       </div>
       ${renderPersistenceBadge()}
       <div class="settings-section">
@@ -1593,6 +1594,16 @@ function renderCertificateFiles() {
         ${currentFiles.length === 0 ? '<div class="empty-list"><i class="fas fa-images"></i><p>No certificate files listed.</p></div>' : ''}
       </div>
     `;
+
+    document.getElementById('cert-save-btn').addEventListener('click', async () => {
+      try {
+        await saveContent();
+        toast('Certificate files saved!', 'success');
+        renderList();
+      } catch (e) {
+        toast(e.message, 'error');
+      }
+    });
 
     document.getElementById('cert-add-btn').addEventListener('click', () => {
       const input = document.getElementById('cert-new-input');
