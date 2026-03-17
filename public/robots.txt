@@ -1,0 +1,39 @@
+# SEO-Optimized robots.txt for K. M. Arafat Islam Portfolio
+
+# Allow all legitimate crawlers
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /programming-hero.html
+Allow: /nebulae.html
+Allow: /buildsign.html
+Allow: /certificates.html
+Allow: /ieee-pr.html
+Allow: /csclub.html
+Allow: /creative-it.html
+Allow: /international-affairs.html
+Allow: /banglay-ielts.html
+Allow: /tbs-edge.html
+Allow: /moods/
+Allow: /assets/
+
+# Block admin panel and internal APIs
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /api/admin/
+Disallow: /api/session/
+Disallow: /.env
+Disallow: /.git
+
+# Allow search crawlers specific indexing
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://kmaarafatislam.vercel.app/api/sitemap.xml
+Sitemap: https://kmaarafatislam.vercel.app/sitemap.xml
