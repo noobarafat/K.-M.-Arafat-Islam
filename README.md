@@ -1,135 +1,139 @@
 # K M Arafat Islam - Portfolio
 
-A modern, fully responsive portfolio website showcasing my projects, skills, and professional information.
+This project keeps the existing public portfolio UI unchanged while adding dynamic content management and a protected admin panel.
 
-## Features
+## Current Stack
 
-✨ **Modern Design**
-- Clean and professional UI with gradient color schemes
-- Smooth animations and transitions
-- Fully responsive across all devices
+- Static multipage frontend: HTML + CSS + vanilla JS
+- Serverless API endpoints: Vercel Functions (`api/*`)
+- Storage:
+    - Production: Vercel KV (if configured)
+    - Local fallback: `data/content.runtime.json`
 
-🎨 **Interactive Elements**
-- Mobile-friendly hamburger menu
-- Smooth scrolling navigation
-- Animated skill progress bars
-- Project cards with hover effects
-- Scroll-to-top button
-- Form validation with notifications
+## What Was Added
 
-📱 **Responsive Sections**
-- **Home**: Hero section with profile introduction
-- **About**: Personal information and downloadable resume
-- **Skills**: Categorized skill sets with progress indicators
-- **Projects**: Showcase of 6 portfolio projects
-- **Contact**: Interactive contact form with validation
+- Dynamic content architecture using existing hardcoded source content only
+- Protected admin panel at `/admin`
+- Seed extraction script from existing codebase
+- Seed application script for runtime/KV data
+- API routes for auth + content CRUD
 
-## Technologies Used
+## Dynamic Content Model
 
-- **HTML5**: Semantic markup structure
-- **CSS3**: Modern styling with Flexbox and Grid
-- **JavaScript**: Interactive functionality and animations
-- **Font Awesome**: Icon library for visual elements
+The runtime content object contains only existing structures:
 
-## Getting Started
+- `index.static` (SEO, hero, contact, footer)
+- `index.datasets` (`aboutHighlights`, `publications`, `activities`, `skills`, `internationalEvents`)
+- `search.searchIndex`
+- `buildsign.static`
+- `buildsign.datasets` (`buildsignServices`, `buildsignServicesDetails`, `buildsignProcess`, `buildsignWhy`, `buildsignFAQs`)
+- `certificates.certificateFiles`
 
-1. **Clone or download** this repository
-2. **Customize the content**:
-   - Update personal information in `index.html`
-   - Replace placeholder images in `assets/` folder
-   - Modify social media links
-   - Add your own projects and skills
-3. **Open `index.html`** in your browser
+## Admin Panel
 
-## Customization Guide
+Route:
 
-### Personal Information
-Edit the following sections in `index.html`:
-- Name and tagline in the home section
-- About me text and info items
-- Contact details
-- Social media links
+- `/admin`
 
-### Skills
-Update the skill categories and percentages in the skills section. Each skill has:
-```html
-<div class="skill-item">
-    <div class="skill-info">
-        <span>Skill Name</span>
-        <span>Percentage%</span>
-    </div>
-    <div class="skill-bar">
-        <div class="skill-progress" style="width: Percentage%"></div>
-    </div>
-</div>
+Capabilities:
+
+- Secure login/logout with httpOnly cookie session
+- Sidebar-based section editor
+- Form editor for static fields
+- JSON editor for existing datasets
+- Validation before save
+- Reload latest server content
+
+Admin APIs:
+
+- `POST /api/admin/login`
+- `POST /api/admin/logout`
+- `GET /api/admin/session`
+- `GET /api/admin/content`
+- `PUT /api/admin/content`
+
+Public API:
+
+- `GET /api/content`
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and set:
+
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET`
+- `CONTENT_KV_KEY` (optional override)
+
+If KV is not configured, the app automatically uses local file fallback.
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
 ```
 
-### Projects
-Each project card includes:
-- Project image (stored in `assets/`)
-- Project title and description
-- Technology tags
-- Links to live demo and GitHub repo
+2. Extract seed from existing hardcoded source:
 
-### Colors
-Customize the color scheme in `styles.css` by modifying CSS variables:
-```css
-:root {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --accent-color: #ec4899;
-    /* ... more colors */
-}
+```bash
+npm run extract:seed
 ```
 
-## Images
+3. Seed runtime data store:
 
-Replace the placeholder SVG images in the `assets/` folder with your own:
-- `profile.jpg` - Your profile photo
-- `project1.jpg` through `project6.jpg` - Project screenshots
-- Add `resume.pdf` for downloadable resume
-
-## Contact Form
-
-The contact form includes validation but needs backend integration for actual email sending. To implement:
-
-1. Create a backend API endpoint (Node.js, PHP, Python, etc.)
-2. Update the form submission in `script.js`:
-
-```javascript
-fetch('/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, subject, message })
-})
+```bash
+npm run seed:content
 ```
 
-## Browser Support
+4. Run locally using your preferred static/API workflow (for example `vercel dev`).
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
+## Seed Scripts
 
-## Performance
+- `scripts/extract-seed-from-source.js`
+    - Reads existing source files (`script.js`, `search.js`, `buildsign.js`, `certificates.js`, `index.html`, `buildsign.html`)
+    - Writes `data/content.seed.json`
 
-- Optimized with debounced scroll events
-- Lazy loading for animations
-- Minimal external dependencies
-- Fast load times
+- `scripts/seed-content.js`
+    - Loads `data/content.seed.json`
+    - Saves to KV when configured, otherwise `data/content.runtime.json`
 
-## License
+## Vercel Deployment Notes
 
-This project is open source and available for personal and commercial use.
+- `vercel.json` sets Node runtime for all API functions
+- Configure env vars in Vercel Project Settings
+- Seed data after deployment using your preferred workflow
 
-## Contact
+## Public UI Parity Notes
 
-For questions or collaborations:
-- Email: your.email@example.com
-- GitHub: [yourusername](https://github.com/yourusername)
-- LinkedIn: [yourprofile](https://linkedin.com/in/yourusername)
+Public scripts now load dynamic content from `/api/content` and gracefully fallback to original in-file hardcoded datasets if API data is unavailable. Existing classes/layout/styles remain unchanged.
 
----
+## Files Added
 
-**Developed with ❤️ by K M Arafat Islam**
+- `api/_lib/store.js`
+- `api/_lib/auth.js`
+- `api/content.js`
+- `api/admin/login.js`
+- `api/admin/logout.js`
+- `api/admin/session.js`
+- `api/admin/content.js`
+- `admin/index.html`
+- `admin/admin.css`
+- `admin/admin.js`
+- `scripts/extract-seed-from-source.js`
+- `scripts/seed-content.js`
+- `data/content.seed.json`
+- `data/content.runtime.json` (generated)
+- `.env.example`
+- `vercel.json`
+- `package.json`
+
+## Files Updated
+
+- `script.js`
+- `search.js`
+- `buildsign.js`
+- `certificates.js`
+- `tbs-edge.js`
+

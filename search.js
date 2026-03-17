@@ -1,6 +1,6 @@
 // ==================== Portfolio Search System ====================
 
-const searchIndex = [
+let searchIndex = [
     // Main Sections
     { id: 'home', title: 'Home', subtitle: 'Portfolio Landing', keywords: ['home', 'landing', 'hero', 'introduction'], type: 'section', href: 'index.html#home', excerpt: 'Hello, I\'m K. M. Arafat Islam - Founder & CEO @BuildSign' },
     { id: 'about', title: 'About', subtitle: 'My Story', keywords: ['about', 'story', 'background', 'biography'], type: 'section', href: 'index.html#about', excerpt: 'Learn about my journey, interests, and what drives me' },
@@ -292,5 +292,24 @@ function closeSearchDropdown() {
     currentFocusIndex = -1;
 }
 
+async function loadDynamicSearchIndex() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return;
+
+        const incoming = payload.content.search?.searchIndex;
+        if (Array.isArray(incoming)) {
+            searchIndex = incoming;
+        }
+    } catch (error) {
+        // Keep local fallback data.
+    }
+}
+
 // Initialize on load
-document.addEventListener('DOMContentLoaded', initSearchBar);
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadDynamicSearchIndex();
+    initSearchBar();
+});

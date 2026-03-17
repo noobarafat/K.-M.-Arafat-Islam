@@ -1,5 +1,5 @@
 // ==================== BuildSign Data ====================
-const buildsignServices = [
+let buildsignServices = [
     {
         id: 'app-design',
         title: 'App Design',
@@ -38,7 +38,7 @@ const buildsignServices = [
     }
 ];
 
-const buildsignServicesDetails = {
+let buildsignServicesDetails = {
     'app-design': {
         title: 'App Design',
         icon: 'fas fa-mobile-alt',
@@ -83,7 +83,7 @@ const buildsignServicesDetails = {
     }
 };
 
-const buildsignProcess = [
+let buildsignProcess = [
     {
         step: '01',
         title: 'Discovery & Strategy',
@@ -106,7 +106,7 @@ const buildsignProcess = [
     }
 ];
 
-const buildsignWhy = [
+let buildsignWhy = [
     {
         title: 'System-based delivery',
         description: 'Organized workflows, clear milestones, and predictable outcomes—no chaos, just quality.'
@@ -125,7 +125,7 @@ const buildsignWhy = [
     }
 ];
 
-const buildsignFAQs = [
+let buildsignFAQs = [
     {
         question: 'What kind of clients do you work with?',
         answer: 'We work with startups, small businesses, and entrepreneurs who value quality and clear communication. Our ideal clients appreciate thoughtful design, sustainable timelines, and building meaningful digital products.'
@@ -319,13 +319,75 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==================== Initialize ====================
-document.addEventListener('DOMContentLoaded', () => {
+function applyBuildsignStaticContent(staticContent) {
+    if (!staticContent) return;
+
+    if (staticContent.seo?.title) {
+        document.title = staticContent.seo.title;
+    }
+
+    const heroTitle = document.querySelector('.buildsign-hero-title');
+    if (heroTitle && staticContent.hero?.title) {
+        heroTitle.textContent = staticContent.hero.title;
+    }
+
+    const heroSubtitle = document.querySelector('.buildsign-hero-subtitle');
+    if (heroSubtitle && staticContent.hero?.subtitle) {
+        heroSubtitle.textContent = staticContent.hero.subtitle;
+    }
+
+    const heroLinks = document.querySelectorAll('.buildsign-hero-links .buildsign-link');
+    if (heroLinks[0] && staticContent.hero?.links?.websiteHref) {
+        heroLinks[0].setAttribute('href', staticContent.hero.links.websiteHref);
+    }
+    if (heroLinks[1] && staticContent.hero?.links?.linkedinHref) {
+        heroLinks[1].setAttribute('href', staticContent.hero.links.linkedinHref);
+    }
+    if (heroLinks[2] && staticContent.hero?.links?.emailHref) {
+        heroLinks[2].setAttribute('href', staticContent.hero.links.emailHref);
+    }
+}
+
+async function loadDynamicBuildsignContent() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return;
+
+        const buildsign = payload.content.buildsign;
+        if (!buildsign) return;
+
+        if (Array.isArray(buildsign.datasets?.buildsignServices)) {
+            buildsignServices = buildsign.datasets.buildsignServices;
+        }
+        if (buildsign.datasets?.buildsignServicesDetails && typeof buildsign.datasets.buildsignServicesDetails === 'object') {
+            buildsignServicesDetails = buildsign.datasets.buildsignServicesDetails;
+        }
+        if (Array.isArray(buildsign.datasets?.buildsignProcess)) {
+            buildsignProcess = buildsign.datasets.buildsignProcess;
+        }
+        if (Array.isArray(buildsign.datasets?.buildsignWhy)) {
+            buildsignWhy = buildsign.datasets.buildsignWhy;
+        }
+        if (Array.isArray(buildsign.datasets?.buildsignFAQs)) {
+            buildsignFAQs = buildsign.datasets.buildsignFAQs;
+        }
+
+        applyBuildsignStaticContent(buildsign.static);
+    } catch (error) {
+        // Keep local fallback data.
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadDynamicBuildsignContent();
+
     renderServicesGrid();
     renderProcessGrid();
     renderWhyGrid();
     renderFAQGrid();
-    
-    // Initialize reveal animations if available
+
     if (typeof initRevealAnimations === 'function') {
         setTimeout(initRevealAnimations, 100);
     }

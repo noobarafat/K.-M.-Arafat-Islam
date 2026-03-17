@@ -1,5 +1,5 @@
 // ==================== About Highlights Data ====================
-const publications = [
+let publications = [
     {
         id: "oct-vit-explainable",
         title: "Explainable Deep Neural Diagnostics: Vision Transformer-Based Retinal Disease Classification",
@@ -62,7 +62,7 @@ const publications = [
     }
 ];
 
-const activities = [
+let activities = [
     {
         id: "diu-cyber-club",
         role: "Communication & Organizing Secretary",
@@ -161,7 +161,7 @@ const activities = [
     }
 ];
 
-const skills = [
+let skills = [
     {
         id: "uiux-gp",
         name: "UI/UX Design",
@@ -224,7 +224,7 @@ const skills = [
     }
 ];
 
-const aboutHighlights = [
+let aboutHighlights = [
     {
         id: "buildsign-founder",
         title: "Founder & CEO of BuildSign | Digital Product Agency",
@@ -877,7 +877,7 @@ function closeSkillDetails() {
 renderSkillsCompact();
 
 // ==================== International Events Section ====================
-const internationalEvents = [
+let internationalEvents = [
     {
         id: "comtech-2023",
         institute: "Institut Teknologi Sepuluh Nopember (ITS), Indonesia",
@@ -1805,6 +1805,129 @@ function changeGPImage(direction) {
     lightbox.querySelector('.gp-lightbox-img').src = window.gpImages[window.currentGPIndex];
     lightbox.querySelector('.gp-lightbox-label').textContent = window.gpLabels[window.currentGPIndex];
 }
+
+async function fetchDynamicContentPayload() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return null;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return null;
+        return payload.content;
+    } catch (error) {
+        return null;
+    }
+}
+
+function applyIndexStaticContent(staticContent) {
+    if (!staticContent) return;
+
+    if (staticContent.seo?.title) {
+        document.title = staticContent.seo.title;
+    }
+
+    if (staticContent.seo?.description) {
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', staticContent.seo.description);
+        }
+    }
+
+    if (staticContent.hero?.name) {
+        document.querySelectorAll('.hero-name').forEach((el) => {
+            el.textContent = staticContent.hero.name;
+        });
+    }
+
+    const subtitleTextEls = document.querySelectorAll('.hero-subtitle .subtitle-text');
+    subtitleTextEls.forEach((el, index) => {
+        if (index % 2 === 0 && staticContent.hero?.subtitlePrimary) {
+            el.textContent = staticContent.hero.subtitlePrimary;
+        }
+        if (index % 2 === 1 && staticContent.hero?.subtitleSecondary) {
+            el.textContent = staticContent.hero.subtitleSecondary;
+        }
+    });
+
+    if (staticContent.hero?.description) {
+        const descEl = document.querySelector('.hero-description');
+        if (descEl) descEl.textContent = staticContent.hero.description;
+    }
+
+    if (staticContent.contact?.emailHref || staticContent.contact?.emailText) {
+        const emailAnchors = document.querySelectorAll('a[href^="mailto:"]');
+        emailAnchors.forEach((anchor) => {
+            if (staticContent.contact?.emailHref) {
+                anchor.setAttribute('href', staticContent.contact.emailHref);
+            }
+            if (staticContent.contact?.emailText && anchor.classList.contains('contact-method-value')) {
+                anchor.textContent = staticContent.contact.emailText;
+            }
+        });
+    }
+
+    const linkedinEl = document.querySelector('.contact-method .contact-method-value[href*="linkedin"]');
+    if (linkedinEl) {
+        if (staticContent.contact?.linkedinHref) {
+            linkedinEl.setAttribute('href', staticContent.contact.linkedinHref);
+        }
+        if (staticContent.contact?.linkedinText) {
+            linkedinEl.textContent = staticContent.contact.linkedinText;
+        }
+    }
+
+    if (staticContent.contact?.location) {
+        document.querySelectorAll('.contact-method').forEach((methodEl) => {
+            const label = methodEl.querySelector('.contact-method-label');
+            const value = methodEl.querySelector('.contact-method-value');
+            if (label && value && label.textContent.trim().toLowerCase() === 'location') {
+                value.textContent = staticContent.contact.location;
+            }
+        });
+    }
+
+    if (staticContent.footer?.copyright || staticContent.footer?.developedText) {
+        const footerParagraphs = document.querySelectorAll('.footer .container > p');
+        if (footerParagraphs[0] && staticContent.footer?.copyright) {
+            footerParagraphs[0].innerHTML = staticContent.footer.copyright;
+        }
+        if (footerParagraphs[1] && staticContent.footer?.developedText) {
+            footerParagraphs[1].innerHTML = staticContent.footer.developedText;
+        }
+    }
+}
+
+async function loadDynamicPortfolioContent() {
+    const content = await fetchDynamicContentPayload();
+    if (!content) return;
+
+    if (Array.isArray(content.index?.datasets?.publications)) {
+        publications = content.index.datasets.publications;
+    }
+    if (Array.isArray(content.index?.datasets?.activities)) {
+        activities = content.index.datasets.activities;
+    }
+    if (Array.isArray(content.index?.datasets?.skills)) {
+        skills = content.index.datasets.skills;
+    }
+    if (Array.isArray(content.index?.datasets?.aboutHighlights)) {
+        aboutHighlights = content.index.datasets.aboutHighlights;
+    }
+    if (Array.isArray(content.index?.datasets?.internationalEvents)) {
+        internationalEvents = content.index.datasets.internationalEvents;
+    }
+
+    applyIndexStaticContent(content.index?.static);
+
+    renderAboutGrid();
+    renderPublicationsGrid();
+    renderActivitiesGrid();
+    renderSkillsCompact();
+    renderEventsGrid();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadDynamicPortfolioContent();
+});
 
 // Initialize about grid on page load
 document.addEventListener('DOMContentLoaded', () => {

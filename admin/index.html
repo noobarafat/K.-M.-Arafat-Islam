@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Portfolio Content</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <main class="admin-app">
+        <section id="login-view" class="login-view">
+            <div class="login-card">
+                <h1>Admin Login</h1>
+                <p>Manage existing portfolio content only.</p>
+                <form id="login-form" class="stack">
+                    <label>
+                        Username
+                        <input type="text" id="login-username" required autocomplete="username">
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" id="login-password" required autocomplete="current-password">
+                    </label>
+                    <button type="submit" class="btn-primary">Sign In</button>
+                    <p id="login-error" class="status error" hidden></p>
+                </form>
+            </div>
+        </section>
+
+        <section id="dashboard-view" class="dashboard-view" hidden>
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Content Admin</h2>
+                    <p id="session-user"></p>
+                </div>
+                <nav id="section-nav" class="section-nav"></nav>
+                <button id="logout-btn" class="btn-ghost">Logout</button>
+            </aside>
+
+            <section class="editor-panel">
+                <header class="panel-header">
+                    <h1 id="panel-title">Content</h1>
+                    <div class="panel-actions">
+                        <button id="reload-btn" class="btn-ghost">Reload</button>
+                        <button id="save-btn" class="btn-primary">Save Changes</button>
+                    </div>
+                </header>
+
+                <div id="section-description" class="panel-description"></div>
+
+                <div id="form-root" class="form-root"></div>
+
+                <p id="save-status" class="status" hidden></p>
+            </section>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 // ==================== Certificate Files List ====================
-const certificateFiles = [
+let certificateFiles = [
     "62b0c3911742a.pdf", "633b3873abf83.pdf", "633b3d03a1abc.pdf", "633b406c68a98.pdf", "633b420e10580.pdf",
     "633c580e97654.pdf", "633c5ad5d393b.pdf", "633fdb88386d7.pdf", "633fdc4e7ce04.pdf", "635847550abe4.pdf",
     "Attention Mechanism with Google Cloud.pdf", "Be Professional with LinkedIn.png", "Boss VS Leader.pdf",
@@ -224,10 +224,28 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ==================== Initialize ====================
-document.addEventListener('DOMContentLoaded', () => {
+async function loadDynamicCertificateFiles() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return;
+
+        const incoming = payload.content.certificates?.certificateFiles;
+        if (Array.isArray(incoming)) {
+            certificateFiles = incoming;
+        }
+    } catch (error) {
+        // Keep local fallback data.
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
     // Remove all navbar active states on certificates page
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => link.classList.remove('active'));
+
+    await loadDynamicCertificateFiles();
     
     renderCertificatesGrid();
     
