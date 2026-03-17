@@ -2182,8 +2182,8 @@ window.addEventListener('scroll', revealElements);
 window.addEventListener('load', revealElements);
 
 // ==================== Contact Section ====================
-// ==================== Formspree Configuration ====================
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_REAL_ID";
+// Uses FormSubmit to forward submissions to uxdev.arafat@gmail.com.
+const FORMSPREE_ENDPOINT = "https://formsubmit.co/ajax/uxdev.arafat@gmail.com";
 
 function copyEmail() {
     const email = 'uxdev.arafat@gmail.com';
@@ -2222,9 +2222,9 @@ function showToast(message, type = 'success') {
 }
 
 function validateFormspreeEndpoint() {
-    if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT.includes('REPLACE_WITH_REAL_ID')) {
-        showToast('Form setup incomplete. Please configure Form ID.', 'error');
-        console.error('[Formspree Config] Endpoint not configured:', FORMSPREE_ENDPOINT);
+    if (!FORMSPREE_ENDPOINT) {
+        showToast('Form setup incomplete. Please configure form endpoint.', 'error');
+        console.error('[Form Config] Endpoint not configured:', FORMSPREE_ENDPOINT);
         return false;
     }
     return true;
@@ -2233,26 +2233,31 @@ function validateFormspreeEndpoint() {
 function handleFormspreeError(response, error) {
     if (response) {
         if (response.status === 404) {
-            showToast('Form endpoint is invalid. Please update Formspree Form ID.', 'error');
-            console.error('[Formspree] Form not found (404). Endpoint:', FORMSPREE_ENDPOINT);
+            showToast('Form endpoint is invalid. Please verify contact form setup.', 'error');
+            console.error('[Form Submit] Form endpoint not found (404). Endpoint:', FORMSPREE_ENDPOINT);
             return;
         }
         if (response.status === 403) {
-            showToast('Form access denied. Please verify Formspree configuration.', 'error');
-            console.error('[Formspree] Access forbidden (403). Endpoint:', FORMSPREE_ENDPOINT);
+            showToast('Form access denied. Please verify contact form setup.', 'error');
+            console.error('[Form Submit] Access forbidden (403). Endpoint:', FORMSPREE_ENDPOINT);
+            return;
+        }
+        if (response.status === 422) {
+            showToast('Please check required fields and try again.', 'error');
+            console.error('[Form Submit] Validation failed (422). Endpoint:', FORMSPREE_ENDPOINT);
             return;
         }
     }
     if (error) {
         const errorMsg = error.message || String(error);
         if (errorMsg.toLowerCase().includes('not found') || errorMsg.toLowerCase().includes('404')) {
-            showToast('Form endpoint is invalid. Please update Formspree Form ID.', 'error');
-            console.error('[Formspree] Form not found error:', error, 'Endpoint:', FORMSPREE_ENDPOINT);
+            showToast('Form endpoint is invalid. Please verify contact form setup.', 'error');
+            console.error('[Form Submit] Endpoint error:', error, 'Endpoint:', FORMSPREE_ENDPOINT);
             return;
         }
     }
     showToast('Oops! Something went wrong. Please try again.', 'error');
-    console.error('[Formspree] Submission error:', error || response, 'Endpoint:', FORMSPREE_ENDPOINT);
+    console.error('[Form Submit] Submission error:', error || response, 'Endpoint:', FORMSPREE_ENDPOINT);
 }
 
 // Contact Form Handler
@@ -2278,6 +2283,9 @@ if (contactForm) {
         
         try {
             const formData = new FormData(this);
+            formData.set('_subject', `New portfolio contact from ${formData.get('name') || 'Website visitor'}`);
+            formData.set('_template', 'table');
+            formData.set('_captcha', 'false');
             const response = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
                 body: formData,
@@ -2338,6 +2346,9 @@ if (subscribeForm) {
         
         try {
             const formData = new FormData(this);
+            formData.set('_subject', 'New portfolio newsletter request');
+            formData.set('_template', 'table');
+            formData.set('_captcha', 'false');
             const response = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
                 body: formData,
