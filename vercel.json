@@ -4,7 +4,29 @@
       "maxDuration": 10
     }
   },
+  "redirects": [
+    {
+      "source": "/admin",
+      "missing": [{ "type": "cookie", "key": "admin_session" }],
+      "destination": "/admin/login",
+      "permanent": false
+    },
+    {
+      "source": "/admin/",
+      "missing": [{ "type": "cookie", "key": "admin_session" }],
+      "destination": "/admin/login",
+      "permanent": false
+    },
+    {
+      "source": "/admin/index.html",
+      "missing": [{ "type": "cookie", "key": "admin_session" }],
+      "destination": "/admin/login",
+      "permanent": false
+    }
+  ],
   "rewrites": [
+    { "source": "/admin/login", "destination": "/admin/login.html" },
+    { "source": "/admin/login/", "destination": "/admin/login.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/admin/", "destination": "/admin/index.html" }
   ]

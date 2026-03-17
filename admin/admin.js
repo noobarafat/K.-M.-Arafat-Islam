@@ -254,8 +254,7 @@ if (mobileSaveFab) {
 /* ── Logout ── */
 document.getElementById('logout-btn').addEventListener('click', async () => {
   try { await apiFetch('/api/admin/logout', { method: 'POST' }); } catch (_) {}
-  state.content = null;
-  await init();
+  window.location.replace('/admin/login');
 });
 
 
@@ -1651,14 +1650,16 @@ async function init() {
       <span>Loading content&hellip;</span>
     </div>`;
 
-  // Auto-login (silent — ignore errors if already authed)
   try {
-    await apiFetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: 'kmarafatislam@gmail.com', password: '1234' })
-    });
-  } catch (_) { /* ignore */ }
+    const session = await apiFetch('/api/admin/session');
+    if (!session || !session.authenticated) {
+      window.location.replace('/admin/login');
+      return;
+    }
+  } catch (_) {
+    window.location.replace('/admin/login');
+    return;
+  }
 
   // Load content
   try {

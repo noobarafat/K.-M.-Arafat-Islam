@@ -34,11 +34,12 @@ The runtime content object contains only existing structures:
 
 Route:
 
+- `/admin/login`
 - `/admin`
 
 Capabilities:
 
-- Secure login/logout with httpOnly cookie session
+- Password-only admin login with httpOnly cookie session
 - CMS-style dashboard, collection managers, and drawer editors
 - Shared live content reads/writes through the same API used by the public site
 - Certificate/media upload to shared blob storage
@@ -62,7 +63,6 @@ Public API:
 
 Copy `.env.example` to `.env` and set:
 
-- `ADMIN_USERNAME`
 - `ADMIN_PASSWORD`
 - `ADMIN_SESSION_SECRET`
 - `CONTENT_KV_KEY` (optional override)
