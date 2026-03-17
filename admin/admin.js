@@ -225,7 +225,13 @@ async function ensureSession() {
   dashboardView.hidden = false;
 
   renderNav();
-  await loadContent();
+
+  // Load content after showing dashboard — errors shown in panel, not login
+  try {
+    await loadContent();
+  } catch (error) {
+    showStatus('Could not load content: ' + error.message, 'error');
+  }
 }
 
 document.getElementById('login-form').addEventListener('submit', async (event) => {
@@ -235,17 +241,28 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
   const errorEl = document.getElementById('login-error');
 
   try {
+    // Step 1: authenticate
     await fetchJson('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
-
     errorEl.hidden = true;
-    await ensureSession();
   } catch (error) {
     errorEl.hidden = false;
     errorEl.textContent = error.message;
+    return;
+  }
+
+  // Step 2: load dashboard (separate — login already succeeded)
+  try {
+    await ensureSession();
+  } catch (error) {
+    // Session/content error: show dashboard anyway, display error in panel
+    loginView.hidden = true;
+    dashboardView.hidden = false;
+    renderNav();
+    showStatus('Logged in. Content load error: ' + error.message, 'error');
   }
 });
 

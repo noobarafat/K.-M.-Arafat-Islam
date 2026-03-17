@@ -63,7 +63,13 @@ function writeJsonSync(filePath, data) {
 function loadSeedContent() {
   const seed = readJsonSync(SEED_FILE);
   if (!seed) {
-    throw new Error('Seed file not found at data/content.seed.json');
+    // Return empty but valid structure if seed file not present (e.g. first deploy)
+    return normalizeContent({
+      index: { static: {}, datasets: {} },
+      search: { searchIndex: [] },
+      buildsign: { static: {}, datasets: {} },
+      certificates: { certificateFiles: [] }
+    });
   }
   return normalizeContent(seed);
 }
