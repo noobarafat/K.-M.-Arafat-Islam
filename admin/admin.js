@@ -28,7 +28,6 @@ const drawerClose     = document.getElementById('drawer-close');
 const sidebarNav      = document.getElementById('sidebar-nav');
 const toastContainer  = document.getElementById('toast-container');
 const confirmOverlay  = document.getElementById('confirm-overlay');
-const mobileSaveFab   = document.getElementById('mobile-save-fab');
 
 /* ── Toast ── */
 function toast(msg, type = 'info') {
@@ -239,16 +238,82 @@ document.getElementById('unsaved-save-topbtn').addEventListener('click', async (
   } catch (e) { toast(e.message, 'error'); }
 });
 
-if (mobileSaveFab) {
-  mobileSaveFab.addEventListener('click', async () => {
-    try {
-      await saveContent();
-      toast('Saved successfully!', 'success');
-      renderView(state.view);
-    } catch (e) {
-      toast(e.message, 'error');
+function applyHomepageSettingsFromForm() {
+  if (!state.content.index.static.seo) state.content.index.static.seo = {};
+  state.content.index.static.seo.title       = document.getElementById('hps-seo-title').value;
+  state.content.index.static.seo.description = document.getElementById('hps-seo-desc').value;
+  state.content.index.static.seo.ogImage     = document.getElementById('hps-seo-og').value;
+
+  if (!state.content.index.static.hero) state.content.index.static.hero = {};
+  const hObj = state.content.index.static.hero;
+  hObj.name = document.getElementById('hps-hero-name').value;
+  hObj.title = document.getElementById('hps-hero-title').value;
+  hObj.headline = document.getElementById('hps-hero-title').value;
+  hObj.subtitlePrimary = document.getElementById('hps-hero-sub-primary').value;
+  hObj.subtitleSecondary = document.getElementById('hps-hero-sub-secondary').value;
+  hObj.subtitle = hObj.subtitlePrimary;
+  hObj.tagline = hObj.subtitlePrimary;
+  hObj.description = document.getElementById('hps-hero-bio').value;
+  hObj.bio = hObj.description;
+  hObj.image = document.getElementById('hps-hero-img').value;
+  hObj.profileImage = hObj.image;
+  hObj.cvLink = document.getElementById('hps-hero-cv').value;
+  hObj.resumeLink = hObj.cvLink;
+
+  if (!state.content.index.static.contact) state.content.index.static.contact = {};
+  const cObj = state.content.index.static.contact;
+  cObj.emailHref = document.getElementById('hps-contact-email-href').value;
+  cObj.emailText = document.getElementById('hps-contact-email-text').value;
+  cObj.linkedinHref = document.getElementById('hps-contact-linkedin-href').value;
+  cObj.linkedinText = document.getElementById('hps-contact-linkedin-text').value;
+  cObj.location = document.getElementById('hps-contact-location').value;
+  cObj.email = cObj.emailHref;
+  cObj.linkedin = cObj.linkedinHref;
+
+  if (!state.content.index.static.footer) state.content.index.static.footer = {};
+  const fObj = state.content.index.static.footer;
+  fObj.copyright = document.getElementById('hps-footer-text').value;
+  fObj.text = fObj.copyright;
+  fObj.developedText = document.getElementById('hps-footer-developed').value;
+}
+
+function applyBuildsignSettingsFromForm() {
+  if (!state.content.buildsign.static.seo)  state.content.buildsign.static.seo  = {};
+  if (!state.content.buildsign.static.hero) state.content.buildsign.static.hero = {};
+  const seo  = state.content.buildsign.static.seo;
+  const hero = state.content.buildsign.static.hero;
+
+  seo.title       = document.getElementById('bss-seo-title').value;
+  seo.description = document.getElementById('bss-seo-desc').value;
+  hero.title      = document.getElementById('bss-hero-title').value;
+  hero.subtitle   = document.getElementById('bss-hero-sub').value;
+
+  if (!hero.links) hero.links = {};
+  hero.links.primary   = { label: document.getElementById('bss-link-primary-label').value,   href: document.getElementById('bss-link-primary-href').value };
+  hero.links.secondary = { label: document.getElementById('bss-link-secondary-label').value, href: document.getElementById('bss-link-secondary-href').value };
+}
+
+async function saveCurrentViewFromTopbar() {
+  try {
+    if (state.view === 'homepage-settings') {
+      applyHomepageSettingsFromForm();
+      markDirty();
+    } else if (state.view === 'buildsign-settings') {
+      applyBuildsignSettingsFromForm();
+      markDirty();
     }
-  });
+
+    if (!state.dirty) {
+      toast('No changes to save.', 'info');
+      return;
+    }
+
+    await saveContent();
+    toast('Saved successfully!', 'success');
+    renderView(state.view);
+  } catch (e) {
+    toast(e.message, 'error');
+  }
 }
 
 /* ── Logout ── */
@@ -474,6 +539,12 @@ function addSubItemBtn(containerId, fields, defaultItem) {
 function renderView(view) {
   topbarActions.innerHTML = '';
 
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'btn btn-primary';
+  saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+  saveBtn.onclick = saveCurrentViewFromTopbar;
+  topbarActions.appendChild(saveBtn);
+
   switch (view) {
     case 'dashboard':          renderDashboard(); break;
     case 'homepage-settings':  renderHomepageSettings(); break;
@@ -688,18 +759,6 @@ function renderCollection(view) {
   addBtn.innerHTML = `<i class="fas fa-plus"></i> Add ${cfg.label}`;
   addBtn.onclick = () => openItemEditor(view, null);
   topbarActions.appendChild(addBtn);
-
-  const saveBtn = document.createElement('button');
-  saveBtn.className = 'btn btn-secondary';
-  saveBtn.innerHTML = `<i class="fas fa-save"></i> Save`;
-  saveBtn.onclick = async () => {
-    try {
-      await saveContent();
-      toast('Saved!', 'success');
-      renderView(view);
-    } catch(e) { toast(e.message, 'error'); }
-  };
-  topbarActions.appendChild(saveBtn);
 
   let filterVal = '';
 
@@ -1302,12 +1361,9 @@ function renderHomepageSettings() {
   const linkedinHref = contact.linkedinHref || contact.linkedin || '';
   const footerText = footer.copyright || footer.text || '';
 
-  topbarActions.innerHTML = '<button class="btn btn-primary" id="hp-save-top-btn"><i class="fas fa-save"></i> Save Homepage</button>';
-
   adminContent.innerHTML = `
     <div class="view-header">
       <h2 class="view-title">Homepage Settings</h2>
-      <button class="btn btn-primary" id="hp-save-btn"><i class="fas fa-save"></i> Save All</button>
     </div>
 
     <div class="settings-section">
@@ -1411,53 +1467,6 @@ function renderHomepageSettings() {
     </div>
   `;
 
-  const saveHomepageSettings = () => {
-    // SEO
-    if (!state.content.index.static.seo) state.content.index.static.seo = {};
-    state.content.index.static.seo.title       = document.getElementById('hps-seo-title').value;
-    state.content.index.static.seo.description = document.getElementById('hps-seo-desc').value;
-    state.content.index.static.seo.ogImage     = document.getElementById('hps-seo-og').value;
-    // Hero
-    if (!state.content.index.static.hero) state.content.index.static.hero = {};
-    const hObj = state.content.index.static.hero;
-    hObj.name = document.getElementById('hps-hero-name').value;
-    hObj.title = document.getElementById('hps-hero-title').value;
-    hObj.headline = document.getElementById('hps-hero-title').value;
-    hObj.subtitlePrimary = document.getElementById('hps-hero-sub-primary').value;
-    hObj.subtitleSecondary = document.getElementById('hps-hero-sub-secondary').value;
-    hObj.subtitle = hObj.subtitlePrimary;
-    hObj.tagline = hObj.subtitlePrimary;
-    hObj.description = document.getElementById('hps-hero-bio').value;
-    hObj.bio = hObj.description;
-    hObj.image = document.getElementById('hps-hero-img').value;
-    hObj.profileImage = hObj.image;
-    hObj.cvLink = document.getElementById('hps-hero-cv').value;
-    hObj.resumeLink = hObj.cvLink;
-
-    // Contact
-    if (!state.content.index.static.contact) state.content.index.static.contact = {};
-    const cObj = state.content.index.static.contact;
-    cObj.emailHref = document.getElementById('hps-contact-email-href').value;
-    cObj.emailText = document.getElementById('hps-contact-email-text').value;
-    cObj.linkedinHref = document.getElementById('hps-contact-linkedin-href').value;
-    cObj.linkedinText = document.getElementById('hps-contact-linkedin-text').value;
-    cObj.location = document.getElementById('hps-contact-location').value;
-    cObj.email = cObj.emailHref;
-    cObj.linkedin = cObj.linkedinHref;
-
-    // Footer
-    if (!state.content.index.static.footer) state.content.index.static.footer = {};
-    const fObj = state.content.index.static.footer;
-    fObj.copyright = document.getElementById('hps-footer-text').value;
-    fObj.text = fObj.copyright;
-    fObj.developedText = document.getElementById('hps-footer-developed').value;
-
-    markDirty();
-    saveContent().then(() => toast('Homepage settings saved!', 'success')).catch(e => toast(e.message, 'error'));
-  };
-
-  document.getElementById('hp-save-btn').addEventListener('click', saveHomepageSettings);
-  document.getElementById('hp-save-top-btn').addEventListener('click', saveHomepageSettings);
 }
 
 /* ── BuildSign Settings ── */
@@ -1470,7 +1479,6 @@ function renderBuildsignSettings() {
   adminContent.innerHTML = `
     <div class="view-header">
       <h2 class="view-title">BuildSign Settings</h2>
-      <button class="btn btn-primary" id="bs-save-btn"><i class="fas fa-save"></i> Save All</button>
     </div>
 
     <div class="settings-section">
@@ -1530,24 +1538,6 @@ function renderBuildsignSettings() {
     </div>
   `;
 
-  document.getElementById('bs-save-btn').addEventListener('click', () => {
-    if (!state.content.buildsign.static.seo)  state.content.buildsign.static.seo  = {};
-    if (!state.content.buildsign.static.hero) state.content.buildsign.static.hero = {};
-    const seo  = state.content.buildsign.static.seo;
-    const hero = state.content.buildsign.static.hero;
-
-    seo.title       = document.getElementById('bss-seo-title').value;
-    seo.description = document.getElementById('bss-seo-desc').value;
-    hero.title      = document.getElementById('bss-hero-title').value;
-    hero.subtitle   = document.getElementById('bss-hero-sub').value;
-
-    if (!hero.links) hero.links = {};
-    hero.links.primary   = { label: document.getElementById('bss-link-primary-label').value,   href: document.getElementById('bss-link-primary-href').value };
-    hero.links.secondary = { label: document.getElementById('bss-link-secondary-label').value, href: document.getElementById('bss-link-secondary-href').value };
-
-    markDirty();
-    saveContent().then(() => toast('BuildSign settings saved!', 'success')).catch(e => toast(e.message, 'error'));
-  });
 }
 
 /* ── Certificate Files ── */
@@ -1557,7 +1547,6 @@ function renderCertificateFiles() {
     adminContent.innerHTML = `
       <div class="view-header">
         <h2 class="view-title">Certificate Files <span class="item-count">${currentFiles.length}</span></h2>
-        <button class="btn btn-primary" id="cert-save-btn"><i class="fas fa-save"></i> Save Changes</button>
       </div>
       ${renderPersistenceBadge()}
       <div class="settings-section">
@@ -1594,16 +1583,6 @@ function renderCertificateFiles() {
         ${currentFiles.length === 0 ? '<div class="empty-list"><i class="fas fa-images"></i><p>No certificate files listed.</p></div>' : ''}
       </div>
     `;
-
-    document.getElementById('cert-save-btn').addEventListener('click', async () => {
-      try {
-        await saveContent();
-        toast('Certificate files saved!', 'success');
-        renderList();
-      } catch (e) {
-        toast(e.message, 'error');
-      }
-    });
 
     document.getElementById('cert-add-btn').addEventListener('click', () => {
       const input = document.getElementById('cert-new-input');
