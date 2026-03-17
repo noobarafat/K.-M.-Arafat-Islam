@@ -28,6 +28,7 @@ const drawerClose     = document.getElementById('drawer-close');
 const sidebarNav      = document.getElementById('sidebar-nav');
 const toastContainer  = document.getElementById('toast-container');
 const confirmOverlay  = document.getElementById('confirm-overlay');
+const mobileSaveFab   = document.getElementById('mobile-save-fab');
 
 /* ── Toast ── */
 function toast(msg, type = 'info') {
@@ -49,10 +50,15 @@ function confirm(title, message) {
   return new Promise(resolve => {
     document.getElementById('confirm-title').textContent = resolvedTitle;
     document.getElementById('confirm-message').textContent = resolvedMessage;
+    document.body.classList.add('confirm-open');
     confirmOverlay.classList.add('open');
     const ok = document.getElementById('confirm-ok');
     const cancel = document.getElementById('confirm-cancel');
-    const close = (v) => { confirmOverlay.classList.remove('open'); resolve(v); };
+    const close = (v) => {
+      confirmOverlay.classList.remove('open');
+      document.body.classList.remove('confirm-open');
+      resolve(v);
+    };
     ok.onclick     = () => close(true);
     cancel.onclick = () => close(false);
   });
@@ -61,10 +67,12 @@ function confirm(title, message) {
 /* ── Unsaved changes ── */
 function markDirty() {
   state.dirty = true;
+  document.body.classList.add('is-dirty');
   unsavedBar.classList.add('visible');
 }
 function clearDirty() {
   state.dirty = false;
+  document.body.classList.remove('is-dirty');
   unsavedBar.classList.remove('visible');
 }
 
@@ -231,6 +239,18 @@ document.getElementById('unsaved-save-topbtn').addEventListener('click', async (
   } catch (e) { toast(e.message, 'error'); }
 });
 
+if (mobileSaveFab) {
+  mobileSaveFab.addEventListener('click', async () => {
+    try {
+      await saveContent();
+      toast('Saved successfully!', 'success');
+      renderView(state.view);
+    } catch (e) {
+      toast(e.message, 'error');
+    }
+  });
+}
+
 /* ── Logout ── */
 document.getElementById('logout-btn').addEventListener('click', async () => {
   try { await apiFetch('/api/admin/logout', { method: 'POST' }); } catch (_) {}
@@ -255,6 +275,7 @@ function openDrawer(title, bodyHtml, onSave, onDelete = null) {
 function closeDrawer() {
   editorOverlay.classList.remove('open');
   editorDrawer.classList.remove('open');
+  document.body.classList.remove('drawer-open');
   drawerBody.innerHTML = '';
 }
 
@@ -844,6 +865,7 @@ function openItemEditor(view, idx) {
 
   editorOverlay.classList.add('open');
   editorDrawer.classList.add('open');
+  document.body.classList.add('drawer-open');
 }
 
 /* Wire array-chip inputs after draw */
