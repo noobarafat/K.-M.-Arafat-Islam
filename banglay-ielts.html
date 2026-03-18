@@ -34,6 +34,39 @@
       }
     }
     </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://kmaarafatislam.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Extracurricular Activities",
+          "item": "https://kmaarafatislam.vercel.app/#eca"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Banglay IELTS",
+          "item": "https://kmaarafatislam.vercel.app/banglay-ielts.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Performance: DNS Prefetch -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -232,7 +265,7 @@
         </div>
     </footer>
 
-    <script src="banglay-ielts.js"></script>
+    <script src="banglay-ielts.js" async></script>
     <script>
         document.getElementById('banglay-year').textContent = new Date().getFullYear();
     </script>

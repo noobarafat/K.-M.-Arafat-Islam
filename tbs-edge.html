@@ -34,6 +34,40 @@
       }
     }
     </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://kmaarafatislam.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Extracurricular Activities",
+          "item": "https://kmaarafatislam.vercel.app/#eca"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The Business Standard - EDGE",
+          "item": "https://kmaarafatislam.vercel.app/tbs-edge.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Performance: DNS Prefetch & Preload -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -249,7 +283,7 @@
         </div>
     </footer>
 
-    <script src="tbs-edge.js"></script>
+    <script src="tbs-edge.js" async></script>
     <script>
         document.getElementById('tbs-year').textContent = new Date().getFullYear();
     </script>

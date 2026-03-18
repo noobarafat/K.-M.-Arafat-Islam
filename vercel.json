@@ -114,6 +114,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/robots.txt", "destination": "/api/robots.txt" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
     { "source": "/admin/login", "destination": "/admin/login.html" },
     { "source": "/admin/login/", "destination": "/admin/login.html" },
