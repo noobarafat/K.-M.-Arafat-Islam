@@ -2054,6 +2054,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 function closeMobileMenu() {
     hamburger?.classList.remove('active');
     navMenu?.classList.remove('active');
+    hamburger?.setAttribute('aria-expanded', 'false');
 }
 
 if (hamburger && navMenu) {
@@ -2061,6 +2062,8 @@ if (hamburger && navMenu) {
         event.stopPropagation();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        const expanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', String(expanded));
     });
 }
 
@@ -2699,3 +2702,19 @@ function createMoodParticles(mood, buttonElement) {
     }
 }
 
+// ==================== Back to Top Button ====================
+const backToTopBtn = document.getElementById('back-to-top');
+
+if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}

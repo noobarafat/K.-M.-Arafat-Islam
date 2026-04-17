@@ -115,13 +115,16 @@
 </head>
 
 <body>
+    <!-- Skip to Content (accessibility) -->
+    <a href="#home" class="skip-to-content">Skip to content</a>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <a href="#home" class="logo">
                 <h2>arafat<span class="logo-dot">.</span></h2>
             </a>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
@@ -131,11 +134,11 @@
                 <li><a href="#events" class="nav-link">Events</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -183,7 +186,7 @@
                         <span class="subtitle-text">Digital Product Agency</span>
                     </p>
                     <p class="hero-description">
-                        Curious young mind eager to learn and explore the world. Always seeking new knowledge and experiences.
+                        Published researcher in AI &amp; ML · Founder of BuildSign · CSE graduate. Passionate about impactful digital products, global career opportunities, and advanced academic pursuits.
                     </p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn-primary-gradient">
@@ -536,7 +539,7 @@
                             <i class="fab fa-linkedin contact-method-icon"></i>
                             <div class="contact-method-content">
                                 <span class="contact-method-label">LinkedIn</span>
-                                <a href="https://linkedin.com/in/k-m-arafat-islam" target="_blank" class="contact-method-value">k-m-arafat-islam</a>
+                                <a href="https://www.linkedin.com/in/kmarafatislam/" target="_blank" rel="noopener noreferrer" class="contact-method-value">kmarafatislam</a>
                             </div>
                         </div>
                         
@@ -628,6 +631,11 @@
         </div>
         <div class="mood-particles-container" id="moodParticlesContainer"></div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="search.js"></script>
     <script src="script.js"></script>
