@@ -7364,7 +7364,7 @@ section {
 .activities-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    gap: 18px;
     position: relative;
     z-index: 1;
     min-height: auto;
@@ -7422,28 +7422,83 @@ section {
 .activity-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-purple);
-    border-radius: 20px;
-    padding: 32px;
+    border-radius: 14px;
+    padding: 20px 20px 18px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
-    min-height: 200px;
-    display: block !important;
+    min-height: auto;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
     visibility: visible !important;
     opacity: 1 !important;
 }
 
+.activity-card:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 3px;
+}
+
 @media (hover: hover) {
     .activity-card:hover {
-        transform: translateY(-6px);
+        transform: translateY(-4px);
         border-color: var(--purple);
-        box-shadow: 0 16px 48px rgba(124, 58, 237, 0.3);
+        box-shadow: 0 12px 32px rgba(124, 58, 237, 0.25);
     }
-    
+
     .activity-card:hover .activity-card-gradient {
         opacity: 1;
     }
+
+    .activity-card:hover .activity-card-arrow {
+        opacity: 1;
+        transform: translate(0, 0);
+        color: var(--text-main);
+    }
+}
+
+.activity-card-arrow {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--purple);
+    font-size: 0.75rem;
+    opacity: 0.55;
+    transform: translate(2px, -2px);
+    transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease, background 0.25s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.activity-card:hover .activity-card-arrow {
+    background: var(--gradient-purple-blue);
+}
+
+.activity-tag {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--purple);
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    border-radius: 999px;
+    position: relative;
+    z-index: 1;
 }
 
 .activity-card-gradient {
@@ -7465,208 +7520,347 @@ section {
 }
 
 .activity-role {
-    font-size: 1.3rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-main);
-    line-height: 1.3;
-    margin-bottom: 12px;
+    line-height: 1.35;
+    margin: 0 36px 6px 0;
     position: relative;
     z-index: 1;
 }
 
 .activity-org {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
     background: var(--gradient-purple-blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 20px;
+    margin: 0 0 14px;
     position: relative;
     z-index: 1;
 }
 
 .activity-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.activity-metric {
-    background: rgba(124, 58, 237, 0.08);
-    border: 1px solid var(--border-purple);
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-    transition: all 0.25s ease;
-}
-
-.activity-card:hover .activity-metric {
-    background: rgba(124, 58, 237, 0.12);
-    border-color: var(--purple);
-}
-
-.metric-value {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--purple);
-    margin-bottom: 4px;
-}
-
-.metric-label {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.activity-highlights-preview {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 16px 0;
-    position: relative;
-    z-index: 1;
-}
-
-.activity-highlights-preview li {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 8px;
-}
-
-.activity-highlights-preview li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--purple);
-    font-weight: bold;
-}
-
-.activity-click-hint {
-    font-size: 0.85rem;
-    color: var(--purple);
-    font-weight: 600;
     display: flex;
-    align-items: center;
-    gap: 6px;
+    flex-wrap: wrap;
+    gap: 8px;
     margin: 0;
     position: relative;
     z-index: 1;
 }
 
-.activity-click-hint i {
-    transition: transform 0.25s ease;
+.activity-metric {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid var(--border-purple);
+    border-radius: 999px;
+    padding: 5px 12px;
+    text-align: left;
+    transition: background 0.25s ease, border-color 0.25s ease;
 }
 
-.activity-card:hover .activity-click-hint i {
-    transform: translateX(4px);
+.activity-card:hover .activity-metric {
+    background: rgba(124, 58, 237, 0.16);
+    border-color: var(--purple);
+}
+
+.metric-value {
+    display: inline;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--purple);
+    margin: 0;
+}
+
+.metric-label {
+    display: inline;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 
 /* Activity Modal Styles */
-.activity-modal-content {
-    max-width: 900px;
+.activity-modal-overlay {
+    padding: clamp(0.5rem, 2vw, 1rem);
 }
 
-.activity-modal-meta {
-    margin-bottom: 24px;
+.activity-modal-container {
+    max-width: 920px;
+    width: 100%;
+    margin: auto;
+}
+
+.activity-modal-content {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(124, 58, 237, 0.18);
+    animation: activityModalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes activityModalIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.activity-modal-content .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    float: none;
+    z-index: 5;
+}
+
+.activity-modal-header {
+    position: relative;
+    padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 1.75rem);
+    background: radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.18), transparent 55%),
+                radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.14), transparent 55%);
+    border-bottom: 1px solid rgba(124, 58, 237, 0.18);
+}
+
+.activity-modal-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 55%;
+    height: 2px;
+    background: linear-gradient(90deg, #7C3AED 0%, #3B82F6 60%, transparent 100%);
+}
+
+.activity-modal-header .modal-breadcrumb {
+    margin-bottom: 14px;
+}
+
+.activity-modal-header .modal-title {
+    margin-bottom: 8px;
+    padding-right: 3rem;
 }
 
 .activity-modal-org {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     background: var(--gradient-purple-blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 24px;
+    margin: 0 0 16px;
+}
+
+.activity-modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+}
+
+.activity-modal-tags:empty {
+    display: none;
+}
+
+.activity-modal-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--purple);
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 999px;
 }
 
 .activity-modal-metrics {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+    padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.5rem, 4vw, 2.5rem);
+    background: rgba(7, 7, 17, 0.55);
+    border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+    margin: 0;
+}
+
+.activity-modal-metrics:empty {
+    display: none;
+    border-bottom: none;
 }
 
 .activity-metric-large {
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid var(--border-purple);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
+    background: linear-gradient(140deg, rgba(124, 58, 237, 0.14), rgba(59, 130, 246, 0.08));
+    border: 1px solid rgba(124, 58, 237, 0.28);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-align: left;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.activity-metric-large:hover {
+    transform: translateY(-2px);
+    border-color: var(--purple);
+    box-shadow: 0 10px 28px rgba(124, 58, 237, 0.25);
 }
 
 .metric-value-large {
     display: block;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--purple);
-    margin-bottom: 8px;
+    font-size: 1.65rem;
+    font-weight: 800;
+    background: var(--gradient-purple-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    line-height: 1;
 }
 
 .metric-label-large {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+}
+
+.activity-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    padding: clamp(1.5rem, 3.5vw, 2.25rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.activity-modal-highlights,
+.activity-modal-description {
+    margin: 0;
 }
 
 .activity-modal-highlights h3,
 .activity-modal-description h3 {
-    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 16px;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.activity-modal-highlights {
-    margin-bottom: 32px;
+.activity-modal-highlights h3 i,
+.activity-modal-description h3 i {
+    color: var(--purple);
+    font-size: 0.95rem;
 }
 
 .activity-modal-highlights ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .activity-modal-highlights li {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
-    line-height: 1.7;
-    padding-left: 28px;
+    line-height: 1.6;
+    padding: 12px 14px 12px 38px;
     position: relative;
-    margin-bottom: 12px;
+    margin: 0;
+    background: rgba(124, 58, 237, 0.05);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    border-radius: 10px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.activity-modal-highlights li:hover {
+    background: rgba(124, 58, 237, 0.09);
+    border-color: rgba(124, 58, 237, 0.3);
 }
 
 .activity-modal-highlights li::before {
-    content: '✓';
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
     position: absolute;
-    left: 0;
+    left: 14px;
+    top: 12px;
     color: var(--purple);
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 0.85rem;
 }
 
 .activity-modal-description p {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     color: var(--text-muted);
-    line-height: 1.8;
+    line-height: 1.75;
     margin: 0;
+}
+
+.activity-modal-footer {
+    padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.5rem, 4vw, 2.5rem);
+    border-top: 1px solid rgba(124, 58, 237, 0.12);
+    background: rgba(7, 7, 17, 0.4);
+    display: flex;
+    justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+    .activity-modal-body {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .activity-modal-content {
+        border-radius: 18px;
+    }
+
+    .activity-modal-metrics {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .metric-value-large {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .activity-modal-container {
+        max-height: 92vh;
+    }
+
+    .activity-modal-content {
+        border-radius: 18px 18px 0 0;
+        animation: activitySheetIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+}
+
+@keyframes activitySheetIn {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }
 
 @media (max-width: 992px) {
     .activities-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        gap: 16px;
     }
 }
 
@@ -7675,46 +7869,53 @@ section {
         padding: clamp(2.5rem, 6vw, 4rem) 0;
         overflow: visible !important;
     }
-    
+
     .activities-background-blob {
         width: 600px;
         height: 600px;
     }
-    
+
     .filter-chips {
         gap: 8px;
-        margin-bottom: 40px;
+        margin-bottom: 32px;
     }
-    
+
     .filter-chip {
         padding: 8px 16px;
         font-size: 0.85rem;
     }
-    
+
     .activities-grid {
         grid-template-columns: 1fr !important;
-        gap: 20px;
+        gap: 14px;
         display: grid !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
-    
+
     .activity-card {
-        padding: 24px;
+        padding: 18px 18px 16px;
         min-height: auto;
-        display: block !important;
+        display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
-    
+
     .activity-role {
-        font-size: 1.15rem;
+        font-size: 1rem;
     }
-    
+
+    .activity-card-arrow {
+        top: 14px;
+        right: 14px;
+        width: 26px;
+        height: 26px;
+    }
+
     .activity-modal-metrics {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .activities-empty-state {
         padding: 3rem 1.5rem;
     }

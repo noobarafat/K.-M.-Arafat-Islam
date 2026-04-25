@@ -538,6 +538,17 @@ function renderActivitiesGrid() {
         return;
     }
     
+    if (!grid.dataset.keyboardBound) {
+        grid.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            const card = e.target.closest('.activity-card');
+            if (!card) return;
+            e.preventDefault();
+            card.click();
+        });
+        grid.dataset.keyboardBound = 'true';
+    }
+
     grid.innerHTML = filteredActivities.map(activity => {
         let clickAction = '';
         if (activity.id === 'diu-cyber-club') {
@@ -556,9 +567,14 @@ function renderActivitiesGrid() {
             clickAction = `openActivityDetails('${activity.id}')`;
         }
         
+        const primaryCategory = Array.isArray(activity.category) && activity.category.length
+            ? activity.category[0]
+            : '';
         return `
-            <div class="activity-card" onclick="${clickAction}">
+            <div class="activity-card" onclick="${clickAction}" role="button" tabindex="0" aria-label="${activity.role} at ${activity.org}">
                 <div class="activity-card-gradient"></div>
+                <span class="activity-card-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                ${primaryCategory ? `<span class="activity-tag">${primaryCategory}</span>` : ''}
                 <h3 class="activity-role">${activity.role}</h3>
                 <p class="activity-org">${activity.org}</p>
                 <div class="activity-metrics">
@@ -569,12 +585,6 @@ function renderActivitiesGrid() {
                         </div>
                     `).join('')}
                 </div>
-                <ul class="activity-highlights-preview">
-                    ${activity.highlights.slice(0, 2).map(highlight => `
-                        <li>${highlight}</li>
-                    `).join('')}
-                </ul>
-                <p class="activity-click-hint"><i class="fas fa-arrow-right"></i> Click to view more</p>
             </div>
         `;
     }).join('');
@@ -644,47 +654,150 @@ filterChips.forEach(chip => {
     });
 });
 
+// ==================== Modal Infrastructure ====================
+const __modalCloseRegistry = {
+    'activity-details-modal': () => closeActivityDetails(),
+    'skill-details-modal': () => closeSkillDetails(),
+    'certificate-viewer-modal': () => closeCertificateViewer(),
+    'multi-certificate-viewer-modal': () => closeMultiCertificateViewer(),
+    'event-details-modal': () => closeEventDetails(),
+};
+const __modalFocusReturn = new WeakMap();
+let __modalScrollLockCount = 0;
+
+function __getFocusable(root) {
+    if (!root) return [];
+    return Array.from(root.querySelectorAll(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => !el.hasAttribute('aria-hidden') && el.offsetParent !== null);
+}
+
+function __lockBodyScroll() {
+    if (__modalScrollLockCount === 0) {
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.dataset.prevPaddingRight = document.body.style.paddingRight || '';
+        if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
+        document.body.style.overflow = 'hidden';
+    }
+    __modalScrollLockCount++;
+}
+
+function __unlockBodyScroll() {
+    __modalScrollLockCount = Math.max(0, __modalScrollLockCount - 1);
+    if (__modalScrollLockCount === 0) {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = document.body.dataset.prevPaddingRight || '';
+        delete document.body.dataset.prevPaddingRight;
+    }
+}
+
+function __openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return null;
+    __modalFocusReturn.set(modal, document.activeElement);
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    __lockBodyScroll();
+    requestAnimationFrame(() => {
+        const focusables = __getFocusable(modal);
+        const target = focusables.find(el => !el.classList.contains('modal-close')) || focusables[0];
+        if (target) target.focus({ preventScroll: true });
+    });
+    return modal;
+}
+
+function __closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal || !modal.classList.contains('active')) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    __unlockBodyScroll();
+    const prev = __modalFocusReturn.get(modal);
+    if (prev && typeof prev.focus === 'function') {
+        try { prev.focus({ preventScroll: true }); } catch (_) {}
+    }
+    __modalFocusReturn.delete(modal);
+}
+
+function __getTopmostActiveModal() {
+    const active = document.querySelectorAll('.modal-overlay.active');
+    return active.length ? active[active.length - 1] : null;
+}
+
+document.addEventListener('keydown', (e) => {
+    const top = __getTopmostActiveModal();
+    if (!top) return;
+
+    if (e.key === 'Escape') {
+        const closeFn = __modalCloseRegistry[top.id];
+        if (closeFn) {
+            e.preventDefault();
+            closeFn();
+        }
+        return;
+    }
+
+    if (e.key === 'Tab') {
+        const focusables = __getFocusable(top);
+        if (focusables.length === 0) {
+            e.preventDefault();
+            return;
+        }
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+});
+
+document.addEventListener('click', (e) => {
+    const overlay = e.target.closest('.modal-overlay.active');
+    if (!overlay) return;
+    if (e.target !== overlay) return;
+    const closeFn = __modalCloseRegistry[overlay.id];
+    if (closeFn) closeFn();
+});
+
 // Activity Details Modal
 function openActivityDetails(id) {
     const activity = activities.find(a => a.id === id);
     if (!activity) return;
-    
+
     document.getElementById('activity-modal-breadcrumb-title').textContent = activity.role;
     document.getElementById('activity-modal-title').textContent = activity.role;
     document.getElementById('activity-modal-org').textContent = activity.org;
-    
+
+    const tagsEl = document.getElementById('activity-modal-tags');
+    if (tagsEl) {
+        tagsEl.innerHTML = (Array.isArray(activity.category) ? activity.category : [])
+            .map(c => `<span class="activity-modal-tag">${c}</span>`)
+            .join('');
+    }
+
     document.getElementById('activity-modal-metrics').innerHTML = activity.metrics.map(metric => `
         <div class="activity-metric-large">
             <span class="metric-value-large">${metric.value}</span>
             <span class="metric-label-large">${metric.label}</span>
         </div>
     `).join('');
-    
+
     document.getElementById('activity-modal-highlights-list').innerHTML = activity.highlights.map(highlight => `
         <li>${highlight}</li>
     `).join('');
-    
+
     document.getElementById('activity-modal-description').textContent = activity.desc;
-    
-    document.getElementById('activity-details-modal').classList.add('active');
-    document.body.style.overflow = 'hidden';
+
+    __openModal('activity-details-modal');
 }
 
 function closeActivityDetails() {
-    document.getElementById('activity-details-modal').classList.remove('active');
-    document.body.style.overflow = '';
+    __closeModal('activity-details-modal');
 }
-
-// Close modal with ESC key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeActivityDetails();
-        closeSkillDetails();
-        closeCertificateViewer();
-        closeEventDetails();
-        closeMultiCertificateViewer();
-    }
-});
 
 // ==================== Skills & Certifications Section ====================
 function renderSkillsCompact() {

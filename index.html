@@ -301,48 +301,44 @@
         <div class="activities-background-blob"></div>
         <div class="container">
             <h2 class="section-title section-title-purple reveal">Extracurricular Activities</h2>
-            
-            <div class="filter-chips" id="filterChips">
-                <button class="filter-chip active" data-filter="All">All</button>
-                <button class="filter-chip" data-filter="Leadership">Leadership</button>
-                <button class="filter-chip" data-filter="Events">Events</button>
-                <button class="filter-chip" data-filter="Communication">Communication</button>
-                <button class="filter-chip" data-filter="Community">Community</button>
-                <button class="filter-chip" data-filter="PR / Media">PR / Media</button>
-            </div>
-            
+
             <div class="activities-grid" id="activitiesGrid"></div>
         </div>
     </section>
 
     <!-- Activity Details Modal -->
-    <div class="modal-overlay" id="activity-details-modal">
-        <div class="modal-container">
+    <div class="modal-overlay activity-modal-overlay" id="activity-details-modal" role="dialog" aria-modal="true" aria-labelledby="activity-modal-title" aria-hidden="true">
+        <div class="modal-container activity-modal-container">
             <div class="modal-content activity-modal-content">
-                <button class="modal-close" onclick="closeActivityDetails()">
-                    <i class="fas fa-times"></i>
+                <button class="modal-close" onclick="closeActivityDetails()" aria-label="Close activity details">
+                    <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
-                <div class="modal-breadcrumb">
-                    <span>Extracurricular Activities</span>
-                    <span class="breadcrumb-separator">/</span>
-                    <span id="activity-modal-breadcrumb-title"></span>
-                </div>
-                <h2 class="modal-title" id="activity-modal-title"></h2>
-                <div class="activity-modal-meta">
+                <header class="activity-modal-header">
+                    <div class="modal-breadcrumb">
+                        <span>Extracurricular Activities</span>
+                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                        <span id="activity-modal-breadcrumb-title"></span>
+                    </div>
+                    <h2 class="modal-title" id="activity-modal-title"></h2>
                     <p class="activity-modal-org" id="activity-modal-org"></p>
+                    <div class="activity-modal-tags" id="activity-modal-tags" aria-label="Categories"></div>
+                </header>
+                <div class="activity-modal-metrics" id="activity-modal-metrics" aria-label="Key metrics"></div>
+                <div class="activity-modal-body">
+                    <section class="activity-modal-highlights" aria-labelledby="activity-modal-highlights-heading">
+                        <h3 id="activity-modal-highlights-heading"><i class="fas fa-bolt" aria-hidden="true"></i> Key Highlights</h3>
+                        <ul id="activity-modal-highlights-list"></ul>
+                    </section>
+                    <section class="activity-modal-description" aria-labelledby="activity-modal-description-heading">
+                        <h3 id="activity-modal-description-heading"><i class="fas fa-circle-info" aria-hidden="true"></i> Full Description</h3>
+                        <p id="activity-modal-description"></p>
+                    </section>
                 </div>
-                <div class="activity-modal-metrics" id="activity-modal-metrics"></div>
-                <div class="activity-modal-highlights">
-                    <h3>Key Highlights</h3>
-                    <ul id="activity-modal-highlights-list"></ul>
-                </div>
-                <div class="activity-modal-description">
-                    <h3>Full Description</h3>
-                    <p id="activity-modal-description"></p>
-                </div>
-                <button class="btn-back" onclick="closeActivityDetails()">
-                    <i class="fas fa-arrow-left"></i> Back to Activities
-                </button>
+                <footer class="activity-modal-footer">
+                    <button class="btn-back" onclick="closeActivityDetails()">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Activities
+                    </button>
+                </footer>
             </div>
         </div>
     </div>
