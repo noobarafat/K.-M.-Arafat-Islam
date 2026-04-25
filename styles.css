@@ -6870,14 +6870,15 @@ section {
 .education-card {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
     gap: clamp(1.75rem, 4vw, 3rem);
     margin-top: clamp(2rem, 6vw, 3.75rem);
     padding: clamp(1.75rem, 3.5vw, 2.5rem);
-    background: #0B1020;
-    border: 1px solid rgba(124, 58, 237, 0.18);
-    border-radius: 18px;
+    background: #0B1326;
+    border: 1px solid rgba(96, 165, 250, 0.14);
+    border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .education-card::before {
@@ -6885,10 +6886,10 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    width: 38%;
+    width: 36%;
     height: 2px;
-    background: linear-gradient(90deg, #7C3AED, #3B82F6, transparent);
-    border-top-left-radius: 18px;
+    background: linear-gradient(90deg, #7C3AED 0%, #3B82F6 55%, transparent 100%);
+    border-top-left-radius: 16px;
 }
 
 .education-card-left {
@@ -6950,15 +6951,15 @@ section {
     justify-content: space-between;
     gap: 16px;
     padding: 16px 20px;
-    background: rgba(30, 41, 75, 0.35);
-    border: 1px solid rgba(59, 130, 246, 0.15);
+    background: rgba(20, 32, 64, 0.55);
+    border: 1px solid rgba(96, 165, 250, 0.12);
     border-radius: 10px;
     transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .ranking-row:hover {
     border-color: rgba(96, 165, 250, 0.45);
-    background: rgba(30, 41, 75, 0.55);
+    background: rgba(30, 45, 85, 0.65);
     transform: translateX(2px);
 }
 
