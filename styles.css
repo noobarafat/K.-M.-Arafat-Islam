@@ -6799,161 +6799,120 @@ section {
     background-clip: text;
 }
 
-.education-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
-    margin-top: clamp(2rem, 6vw, 3.75rem);
-    margin-bottom: clamp(2rem, 6vw, 3.75rem);
-    flex-wrap: wrap;
-}
-
-.education-intro {
-    flex: 1;
-    min-width: min(300px, 100%);
-}
-
-.education-degree-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-}
-
-.education-degree {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 0;
-    line-height: 1.3;
-}
-
-.education-timeline {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    background: rgba(124, 58, 237, 0.08);
-    border: 1px solid var(--border-purple);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    white-space: nowrap;
-}
-
-.education-timeline i {
-    font-size: 0.85rem;
-    color: var(--purple);
-}
-
-.education-university {
-    font-size: 1.4rem;
-    font-weight: 600;
-    background: var(--gradient-purple-blue);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 20px;
-}
-
-.education-tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-style: italic;
-}
-
-.rankings-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-}
-
-.ranking-mobile-summary {
-    display: none;
-}
-
-.ranking-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-purple);
-    border-radius: 20px;
-    padding: 32px 24px;
-    transition: all 0.25s ease;
+.education-card {
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(1.75rem, 4vw, 3rem);
+    margin-top: clamp(2rem, 6vw, 3.75rem);
+    padding: clamp(1.75rem, 3.5vw, 2.5rem);
+    background: #0B1020;
+    border: 1px solid rgba(124, 58, 237, 0.18);
+    border-radius: 18px;
     overflow: hidden;
 }
 
-.ranking-card::before {
+.education-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    pointer-events: none;
+    width: 38%;
+    height: 2px;
+    background: linear-gradient(90deg, #7C3AED, #3B82F6, transparent);
+    border-top-left-radius: 18px;
 }
 
-.ranking-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--purple);
-    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
-}
-
-.ranking-card:hover::before {
-    opacity: 1;
-}
-
-.ranking-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid var(--border-purple);
+.education-card-left {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    transition: all 0.25s ease;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4px 0;
 }
 
-.ranking-card:hover .ranking-icon {
-    background: var(--gradient-purple-blue);
-    border-color: transparent;
-}
-
-.ranking-icon i {
-    font-size: 1.6rem;
-    color: var(--purple);
-    transition: color 0.25s ease;
-}
-
-.ranking-card:hover .ranking-icon i {
-    color: var(--text-main);
-}
-
-.ranking-title {
-    font-size: 1.1rem;
+.education-degree {
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 12px;
+    line-height: 1.25;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+}
+
+.education-university {
+    display: inline-block;
+    width: fit-content;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #60A5FA;
+    text-decoration: none;
+    margin-bottom: 6px;
+    transition: color 0.2s ease;
+}
+
+.education-university:hover {
+    color: #93C5FD;
+}
+
+.education-meta {
+    font-size: 0.9rem;
+    color: #64748B;
+    margin: 0 0 18px;
+    letter-spacing: 0.01em;
+}
+
+.education-tagline {
+    font-size: 0.98rem;
+    color: #94A3B8;
+    line-height: 1.65;
+    margin: 0;
+    font-style: normal;
+}
+
+.education-card-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
+
+.ranking-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(30, 41, 75, 0.35);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 10px;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.ranking-row:hover {
+    border-color: rgba(96, 165, 250, 0.45);
+    background: rgba(30, 41, 75, 0.55);
+    transform: translateX(2px);
+}
+
+.ranking-row-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #93C5FD;
     line-height: 1.4;
 }
 
-.ranking-description {
+.ranking-row-value {
     font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.6;
+    font-weight: 700;
+    color: #60A5FA;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
 }
 
-@media (max-width: 1200px) {
-    .rankings-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 900px) {
+    .education-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
@@ -6961,97 +6920,22 @@ section {
     .education-section {
         padding: 80px 0;
     }
-    
-    .education-header {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-    
-    .education-degree-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-    
+
     .education-degree {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
-    
-    .education-university {
-        font-size: 1.2rem;
-    }
-    
-    .education-tagline {
-        font-size: 1rem;
-    }
-    
-    .btn-learn-more {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .rankings-grid {
+
+    .education-degree br {
         display: none;
     }
 
-    .ranking-mobile-summary {
-        display: block;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-purple);
-        border-radius: 18px;
-        padding: 24px;
-        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
-        animation: rankingSummaryFadeIn 0.35s ease;
+    .ranking-row {
+        padding: 14px 16px;
     }
 
-    .ranking-mobile-title {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: var(--text-main);
-        margin: 0 0 12px;
-    }
-
-    .ranking-mobile-divider {
-        height: 1px;
-        width: 100%;
-        margin-bottom: 18px;
-        background: linear-gradient(90deg, rgba(124, 58, 237, 0), rgba(124, 58, 237, 0.65), rgba(59, 130, 246, 0.65), rgba(59, 130, 246, 0));
-    }
-
-    .ranking-mobile-item {
-        margin-bottom: 18px;
-    }
-
-    .ranking-mobile-item:last-child {
-        margin-bottom: 0;
-    }
-
-    .ranking-mobile-item h4 {
-        margin: 0 0 8px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: var(--text-main);
-        line-height: 1.5;
-    }
-
-    .ranking-mobile-item p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        line-height: 1.65;
-    }
-}
-
-@keyframes rankingSummaryFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .ranking-row-label,
+    .ranking-row-value {
+        font-size: 0.88rem;
     }
 }
 
