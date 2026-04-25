@@ -1,5 +1,5 @@
 // ==================== BuildSign Data ====================
-const buildsignServices = [
+let buildsignServices = [
     {
         id: 'app-design',
         title: 'App Design',
@@ -38,7 +38,7 @@ const buildsignServices = [
     }
 ];
 
-const buildsignServicesDetails = {
+let buildsignServicesDetails = {
     'app-design': {
         title: 'App Design',
         icon: 'fas fa-mobile-alt',
@@ -83,7 +83,7 @@ const buildsignServicesDetails = {
     }
 };
 
-const buildsignProcess = [
+let buildsignProcess = [
     {
         step: '01',
         title: 'Discovery & Strategy',
@@ -106,7 +106,7 @@ const buildsignProcess = [
     }
 ];
 
-const buildsignWhy = [
+let buildsignWhy = [
     {
         title: 'System-based delivery',
         description: 'Organized workflows, clear milestones, and predictable outcomes—no chaos, just quality.'
@@ -125,7 +125,7 @@ const buildsignWhy = [
     }
 ];
 
-const buildsignFAQs = [
+let buildsignFAQs = [
     {
         question: 'What kind of clients do you work with?',
         answer: 'We work with startups, small businesses, and entrepreneurs who value quality and clear communication. Our ideal clients appreciate thoughtful design, sustainable timelines, and building meaningful digital products.'
@@ -141,6 +141,87 @@ const buildsignFAQs = [
     {
         question: 'What\'s your typical timeline?',
         answer: 'Timelines vary by service. Small projects like logo design take 2–3 weeks, while app development can take 6–10 weeks. We set realistic deadlines during discovery and keep you updated throughout the process.'
+    }
+];
+
+let engagementModels = [
+    {
+        id: 'project-based',
+        title: 'Project-Based',
+        description: 'Perfect for specific deliverables',
+        features: ['Fixed scope & timeline', 'Milestone-based payments', 'Quality guarantee', 'Post-launch support'],
+        icon: 'fas fa-box',
+        ideal: 'Best for: One-time projects, MVPs, redesigns'
+    },
+    {
+        id: 'retainer',
+        title: 'Retainer',
+        description: 'Ongoing dedicated support',
+        features: ['Monthly hours allocation', 'Priority support', 'Flexible deliverables', 'Team availability'],
+        icon: 'fas fa-handshake',
+        ideal: 'Best for: Scaling teams, long-term growth'
+    },
+    {
+        id: 'hybrid',
+        title: 'Hybrid Model',
+        description: 'Combine project and retainer',
+        features: ['Custom engagement', 'Flexible scope', 'Best of both', 'Scale as needed'],
+        icon: 'fas fa-sliders-h',
+        ideal: 'Best for: Growing projects, evolving needs'
+    }
+];
+
+let caseStudies = [
+    {
+        id: 'case-1',
+        title: 'E-Commerce Platform Redesign',
+        category: 'Web Design & Development',
+        description: 'Redesigned and rebuilt a failing e-commerce platform, resulting in 3x conversion increase and improved user engagement.',
+        metrics: ['3x conversion increase', '50% faster load times', '45% reduction in bounce rate'],
+        icon: 'fas fa-shopping-cart',
+        color: '#7C3AED'
+    },
+    {
+        id: 'case-2',
+        title: 'SaaS Dashboard Platform',
+        category: 'Product Design',
+        description: 'Created an intuitive dashboard for data analytics that reduced learning curve by 60% and increased user retention.',
+        metrics: ['60% faster adoption', '85% task completion rate', '4.8/5 user satisfaction'],
+        icon: 'fas fa-chart-line',
+        color: '#0EA5E9'
+    },
+    {
+        id: 'case-3',
+        title: 'Flutter Mobile App Launch',
+        category: 'Mobile Development',
+        description: 'Built and launched a cross-platform mobile app from MVP to 10K+ users in 3 months with stellar reviews.',
+        metrics: ['10K+ downloads', '4.7/5 rating', 'iOS + Android'],
+        icon: 'fas fa-mobile-alt',
+        color: '#10B981'
+    }
+];
+
+let testimonials = [
+    {
+        id: 'testimonial-1',
+        name: 'Ahmed Hassan',
+        role: 'Founder, TechStartup BD',
+        text: 'BuildSign transformed our vision into reality. The team\'s attention to detail and commitment to quality exceeded expectations. Highly recommended!',
+        rating: 5
+    },
+    {
+        id: 'testimonial-2',
+        name: 'Sarah Khan',
+        role: 'Product Manager, DigitalCo',
+        text: 'Working with BuildSign was seamless. Clear communication, transparent process, and they delivered everything on time. A true professional team.',
+        rating: 5
+    },
+    {
+        id: 'testimonial-3',
+        name: 'Rajesh Patel',
+        role: 'CEO, InnovateLabs',
+        text: 'The quality of work is exceptional. They don\'t just build products; they build solutions. Our platform went from concept to market-ready in less than 4 months.',
+        rating: 5
     }
 ];
 
@@ -216,6 +297,108 @@ function renderFAQGrid() {
             </div>
         </div>
     `).join('');
+}
+
+function renderEngagementModels() {
+    const grid = document.getElementById('engagementGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = engagementModels.map(model => `
+        <div class="engagement-model-card reveal-stagger">
+            <div class="engagement-card-header">
+                <div class="engagement-card-icon">
+                    <i class="${model.icon}"></i>
+                </div>
+                <h3>${model.title}</h3>
+            </div>
+            <p class="engagement-card-description">${model.description}</p>
+            <ul class="engagement-features">
+                ${model.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+            </ul>
+            <div class="engagement-card-footer">
+                <p class="engagement-ideal">${model.ideal}</p>
+                <a href="#bs-contact" class="btn-engagement-cta">Learn More</a>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderCaseStudies() {
+    const grid = document.getElementById('caseStudiesGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = caseStudies.map(study => `
+        <div class="case-study-card reveal-stagger" style="--case-color: ${study.color}">
+            <div class="case-study-header">
+                <div class="case-study-icon">
+                    <i class="${study.icon}"></i>
+                </div>
+                <span class="case-study-category">${study.category}</span>
+            </div>
+            <div class="case-study-content">
+                <h3>${study.title}</h3>
+                <p>${study.description}</p>
+            </div>
+            <div class="case-study-metrics">
+                ${study.metrics.map(metric => `<div class="case-metric"><i class="fas fa-arrow-up"></i> ${metric}</div>`).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderTestimonials() {
+    const grid = document.getElementById('testimonialsGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = testimonials.map(testimonial => `
+        <div class="testimonial-card reveal-stagger">
+            <div class="testimonial-stars">
+                ${Array(testimonial.rating).fill().map(() => '<i class="fas fa-star"></i>').join('')}
+            </div>
+            <p class="testimonial-text">"${testimonial.text}"</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="testimonial-info">
+                    <h4>${testimonial.name}</h4>
+                    <p>${testimonial.role}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function animateCounters() {
+    const metrics = document.querySelectorAll('.impact-metric-number');
+    metrics.forEach(metric => {
+        const target = parseInt(metric.getAttribute('data-target'));
+        const suffix = metric.getAttribute('data-suffix') || '';
+        let current = 0;
+        const increment = target / 30;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                metric.textContent = Math.floor(current) + suffix;
+                requestAnimationFrame(updateCounter);
+            } else {
+                metric.textContent = target + suffix;
+            }
+        };
+        
+        // Trigger animation when element is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && current === 0) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(metric);
+    });
 }
 
 // ==================== Service Modal ====================
@@ -319,13 +502,79 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==================== Initialize ====================
-document.addEventListener('DOMContentLoaded', () => {
+function applyBuildsignStaticContent(staticContent) {
+    if (!staticContent) return;
+
+    if (staticContent.seo?.title) {
+        document.title = staticContent.seo.title;
+    }
+
+    const heroTitle = document.querySelector('.buildsign-hero-title');
+    if (heroTitle && staticContent.hero?.title) {
+        heroTitle.textContent = staticContent.hero.title;
+    }
+
+    const heroSubtitle = document.querySelector('.buildsign-hero-subtitle');
+    if (heroSubtitle && staticContent.hero?.subtitle) {
+        heroSubtitle.textContent = staticContent.hero.subtitle;
+    }
+
+    const heroLinks = document.querySelectorAll('.buildsign-hero-links .buildsign-link');
+    if (heroLinks[0] && staticContent.hero?.links?.websiteHref) {
+        heroLinks[0].setAttribute('href', staticContent.hero.links.websiteHref);
+    }
+    if (heroLinks[1] && staticContent.hero?.links?.linkedinHref) {
+        heroLinks[1].setAttribute('href', staticContent.hero.links.linkedinHref);
+    }
+    if (heroLinks[2] && staticContent.hero?.links?.emailHref) {
+        heroLinks[2].setAttribute('href', staticContent.hero.links.emailHref);
+    }
+}
+
+async function loadDynamicBuildsignContent() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return;
+
+        const buildsign = payload.content.buildsign;
+        if (!buildsign) return;
+
+        if (Array.isArray(buildsign.datasets?.buildsignServices)) {
+            buildsignServices = buildsign.datasets.buildsignServices;
+        }
+        if (buildsign.datasets?.buildsignServicesDetails && typeof buildsign.datasets.buildsignServicesDetails === 'object') {
+            buildsignServicesDetails = buildsign.datasets.buildsignServicesDetails;
+        }
+        if (Array.isArray(buildsign.datasets?.buildsignProcess)) {
+            buildsignProcess = buildsign.datasets.buildsignProcess;
+        }
+        if (Array.isArray(buildsign.datasets?.buildsignWhy)) {
+            buildsignWhy = buildsign.datasets.buildsignWhy;
+        }
+        if (Array.isArray(buildsign.datasets?.buildsignFAQs)) {
+            buildsignFAQs = buildsign.datasets.buildsignFAQs;
+        }
+
+        applyBuildsignStaticContent(buildsign.static);
+    } catch (error) {
+        // Keep local fallback data.
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadDynamicBuildsignContent();
+
     renderServicesGrid();
     renderProcessGrid();
     renderWhyGrid();
+    renderEngagementModels();
+    renderCaseStudies();
+    renderTestimonials();
     renderFAQGrid();
-    
-    // Initialize reveal animations if available
+    animateCounters();
+
     if (typeof initRevealAnimations === 'function') {
         setTimeout(initRevealAnimations, 100);
     }

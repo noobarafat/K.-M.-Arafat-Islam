@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, nocache, no-cache, noarchive">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Admin Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/login.css">
+</head>
+<body>
+  <main class="login-shell">
+    <section class="login-card" aria-labelledby="login-title">
+      <h1 id="login-title">Admin Access</h1>
+      <p class="login-subtitle">Enter your admin password to continue.</p>
+
+      <form id="admin-login-form" class="login-form" novalidate>
+        <label class="field-label" for="password-input">Password</label>
+        <input
+          id="password-input"
+          class="field-input"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          minlength="1"
+          placeholder="Enter password"
+        >
+
+        <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
+
+        <button id="login-submit" type="submit" class="login-btn">
+          <span id="login-btn-text">Login</span>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/admin/login.js"></script>
+</body>
+</html>

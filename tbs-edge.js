@@ -78,7 +78,7 @@ function initTBSReveal() {
 }
 
 // ==================== Render Publications Grid ====================
-const publications = [
+let publications = [
     {
         id: 'oct-vit-explainable',
         title: 'Explainable Deep Neural Diagnostics: Vision Transformer-Based Retinal Disease Classification',
@@ -169,8 +169,25 @@ function renderPublicationsGrid() {
     `).join('');
 }
 
+async function loadDynamicPublications() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return;
+
+        const incoming = payload.content.index?.datasets?.publications;
+        if (Array.isArray(incoming)) {
+            publications = incoming;
+        }
+    } catch (error) {
+        // Keep local fallback data.
+    }
+}
+
 // Initialize on load
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     initTBSReveal();
+    await loadDynamicPublications();
     renderPublicationsGrid();
 });

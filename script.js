@@ -1,5 +1,5 @@
 // ==================== About Highlights Data ====================
-const publications = [
+let publications = [
     {
         id: "oct-vit-explainable",
         title: "Explainable Deep Neural Diagnostics: Vision Transformer-Based Retinal Disease Classification",
@@ -62,7 +62,7 @@ const publications = [
     }
 ];
 
-const activities = [
+let activities = [
     {
         id: "diu-cyber-club",
         role: "Communication & Organizing Secretary",
@@ -161,7 +161,7 @@ const activities = [
     }
 ];
 
-const skills = [
+let skills = [
     {
         id: "uiux-gp",
         name: "UI/UX Design",
@@ -224,7 +224,7 @@ const skills = [
     }
 ];
 
-const aboutHighlights = [
+let aboutHighlights = [
     {
         id: "buildsign-founder",
         title: "Founder & CEO of BuildSign | Digital Product Agency",
@@ -877,7 +877,7 @@ function closeSkillDetails() {
 renderSkillsCompact();
 
 // ==================== International Events Section ====================
-const internationalEvents = [
+let internationalEvents = [
     {
         id: "comtech-2023",
         institute: "Institut Teknologi Sepuluh Nopember (ITS), Indonesia",
@@ -1806,6 +1806,133 @@ function changeGPImage(direction) {
     lightbox.querySelector('.gp-lightbox-label').textContent = window.gpLabels[window.currentGPIndex];
 }
 
+async function fetchDynamicContentPayload() {
+    try {
+        const response = await fetch('/api/content', { method: 'GET' });
+        if (!response.ok) return null;
+        const payload = await response.json();
+        if (!payload || !payload.ok || !payload.content) return null;
+        return payload.content;
+    } catch (error) {
+        return null;
+    }
+}
+
+function applyIndexStaticContent(staticContent) {
+    if (!staticContent) return;
+
+    if (staticContent.seo?.title) {
+        document.title = staticContent.seo.title;
+    }
+
+    if (staticContent.seo?.description) {
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', staticContent.seo.description);
+        }
+    }
+
+    if (staticContent.hero?.name) {
+        document.querySelectorAll('.hero-name').forEach((el) => {
+            el.textContent = staticContent.hero.name;
+        });
+    }
+
+    const subtitleTextEls = document.querySelectorAll('.hero-subtitle .subtitle-text');
+    subtitleTextEls.forEach((el, index) => {
+        if (index % 2 === 0 && staticContent.hero?.subtitlePrimary) {
+            el.textContent = staticContent.hero.subtitlePrimary;
+        }
+        if (index % 2 === 1 && staticContent.hero?.subtitleSecondary) {
+            el.textContent = staticContent.hero.subtitleSecondary;
+        }
+    });
+
+    if (staticContent.hero?.description) {
+        const descEl = document.querySelector('.hero-description');
+        if (descEl) descEl.textContent = staticContent.hero.description;
+    }
+
+    if (staticContent.contact?.emailHref || staticContent.contact?.emailText) {
+        const emailAnchors = document.querySelectorAll('a[href^="mailto:"]');
+        emailAnchors.forEach((anchor) => {
+            if (staticContent.contact?.emailHref) {
+                anchor.setAttribute('href', staticContent.contact.emailHref);
+            }
+            if (staticContent.contact?.emailText && anchor.classList.contains('contact-method-value')) {
+                anchor.textContent = staticContent.contact.emailText;
+            }
+        });
+    }
+
+    const linkedinEl = document.querySelector('.contact-method .contact-method-value[href*="linkedin"]');
+    if (linkedinEl) {
+        if (staticContent.contact?.linkedinHref) {
+            linkedinEl.setAttribute('href', staticContent.contact.linkedinHref);
+        }
+        if (staticContent.contact?.linkedinText) {
+            linkedinEl.textContent = staticContent.contact.linkedinText;
+        }
+    }
+
+    if (staticContent.contact?.location) {
+        document.querySelectorAll('.contact-method').forEach((methodEl) => {
+            const label = methodEl.querySelector('.contact-method-label');
+            const value = methodEl.querySelector('.contact-method-value');
+            if (label && value && label.textContent.trim().toLowerCase() === 'location') {
+                value.textContent = staticContent.contact.location;
+            }
+        });
+    }
+
+    if (staticContent.footer?.copyright || staticContent.footer?.developedText) {
+        const footerParagraphs = document.querySelectorAll('.footer .container > p');
+        if (footerParagraphs[0] && staticContent.footer?.copyright) {
+            footerParagraphs[0].innerHTML = staticContent.footer.copyright;
+        }
+        if (footerParagraphs[1] && staticContent.footer?.developedText) {
+            footerParagraphs[1].innerHTML = staticContent.footer.developedText;
+        }
+    }
+}
+
+async function loadDynamicPortfolioContent() {
+    const content = await fetchDynamicContentPayload();
+    if (!content) return;
+
+    if (Array.isArray(content.index?.datasets?.publications)) {
+        publications = content.index.datasets.publications;
+    }
+    if (Array.isArray(content.index?.datasets?.activities)) {
+        activities = content.index.datasets.activities;
+    }
+    if (Array.isArray(content.index?.datasets?.skills)) {
+        skills = content.index.datasets.skills;
+    }
+    if (Array.isArray(content.index?.datasets?.aboutHighlights)) {
+        aboutHighlights = content.index.datasets.aboutHighlights;
+    }
+    if (Array.isArray(content.index?.datasets?.internationalEvents)) {
+        internationalEvents = content.index.datasets.internationalEvents;
+    }
+
+    applyIndexStaticContent(content.index?.static);
+
+    renderAboutGrid();
+    renderPublicationsGrid();
+    renderActivitiesGrid();
+    renderSkillsCompact();
+    renderEventsGrid();
+
+    // Dynamic renders can replace hidden .reveal-stagger nodes (About cards).
+    // Re-initialize reveal observer so newly inserted elements can animate in.
+    initRevealAnimations();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadDynamicPortfolioContent();
+});
+
 // Initialize about grid on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderAboutGrid();
@@ -1927,6 +2054,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 function closeMobileMenu() {
     hamburger?.classList.remove('active');
     navMenu?.classList.remove('active');
+    hamburger?.setAttribute('aria-expanded', 'false');
 }
 
 if (hamburger && navMenu) {
@@ -1934,6 +2062,8 @@ if (hamburger && navMenu) {
         event.stopPropagation();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        const expanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', String(expanded));
     });
 }
 
@@ -2055,8 +2185,8 @@ window.addEventListener('scroll', revealElements);
 window.addEventListener('load', revealElements);
 
 // ==================== Contact Section ====================
-// ==================== Formspree Configuration ====================
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_REAL_ID";
+// Uses FormSubmit to forward submissions to uxdev.arafat@gmail.com.
+const FORMSPREE_ENDPOINT = "https://formsubmit.co/ajax/uxdev.arafat@gmail.com";
 
 function copyEmail() {
     const email = 'uxdev.arafat@gmail.com';
@@ -2095,9 +2225,9 @@ function showToast(message, type = 'success') {
 }
 
 function validateFormspreeEndpoint() {
-    if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT.includes('REPLACE_WITH_REAL_ID')) {
-        showToast('Form setup incomplete. Please configure Form ID.', 'error');
-        console.error('[Formspree Config] Endpoint not configured:', FORMSPREE_ENDPOINT);
+    if (!FORMSPREE_ENDPOINT) {
+        showToast('Form setup incomplete. Please configure form endpoint.', 'error');
+        console.error('[Form Config] Endpoint not configured:', FORMSPREE_ENDPOINT);
         return false;
     }
     return true;
@@ -2106,26 +2236,31 @@ function validateFormspreeEndpoint() {
 function handleFormspreeError(response, error) {
     if (response) {
         if (response.status === 404) {
-            showToast('Form endpoint is invalid. Please update Formspree Form ID.', 'error');
-            console.error('[Formspree] Form not found (404). Endpoint:', FORMSPREE_ENDPOINT);
+            showToast('Form endpoint is invalid. Please verify contact form setup.', 'error');
+            console.error('[Form Submit] Form endpoint not found (404). Endpoint:', FORMSPREE_ENDPOINT);
             return;
         }
         if (response.status === 403) {
-            showToast('Form access denied. Please verify Formspree configuration.', 'error');
-            console.error('[Formspree] Access forbidden (403). Endpoint:', FORMSPREE_ENDPOINT);
+            showToast('Form access denied. Please verify contact form setup.', 'error');
+            console.error('[Form Submit] Access forbidden (403). Endpoint:', FORMSPREE_ENDPOINT);
+            return;
+        }
+        if (response.status === 422) {
+            showToast('Please check required fields and try again.', 'error');
+            console.error('[Form Submit] Validation failed (422). Endpoint:', FORMSPREE_ENDPOINT);
             return;
         }
     }
     if (error) {
         const errorMsg = error.message || String(error);
         if (errorMsg.toLowerCase().includes('not found') || errorMsg.toLowerCase().includes('404')) {
-            showToast('Form endpoint is invalid. Please update Formspree Form ID.', 'error');
-            console.error('[Formspree] Form not found error:', error, 'Endpoint:', FORMSPREE_ENDPOINT);
+            showToast('Form endpoint is invalid. Please verify contact form setup.', 'error');
+            console.error('[Form Submit] Endpoint error:', error, 'Endpoint:', FORMSPREE_ENDPOINT);
             return;
         }
     }
     showToast('Oops! Something went wrong. Please try again.', 'error');
-    console.error('[Formspree] Submission error:', error || response, 'Endpoint:', FORMSPREE_ENDPOINT);
+    console.error('[Form Submit] Submission error:', error || response, 'Endpoint:', FORMSPREE_ENDPOINT);
 }
 
 // Contact Form Handler
@@ -2151,6 +2286,9 @@ if (contactForm) {
         
         try {
             const formData = new FormData(this);
+            formData.set('_subject', `New portfolio contact from ${formData.get('name') || 'Website visitor'}`);
+            formData.set('_template', 'table');
+            formData.set('_captcha', 'false');
             const response = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
                 body: formData,
@@ -2211,6 +2349,9 @@ if (subscribeForm) {
         
         try {
             const formData = new FormData(this);
+            formData.set('_subject', 'New portfolio newsletter request');
+            formData.set('_template', 'table');
+            formData.set('_captcha', 'false');
             const response = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
                 body: formData,
@@ -2561,3 +2702,19 @@ function createMoodParticles(mood, buttonElement) {
     }
 }
 
+// ==================== Back to Top Button ====================
+const backToTopBtn = document.getElementById('back-to-top');
+
+if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}

@@ -1,0 +1,1366 @@
+{
+  "generatedAt": "2026-03-17T01:49:27.166Z",
+  "source": {
+    "script": "script.js",
+    "search": "search.js",
+    "buildsign": "buildsign.js",
+    "certificates": "certificates.js",
+    "index": "index.html",
+    "buildsignHtml": "buildsign.html"
+  },
+  "index": {
+    "static": {
+      "seo": {
+        "title": "K M Arafat Islam | Portfolio",
+        "description": "K M Arafat Islam - Professional Portfolio"
+      },
+      "hero": {
+        "name": "K. M. Arafat Islam",
+        "subtitlePrimary": "Founder & CEO @BuildSign",
+        "subtitleSecondary": "Digital Product Agency",
+        "description": "Curious young mind eager to learn and explore the world. Always seeking new knowledge and experiences."
+      },
+      "contact": {
+        "emailHref": "mailto:uxdev.arafat@gmail.com",
+        "emailText": "uxdev.arafat@gmail.com",
+        "linkedinHref": "https://linkedin.com/in/k-m-arafat-islam",
+        "linkedinText": "k-m-arafat-islam",
+        "location": "Dhaka, Bangladesh"
+      },
+      "footer": {
+        "copyright": "&copy; 2026 K. M. Arafat Islam. All rights reserved.",
+        "developedText": "Designed & Developed with <i class=\"fas fa-heart\"></i> by K M Arafat Islam"
+      }
+    },
+    "datasets": {
+      "publications": [
+        {
+          "id": "oct-vit-explainable",
+          "title": "Explainable Deep Neural Diagnostics: Vision Transformer-Based Retinal Disease Classification",
+          "conference": "Proceedings of the 3rd International Conference on Big Data, IoT and Machine Learning (Springer)",
+          "index": "Indexed Publication",
+          "publisher": "Springer",
+          "link": "https://link.springer.com/chapter/10.1007/978-3-032-15346-3_17#citeas",
+          "desc": "Vision Transformer-driven retinal diagnostics with explainability features, published in Springer conference proceedings."
+        },
+        {
+          "id": "deepcactus",
+          "title": "DeepCactus: A Transfer Learning-Driven CNN Model for Accurate Identification of Morphologically Overlapping Cactus Breeds",
+          "conference": "Proceedings of the 3rd International Conference on Big Data, IoT and Machine Learning (Springer)",
+          "index": "Indexed Publication",
+          "publisher": "Springer",
+          "link": "https://link.springer.com/chapter/10.1007/978-3-032-15346-3_44",
+          "desc": "Transfer learning-based cactus breed identification study in Springer proceedings, focused on morphologically overlapping species."
+        },
+        {
+          "id": "walmart-forecasting",
+          "title": "Resource-Efficient Deep Ensembles for Structured Retail Time-Series Forecasting: A Case Study on Walmart Sales",
+          "conference": "4th IEEE International Conference on Robotics, Automation, Artificial Intelligence and IoT (RAAICON 2025) — MIST, Dhaka",
+          "index": "IEEE Xplore",
+          "desc": "A parameter-efficient deep ensemble with shared MLP backbone achieves near-ensemble accuracy while training 4–5× faster with ~80% fewer parameters."
+        },
+        {
+          "id": "gi-ensemble-endoscopy",
+          "title": "Ensemble Deep Learning for Automated Multiclass Classification of Gastrointestinal Disorders in Endoscopic Images",
+          "conference": "11th IEEE WIE Conference on Electrical and Computer Engineering (WIECON-ECE 2025) — Cox's Bazar",
+          "index": "IEEE Xplore",
+          "desc": "Weighted ensemble of DeepLabV3+, U-Net, and YOLOv4 achieved ~98% accuracy for automated multiclass gastrointestinal disorder classification from endoscopic images."
+        },
+        {
+          "id": "mental-health-rank-ensemble",
+          "title": "Rank-Based Ensemble Learning for Early Detection of Mental Health Disorders in Private University Students",
+          "conference": "11th IEEE WIE Conference on Electrical and Computer Engineering (WIECON-ECE 2025) — Cox's Bazar",
+          "index": "IEEE Xplore",
+          "desc": "Rank-based ensemble of CatBoost, SAINT, and NODE improves robustness and balanced prediction of stress, anxiety, and depression severity levels."
+        },
+        {
+          "id": "thesis-idaa",
+          "title": "Early Detection of Mental Health Disorders Among Private University Students in Bangladesh Using Machine Learning-Based Behavioral Data Analysis",
+          "conference": "International Conference on Intelligent Data Analysis and Applications (IDAA 2025) — Daffodil International University",
+          "index": "Atlantis Press / Taylor & Francis",
+          "desc": "Undergraduate thesis analyzing behavioral survey data from 1,978 students; tuned CatBoost reached 99.79% accuracy with strong generalization."
+        },
+        {
+          "id": "tea-leaf-ensemble",
+          "title": "A Transfer Learning-Based Ensemble Model for Automated Tea Leaf Disease Detection",
+          "conference": "Undergraduate Conference on Intelligent Computing and Systems (UCICS 2026) — Varendra University",
+          "index": "Conference Proceedings",
+          "desc": "Lightweight ensemble combining DenseNet121, Xception, and MobileNet achieved 98.64% accuracy for automated tea leaf disease detection."
+        },
+        {
+          "id": "agile-pm-review",
+          "title": "The Role of Agile Methodology in Enhancing Product Management Efficiency: A Review",
+          "conference": "Undergraduate Conference on Intelligent Computing and Systems (UCICS 2026) — Varendra University",
+          "index": "Conference Proceedings",
+          "desc": "Systematic review (2023–2025) linking Agile practices with product efficiency outcomes such as delivery speed, quality, and stakeholder alignment."
+        }
+      ],
+      "activities": [
+        {
+          "id": "diu-cyber-club",
+          "role": "Communication & Organizing Secretary",
+          "org": "DIU Cyber Security Club",
+          "category": [
+            "Leadership",
+            "Events",
+            "Communication",
+            "Community"
+          ],
+          "metrics": [
+            {
+              "label": "Events Led",
+              "value": "25+"
+            },
+            {
+              "label": "Students Reached",
+              "value": "6,000+"
+            }
+          ],
+          "highlights": [
+            "Handled content writing, email communication, documentation, and social media.",
+            "Led planning and execution of 25+ seminars, workshops, and competitions.",
+            "Improved outreach and internal coordination to solve participation and communication issues."
+          ],
+          "desc": "I was actively involved in the Cyber Security Club at Daffodil International University, where I initially served as Communication Secretary and later took on the role of Organizing Secretary. My responsibilities began with content writing, email communication, documentation, and social media management, which strengthened the club's internal and external communication. As Organizing Secretary, I led the planning and execution of more than 25 seminars, workshops, and competitions—coordinating teams, schedules, and smooth delivery. Through these activities, the club reached and benefited over 6,000 students. This experience developed my communication, leadership, and planning skills and directly supports my current work in agency management and client communication."
+        },
+        {
+          "id": "ieee-pr",
+          "role": "Public Relations Coordinator",
+          "org": "IEEE DIU Student Branch",
+          "category": [
+            "PR / Media",
+            "Communication",
+            "Events",
+            "Leadership"
+          ],
+          "metrics": [
+            {
+              "label": "Events Supported",
+              "value": "38"
+            },
+            {
+              "label": "Avg Participants",
+              "value": "70–100"
+            }
+          ],
+          "highlights": [
+            "Coordinated with IEEE branches across Bangladesh for announcements and outreach.",
+            "Helped organize and promote 38 events with consistent documentation.",
+            "Led a 3-day programming program with Programming Hero + competition + bootcamp access."
+          ],
+          "desc": "I served as a Public Relations Coordinator at the IEEE DIU Student Branch, managing internal communication and strengthening collaboration with other IEEE student branches across Bangladesh. I coordinated with different university branches to promote events, share announcements in official groups, and increase participation through structured outreach. During my tenure, I supported 38 events with 70–100 participants on average. A key initiative was a three-day programming event with Programming Hero: three technical sessions, followed by a competition; top three winners received prizes and all participants got a 21-day free bootcamp. This role strengthened my communication, branding, and stakeholder management skills—directly supporting my agency branding and client communication today."
+        },
+        {
+          "id": "creative-it-ambassador",
+          "role": "Campus Ambassador",
+          "org": "Creative IT Institute",
+          "category": [
+            "Community",
+            "Communication"
+          ],
+          "metrics": [
+            {
+              "label": "Outreach Posts",
+              "value": "40+"
+            },
+            {
+              "label": "Student Leads",
+              "value": "150+"
+            }
+          ],
+          "highlights": [
+            "Promoted practical IT skill development opportunities to students.",
+            "Acted as a bridge between the institute and the student community.",
+            "Encouraged peers to explore skill-based learning pathways for employability."
+          ],
+          "desc": "I served as a Campus Ambassador for Creative IT Institute, promoting access to practical IT skill development and increasing student engagement with technology-focused learning initiatives. I acted as a bridge between the institute and the university student community—sharing program information through student networks and encouraging participation in training initiatives related to digital skills. Through consistent outreach, I supported peers in exploring skill-based learning pathways that strengthened confidence and long-term career readiness. This experience improved my communication and outreach abilities and reinforced my community impact mindset, which continues to influence my entrepreneurial thinking."
+        },
+        {
+          "id": "programming-hero",
+          "role": "Campus Hero",
+          "org": "Programming Hero",
+          "category": [
+            "Leadership",
+            "Community",
+            "Communication"
+          ],
+          "metrics": [
+            {
+              "label": "Institutions",
+              "value": "20+"
+            },
+            {
+              "label": "Students Reached",
+              "value": "1,000+"
+            }
+          ],
+          "highlights": [
+            "Represented my university and coordinated a nationwide Campus Hero network.",
+            "Managed communication, updates, and engagement across 20+ institutions.",
+            "Promoted workshops, bootcamps, and online learning programs for students."
+          ],
+          "desc": "I served as a Campus Hero for Programming Hero, promoting learning initiatives and building student engagement across digital platforms. Beyond representing my own university, I acted as a coordinator for 20+ institutions—managing communication, updates, and engagement across a nationwide student network. Through structured online outreach, the initiatives reached around 1,000 students and provided access to technical learning opportunities. This role strengthened my leadership and team management skills in large groups, and reinforced my community impact mindset—widening access to technology education continues to influence my entrepreneurial and academic goals."
+        },
+        {
+          "id": "tbs-edge",
+          "role": "EDGE Associate",
+          "org": "The Business Standard",
+          "category": [
+            "PR / Media",
+            "Communication"
+          ],
+          "metrics": [
+            {
+              "label": "Articles Promoted",
+              "value": "30+"
+            },
+            {
+              "label": "Campus Reach",
+              "value": "1,000+"
+            }
+          ],
+          "highlights": [
+            "Supported news outreach, student communication, and public relations activities.",
+            "Promoted selected news and initiatives through campus networks.",
+            "Learned consistent messaging and media communication in a professional context."
+          ],
+          "desc": "As an EDGE Associate at The Business Standard, I supported the newspaper's youth development wing by helping with news outreach, student communication, and public relations activities. I promoted selected articles and initiatives across campus networks so relevant stories reached a wider student audience. This role gave me hands-on exposure to news distribution, campus-level PR, and media communication. It strengthened my ability to represent a national newspaper, maintain consistent messaging, and manage information flow between students and the organization—helping me understand how professional media platforms build trust and public image."
+        },
+        {
+          "id": "banglay-ielts-crew",
+          "role": "Campus Crew",
+          "org": "Banglay IELTS & Immigration Centre",
+          "category": [
+            "Communication",
+            "Community",
+            "PR / Media"
+          ],
+          "metrics": [
+            {
+              "label": "Sessions Supported",
+              "value": "10+"
+            },
+            {
+              "label": "Students Guided",
+              "value": "200+"
+            }
+          ],
+          "highlights": [
+            "Promoted IELTS and study-abroad guidance sessions through campus networks.",
+            "Supported event coordination, student communication, and response handling.",
+            "Helped increase awareness of application steps, documentation, and timelines."
+          ],
+          "desc": "I worked as a Campus Crew member at Banglay IELTS & Immigration Centre, supporting student outreach and engagement around IELTS preparation and study-abroad guidance. I helped promote sessions through campus networks, assisted in coordination, and supported student communication by answering common queries and guiding students to the right resources. This role strengthened my community outreach and communication skills, especially in handling high-volume student interest and maintaining clear, helpful messaging. It also improved my ability to coordinate small campaigns and support learning-focused events with a service mindset."
+        }
+      ],
+      "skills": [
+        {
+          "id": "uiux-gp",
+          "name": "UI/UX Design",
+          "issuer": "Grameenphone Academy (Grameenphone Ltd.)",
+          "meta": [
+            "8 months",
+            "Freelancing Factory",
+            "Top 5 learner",
+            "$3000+ earnings"
+          ],
+          "tags": [
+            "Design",
+            "UI/UX",
+            "Figma",
+            "Freelancing",
+            "App Design",
+            "Web Design",
+            "UX Research"
+          ],
+          "certificateLink": "assets/gpui.jpg",
+          "short": "UI/UX design training through Grameenphone Academy's Freelancing Factory—focused on real market work, strong learning performance, and verified international freelancing earnings.",
+          "details": "I completed the 8-month Grameenphone Academy Freelancing Factory program in UI/UX Design and was ranked among the top 5 learners. The program was built around learning with earning, so I applied my skills in real market projects. After finishing the course, my recorded freelancing earnings crossed $3000+. I received official certification from Grameenphone Ltd., and this experience became a major foundation for my professional journey and confidence in delivering design work for real clients."
+        },
+        {
+          "id": "data-analytics-hdn",
+          "name": "Data Analytics",
+          "issuer": "Human Development Network Bangladesh (Accredited Bootcamp)",
+          "meta": [
+            "12-week bootcamp",
+            "8+ real projects",
+            "Excel • SQL • Python"
+          ],
+          "tags": [
+            "Analytics",
+            "Excel",
+            "Power BI",
+            "SQL",
+            "Python",
+            "Dashboards"
+          ],
+          "certificateLink": "assets/dataanalytics.png",
+          "short": "12-week career bootcamp with 8+ real projects covering data cleaning, analysis, visualization, dashboards, and business reporting using Excel, SQL, and Python.",
+          "details": "I completed a 12-week Data Analytics Career Bootcamp accredited by the Human Development Network Bangladesh, working on 8+ real data projects involving cleaning, exploration, visualization, and business reporting. The program included industry-oriented modules on Data Fundamentals, Excel Analytics, SQL & Databases, and Career Readiness. I practiced end-to-end workflows: collecting datasets, cleaning with Excel and Python, writing SQL queries, building dashboards, and presenting insights for decisions. This training strengthened my analytical thinking, attention to detail, and confidence with real datasets, preparing me for data-driven roles in modern business environments."
+        },
+        {
+          "id": "mobile-app-edge",
+          "name": "Mobile App Development",
+          "issuer": "ICT Division, Government of Bangladesh (EDGE Project) • Bangladesh Computer Council",
+          "meta": [
+            "80 Hours",
+            "Government funded",
+            "Hands-on prototypes"
+          ],
+          "tags": [
+            "Mobile",
+            "App Dev",
+            "Flutter",
+            "EDGE",
+            "UI Basics",
+            "Backend Concepts"
+          ],
+          "certificateLink": "assets/mobileapp.jpg",
+          "short": "Government-certified 80-hour training under the EDGE Project—mobile app fundamentals, UI basics, backend concepts, and hands-on prototype building with structured lessons.",
+          "details": "I successfully completed an 80-hour Mobile App Development training under the Enhancing Digital Government and Economy (EDGE) Project, conducted by the ICT Division, Government of Bangladesh and the Bangladesh Computer Council, in collaboration with the Department of CSE, Jagannath University. I learned mobile app fundamentals, UI design basics, backend concepts, and the complete process of building functional app prototypes. Through structured lessons and hands-on tasks, I practiced real workflows and strengthened my foundation in mobile technology. Completing this government-certified program added value to my technical skill set and exposure to practical, industry-relevant ICT training."
+        },
+        {
+          "id": "product-management-bohubrihi",
+          "name": "Digital Product Management",
+          "issuer": "Bohubrihi (4-Month Career Track Program)",
+          "meta": [
+            "4 months",
+            "5 mini-projects",
+            "1 capstone"
+          ],
+          "tags": [
+            "Product",
+            "Strategy",
+            "JIRA",
+            "User Research",
+            "Go-to-market",
+            "UI/UX",
+            "Development",
+            "Engineering"
+          ],
+          "certificateLink": "assets/product.jfif",
+          "short": "4-month product career track covering full product lifecycle with 5 mini-projects + capstone—BMC, Kano, Hooked model, prioritization, JIRA, validation, and launch strategy.",
+          "details": "I completed a 4-month Digital Product Management career track program from Bohubrihi, learning the full product lifecycle from idea to launch. I worked on five structured mini-projects and a capstone project—Business Model Canvas (Pathao), Kano Model (Netflix), Hooked Model (Dorik), JIRA-based task management, and a final capstone feature built by applying all concepts. The program covered hypothesis validation, user research, prioritization, development methodologies, go-to-market planning, and post-launch strategy. This training strengthened my product-thinking mindset and helped me connect design, business, and technical understanding toward building meaningful digital solutions."
+        },
+        {
+          "id": "nssb-2019",
+          "name": "National Skill Standard Computer Office Application",
+          "issuer": "Bangladesh Technical Education Board (Government Certified)",
+          "meta": [
+            "360 Hours",
+            "6 months",
+            "A+ Grade",
+            "2019"
+          ],
+          "tags": [
+            "Office Tools",
+            "Documentation",
+            "Digital Skills",
+            "MS Word",
+            "Typing",
+            "Hardware"
+          ],
+          "certificateLink": "assets/com.jpg",
+          "short": "Government-recognized 360-hour National Skill Standard course in Computer Office Application—earned A+ in the national exam and built strong early foundation in digital tools and discipline.",
+          "details": "In 2019, I earned a government-recognized certification from the Bangladesh Technical Education Board after completing a 360-hour (6-month) National Skill Standard Basic Course in Computer Office Application. The program was conducted by Daffodil International Professional Training Institute, Chandpur, and supervised under the Ministry of Education. I passed the national examination with an A+ grade. This certification built my foundation in essential computer skills, documentation, and professional office applications. Completing a government-standard course early helped build my discipline, interest in technology, and confidence to pursue higher-level digital skills later."
+        },
+        {
+          "id": "doe-video-editing",
+          "name": "Video Editing",
+          "issuer": "The Duke of Edinburgh's International Award (Bronze Standard)",
+          "meta": [
+            "Bronze Award",
+            "Skill: Video Editing",
+            "Voluntary service: 30+ patients helped"
+          ],
+          "tags": [
+            "Video Editing",
+            "Consistency",
+            "Discipline",
+            "Service",
+            "Blood",
+            "Football",
+            "Sunamganj"
+          ],
+          "certificateLink": "assets/duke.jpg",
+          "short": "Bronze Duke of Edinburgh's Award—developed video editing as the skill track, football as physical recreation, and blood donation service supporting 30+ patients plus 4 personal donations.",
+          "details": "I earned the Bronze Standard of the Duke of Edinburgh's International Award by completing all four phases with consistency and dedication. For the Skill section, I chose video editing and practiced weekly until I became confident. Physical Recreation focused on football training 3–4 days a week, improving discipline and teamwork. In Voluntary Service, I worked in emergency blood management and helped more than 30 patients by arranging blood on time, and I donated blood four times. The Adventurous Journey took place in Tanguar Haor, Sunamganj, building teamwork and adaptability. This award taught discipline, empathy, and personal growth through real responsibility."
+        }
+      ],
+      "aboutHighlights": [
+        {
+          "id": "buildsign-founder",
+          "title": "Founder & CEO of BuildSign | Digital Product Agency",
+          "short": "BuildSign is more than an agency—it's a remote-first model built to bridge the gap between student skills and real paid opportunities, especially international work.",
+          "details": "BuildSign wasn't started only as a digital agency. I built it to solve a deeper issue: skilled students often lack real earning opportunities, especially remote or international work. After freelancing, I saw how online platforms remove location and schedule barriers. BuildSign became a shared opportunity—about ten people have worked with us and earned through flexible remote projects, sometimes supporting families. Beyond income, they gained confidence, professional experience, and long-term skills. We grow slowly and responsibly, shaped by Grameenphone Academy's learning-first mindset. The long-term goal is to train and support 10–20 students yearly."
+        },
+        {
+          "id": "fiverr-level1",
+          "title": "Level 1 Seller on Fiverr",
+          "short": "Freelancing became my real-market training ground—learning with earning through Grameenphone Academy and building global client experience that later shaped BuildSign.",
+          "details": "<div class=\"fiverr-details-layout\">\n            <div class=\"fiverr-quote-block\">\n                <i class=\"fas fa-quote-left quote-icon\"></i>\n                <p class=\"quote-text\">Freelancing became my real-market training ground—learning with earning through Grameenphone Academy and building global client experience that later shaped BuildSign.</p>\n            </div>\n\n            <div class=\"fiverr-section\">\n                <h3 class=\"fiverr-section-title\">Services I Deliver on Fiverr</h3>\n                <div class=\"fiverr-services-grid\">\n                    <div class=\"fiverr-service-item\">\n                        <div class=\"service-item-icon\">\n                            <i class=\"fas fa-pencil-ruler\"></i>\n                        </div>\n                        <div class=\"service-item-content\">\n                            <h4>UI/UX Design</h4>\n                            <p>Web & app UI, UX flows, wireframes, high-fidelity designs, clickable prototypes</p>\n                        </div>\n                    </div>\n                    <div class=\"fiverr-service-item\">\n                        <div class=\"service-item-icon\">\n                            <i class=\"fab fa-wordpress\"></i>\n                        </div>\n                        <div class=\"service-item-content\">\n                            <h4>WordPress Development</h4>\n                            <p>Custom themes, responsive websites, performance-focused builds, easy-to-manage CMS</p>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"fiverr-section\">\n                <h3 class=\"fiverr-section-title\">Seller Credibility</h3>\n                <div class=\"fiverr-stats-grid\">\n                    <div class=\"fiverr-stat-card\">\n                        <i class=\"fas fa-award stat-icon\"></i>\n                        <p>Fiverr Level 1 Seller</p>\n                    </div>\n                    <div class=\"fiverr-stat-card\">\n                        <i class=\"fas fa-star stat-icon\"></i>\n                        <p>100% 5-star ratings across all completed orders</p>\n                    </div>\n                    <div class=\"fiverr-stat-card\">\n                        <i class=\"fas fa-clock stat-icon\"></i>\n                        <p>Consistent on-time delivery</p>\n                    </div>\n                    <div class=\"fiverr-stat-card\">\n                        <i class=\"fas fa-globe stat-icon\"></i>\n                        <p>Experience working with international clients</p>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"fiverr-section\">\n                <h3 class=\"fiverr-section-title\">How I Work with Clients</h3>\n                <p class=\"fiverr-text\">I focus on understanding requirements clearly before starting, maintaining transparent communication throughout the project, and delivering work that balances usability, performance, and visual clarity. Each Fiverr project is handled with the same quality-first mindset I follow in my agency work.</p>\n            </div>\n\n            <div class=\"fiverr-section\">\n                <h3 class=\"fiverr-section-title\">From Freelancing to Agency</h3>\n                <p class=\"fiverr-text\">The discipline, communication practices, and real client exposure gained on Fiverr became the foundation for building BuildSign as a structured, system-driven digital product agency. What started as individual freelance projects evolved into a platform for creating opportunities for talented students while delivering consistent quality to clients worldwide.</p>\n            </div>\n        </div>"
+        },
+        {
+          "id": "spirit-on-jersey",
+          "title": "Owner of Spirit On Jersey",
+          "short": "A sports-driven brand idea built from a simple gap: too few trusted online jersey sellers. I focused on quality, customization, and customer trust from day one.",
+          "details": "<div class=\"spirit-details-layout\">\n            <div class=\"spirit-header\">\n                <p class=\"spirit-subtext\">Sportswear brand journey focused on quality, trust, and customization.</p>\n            </div>\n\n            <div class=\"spirit-story\">\n                <p>Spirit On Jersey started from a very simple place. I saw that trusted jersey sellers were very few in the online space, and at the same time, I have always loved sports. From these two feelings, the idea came. What if I create something where people can get good-quality, customised jerseys without any worry. That is how the journey began.</p>\n                \n                <p>I still remember the first order. It came on the very first day. It gave me a small push inside, because someone trusted me without even knowing me. Finding the right audience in the beginning was difficult, and I was not sure how the business would grow, but I kept trying step by step.</p>\n                \n                <p>Through Spirit On Jersey, I learned many things. Business basics, digital marketing, jersey design, customer psychology and understanding market demand. I realized people care a lot about quality and personalization. When customers said they loved their jersey, or when they ordered again, it felt very motivating. These small happy moments told me that I was building something people valued.</p>\n                \n                <p>My aim with Spirit On Jersey is simple. I want to create a trusted footprint in online selling and make sure customers get what they expect. In the future, I want to grow this into a proper brand, one that people remember for honesty, quality and care.</p>\n            </div>\n\n            <div class=\"spirit-order-section\">\n                <h3 class=\"spirit-order-title\">Order & Explore</h3>\n                <p class=\"spirit-order-subtitle\">Choose a platform to explore designs or place an order.</p>\n                \n                <div class=\"spirit-cta-grid\">\n                    <div class=\"spirit-cta-card\">\n                        <div class=\"spirit-cta-icon\">\n                            <i class=\"fab fa-facebook\"></i>\n                        </div>\n                        <h4>Order via Facebook</h4>\n                        <p>Message your jersey requirements and get quick confirmation.</p>\n                        <a href=\"https://www.facebook.com/profile.php?id=61562469124798\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"spirit-cta-btn\">\n                            Facebook\n                        </a>\n                    </div>\n                    \n                    <div class=\"spirit-cta-card\">\n                        <div class=\"spirit-cta-icon\">\n                            <i class=\"fab fa-pinterest\"></i>\n                        </div>\n                        <h4>Browse Designs (Pinterest)</h4>\n                        <p>Explore jersey inspirations, designs, and custom concepts.</p>\n                        <a href=\"https://www.pinterest.com/spiritonjersey/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"spirit-cta-btn\">\n                            Open Pinterest\n                        </a>\n                    </div>\n                    \n                    <div class=\"spirit-cta-card\">\n                        <div class=\"spirit-cta-icon\">\n                            <i class=\"fas fa-globe\"></i>\n                        </div>\n                        <h4>Official Page (Google Site)</h4>\n                        <p>See full details, brand info, and updates in one place.</p>\n                        <a href=\"https://sites.google.com/view/spiritonjersey\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"spirit-cta-btn\">\n                            Visit Website\n                        </a>\n                    </div>\n                </div>\n                \n                <p class=\"spirit-order-note\">\n                    <i class=\"fas fa-info-circle\"></i>\n                    Tip: Send your size, team name, player name, and preferred color to get a fast quote.\n                </p>\n            </div>\n        </div>"
+        },
+        {
+          "id": "gp-certified",
+          "title": "Certified & Recognized by Grameenphone Ltd",
+          "short": "Official recognition for turning skill development into verified earnings and entrepreneurship—freelancing success plus founding a digital agency inside an impact-focused program.",
+          "details": "<div class=\"gp-details-layout\">\n            <div class=\"gp-content-grid\">\n                <div class=\"gp-media-column\">\n                    <div class=\"gp-media-card\" onclick=\"openGPLightbox(0)\">\n                        <img src=\"assets/gp.jpg\" alt=\"Grameenphone Certification\" loading=\"lazy\" onerror=\"this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Certificate failed to load<br><small>assets/gp.jpg</small></div>'\">\n                        <p class=\"gp-media-label\">Certification</p>\n                    </div>\n                    <div class=\"gp-media-card\" onclick=\"openGPLightbox(1)\">\n                        <img src=\"assets/gp1.jpg\" alt=\"Grameenphone Recognition\" loading=\"lazy\" onerror=\"this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Certificate failed to load<br><small>assets/gp1.jpg</small></div>'\">\n                        <p class=\"gp-media-label\">Recognition</p>\n                    </div>\n                </div>\n\n                <div class=\"gp-text-column\">\n                    <div class=\"gp-story\">\n                        <p>This recognition was awarded to acknowledge my successful transition from skill development to sustainable income generation and entrepreneurship, including verified freelancing earnings and the founding of a digital agency during a structured impact-focused program.</p>\n                        \n                        <p>Grameenphone Academy is a venture of Grameenphone Ltd., operating under the company's ESG (Environmental, Social, and Governance) initiatives. The academy focuses on equipping students with industry-relevant skills free of cost, with the objective of creating sustainable social and economic impact through education and employability.</p>\n                        \n                        <p>In line with this mission, Grameenphone Academy launched the \"Freelancing Factory\" program in November 2024, designed to help participants develop professional skills and generate real income opportunities. I was selected as a participant in the UI/UX Design batch of this program.</p>\n                        \n                        <p>The core motto of the program was \"Learn with Earn\", where participants were encouraged not only to acquire skills but also to apply them in real market environments. As part of this initiative, I started freelancing on Fiverr, achieved Level 1 Seller status within six months, and concurrently founded BuildSign, a digital service agency.</p>\n                        \n                        <p>Additionally, only two digital agencies emerged from the cohort, one of which was BuildSign, founded by me. Grameenphone Academy officially certified this achievement as a key sustainable outcome of the program, recognizing it as part of their long-term impact creation efforts.</p>\n                    </div>\n\n                    <div class=\"gp-official-links\">\n                        <h4>Official Links</h4>\n                        <div class=\"gp-links-row\">\n                            <a href=\"https://www.facebook.com/Grameenphone\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"gp-link-item\">\n                                <i class=\"fab fa-facebook\"></i>\n                                <span>Facebook</span>\n                            </a>\n                            <a href=\"https://www.grameenphone.academy/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"gp-link-item\">\n                                <i class=\"fas fa-graduation-cap\"></i>\n                                <span>GP Academy</span>\n                            </a>\n                            <a href=\"https://www.linkedin.com/company/grameenphone-ltd/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"gp-link-item\">\n                                <i class=\"fab fa-linkedin\"></i>\n                                <span>LinkedIn</span>\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>"
+        },
+        {
+          "id": "nebulae-soft",
+          "title": "Former UI Designer & UX Researcher at Nebulae-Soft",
+          "short": "My first structured product-team experience—learning real workflows, collaboration, and system-based execution that shaped how I manage projects and teams today.",
+          "details": "I joined Nebulae Soft in June 2024 as a UI Designer and UX Researcher, gaining my first exposure to structured, team-based work in a real product environment. I learned how responsibilities are distributed, how teams collaborate, and how design workflows connect with development, timelines, and delivery. I independently handled a project for an army-related client—running meetings, gathering requirements, and coordinating with the team—strengthening leadership, communication, and trust. A key challenge was aligning stakeholders, which I solved through clarity and regular clarification. This role shaped my system-oriented mindset, which I later applied directly in freelancing from January 2025 and in BuildSign."
+        },
+        {
+          "id": "diu-internship",
+          "title": "Former Intern, International Affairs– Daffodil International University",
+          "short": "Hands-on exposure to international coordination—content, communication, and event support that strengthened cross-cultural professionalism and systems thinking.",
+          "details": "I joined the International Affairs Office at Daffodil International University to learn how international collaboration and professional communication work in practice. I supported content writing, communication, and event management—helping students, guests, and partner institutions through clear information sharing and organized engagement. Interacting with international delegates improved my confidence and taught me that tone, clarity, and cultural awareness matter. I also saw how strong coordination across departments makes events successful and prevents inefficiency. This internship prepared me for international and multicultural environments, supports my work with global clients, and aligns with my interest in programs like Erasmus Mundus. The discipline and communication habits still influence how I run BuildSign."
+        }
+      ],
+      "internationalEvents": [
+        {
+          "id": "comtech-2023",
+          "institute": "Institut Teknologi Sepuluh Nopember (ITS), Indonesia",
+          "title": "CommTECH Nusantara 2023 — Virtual Exploration of Indonesia",
+          "locationType": "International • Virtual",
+          "certificates": [
+            "comtech.png"
+          ],
+          "short": "International virtual exchange exploring Indonesian culture, technology, and community-driven innovation through workshops and peer collaboration with global participants.",
+          "details": "I participated in the CommTECH Nusantara 2023: Virtual Exploration of Indonesia, an international program hosted by Institut Teknologi Sepuluh Nopember (ITS), Indonesia. The program brought together global participants to explore Indonesian culture, technology and community through a virtual academic exchange model. During the program, I learned about Indonesian social innovation, local industry practices, cultural heritage and the country's approach to community-driven development. The sessions included interactive workshops, cultural immersion activities, group discussions and problem-based learning with international peers. This experience developed cross-cultural communication, global awareness and international connections that continue to motivate my academic and professional growth."
+        },
+        {
+          "id": "climate-summit-2023",
+          "institute": "Global Youth Leadership Center • University of Dar es Salaam • Tanzania Forest Service Agency",
+          "title": "Global Youth Climate Summit 2023 — Virtual Delegate",
+          "locationType": "International • Virtual",
+          "certificates": [
+            "gsummit.pdf"
+          ],
+          "short": "Selected as a global virtual delegate to engage in climate action discussions on sustainability, resilience, policy, and youth-led solutions with changemakers worldwide.",
+          "details": "I was selected as a virtual delegate for the Global Youth Climate Summit 2023, a global platform organized by the Global Youth Leadership Center in partnership with the University of Dar es Salaam and the Tanzania Forest Service Agency. More than a thousand youth applicants from different countries compete for a chance to join this summit each year, and being selected was a significant milestone. Throughout the summit, I engaged in discussions on climate resilience, global environmental policy, innovation for sustainability and youth-driven climate solutions. This experience strengthened my global perspective, enhanced my leadership mindset, and connected me with changemakers and youth leaders worldwide."
+        },
+        {
+          "id": "rmi-week-2023",
+          "institute": "Universitas Islam Sultan Agung (UNISSULA), Semarang, Indonesia",
+          "title": "RMI Week 2023 — International Short Course",
+          "locationType": "International • Short Course",
+          "certificates": [
+            "rmi.pdf",
+            "rmibd.jpg"
+          ],
+          "short": "International short course on city resilience and disaster mitigation, including cross-country teamwork and a case-study proposing solutions for real urban challenges.",
+          "details": "I was selected for the International Short Course on City Resilience, Disaster Mitigation and Infrastructure (RMI Week 2023) at UNISSULA. I worked with students from multiple countries to study climate risks, resilient infrastructure, and disaster-ready communities. A key part was a collaborative international case study where our mixed-country team analyzed real urban challenges and proposed solutions combining engineering, policy insight, and community readiness. This experience strengthened cross-cultural teamwork, problem-solving, and understanding of global disaster management strategies, aligning with my goals in innovation, entrepreneurship, and impact-driven leadership."
+        },
+        {
+          "id": "ubaya-2023",
+          "institute": "Universitas Surabaya (UBAYA), Indonesia",
+          "title": "UBAYA Online Summer Program 2023 — Global Short Courses",
+          "locationType": "International • Online",
+          "certificates": [
+            "ubaya1.pdf",
+            "ubaya2.pdf"
+          ],
+          "short": "Two global short courses on digital transformation, personal branding, and future tech—AI, ChatGPT, and metaverse concepts—through interactive learning with international peers.",
+          "details": "I participated in the UBAYA Online Summer Program 2023 organized by Universitas Surabaya (UBAYA). Across two global short courses, I explored how technology shapes modern life and collaborated with international participants. The first module, Digitalize Your Life, covered digital transformation trends, personal branding, online communication, and productivity tools. The second module focused on ChatGPT, AI applications, human–AI interaction, metaverse concepts, and future digital ecosystems. These programs strengthened my global exposure, cross-cultural communication, and understanding of emerging technologies, supporting my mindset as a future entrepreneur and digital product builder."
+        },
+        {
+          "id": "reuters-journalism",
+          "institute": "Reuters • Sponsored by Meta Journalism Project",
+          "title": "Introduction to Digital Journalism",
+          "locationType": "International • Online",
+          "certificates": [
+            "reu.png"
+          ],
+          "short": "Completed Reuters training covering media ethics, fact-checking, sourcing, misinformation handling, and producing digital content aligned with global journalism standards.",
+          "details": "I completed the Introduction to Digital Journalism online training offered by Reuters and sponsored by the Meta Journalism Project. The course covered media ethics, fact-checking, sourcing reliable information, producing digital content, and how journalism operates in today's fast-changing online environment. Through structured modules, I learned how journalists verify information, combat misinformation, and communicate effectively across digital platforms. This training improved my critical thinking, writing clarity, and understanding of global media standards—supporting my growth as an entrepreneur, communicator, and future global professional."
+        },
+        {
+          "id": "locust-2022",
+          "institute": "Industrial Technology Faculty, UNISSULA, Indonesia",
+          "title": "LOCUST 2022 — Local Culture, Science & Technology Short Program",
+          "locationType": "International • Short Program",
+          "certificates": [
+            "uni.pdf"
+          ],
+          "short": "International short program exploring how culture influences innovation and technology adoption, with cross-cultural interaction focused on community development and local industry practices.",
+          "details": "I participated in LOCUST 2022: Local Culture, Science & Technology Short Program, organized by the Industrial Technology Faculty of UNISSULA, Indonesia. The program brought together students to explore the connection between culture, innovation and technology in Southeast Asia. I learned about Indonesian local culture, scientific approaches to community development and technology-driven solutions used in local industries. Through lectures, discussions and cross-cultural interaction, I developed a broader perspective on how context shapes innovation. This experience strengthened my global mindset and interest in international learning and entrepreneurship."
+        }
+      ]
+    }
+  },
+  "search": {
+    "searchIndex": [
+      {
+        "id": "home",
+        "title": "Home",
+        "subtitle": "Portfolio Landing",
+        "keywords": [
+          "home",
+          "landing",
+          "hero",
+          "introduction"
+        ],
+        "type": "section",
+        "href": "index.html#home",
+        "excerpt": "Hello, I'm K. M. Arafat Islam - Founder & CEO @BuildSign"
+      },
+      {
+        "id": "about",
+        "title": "About",
+        "subtitle": "My Story",
+        "keywords": [
+          "about",
+          "story",
+          "background",
+          "biography"
+        ],
+        "type": "section",
+        "href": "index.html#about",
+        "excerpt": "Learn about my journey, interests, and what drives me"
+      },
+      {
+        "id": "education",
+        "title": "Education",
+        "subtitle": "Academic Background",
+        "keywords": [
+          "education",
+          "university",
+          "degree",
+          "diu",
+          "daffodil"
+        ],
+        "type": "section",
+        "href": "index.html#education",
+        "excerpt": "CSE student at Daffodil International University"
+      },
+      {
+        "id": "publications",
+        "title": "Publications",
+        "subtitle": "Research Papers",
+        "keywords": [
+          "publications",
+          "research",
+          "papers",
+          "ieee",
+          "ml",
+          "ai"
+        ],
+        "type": "section",
+        "href": "index.html#publications",
+        "excerpt": "Machine learning and AI research publications"
+      },
+      {
+        "id": "eca",
+        "title": "Extra-Curricular Activities",
+        "subtitle": "Leadership & Experience",
+        "keywords": [
+          "eca",
+          "activities",
+          "leadership",
+          "clubs",
+          "organizations"
+        ],
+        "type": "section",
+        "href": "index.html#eca",
+        "excerpt": "Campus leadership, international programs, and community work"
+      },
+      {
+        "id": "skills",
+        "title": "Skills & Certifications",
+        "subtitle": "Technical Expertise",
+        "keywords": [
+          "skills",
+          "certifications",
+          "certificates",
+          "courses",
+          "expertise"
+        ],
+        "type": "section",
+        "href": "index.html#skills",
+        "excerpt": "UI/UX, development, machine learning, and professional certifications"
+      },
+      {
+        "id": "events",
+        "title": "International Events",
+        "subtitle": "Global Programs",
+        "keywords": [
+          "events",
+          "international",
+          "programs",
+          "summits",
+          "courses"
+        ],
+        "type": "section",
+        "href": "index.html#events",
+        "excerpt": "International academic programs and global youth summits"
+      },
+      {
+        "id": "contact",
+        "title": "Contact",
+        "subtitle": "Get In Touch",
+        "keywords": [
+          "contact",
+          "email",
+          "reach",
+          "connect",
+          "message"
+        ],
+        "type": "section",
+        "href": "index.html#contact",
+        "excerpt": "Let's connect - reach out for opportunities or collaborations"
+      },
+      {
+        "id": "buildsign",
+        "title": "BuildSign",
+        "subtitle": "Digital Product Agency",
+        "keywords": [
+          "buildsign",
+          "agency",
+          "startup",
+          "founder",
+          "ceo",
+          "fiverr",
+          "business"
+        ],
+        "type": "page",
+        "href": "buildsign.html",
+        "excerpt": "Founder & CEO of BuildSign - Digital product agency serving 200+ global clients"
+      },
+      {
+        "id": "fiverr",
+        "title": "Fiverr Success Story",
+        "subtitle": "Top Rated Seller",
+        "keywords": [
+          "fiverr",
+          "freelance",
+          "top rated",
+          "seller",
+          "clients",
+          "revenue"
+        ],
+        "type": "details",
+        "href": "buildsign.html#fiverr",
+        "excerpt": "Level Two Seller managing 200+ orders with $10K+ revenue"
+      },
+      {
+        "id": "spirit-on-jersey",
+        "title": "Spirit On Jersey",
+        "subtitle": "Fashion Startup",
+        "keywords": [
+          "spirit",
+          "jersey",
+          "fashion",
+          "startup",
+          "clothing",
+          "brand"
+        ],
+        "type": "details",
+        "href": "buildsign.html#spirit",
+        "excerpt": "Fashion startup merging creativity with entrepreneurial discipline"
+      },
+      {
+        "id": "nebulae",
+        "title": "Nebulae",
+        "subtitle": "Scientific Publication",
+        "keywords": [
+          "nebulae",
+          "science",
+          "publication",
+          "research",
+          "astronomy"
+        ],
+        "type": "page",
+        "href": "nebulae.html",
+        "excerpt": "Founded Nebulae - scientific publication focusing on science communication"
+      },
+      {
+        "id": "intl-affairs",
+        "title": "International Affairs",
+        "subtitle": "DIU Internship",
+        "keywords": [
+          "international",
+          "affairs",
+          "diu",
+          "internship",
+          "global",
+          "coordination"
+        ],
+        "type": "page",
+        "href": "international-affairs.html",
+        "excerpt": "Former Intern at DIU International Affairs Office"
+      },
+      {
+        "id": "cs-club",
+        "title": "CS Club",
+        "subtitle": "DIU CS Club",
+        "keywords": [
+          "cs",
+          "club",
+          "diu",
+          "computer",
+          "science",
+          "programming"
+        ],
+        "type": "page",
+        "href": "csclub.html",
+        "excerpt": "Active member of DIU Computer Science Club"
+      },
+      {
+        "id": "ieee-pr",
+        "title": "IEEE DIU PR Coordinator",
+        "subtitle": "Public Relations",
+        "keywords": [
+          "ieee",
+          "pr",
+          "coordinator",
+          "events",
+          "programming hero"
+        ],
+        "type": "page",
+        "href": "ieee-pr.html",
+        "excerpt": "Organized 38 events with 70-100 participants including Programming Hero collaboration"
+      },
+      {
+        "id": "creative-it",
+        "title": "Creative IT Ambassador",
+        "subtitle": "Campus Ambassador",
+        "keywords": [
+          "creative",
+          "it",
+          "ambassador",
+          "education",
+          "outreach"
+        ],
+        "type": "page",
+        "href": "creative-it.html",
+        "excerpt": "Campus Ambassador for Creative IT Institute"
+      },
+      {
+        "id": "programming-hero",
+        "title": "Programming Hero",
+        "subtitle": "Campus Hero",
+        "keywords": [
+          "programming",
+          "hero",
+          "campus",
+          "network",
+          "coordination"
+        ],
+        "type": "page",
+        "href": "programming-hero.html",
+        "excerpt": "Campus Hero coordinating network of 20+ institutions and ~1,000 students"
+      },
+      {
+        "id": "tbs-edge",
+        "title": "TBS EDGE Associate",
+        "subtitle": "The Business Standard",
+        "keywords": [
+          "tbs",
+          "edge",
+          "business",
+          "standard",
+          "newsroom",
+          "editorial"
+        ],
+        "type": "page",
+        "href": "tbs-edge.html",
+        "excerpt": "EDGE Associate at The Business Standard newsroom"
+      },
+      {
+        "id": "banglay-ielts",
+        "title": "Banglay IELTS Campus Crew",
+        "subtitle": "IELTS & Immigration",
+        "keywords": [
+          "banglay",
+          "ielts",
+          "immigration",
+          "education",
+          "global"
+        ],
+        "type": "page",
+        "href": "banglay-ielts.html",
+        "excerpt": "Campus Crew for Banglay IELTS & Immigration Centre"
+      },
+      {
+        "id": "commtech",
+        "title": "CommTECH Nusantara 2023",
+        "subtitle": "ITS, Indonesia",
+        "keywords": [
+          "commtech",
+          "indonesia",
+          "its",
+          "virtual",
+          "culture",
+          "technology"
+        ],
+        "type": "details",
+        "href": "index.html#events",
+        "excerpt": "International virtual exchange exploring Indonesian culture and technology"
+      },
+      {
+        "id": "climate-summit",
+        "title": "Global Youth Climate Summit 2023",
+        "subtitle": "Virtual Delegate",
+        "keywords": [
+          "climate",
+          "summit",
+          "delegate",
+          "sustainability",
+          "tanzania"
+        ],
+        "type": "details",
+        "href": "index.html#events",
+        "excerpt": "Selected as Virtual Delegate for global youth climate action discussions"
+      },
+      {
+        "id": "rmi-week",
+        "title": "RMI Week 2023",
+        "subtitle": "UNISSULA, Indonesia",
+        "keywords": [
+          "rmi",
+          "resilience",
+          "disaster",
+          "infrastructure",
+          "indonesia"
+        ],
+        "type": "details",
+        "href": "index.html#events",
+        "excerpt": "International short course on city resilience and disaster mitigation"
+      },
+      {
+        "id": "ubaya",
+        "title": "UBAYA Online Summer Program 2023",
+        "subtitle": "Digital Transformation",
+        "keywords": [
+          "ubaya",
+          "summer",
+          "ai",
+          "chatgpt",
+          "metaverse",
+          "digital"
+        ],
+        "type": "details",
+        "href": "index.html#events",
+        "excerpt": "Global short courses on AI, ChatGPT, and digital transformation"
+      },
+      {
+        "id": "reuters",
+        "title": "Introduction to Digital Journalism",
+        "subtitle": "Reuters",
+        "keywords": [
+          "reuters",
+          "journalism",
+          "media",
+          "fact-checking",
+          "ethics"
+        ],
+        "type": "details",
+        "href": "index.html#events",
+        "excerpt": "Reuters training on media ethics and digital journalism"
+      },
+      {
+        "id": "locust",
+        "title": "LOCUST 2022",
+        "subtitle": "UNISSULA, Indonesia",
+        "keywords": [
+          "locust",
+          "culture",
+          "science",
+          "technology",
+          "indonesia"
+        ],
+        "type": "details",
+        "href": "index.html#events",
+        "excerpt": "Local Culture, Science & Technology international short program"
+      },
+      {
+        "id": "pub-catboost",
+        "title": "CatBoost Classifier for Intrusion Detection",
+        "subtitle": "IEEE CCWC 2024",
+        "keywords": [
+          "catboost",
+          "intrusion",
+          "detection",
+          "cybersecurity",
+          "machine learning"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Machine learning approach for network intrusion detection using CatBoost"
+      },
+      {
+        "id": "pub-stroke",
+        "title": "Stroke Prediction with Machine Learning",
+        "subtitle": "IEEE TENSYMP 2024",
+        "keywords": [
+          "stroke",
+          "prediction",
+          "healthcare",
+          "ml",
+          "classification"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Predicting stroke risk using ensemble machine learning models"
+      },
+      {
+        "id": "pub-chronic-kidney",
+        "title": "Chronic Kidney Disease Prediction",
+        "subtitle": "IEEE TENSYMP 2024",
+        "keywords": [
+          "kidney",
+          "disease",
+          "prediction",
+          "healthcare",
+          "ml"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Early detection of chronic kidney disease using ML algorithms"
+      },
+      {
+        "id": "pub-heart-disease",
+        "title": "Heart Disease Prediction",
+        "subtitle": "IEEE iSAI-NLP 2024",
+        "keywords": [
+          "heart",
+          "disease",
+          "cardiovascular",
+          "prediction",
+          "ml"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Cardiovascular disease prediction with machine learning"
+      },
+      {
+        "id": "pub-intrusion-review",
+        "title": "Intrusion Detection Systems Review",
+        "subtitle": "IEEE TENSYMP 2024",
+        "keywords": [
+          "intrusion",
+          "detection",
+          "review",
+          "cybersecurity",
+          "survey"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Comprehensive review of machine learning in intrusion detection"
+      },
+      {
+        "id": "pub-brain-tumor",
+        "title": "Brain Tumor Detection",
+        "subtitle": "IEEE TENSYMP 2024",
+        "keywords": [
+          "brain",
+          "tumor",
+          "detection",
+          "medical",
+          "imaging",
+          "cnn"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Deep learning for brain tumor detection from MRI scans"
+      },
+      {
+        "id": "pub-diabetes",
+        "title": "Diabetes Prediction",
+        "subtitle": "IEEE TENSYMP 2024",
+        "keywords": [
+          "diabetes",
+          "prediction",
+          "healthcare",
+          "classification"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "Early diabetes prediction using machine learning techniques"
+      },
+      {
+        "id": "pub-lung-cancer",
+        "title": "Lung Cancer Detection",
+        "subtitle": "IEEE R10-HTC 2024",
+        "keywords": [
+          "lung",
+          "cancer",
+          "detection",
+          "medical",
+          "imaging"
+        ],
+        "type": "publication",
+        "href": "index.html#publications",
+        "excerpt": "AI-driven lung cancer detection from medical imaging"
+      },
+      {
+        "id": "certificates",
+        "title": "Professional Certificates",
+        "subtitle": "Coursera & Others",
+        "keywords": [
+          "certificates",
+          "coursera",
+          "google",
+          "meta",
+          "duke",
+          "ui",
+          "ux"
+        ],
+        "type": "page",
+        "href": "certificates.html",
+        "excerpt": "View all professional certifications including Google UX Design, Meta courses, and more"
+      },
+      {
+        "id": "other-certificates",
+        "title": "Other Certificates (80+)",
+        "subtitle": "Additional Certifications",
+        "keywords": [
+          "certificates",
+          "additional",
+          "courses",
+          "training"
+        ],
+        "type": "page",
+        "href": "certificates.html",
+        "excerpt": "80+ additional certificates from various platforms and programs"
+      },
+      {
+        "id": "ui-ux",
+        "title": "UI/UX Design",
+        "subtitle": "Design Skills",
+        "keywords": [
+          "ui",
+          "ux",
+          "design",
+          "figma",
+          "prototyping",
+          "wireframe"
+        ],
+        "type": "skill",
+        "href": "index.html#skills",
+        "excerpt": "User interface and experience design expertise"
+      },
+      {
+        "id": "frontend",
+        "title": "Frontend Development",
+        "subtitle": "Web Development",
+        "keywords": [
+          "frontend",
+          "html",
+          "css",
+          "javascript",
+          "react",
+          "web"
+        ],
+        "type": "skill",
+        "href": "index.html#skills",
+        "excerpt": "HTML, CSS, JavaScript, and modern frameworks"
+      },
+      {
+        "id": "ml-ai",
+        "title": "Machine Learning & AI",
+        "subtitle": "Technical Skills",
+        "keywords": [
+          "machine learning",
+          "ai",
+          "python",
+          "tensorflow",
+          "ml",
+          "data"
+        ],
+        "type": "skill",
+        "href": "index.html#skills",
+        "excerpt": "Machine learning, AI, and data science expertise"
+      }
+    ]
+  },
+  "buildsign": {
+    "static": {
+      "seo": {
+        "title": "BuildSign — Digital Product Agency"
+      },
+      "hero": {
+        "title": "Build products that look premium and work flawlessly.",
+        "subtitle": "We create digital experiences driven by quality and clarity. Every project is an opportunity to learn, deliver, and build trust through design and development that works.",
+        "links": {
+          "websiteHref": "https://buildsigndigital.com",
+          "linkedinHref": "https://www.linkedin.com/company/buildsign/",
+          "emailHref": "mailto:buildsign.contact@gmail.com"
+        }
+      }
+    },
+    "datasets": {
+      "buildsignServices": [
+        {
+          "id": "app-design",
+          "title": "App Design",
+          "description": "User-centered mobile experiences that feel intuitive and premium.",
+          "icon": "fas fa-mobile-alt"
+        },
+        {
+          "id": "website-design",
+          "title": "Website Design",
+          "description": "Modern, responsive websites that convert visitors into customers.",
+          "icon": "fas fa-window-maximize"
+        },
+        {
+          "id": "dashboard-design",
+          "title": "Dashboard Design",
+          "description": "Data visualization and admin panels that make complex information clear.",
+          "icon": "fas fa-chart-line"
+        },
+        {
+          "id": "wordpress-dev",
+          "title": "WordPress Development",
+          "description": "Custom WordPress sites with flexible content management and SEO optimization.",
+          "icon": "fab fa-wordpress"
+        },
+        {
+          "id": "flutter-dev",
+          "title": "Flutter Development",
+          "description": "Cross-platform mobile apps built with Flutter for iOS and Android.",
+          "icon": "fas fa-code"
+        },
+        {
+          "id": "logo-graphic",
+          "title": "Logo & Graphic Design",
+          "description": "Brand identity and visual assets that make your business memorable.",
+          "icon": "fas fa-palette"
+        }
+      ],
+      "buildsignServicesDetails": {
+        "app-design": {
+          "title": "App Design",
+          "icon": "fas fa-mobile-alt",
+          "description": "We design mobile apps that prioritize user experience and visual clarity. From wireframes to high-fidelity prototypes, every screen is crafted to ensure smooth navigation and engagement.",
+          "deliverables": [
+            "User research & personas",
+            "Wireframes & user flows",
+            "High-fidelity UI design",
+            "Interactive prototypes",
+            "Design system documentation"
+          ],
+          "timeline": "3-6 weeks"
+        },
+        "website-design": {
+          "title": "Website Design",
+          "icon": "fas fa-window-maximize",
+          "description": "Your website is your digital storefront. We create responsive, conversion-focused web designs that look beautiful on every device.",
+          "deliverables": [
+            "Responsive layouts",
+            "Landing page design",
+            "Brand-consistent visuals",
+            "Interactive elements",
+            "Mobile-first approach"
+          ],
+          "timeline": "2-4 weeks"
+        },
+        "dashboard-design": {
+          "title": "Dashboard Design",
+          "icon": "fas fa-chart-line",
+          "description": "Dashboards should make data accessible, not overwhelming. We design admin panels and analytics interfaces that help users understand insights quickly.",
+          "deliverables": [
+            "Information architecture",
+            "Data visualization design",
+            "User-friendly layouts",
+            "Customizable components",
+            "Dark/light mode support"
+          ],
+          "timeline": "3-5 weeks"
+        },
+        "wordpress-dev": {
+          "title": "WordPress Development",
+          "icon": "fab fa-wordpress",
+          "description": "WordPress powers flexibility and scalability. We build custom themes, optimize performance, and create intuitive content management experiences.",
+          "deliverables": [
+            "Custom theme development",
+            "Plugin integration",
+            "SEO optimization",
+            "Performance tuning",
+            "Content migration"
+          ],
+          "timeline": "4-6 weeks"
+        },
+        "flutter-dev": {
+          "title": "Flutter Development",
+          "icon": "fas fa-code",
+          "description": "Flutter enables beautiful, fast apps for both iOS and Android from a single codebase. We build feature-rich mobile applications with smooth animations.",
+          "deliverables": [
+            "Cross-platform development",
+            "API integration",
+            "State management",
+            "App store deployment",
+            "Post-launch support"
+          ],
+          "timeline": "6-10 weeks"
+        },
+        "logo-graphic": {
+          "title": "Logo & Graphic Design",
+          "icon": "fas fa-palette",
+          "description": "Your brand deserves a visual identity that stands out. We create logos, brand guidelines, and marketing materials that communicate your values.",
+          "deliverables": [
+            "Logo design concepts",
+            "Brand style guide",
+            "Social media templates",
+            "Marketing collateral",
+            "Vector source files"
+          ],
+          "timeline": "2-3 weeks"
+        }
+      },
+      "buildsignProcess": [
+        {
+          "step": "01",
+          "title": "Discovery & Strategy",
+          "description": "We begin by understanding your business goals, target audience, and project requirements to define a clear and actionable roadmap."
+        },
+        {
+          "step": "02",
+          "title": "Planning & Design",
+          "description": "We create structured layouts and refined UI concepts that align with your brand and ensure a seamless user experience."
+        },
+        {
+          "step": "03",
+          "title": "Development & Testing",
+          "description": "Using clean, scalable code, we build your solution with performance optimization and thorough testing at every stage."
+        },
+        {
+          "step": "04",
+          "title": "Delivery & Support",
+          "description": "After successful deployment, we provide guidance, monitoring, and ongoing support to ensure long-term success."
+        }
+      ],
+      "buildsignWhy": [
+        {
+          "title": "System-based delivery",
+          "description": "Organized workflows, clear milestones, and predictable outcomes—no chaos, just quality."
+        },
+        {
+          "title": "Clear communication",
+          "description": "Regular updates, transparent timelines, and honest conversations keep every project on track."
+        },
+        {
+          "title": "Remote collaboration",
+          "description": "Built for remote teams with async-friendly workflows, flexible schedules, and smooth coordination."
+        },
+        {
+          "title": "Quality without rush culture",
+          "description": "Sustainable pace, realistic deadlines, and long-term excellence over quick fixes."
+        }
+      ],
+      "buildsignFAQs": [
+        {
+          "question": "What kind of clients do you work with?",
+          "answer": "We work with startups, small businesses, and entrepreneurs who value quality and clear communication. Our ideal clients appreciate thoughtful design, sustainable timelines, and building meaningful digital products."
+        },
+        {
+          "question": "How do you price projects?",
+          "answer": "Pricing depends on project scope, timeline, and deliverables. After an initial consultation, we provide a detailed proposal with transparent costs. We focus on value-driven pricing that reflects the quality and impact of the work."
+        },
+        {
+          "question": "How do remote projects work?",
+          "answer": "Everything happens online. We use tools like Figma, Slack, and project management platforms for collaboration. You will receive regular updates, review prototypes, and provide feedback asynchronously—no need for constant meetings."
+        },
+        {
+          "question": "What's your typical timeline?",
+          "answer": "Timelines vary by service. Small projects like logo design take 2–3 weeks, while app development can take 6–10 weeks. We set realistic deadlines during discovery and keep you updated throughout the process."
+        }
+      ]
+    }
+  },
+  "certificates": {
+    "certificateFiles": [
+      "62b0c3911742a.pdf",
+      "633b3873abf83.pdf",
+      "633b3d03a1abc.pdf",
+      "633b406c68a98.pdf",
+      "633b420e10580.pdf",
+      "633c580e97654.pdf",
+      "633c5ad5d393b.pdf",
+      "633fdb88386d7.pdf",
+      "633fdc4e7ce04.pdf",
+      "635847550abe4.pdf",
+      "Attention Mechanism with Google Cloud.pdf",
+      "Be Professional with LinkedIn.png",
+      "Boss VS Leader.pdf",
+      "Carer Planning From News Media.pdf",
+      "certificate-acing-aptitude-tests.pdf",
+      "certificate-advanced-skills-for-professional-landscape.pdf",
+      "certificate-automation-the-future-workplace.pdf",
+      "certificate-career-launchpad.pdf",
+      "certificate-career-with-ai.pdf",
+      "certificate-cv-writing-for-professionals.pdf",
+      "certificate-design-system-in-figma.pdf",
+      "certificate-facebook-marketing-course.pdf",
+      "certificate-innovation-at-work.pdf",
+      "certificate-leadership-skills.pdf",
+      "certificate-masterclass-on-you-should-learn-cybersecurity.pdf",
+      "certificate-module-1-basics-of-entrepreneurship.pdf",
+      "certificate-module-1-introduction-to-wordpress.pdf",
+      "certificate-module-1-research-nutshell.pdf",
+      "certificate-module-10-company-formation-legal-know-hows-and-governance.pdf",
+      "certificate-module-2-customer-persona.pdf",
+      "certificate-module-2-wordpress-installation.pdf",
+      "certificate-module-3-basic-of-wordpress-part-1.pdf",
+      "certificate-module-3-market-research-and-market-sizing.pdf",
+      "certificate-module-4-setting-your-key-metrics.pdf",
+      "certificate-module-5-product-development-using-design-thinking-minimum-viable-product-mvp.pdf",
+      "certificate-module-6-startup-financial-model.pdf",
+      "certificate-module-7-business-model-canvas.pdf",
+      "certificate-module-8-investment-readiness.pdf",
+      "certificate-module-9-pitch-deck-readiness-and-pitching-to-investors.pdf",
+      "certificate-ms-excel-beginner-to-advanced.pdf",
+      "certificate-ms-powerpoint-advanced-course.pdf",
+      "certificate-online-safety.pdf",
+      "certificate-professional-content-writing.pdf",
+      "certificate-tips-and-techniques-on-interview-and-assessment-centre.pdf",
+      "certificate_instructor_sabur-khan.pdf",
+      "certs (1).pdf",
+      "certs.pdf",
+      "cert_232942.png",
+      "Common Etiqutte of LIfe.pdf",
+      "Create Image Captioning Models with Google Cloud.pdf",
+      "Digital Leteracy Course for Youth.pdf",
+      "Email Writing Etiquate.pdf",
+      "Employability Skils.pdf",
+      "Encoder-Decoder Architecture with Google Cloud.pdf",
+      "English For University Students.pdf",
+      "Generative AI Fundamentals with Google Cloud.pdf",
+      "goedu-certificate-instructor-ejaj-ur-rahman.pdf",
+      "goedu-certificate-instructor-muhammad-sajidul-islam.pdf",
+      "goedu-certificate-instructor-nusrat-tasnim-2.pdf",
+      "goedu-certificate-instructor-shah-fahad-hossain.pdf",
+      "How To say NO How to propose.pdf",
+      "Introduction to Gen AI Studio with Google Cloud.pdf",
+      "Introduction to Generative AI with Google Cloud.pdf",
+      "Introduction to Image Generation with Google Cloud.pdf",
+      "Introduction to Large Language Models with Google Cloud.pdf",
+      "Introduction to Liberal Values.pdf",
+      "K M Arafat Islam.pdf",
+      "K.-M.-Arafat-Islam.jpg",
+      "Know Thyself.pdf",
+      "k_m_arafat_islam_2023_stage_2_certificate.pdf",
+      "MS Excel.png",
+      "MS Powerpoint Advance Course.png",
+      "Possitibity.pdf",
+      "Resume Writing Skill.pdf",
+      "Setting and Achieving Focus, Goals and Targets.pdf",
+      "Soft Skill & Hard Skill.pdf",
+      "some.pdf",
+      "Spoken English.png",
+      "Start A CV.pdf",
+      "The Art of Public Speaking.pdf",
+      "Transformer Models and BERT Model with Google Cloud.pdf",
+      "Writing Professional Emails.pdf"
+    ]
+  }
+}
